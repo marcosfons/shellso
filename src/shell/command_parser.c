@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <assert.h>
 
 #include "command_parser.h"
 
@@ -13,221 +14,266 @@ typedef enum parser_state {
 } parser_state;
 
 
-typedef struct {
-	char* content;
-	int start;
-	int end;
-	int size; // Size is different of end - start, cause in double quotes still has escaping characters
-} between_quotes;
-
-
-static char* allocate_string(char* input, int start, int end) {
-	int null_terminator_missing = input[end] != '\0';
-
-	char* result = malloc(((end + null_terminator_missing) - start) * sizeof(char));
-		
-	strncpy(result, input + start, end - start);
-	if (null_terminator_missing) {
-		result[end + 1] = '\0';
-	}
-
-	return result;
-}
-
-
-/* Returns the content between quotes of a string
- *
- * Supports single and double quotes
- * In double quotes escaping characters works as well
- *
+/* Allocate a new string and copy the content from the given input
+ * 
  * Arguments:
  *	char* input
- *	int start  The position of the first quote. Must be inclusive
+ *	int start 	Inclusive
+ *	int end	 		Inclusive. But it will be replaced by '\0'
+ *
+ * Example:
+ * 	char* new_string = stralloc_escaping_character("  test ", 2, 4);
+ * 	new_string -> test\0
+ */
+// static char* stralloc(char* input, int start, int end) {
+// 	char* result = malloc((end - start) * sizeof(char));
+// 	strncpy(result, input, end - start);
+// 	result[end] = '\0';
+//
+// 	return result;
+// }
+
+
+/* Reallocate dest string considering the escaped character
+ *
+ * input[escaping_character_position] must be the escaping character
+ * It will change both dest and size string
+ * 
+ * Arguments:
+ *	char* dest											The string that will be changed
+ *	int* size												The dest string size, considering null-terminator
+ *	char* input
+ *	int escaping_character_position The position of the escaping character in the input string
  *
  */
-static between_quotes get_between_quotes_content(char* input, int start) {
-	char quote_type = input[start]; // Can be " or '
-	int i;
-	int size = 0;
-	int position_after_escaped_char = start + 1;
-	char* content = malloc(sizeof(char));
+static char* str_realloc_escaping_character(char* dest, int* size, char* input, int escaping_character_position) {
+	dest = realloc(dest, (*size + escaping_character_position + 1) * sizeof(char));
 
-	for (i = start + 1; input[i] != quote_type && input[i] != '\0'; i++) {
-		size++;
-		if (quote_type == '"' && input[i] == '\\') {
-			i++; // Jumps the escaping character
-			content = realloc(content, (size + 1) * sizeof(char));
+	strncpy(dest + (*size - 1), input, escaping_character_position + 1);
 
-			strcat(content, allocate_string(input, position_after_escaped_char, i));
+	dest[*size + escaping_character_position] = '\0';
+	dest[*size + escaping_character_position - 1] = input[escaping_character_position + 1];
 
-			content[size - 1] = input[i]; // Replace the escaping character
+	*size = *size + escaping_character_position + 1;
+	
+	return dest;
+}
 
-			position_after_escaped_char = i + 1;
+
+/* Extract the content between quotes inside input into dest and change the size
+ *
+ * It will reallocate dest to add space for the content between quotes
+ * dest must be an allocated pointer
+ * For double quotes it handles escaping characters
+ *
+ * Arguments:
+ * 	char* dest
+ * 	int size 		The size of the dest string before concatenating. dest[size - 1] == '\0'
+ *	char* input The input string, the initial character must be " or '
+ *
+ * Returns a int indicating the position of the last quote, if the 
+ * last quote was not found it returns -1
+ *
+ */
+static int read_between_quotes(char* dest, int* size, char* input) {
+	assert(dest[*size - 1] == '\0');
+	char quote_type = input[0]; // Will be " or '
+	assert(quote_type == '"' || quote_type == '\'');
+	input += 1; // Shift
+	int i = 0;
+	int size_c = *size;
+
+	if (quote_type == '\'') {
+		for (; input[i] != quote_type && input[i] != '\0'; i++) {}
+		if (input[i] != '\0') {
+			dest = realloc(dest, (size_c + i) * sizeof(char));
+			strncpy(dest + size_c - 1, input, i);
+			dest[size_c + i - 1] = '\0';
+			size_c += i;
 		}
+	} else {
+		int j = 0;
+		for (; input[j] != quote_type && input[j] != '\0'; j++) {
+			if (input[j] == '\\') {
+				str_realloc_escaping_character(dest, &size_c, input, j);
+				input += j + 2;
+				i += j + 2;
+				j = -1;
+			}
+		}
+		i += j;
+		dest = realloc(dest, (size_c + j) * sizeof(char));
+		strncpy(dest + size_c - 1, input, j);
+		size_c += j;
+		dest[size_c + j - 1] = '\0';
 	}
-
-	// TODO(marcosfons): Handle error return
+	// Reached the end of the string without finding the end quote
 	if (input[i] == '\0') {
 		fprintf(stderr, "Unexpected EOF while looking for matching %c\n", quote_type);
+		return -1;
 	}
+	*size = size_c;
 
-	content = realloc(content, (size + 1) * sizeof(char));
-	strcat(content, allocate_string(input, position_after_escaped_char, i));
-
-	between_quotes extracted;
-	extracted.start = start;
-	extracted.end = i;
-	extracted.size = size;
-	extracted.content = content;
-
-	return extracted;
+	return i + 1;
 }
 
 
-char* join_string_with_quotes(char* input, int start, int end, int quotes_count, between_quotes* elements) {
-	char* content = malloc(sizeof(char));
-	content[0] = '\0';
-
-	for (int i = 0; i < quotes_count; i++) {
-		int current_start = i == 0 ? start : elements[i - 1].end;
-	
-		int total_size = elements[i].end - current_start;
-
-		content = realloc(content, (total_size + 1) * sizeof(char));
-
-		strncat(content, input + current_start, elements[i].start);
-
-		strncat(content, input + current_start, elements[i].start);
-
-	}
-
-	return content;
-}
-
-
-command_t* command_parse(char* input) {
-	if (input == NULL || input[0] == '\0') {
-		return NULL;
-	}
+command_t* command_create() {
 	command_t* command = malloc(sizeof(command_t));
-
+	
 	command->command = NULL;
 	command->argc = 0;
 	command->argv = malloc(sizeof(char**));
-	
-	// TODO(marcosfons): Add => <= < >
-	//char* restricted_chars = " &|$";
+	command->chain_type = NONE;
+	command->next = NULL;
 
+	return command;
+}
+
+void command_set_command(command_t* command, char* input) {
+	command->command = input;
+}
+
+void command_add_argument(command_t* command, char* argument) {
+	command->argv = realloc(command->argv, (command->argc + 1) * sizeof(char*));
+	command->argv[command->argc] = argument;
+	command->argc += 1;
+}
+
+command_t* command_parse(char* input) {
+	if (input == NULL) {
+		return NULL;
+	}
+
+	command_t* command = command_create();
 	parser_state state = WAITING_FIRST_COMMAND_CHARACTER;
 
-	int previous = 0;
+	// TODO(marcosfons): Maybe use hash for it
+	const char* restricted_chars = "&| \0\\=><";
+
+	// Last token start
+	char* content = malloc(sizeof(char));
+	content[0] = '\0';
+	int content_size = 1;
+	int last_token_st = 0;
 	int i = -1;
-
-	int quotes_count = 0;
-	between_quotes* quotes_elements = malloc(sizeof(between_quotes*));
-
-	char* last_content = malloc(sizeof(char));
-
-	// Using do while to handle null terminator cases inside the loop
 	do {
 		i++;
 
-		if (input[i] == ' ' || input[i] == '\0') {
-			if (state == READING_COMMAND) {
-				command->command = allocate_string(input, previous, i);
+		// Restricted chars
+		if (strchr(restricted_chars, input[i]) != NONE) {
+			if (state == READING_COMMAND || state == READING_ARGUMENTS) {
+				content = realloc(content, (content_size + i - last_token_st) * sizeof(char));
+				strncpy(content + content_size - 1, input + last_token_st, i - last_token_st);
 
-				state = WAITING_FIRST_ARGUMENT_CHARACTER;
-				previous = i;
-
-				last_content = realloc(last_content, sizeof(char));
-			} else if (state == READING_ARGUMENTS) {
-				command->argv = realloc(command->argv, (command->argc + 1) * sizeof(char*));
-
-				if (quotes_count > 0) {
-					for (int j = previous; j < i; j++) {
-						
-					}
-					command->argv[command->argc] = quotes_elements[0].content;
-				} else {
-					command->argv[command->argc] = allocate_string(input, previous, i);
+				if (state == READING_COMMAND) {
+					command_set_command(command, content);
+					state = WAITING_FIRST_ARGUMENT_CHARACTER;
+					last_token_st = i - 1;
+				} else if (state == READING_ARGUMENTS) {
+					command_add_argument(command, content);
+					state = WAITING_FIRST_ARGUMENT_CHARACTER;
 				}
 
-				command->argc += 1;
-				quotes_count = 0;
-				quotes_elements = malloc(sizeof(between_quotes*));
-				previous = i;
-
-				state = WAITING_FIRST_ARGUMENT_CHARACTER;
-
-				last_content = realloc(last_content, sizeof(char));
+				last_token_st = i - 1;
+				content = malloc(sizeof(char));
+				content_size = 1;
+				content[0] = '\0';
 			}
-		} else {
-			if (state == WAITING_FIRST_COMMAND_CHARACTER) {
-				state = READING_COMMAND;
-				previous = i;
-			} else if (state == WAITING_FIRST_ARGUMENT_CHARACTER) {
-				state = READING_ARGUMENTS;
-				previous = i;
+			if (input[i] == '&') {
+				if (input[i + 1] == '&') {
+					command->chain_type = AND;
+					i++;
+				} else {
+					command->chain_type = BACKGROUND;
+				}
+				i++;
 			}
+			if (input[i] == '|') {
+				if (input[i + 1] == '|') {
+					command->chain_type = OR;
+					i++;
+				} else {
+					command->chain_type = PIPE;
+				}
+				i++;
+			}
+		} else if (state == WAITING_FIRST_COMMAND_CHARACTER) {
+			last_token_st = i;
+			state = READING_COMMAND;
+			content = malloc(sizeof(char));
+			content[0] = '\0';
+			content_size = 1;
+		} else if (state == WAITING_FIRST_ARGUMENT_CHARACTER) {
+			last_token_st = i;
+			state = READING_ARGUMENTS;
+			content = malloc(sizeof(char));
+			content[0] = '\0';
+			content_size = 1;
 		}
 
-		// Handle double and single quotes
 		if (input[i] == '"' || input[i] == '\'') {
+			content = realloc(content, (content_size + i - last_token_st) * sizeof(char));
+			strncpy(content + content_size - 1, input + last_token_st, i - last_token_st);
+			content_size += i - last_token_st;
 
-			quotes_elements = realloc(quotes_elements, (quotes_count + 1) * sizeof(between_quotes));
-			quotes_elements[quotes_count] = get_between_quotes_content(input, i);
-			quotes_count += 1;
-
-			int size = quotes_elements[quotes_count - 1].size;
-			int start = quotes_elements[quotes_count - 1].start;
-			char* content = quotes_elements[quotes_count - 1].content;
-			
-			int last_content_size = strlen(last_content);
-			last_content = realloc(last_content, (last_content_size + size + 1)* sizeof(char));
-			printf("Será: '%s'\n", last_content);
-			printf("Actual lwlSerá: '%s'\n", content);
-
-			if (quotes_count > 1) {
-				
-				strncat(last_content + , input + i, start - i);
-			} else {
-				strncat(last_content, input + i, start - i);
+			int last_pos = read_between_quotes(content, &content_size, input + i);
+			if (last_pos == -1) {
+				command_free(command);
+				free(content);
+				return NULL;
 			}
+			last_token_st = last_pos + i + 1;
+			i = last_token_st - 1;
+		}
 
-			strcat(last_content + last_content_size, content);
-			printf("depois lwlSerá: '%s'\n", last_content);
+		if (input[i] == '\\') {
+			str_realloc_escaping_character(content, &content_size, input + last_token_st, i - last_token_st);
+			i+=1;
+			last_token_st = i + 1;
+		}
 
-			i = quotes_elements[quotes_count - 1].end;
+		if (command->chain_type != NONE) {
+			command->next = command_parse(input + i);
+
+			if (command->next == NULL && command->chain_type != BACKGROUND) {
+				// TODO(marcosfons): Create a strategy to "expect" a new command
+				// For now only throwing a error
+
+				// TODO(marcosfons): Introduce a hint saying what character and its position
+				fprintf(stderr, "Unexpected EOF while expecting a new command");
+
+				return NULL;
+			}
+			break;
 		}
 	} while(input[i] != '\0');
 
-	if (state == WAITING_FIRST_COMMAND_CHARACTER) {
+	if (command->command == NULL) {
 		return NULL;
 	}
-	
-	////printf("commmand: '%s'\n", command->command);
-	////printf("PRIMERIA: '%s'\n", command->argv[0]);
-	////printf("SEGUNDA: '%s'\n", command->argv[1]);
+
+	free(content);
+
 	return command;
 }
 
 
-//void free_command(command_t* command) {
-//	if (command == NULL) {
-//		return;
-//	}
-//
-//	free(command->command);
-//
-//	for (int i = 0; i < command->argc; i++) {
-//		free(command->argv[i]);
-//	}
-//
-//	// TODO(marcosfons): Fix compilation warning
-//	//free(command->argv);
-//}
-//
-//// TODO(marcosfons): Finish free_command_chain
-//void free_command_chain(command_t* command) {
-//	
-//}
+void command_free(command_t* command) {
+	if (command == NULL) {
+		return;
+	} else if (command->next != NULL) {
+		command_free(command->next);
+	}
+
+	free(command->command);
+
+	for (int i = 0; i < command->argc; i++) {
+		free(command->argv[i]);
+	}
+	free(command->argv);
+	free(command);
+
+	// Sanity helper
+	command = NULL;
+}

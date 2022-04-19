@@ -1,8 +1,15 @@
 #include <criterion/criterion.h>
+#include <criterion/internal/assert.h>
 #include <criterion/internal/test.h>
 #include <criterion/redirect.h>
+#include <stdio.h>
+#include <string.h>
 
 #include "../../src/shell/command_parser.c"
+
+void redirect_stderr(void) {
+	cr_redirect_stderr();
+}
 
 void redirect_all_std(void) {
     cr_redirect_stdout();
@@ -13,77 +20,128 @@ void redirect_all_std(void) {
 
 // --- Command parse tests ---
 
-Test(get_between_quotes_content, empty_string) {
-	between_quotes result = get_between_quotes_content("\"\"", 0);
 
-	cr_assert_str_eq(result.content, "");
-	cr_assert_eq(result.start, 0);
-	cr_assert_eq(result.end, 1);
-	cr_assert_eq(result.size, 0);
+Test(str_realloc_escaping_character, simple_str_realloc_escaping_character) {
+	char* dest = malloc(sizeof(char));
+	dest[0] = '\0';
+	int size = 1;
+
+	str_realloc_escaping_character(dest, &size, "Testing\\\"", 7);
+
+	cr_assert_str_eq(dest, "Testing\"");
+	cr_assert_eq(size, 9);
 }
 
-Test(get_between_quotes_content, filled_string) {
-	between_quotes result = get_between_quotes_content("\"Content inside quotes\"", 0);
+Test(str_realloc_escaping_character, str_escaping_character_with_content) {
+	char* dest = strcpy(malloc(7), "Hello ");
+	int size = 7;
 
-	cr_assert_str_eq(result.content, "Content inside quotes");
-	cr_assert_eq(result.start, 0);
-	cr_assert_eq(result.end, 22);
-	cr_assert_eq(result.size, 21);
+	str_realloc_escaping_character(dest, &size, "Testing\\\"", 7);
+
+	cr_assert_str_eq(dest, "Hello Testing\"");
+	cr_assert_eq(size, 15);
 }
 
-Test(get_between_quotes_content, without_maching_quote, .init = redirect_all_std) {
-	get_between_quotes_content("\"Missing last quote", 0);
+Test(read_between_quotes, hello_world) {
+	char* dest = strcpy(malloc(6), "Hello");
+	int size = 6;
+	char* final = "' world!'";
+	int final_quote = read_between_quotes(dest, &size, final);
 
-	cr_assert_stderr_eq_str("Unexpected EOF while looking for matching \"\n");
+	cr_assert_str_eq(dest, "Hello world!");
+	cr_assert_eq(final[final_quote], '\'');
+	cr_assert_eq(size, 13);
 }
 
-Test(get_between_quotes_content, filled_string_with_escaping_character) {
-	between_quotes result = get_between_quotes_content("\"Content \\\"inside quotes\"", 0);
+Test(read_between_quotes, empty_string) {
+	char* dest = strcpy(malloc(1), "");
+	int size = 1;
+	char* final = "''";
+	int final_quote = read_between_quotes(dest, &size, final);
 
-	cr_assert_str_eq(result.content, "Content \"inside quotes");
-	cr_assert_eq(result.start, 0);
-	cr_assert_eq(result.end, 24);
-	cr_assert_eq(result.size, 22);
+	cr_assert_str_eq(dest, "");
+	cr_assert_eq(final_quote, 1);
+	cr_assert_eq(final[final_quote], '\'');
+	cr_assert_eq(size, 1);
 }
 
-Test(get_between_quotes_content, filled_string_with_multiple_escaping_character) {
-	between_quotes result = get_between_quotes_content("\"Content \\\"inside\\\" quotes\"", 0);
+Test(read_between_quotes, double_quote_empty_string) {
+	char* dest = strcpy(malloc(1), "");
+	int size = 1;
+	char* final = "''";
+	int final_quote = read_between_quotes(dest, &size, final);
 
-	cr_assert_str_eq(result.content, "Content \"inside\" quotes");
-	cr_assert_eq(result.start, 0);
-	cr_assert_eq(result.end, 26);
-	cr_assert_eq(result.size, 23);
-}
-//Test(get_between_quotes_content, double_quote_with_escaping_character) {
-//	between_quotes result = get_between_quotes_content(
-//		//"\"\\\"The future belongs to those who believe in the beauty of their dreams.\\\" Eleanor Roosevelt\"",
-//		"\"The future belongs to those who believe in the beauty of their dreams. Eleanor Roosevelt\" ",
-//		0
-//	);
-//
-//	printf("ASTRING '%s'\n", result.content);
-//	printf("ASTRING '%s'\n", "The future belongs to those who believe in the beauty of their dreams. Eleanor Roosevelt");
-//	cr_assert_str_eq(result.content, "The future belongs to those who believe in the beauty of their dreams. Eleanor Roosevelt");
-//	cr_assert_eq(result.start, 0);
-//	cr_assert_eq(result.end, 22);
-//	cr_assert_eq(result.size, 21);
-//}
-
-
-
-// --- Command parse tests ---
-
-Test(join_string_with_quotes, empty_string_and_quote_elements) {
-	char* result = join_string_with_quotes("", 0, 0, 0, NULL);
-
-	cr_assert_str_eq(result, "");
+	cr_assert_str_eq(dest, "");
+	cr_assert_eq(final_quote, 1);
+	cr_assert_eq(final[final_quote], '\'');
+	cr_assert_eq(size, 1);
 }
 
-Test(join_string_with_quotes, empty_quote_elements) {
-	char* result = join_string_with_quotes("   ", 0, 2, 0, NULL);
+Test(read_between_quotes, hello_world_double_quotes) {
+	char* dest = strcpy(malloc(6), "Hello");
+	int size = 6;
+	char* final = "\" world!\"";
+	int final_quote = read_between_quotes(dest, &size, final);
 
-	cr_assert_str_eq(result, "   ");
+	cr_assert_str_eq(dest, "Hello world!");
+	cr_assert_eq(final[final_quote], '"');
+	cr_assert_eq(size, 13);
 }
+
+Test(read_between_quotes, hello_world_double_quotes_escaped) {
+	char* dest = strcpy(malloc(6), "Hello");
+	int size = 6;
+	char* final = "\" \\\"world\\\"!\"";
+	int final_quote = read_between_quotes(dest, &size, final);
+
+	cr_assert_str_eq(dest, "Hello \"world\"!");
+	cr_assert_eq(final[final_quote], '"');
+	cr_assert_eq(size, 15);
+}
+
+Test(read_between_quotes, hello_world_escaped_double_quotes) {
+	char* dest = strcpy(malloc(6), "Hello");
+	int size = 6;
+	char* final = "\" \\\"world!\"";
+
+	int final_quote = read_between_quotes(dest, &size, final);
+
+	cr_assert_str_eq(dest, "Hello \"world!");
+	cr_assert_eq(final[final_quote], '"');
+	cr_assert_eq(size, 14);
+}
+
+Test(read_between_quotes, hello_world_double_quotes_escaped2) {
+	char* dest = strcpy(malloc(6), "Hello");
+	int size = 6;
+	char* final = "\" \\\"\\\"world\\\"!\"";
+	int final_quote = read_between_quotes(dest, &size, final);
+
+	cr_assert_str_eq(dest, "Hello \"\"world\"!");
+	cr_assert_eq(final[final_quote], '"');
+	cr_assert_eq(size, 16);
+}
+
+Test(read_between_quotes, hello_world_double_quotes_escaped3) {
+	char* dest = strcpy(malloc(6), "Hello");
+	int size = 6;
+	char* final = "\" \\\" \\\" \\\"world\\\"!\"";
+	int final_quote = read_between_quotes(dest, &size, final);
+
+	cr_assert_str_eq(dest, "Hello \" \" \"world\"!");
+	cr_assert_eq(final[final_quote], '"');
+	cr_assert_eq(size, 19);
+}
+
+Test(read_between_quotes, missing_last_quote) {
+	char* dest = strcpy(malloc(6), "Hello");
+	int size = 6;
+	int final_quote = read_between_quotes(dest, &size, "' world!");
+
+	cr_assert_eq(final_quote, -1);
+	cr_assert_eq(size, 6);
+}
+
 
 
 
@@ -91,19 +149,19 @@ Test(join_string_with_quotes, empty_quote_elements) {
 
 Test(command_parse, null_command) {
 	command_t* command = command_parse(NULL);
-	
+
 	cr_assert_null(command);
 }
 
 Test(command_parse, empty_command) {
 	command_t* command = command_parse("");
-	
+
 	cr_assert_null(command);
 }
 
 Test(command_parse, ls_command) {
 	command_t* command = command_parse("ls");
-	
+
 	cr_assert_str_eq(command->command, "ls");
 	cr_assert_eq(command->argc, 0);
 	cr_assert_null(command->argv[0]);
@@ -117,7 +175,7 @@ Test(command_parse, empty_command_with_spaces) {
 
 Test(command_parse, ls_with_argument) {
 	command_t* command = command_parse("ls -l");
-	
+
 	cr_assert_str_eq(command->command, "ls");
 	cr_assert_eq(command->argc, 1);
 	cr_assert_str_eq(command->argv[0], "-l");
@@ -125,7 +183,7 @@ Test(command_parse, ls_with_argument) {
 
 Test(command_parse, ls_with_leading_spaces) {
 	command_t* command = command_parse("  ls");
-	
+
 	cr_assert_str_eq(command->command, "ls");
 	cr_assert_eq(command->argc, 0);
 	cr_assert_null(command->argv[0]);
@@ -133,7 +191,7 @@ Test(command_parse, ls_with_leading_spaces) {
 
 Test(command_parse, ls_with_trailing_spaces) {
 	command_t* command = command_parse("ls  ");
-	
+
 	cr_assert_str_eq(command->command, "ls");
 	cr_assert_eq(command->argc, 0);
 	cr_assert_null(command->argv[0]);
@@ -141,7 +199,7 @@ Test(command_parse, ls_with_trailing_spaces) {
 
 Test(command_parse, ls_with_spaces_between_arguments) {
 	command_t* command = command_parse("ls  -l  ");
-	
+
 	cr_assert_str_eq(command->command, "ls");
 	cr_assert_eq(command->argc, 1);
 	cr_assert_str_eq(command->argv[0], "-l");
@@ -149,7 +207,7 @@ Test(command_parse, ls_with_spaces_between_arguments) {
 
 Test(command_parse, git_multiple_arguments_without_quotes) {
 	command_t* command = command_parse("git commit -m Message");
-	
+
 	cr_assert_str_eq(command->command, "git");
 	cr_assert_eq(command->argc, 3);
 	cr_assert_str_eq(command->argv[0], "commit");
@@ -159,7 +217,7 @@ Test(command_parse, git_multiple_arguments_without_quotes) {
 
 Test(command_parse, git_multiple_arguments) {
 	command_t* command = command_parse("git commit -m 'Message'");
-	
+
 	cr_assert_str_eq(command->command, "git");
 	cr_assert_eq(command->argc, 3);
 	cr_assert_str_eq(command->argv[0], "commit");
@@ -169,7 +227,7 @@ Test(command_parse, git_multiple_arguments) {
 
 Test(command_parse, git_multiple_arguments_with_quotes_and_spaces) {
 	command_t* command = command_parse("git commit -m 'Message with spaces'");
-	
+
 	cr_assert_str_eq(command->command, "git");
 	cr_assert_eq(command->argc, 3);
 	cr_assert_str_eq(command->argv[0], "commit");
@@ -179,7 +237,7 @@ Test(command_parse, git_multiple_arguments_with_quotes_and_spaces) {
 
 Test(command_parse, echo_valid) {
 	command_t* command = command_parse("echo test'test'");
-	
+
 	cr_assert_str_eq(command->command, "echo");
 	cr_assert_eq(command->argc, 1);
 	cr_assert_str_eq(command->argv[0], "testtest");
@@ -187,16 +245,15 @@ Test(command_parse, echo_valid) {
 
 Test(command_parse, echo_valid_with_quotes) {
 	command_t* command = command_parse("echo out' in 'out");
-	
+
 	cr_assert_str_eq(command->command, "echo");
 	cr_assert_eq(command->argc, 1);
-	printf("AAA '%s'\n", command->argv[0]);
 	cr_assert_str_eq(command->argv[0], "out in out");
 }
 
 Test(command_parse, echo_valid_with_single_quote_and_escaping_character) {
 	command_t* command = command_parse("echo out' in \\'out");
-	
+
 	cr_assert_str_eq(command->command, "echo");
 	cr_assert_eq(command->argc, 1);
 	cr_assert_str_eq(command->argv[0], "out in \\out");
@@ -205,7 +262,7 @@ Test(command_parse, echo_valid_with_single_quote_and_escaping_character) {
 Test(command_parse, echo_valid_with_double_quotes_and_escaping_character) {
 	// echo out" in \""out   --> Valid command
 	command_t* command = command_parse("echo out\" in \\\"\"out");
-	
+
 	cr_assert_str_eq(command->command, "echo");
 	cr_assert_eq(command->argc, 1);
 	cr_assert_str_eq(command->argv[0], "out in \"out");
@@ -214,7 +271,7 @@ Test(command_parse, echo_valid_with_double_quotes_and_escaping_character) {
 Test(command_parse, echo_valid_with_double_quotes) {
 	// echo out" in \""out   --> Valid command
 	command_t* command = command_parse("echo out\" in \"out\" in \"");
-	
+
 	cr_assert_str_eq(command->command, "echo");
 	cr_assert_eq(command->argc, 1);
 	cr_assert_str_eq(command->argv[0], "out in out in ");
@@ -222,20 +279,92 @@ Test(command_parse, echo_valid_with_double_quotes) {
 
 Test(command_parse, simple_echo_command) {
 	command_t* command = command_parse("echo \"Testando\" 'Teste'");
-	
+
 	cr_assert_str_eq(command->command, "echo");
 	cr_assert_eq(command->argc, 2);
 	cr_assert_str_eq(command->argv[0], "Testando");
 	cr_assert_str_eq(command->argv[1], "Teste");
 }
 
-Test(command_parse, echo_invalid_with_double_quotes_and_escaping_character, .init = redirect_all_std) {
-	// echo out" in \"out   --> Invalid command
+Test(command_parse, simple_echo_pipe_command_chain) {
+	command_t* command = command_parse("echo test | echo 123123");
+
+	cr_assert_str_eq(command->command, "echo");
+	cr_assert_eq(command->argc, 1);
+	cr_assert_str_eq(command->argv[0], "test");
+	cr_assert_eq(command->chain_type, PIPE);
+
+	cr_assert_str_eq(command->next->command, "echo");
+	cr_assert_eq(command->next->argc, 1);
+	cr_assert_str_eq(command->next->argv[0], "123123");
+}
+
+Test(command_parse, simple_echo_or_command_chain) {
+	command_t* command = command_parse("echo test || echo 123123");
+
+	cr_assert_str_eq(command->command, "echo");
+	cr_assert_eq(command->argc, 1);
+	cr_assert_str_eq(command->argv[0], "test");
+	cr_assert_eq(command->chain_type, OR);
+
+	cr_assert_str_eq(command->next->command, "echo");
+	cr_assert_eq(command->next->argc, 1);
+	cr_assert_str_eq(command->next->argv[0], "123123");
+}
+
+Test(command_parse, simple_echo_pipe_command_chain_without_spaces) {
+	command_t* command = command_parse("echo test|echo 123123");
+
+	cr_assert_str_eq(command->command, "echo");
+	cr_assert_eq(command->argc, 1);
+	cr_assert_str_eq(command->argv[0], "test");
+	cr_assert_eq(command->chain_type, PIPE);
+
+	cr_assert_str_eq(command->next->command, "echo");
+	cr_assert_eq(command->next->argc, 1);
+	cr_assert_str_eq(command->next->argv[0], "123123");
+}
+
+Test(command_parse, and_command_chain) {
+	command_t* command = command_parse("echo test test1 &&cat 123123");
+
+	cr_assert_str_eq(command->command, "echo");
+	cr_assert_eq(command->argc, 2);
+	cr_assert_str_eq(command->argv[0], "test");
+	cr_assert_str_eq(command->argv[1], "test1");
+	cr_assert_eq(command->chain_type, AND);
+
+	cr_assert_str_eq(command->next->command, "cat");
+	cr_assert_eq(command->next->argc, 1);
+	cr_assert_str_eq(command->next->argv[0], "123123");
+}
+
+Test(command_parse, command_chain_with_escaping_character) {
+	command_t* command = command_parse("cat test\\ test1 & echo 123123");
+
+	cr_assert_str_eq(command->command, "cat");
+	cr_assert_eq(command->argc, 1);
+	cr_assert_str_eq(command->argv[0], "test test1");
+	cr_assert_eq(command->chain_type, BACKGROUND);
+
+	cr_assert_str_eq(command->next->command, "echo");
+	cr_assert_eq(command->next->argc, 1);
+	cr_assert_str_eq(command->next->argv[0], "123123");
+}
+
+Test(command_parse, echo_invalid_with_double_quotes_and_escaping_character, .init = redirect_stderr) {
 	command_parse("echo out\" in \\\"out");
-	fflush(stderr);
 
 	cr_assert_stderr_eq_str(
-		"Unexpected EOF while looking for matching \"\n", 
+		"Unexpected EOF while looking for matching \"\n",
+		"Failed to parse invalid command escaping last quote"
+	);
+}
+Test(command_parse, echo_invalid_with_quotes_and_escaping_character, .init = redirect_stderr) {
+	command_parse("\'echo test");
+
+	cr_assert_stderr_eq_str(
+		"Unexpected EOF while looking for matching \'\n",
 		"Failed to parse invalid command escaping last quote"
 	);
 }

@@ -8,8 +8,9 @@
 
 /*! Type of a chain between two commands */
 typedef enum {
-	PIPE,				/**< |  Sends output to the next command*/
-	AND,				/**< && Only executes if the last command was successful*/
+	NONE,				/**< Doesn't have a next command */
+	PIPE,				/**< |  Sends output to the next command */
+	AND,				/**< && Only executes if the last command was successful */
 	OR,					/**< || Execute another command afterwards */
 	BACKGROUND	/**< &  Execute the program in background */
 } command_chain_type;
@@ -26,7 +27,11 @@ typedef struct command_t {
 	command_chain_type chain_type;
 } command_t;
 
+/** Parses the given input creating a new command_t */
 command_t* command_parse(char* input);
+
+/** Free a command */
+void command_free(command_t* command);
 
 
 #endif
