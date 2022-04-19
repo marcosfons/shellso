@@ -14,26 +14,6 @@ typedef enum parser_state {
 } parser_state;
 
 
-/* Allocate a new string and copy the content from the given input
- * 
- * Arguments:
- *	char* input
- *	int start 	Inclusive
- *	int end	 		Inclusive. But it will be replaced by '\0'
- *
- * Example:
- * 	char* new_string = stralloc_escaping_character("  test ", 2, 4);
- * 	new_string -> test\0
- */
-// static char* stralloc(char* input, int start, int end) {
-// 	char* result = malloc((end - start) * sizeof(char));
-// 	strncpy(result, input, end - start);
-// 	result[end] = '\0';
-//
-// 	return result;
-// }
-
-
 /* Reallocate dest string considering the escaped character
  *
  * input[escaping_character_position] must be the escaping character
@@ -118,6 +98,12 @@ static int read_between_quotes(char* dest, int* size, char* input) {
 }
 
 
+static char* allocate_empty_string() {
+	char* string = malloc(sizeof(char));
+	string[0] = '\0';
+	return string;
+}
+
 command_t* command_create() {
 	command_t* command = malloc(sizeof(command_t));
 	
@@ -146,39 +132,37 @@ command_t* command_parse(char* input) {
 	}
 
 	command_t* command = command_create();
+
 	parser_state state = WAITING_FIRST_COMMAND_CHARACTER;
 
-	// TODO(marcosfons): Maybe use hash for it
 	const char* restricted_chars = "&| \0\\=><";
-
-	// Last token start
-	char* content = malloc(sizeof(char));
-	content[0] = '\0';
+	
+	char* content = allocate_empty_string();
 	int content_size = 1;
-	int last_token_st = 0;
+
 	int i = -1;
+
 	do {
 		i++;
 
 		// Restricted chars
 		if (strchr(restricted_chars, input[i]) != NONE) {
 			if (state == READING_COMMAND || state == READING_ARGUMENTS) {
-				content = realloc(content, (content_size + i - last_token_st) * sizeof(char));
-				strncpy(content + content_size - 1, input + last_token_st, i - last_token_st);
+				content = realloc(content, (content_size + i) * sizeof(char));
+				strncpy(content + content_size - 1, input, i);
 
 				if (state == READING_COMMAND) {
 					command_set_command(command, content);
 					state = WAITING_FIRST_ARGUMENT_CHARACTER;
-					last_token_st = i - 1;
 				} else if (state == READING_ARGUMENTS) {
 					command_add_argument(command, content);
 					state = WAITING_FIRST_ARGUMENT_CHARACTER;
 				}
 
-				last_token_st = i - 1;
-				content = malloc(sizeof(char));
+				input += i;
+				i = 0;
+				content = allocate_empty_string();
 				content_size = 1;
-				content[0] = '\0';
 			}
 			if (input[i] == '&') {
 				if (input[i + 1] == '&') {
@@ -198,39 +182,37 @@ command_t* command_parse(char* input) {
 				}
 				i++;
 			}
-		} else if (state == WAITING_FIRST_COMMAND_CHARACTER) {
-			last_token_st = i;
-			state = READING_COMMAND;
-			content = malloc(sizeof(char));
-			content[0] = '\0';
-			content_size = 1;
-		} else if (state == WAITING_FIRST_ARGUMENT_CHARACTER) {
-			last_token_st = i;
-			state = READING_ARGUMENTS;
-			content = malloc(sizeof(char));
-			content[0] = '\0';
+		} else if (state == WAITING_FIRST_COMMAND_CHARACTER || 
+							 state == WAITING_FIRST_ARGUMENT_CHARACTER) {
+			// Here it transforms WAITING to READING
+			state += 1;
+
+			input += i;
+			i = 0;
+			content = allocate_empty_string();
 			content_size = 1;
 		}
 
 		if (input[i] == '"' || input[i] == '\'') {
-			content = realloc(content, (content_size + i - last_token_st) * sizeof(char));
-			strncpy(content + content_size - 1, input + last_token_st, i - last_token_st);
-			content_size += i - last_token_st;
+			content = realloc(content, (content_size + i) * sizeof(char));
+			strncpy(content + content_size - 1, input, i);
+			content_size += i;
 
-			int last_pos = read_between_quotes(content, &content_size, input + i);
-			if (last_pos == -1) {
+			input += i;
+			i = read_between_quotes(content, &content_size, input);
+			if (i == -1) {
 				command_free(command);
 				free(content);
 				return NULL;
 			}
-			last_token_st = last_pos + i + 1;
-			i = last_token_st - 1;
+			input += i + 1;
+			i = -1;
 		}
 
 		if (input[i] == '\\') {
-			str_realloc_escaping_character(content, &content_size, input + last_token_st, i - last_token_st);
-			i+=1;
-			last_token_st = i + 1;
+			str_realloc_escaping_character(content, &content_size, input, i);
+			input += i + 2;
+			i = 0;
 		}
 
 		if (command->chain_type != NONE) {
@@ -257,7 +239,6 @@ command_t* command_parse(char* input) {
 
 	return command;
 }
-
 
 void command_free(command_t* command) {
 	if (command == NULL) {
