@@ -1,6 +1,8 @@
 #include <stdio.h>
 
+#include "shell/shell.h"
+
+
 int main(int argc, char** argv) {
-	printf("Hello world\n");
-	return 0;
+	run_interactive();
 }

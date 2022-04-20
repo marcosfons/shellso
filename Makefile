@@ -27,6 +27,11 @@ AA=$(BUILD_DIR/%.c.o)
 
 CRITERION := LD_LIBRARY_PATH=/usr/local/lib
 
+bin/main: $(OBJS)
+	$(MKDIR_P) $(dir $@)
+	echo $(OBJS)
+	$(CC) $(OBJS) -o $@ $(LDFLAGS)
+
 $(BIN_DIR)/$(TARGET_EXEC): $(OBJS)
 	$(MKDIR_P) $(dir $@)
 	echo $(OBJS)

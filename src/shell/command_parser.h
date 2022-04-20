@@ -16,15 +16,13 @@ typedef enum {
 } command_chain_type;
 
 
-/** Holds the data of a command chain
- * 
- */
+/** \brief A structure to represent a command_chain */
 typedef struct command_t {
-	char* command;
-	int argc;
-	char** argv;
-	struct command_t* next;
-	command_chain_type chain_type;
+	char* command; /**< The command */
+	int argc; /**< The number of arguments */
+	char** argv; /**< The arguments */
+	struct command_t* next; /**< The next command in the chain */
+	command_chain_type chain_type; /**< The type of the command chain */
 } command_t;
 
 /** Parses the given input creating a new command_t */

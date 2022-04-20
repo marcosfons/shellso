@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <assert.h>
+#include <errno.h>
 
 #include "command_parser.h"
 
@@ -13,6 +14,28 @@ typedef enum parser_state {
 	READING_ARGUMENTS
 } parser_state;
 
+
+/** Try to allocate some space (size) in memory but exits in some unknown failure */
+static void* malloc_or_exit(size_t size, char* reason) {
+	void* pointer = malloc(size);
+	if (pointer == NULL) {
+		perror(reason);
+		exit(EXIT_FAILURE);
+	}
+
+	return pointer;
+}
+
+/** Try to reallocate some space (size) in memory for pointer but exits in some unknown failure */
+static void* realloc_or_exit(void* pointer, size_t size, char* reason) {
+	pointer = realloc(pointer, size);
+	if (pointer == NULL) {
+		perror(reason);
+		exit(EXIT_FAILURE);
+	}
+
+	return pointer;
+}
 
 /* Reallocate dest string considering the escaped character
  *
@@ -27,7 +50,7 @@ typedef enum parser_state {
  *
  */
 static char* str_realloc_escaping_character(char* dest, int* size, char* input, int escaping_character_position) {
-	dest = realloc(dest, (*size + escaping_character_position + 1) * sizeof(char));
+	dest = realloc_or_exit(dest, (*size + escaping_character_position + 1) * sizeof(char), NULL);
 
 	strncpy(dest + (*size - 1), input, escaping_character_position + 1);
 
@@ -59,59 +82,57 @@ static int read_between_quotes(char* dest, int* size, char* input) {
 	assert(dest[*size - 1] == '\0');
 	char quote_type = input[0]; // Will be " or '
 	assert(quote_type == '"' || quote_type == '\'');
-	input += 1; // Shift
+	input += 1; // Shift the quote char
 	int i = 0;
-	int size_c = *size;
 
 	if (quote_type == '\'') {
 		for (; input[i] != quote_type && input[i] != '\0'; i++) {}
 		if (input[i] != '\0') {
-			dest = realloc(dest, (size_c + i) * sizeof(char));
-			strncpy(dest + size_c - 1, input, i);
-			dest[size_c + i - 1] = '\0';
-			size_c += i;
+			dest = realloc_or_exit(dest, (*size + i) * sizeof(char), NULL);
+			strncpy(dest + *size - 1, input, i);
+			dest[*size + i - 1] = '\0';
+			*size += i;
 		}
 	} else {
 		int j = 0;
 		for (; input[j] != quote_type && input[j] != '\0'; j++) {
 			if (input[j] == '\\') {
-				str_realloc_escaping_character(dest, &size_c, input, j);
+				str_realloc_escaping_character(dest, size, input, j);
 				input += j + 2;
 				i += j + 2;
 				j = -1;
 			}
 		}
 		i += j;
-		dest = realloc(dest, (size_c + j) * sizeof(char));
-		strncpy(dest + size_c - 1, input, j);
-		size_c += j;
-		dest[size_c + j - 1] = '\0';
+		dest = realloc_or_exit(dest, (*size + j) * sizeof(char), NULL);
+		strncpy(dest + *size - 1, input, j);
+		*size += j;
+		dest[*size + j - 1] = '\0';
 	}
 	// Reached the end of the string without finding the end quote
 	if (input[i] == '\0') {
 		fprintf(stderr, "Unexpected EOF while looking for matching %c\n", quote_type);
 		return -1;
 	}
-	*size = size_c;
 
 	return i + 1;
 }
 
 
 static char* allocate_empty_string() {
-	char* string = malloc(sizeof(char));
+	char* string = malloc_or_exit(sizeof(char), NULL);
 	string[0] = '\0';
 	return string;
 }
 
 command_t* command_create() {
-	command_t* command = malloc(sizeof(command_t));
+	command_t* command = malloc_or_exit(sizeof(command_t), NULL);
 	
 	command->command = NULL;
-	command->argc = 0;
-	command->argv = malloc(sizeof(char**));
-	command->chain_type = NONE;
 	command->next = NULL;
+	command->chain_type = NONE;
+	command->argc = 0;
+	command->argv = malloc_or_exit(sizeof(char**), NULL);
 
 	return command;
 }
@@ -121,7 +142,7 @@ void command_set_command(command_t* command, char* input) {
 }
 
 void command_add_argument(command_t* command, char* argument) {
-	command->argv = realloc(command->argv, (command->argc + 1) * sizeof(char*));
+	command->argv = realloc_or_exit(command->argv, (command->argc + 1) * sizeof(char*), NULL);
 	command->argv[command->argc] = argument;
 	command->argc += 1;
 }
@@ -148,7 +169,7 @@ command_t* command_parse(char* input) {
 		// Restricted chars
 		if (strchr(restricted_chars, input[i]) != NONE) {
 			if (state == READING_COMMAND || state == READING_ARGUMENTS) {
-				content = realloc(content, (content_size + i) * sizeof(char));
+				content = realloc_or_exit(content, (content_size + i) * sizeof(char), NULL);
 				strncpy(content + content_size - 1, input, i);
 
 				if (state == READING_COMMAND) {
@@ -194,7 +215,7 @@ command_t* command_parse(char* input) {
 		}
 
 		if (input[i] == '"' || input[i] == '\'') {
-			content = realloc(content, (content_size + i) * sizeof(char));
+			content = realloc_or_exit(content, (content_size + i) * sizeof(char), NULL);
 			strncpy(content + content_size - 1, input, i);
 			content_size += i;
 
@@ -223,7 +244,7 @@ command_t* command_parse(char* input) {
 				// For now only throwing a error
 
 				// TODO(marcosfons): Introduce a hint saying what character and its position
-				fprintf(stderr, "Unexpected EOF while expecting a new command");
+				perror("Unexpected EOF while expecting a new command");
 
 				return NULL;
 			}
