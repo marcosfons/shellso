@@ -63,7 +63,7 @@ unit_test: LDLIBS += -lcriterion
 unit_test: CFLAGS += --coverage
 unit_test: $(AA)
 	$(MKDIR_P) $(dir $(UNIT_TEST))
-	$(CC) $(CFLAGS) tests/shell/command_parser.c -o $(UNIT_TEST) $(LDLIBS)
+	$(CC) $(CFLAGS) tests/test_utils.c tests/string/string_utils.c tests/shell/command_parser.c -o $(UNIT_TEST) $(LDLIBS)
 
 
 
