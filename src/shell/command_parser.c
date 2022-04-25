@@ -5,6 +5,7 @@
 #include <errno.h>
 
 #include "command_parser.h"
+
 #include "../string/string_utils.h"
 
 
@@ -22,99 +23,39 @@ typedef enum {
 } parser_state;
 
 
-command_t* command_create() {
-	command_t* command = malloc(sizeof(command_t));
-	if (command == NULL) {
-		perror(NULL);
-		exit(EXIT_FAILURE);
-	}
-	
-	command->command = NULL;
-	command->next = NULL;
-	command->chain_type = NONE;
-	command->argc = 0;
-	command->argv = malloc(sizeof(char**));
-	if (command->argv == NULL) {
-		perror(NULL);
-		exit(EXIT_FAILURE);
-	}
 
-	return command;
-}
-
-void command_set_command(command_t* command, char* input) {
-	command->command = input;
-}
-
-void command_add_argument(command_t* command, char* argument) {
-	command->argv = realloc(command->argv, (command->argc + 1) * sizeof(char*));
-	if (command->argv == NULL) {
-		perror(NULL);
-		exit(EXIT_FAILURE);
-	}
-
-	command->argv[command->argc] = argument;
-	command->argc += 1;
-}
-
-command_t* command_parse(char* input) {
+command* command_parse(char* input) {
 	if (input == NULL) {
 		return NULL;
 	}
 
-	command_t* command = command_create();
+	command* cmd = command_create();
 
-	parser_state state = WAITING_FIRST_COMMAND_CHARACTER;
-
-	const char* restricted_chars = "&| \0\\=><";
+	// Using => to redirect stdout '>' isn't a restricted char
+	const char* restricted_chars = "&| =<\0";
 
 	string_t content = create_empty_string();
+	parser_state state = WAITING_FIRST_COMMAND_CHARACTER;
+	for (int i = 0; i == 0 || input[i - 1] != '\0'; i++) {
 
-	int i = -1;
-
-	do {
-		i++;
-
-		// Restricted chars
 		if (strchr(restricted_chars, input[i]) != NONE) {
-			if (state % 2 != 0) {
+			if (state % 2 != 0) { // State READING
 				append_string(&content, input, i);
 
 				if (state == READING_COMMAND) {
-					command_set_command(command, content.string);
-					state = WAITING_FIRST_ARGUMENT_CHARACTER;
+					command_set_command(cmd, content.string);
 				} else if (state == READING_ARGUMENTS) {
-					command_add_argument(command, content.string);
-					state = WAITING_FIRST_ARGUMENT_CHARACTER;
+					command_add_argument(cmd, content.string);
 				} else if (state == READING_REDIRECT_STDIN_FILE) {
-					command->stdin_file_redirection = content.string;
-					state = WAITING_FIRST_ARGUMENT_CHARACTER;
+					cmd->stdin_file_redirection = content.string;
 				} else if (state == READING_REDIRECT_STDOUT_FILE) {
-					command->stdout_file_redirection = content.string;
-					state = WAITING_FIRST_ARGUMENT_CHARACTER;
+					cmd->stdout_file_redirection = content.string;
 				}
 
+				state = WAITING_FIRST_ARGUMENT_CHARACTER;
 				input += i;
 				i = 0;
 				content = create_empty_string();
-			}
-			if (input[i] == '&') {
-				if (input[i + 1] == '&') {
-					command->chain_type = AND;
-					i++;
-				} else {
-					command->chain_type = BACKGROUND;
-				}
-				i++;
-			}
-			if (input[i] == '|') {
-				if (input[i + 1] == '|') {
-					command->chain_type = OR;
-					i++;
-				} else {
-					command->chain_type = PIPE;
-				}
-				i++;
 			}
 		} else if (state % 2 == 0) { // State WAITING_FIRST_CHARACTER
 			// Here it transforms WAITING to READING
@@ -131,17 +72,17 @@ command_t* command_parse(char* input) {
 			input += i;
 			i = extract_to_string_between_quotes_content(&content, input);
 			if (i == -1) {
-				command_free(command);
+				command_free(cmd);
 				string_free(content);
 				return NULL;
 			}
-			input += i + 1;
+			input += i + 1; // Jumps the last quote
 			i = -1;
 		}
 
 		if (input[i] == '\\') {
 			append_string_escaping_final_char(&content, input, i);
-			input += i + 2;
+			input += i + 2; // Jumps \ and the escaped char
 			i = -1;
 		}
 
@@ -165,10 +106,27 @@ command_t* command_parse(char* input) {
 			}
 		}
 
-		if (command->chain_type != NONE) {
-			command->next = command_parse(input + i);
+		if (input[i] == '&' || input[i] == '|') {
 
-			if (command->next == NULL && command->chain_type != BACKGROUND) {
+			if (input[i] == '&') {
+				if (input[i + 1] == '&') {
+					cmd->chain_type = AND;
+					i++;
+				} else {
+					cmd->chain_type = BACKGROUND;
+				}
+			}
+			if (input[i] == '|') {
+				if (input[i + 1] == '|') {
+					cmd->chain_type = OR;
+					i++;
+				} else {
+					cmd->chain_type = PIPE;
+				}
+			}
+
+			cmd->next = command_parse(input + i + 1);
+			if (cmd->next == NULL && cmd->chain_type != BACKGROUND) {
 				/** @todo Create a strategy to "expect" a new command. For now only throwing a error and returning NULL */
 				/** @todo Introduce a hint saying what character and its position */
 				fprintf(stderr, "Unexpected EOF while expecting a new command");
@@ -176,27 +134,13 @@ command_t* command_parse(char* input) {
 			}
 			break;
 		}
-	} while(input[i] != '\0');
+	}
 
-	if (command->command == NULL) {
+	if (cmd->command == NULL) {
 		return NULL;
 	}
 
 	string_free(content);
 
-	return command;
-}
-
-void command_free(command_t* command) {
-	if (command == NULL) {
-		return;
-	} else if (command->next != NULL) {
-		command_free(command->next);
-	}
-
-	free(command->command);
-	for (int i = 0; i < command->argc; i++) {
-		free(command->argv[i]);
-	}
-	free(command->argv);
+	return cmd;
 }

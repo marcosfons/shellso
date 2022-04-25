@@ -25,9 +25,8 @@
 var NAVTREE =
 [
   [ "shellso", "index.html", [
-    [ "Command parser", "index.html#autotoc_md1", [
-      [ "State machine", "index.html#autotoc_md2", null ]
-    ] ],
+    [ "Table of contents", "index.html#autotoc_md1", null ],
+    [ "Author", "index.html#autotoc_md2", null ],
     [ "Todo List", "todo.html", null ],
     [ "Data Structures", "annotated.html", [
       [ "Data Structures", "annotated.html", "annotated_dup" ],

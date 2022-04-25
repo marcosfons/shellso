@@ -8,7 +8,10 @@ CFLAGS=-g -Wall
 LDLIBS=
 
 SRCS := $(shell find $(SRC_DIRS) -name *.c)
-OBJS := $(SRCS:%=$(BUILD_DIR)/%.o)
+# OBJS := $(SRCS:%=$(BUILD_DIR)/%.o)
+OBJS := $(patsubst $(SRC_DIRS)/%.c, $(BUILD_DIR)/%.o, $(SRCS))
+# OBJS := $(shell find src -name *.c -exec sh -c 'echo {} | cut -d/ -f2- | xargs -I + echo "build/+"' \;)
+
 DEPS := $(OBJS:.o=.d)
 
 INC_DIRS := $(shell find $(SRC_DIRS) -type d)
@@ -26,6 +29,16 @@ UNIT_TEST := $(TESTBIN)/unit_test.o
 AA=$(BUILD_DIR/%.c.o)
 
 CRITERION := LD_LIBRARY_PATH=/usr/local/lib
+
+pri:
+	echo $(OBJS)
+
+alguma: $(OBJS)
+	echo $(OBJS)
+
+$(OBJS): $(SRCS) | $(BUILD_DIR)
+	$(CC) $^ -o $@
+	
 
 bin/main: $(OBJS)
 	$(MKDIR_P) $(dir $@)
@@ -66,6 +79,8 @@ unit_test: $(AA)
 	$(CC) $(CFLAGS) tests/test_utils.c tests/string/string_utils.c tests/shell/command_parser.c -o $(UNIT_TEST) $(LDLIBS)
 
 
+$(BUILD_DIR):
+	$(MKDIR_P) $@
 
 # CGLAG=--coverage will create .gcda and .gcno
 # Create rule to delete them
