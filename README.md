@@ -11,7 +11,7 @@ Online documentation available in [here](https://marcosfons.github.io/shellso).
 1. [Setup](#Setup)
 2. [Usage](#Usage)
 3. What it does not support
-4. [Authors](#Authors)
+5. [Authors](#Authors)
 
 
 
@@ -24,6 +24,9 @@ dependencies you can install:
 - [`Criterion`](https://criterion.readthedocs.io/en/master/setup.html) to run
 	the tests
 
+If you choosed to run the tests with `Criterion`, install it and place the `.so`
+files inside a `include` directory in the root folder. Or set the
+`LD_LIBRARY_PATH` environment variable to its installation path.
 
 ### Usage
 
@@ -37,6 +40,7 @@ Usage: make [target] ...
 targets:
    clean                Clean all builded files
    debug                Build an executable to debug
+   docs                 Generate and try to open docs
    help                 Show a help message
    release              Build a release executable
    test                 Build and run tests
@@ -67,5 +71,6 @@ ENV_VAR=123 echo "$ENV_VAR"
 
 ### Authors
 
+- [Filipe Mateus](https://github.com/fm4teus)
 - [Marcos Fonseca](https://github.com/marcosfons)
 

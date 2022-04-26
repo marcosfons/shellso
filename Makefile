@@ -1,3 +1,6 @@
+CC=gcc
+CFLAGS=-g -Wall
+LDLIBS=
 
 MKDIR_P=mkdir -p
 
@@ -18,10 +21,6 @@ UNIT_TEST=$(TESTBIN)/unit_test.o
 
 
 
-CFLAGS=-g -Wall
-LDLIBS=
-
-
 .PHONY: help
 help: ## Show a help message
 help:
@@ -29,7 +28,6 @@ help:
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | \
 		sort | \
 		awk 'BEGIN {FS = ":.*?## "}; {printf "   \033[36m%-20s\033[0m %s\n", $$1, $$2}'
-
 
 .PHONY: debug
 debug: ## Build an executable to debug 
@@ -41,6 +39,25 @@ release: CFLAGS=-Wall -O2 -DNDEBUG
 release: clean
 release: $(BIN)/$(EXE)
 
+.PHONY: test
+test: ## Build and run tests
+test: LDLIBS += -lcriterion
+test: CFLAGS += --coverage
+test: $(TESTBIN) $(UNIT_TEST) 
+	$(UNIT_TEST) -j1
+
+.PHONY: docs
+docs: ## Generate Doxygen docs and try to open
+docs:
+	doxygen
+	xdg-open docs/doxygen/html/index.html
+
+.PHONY: clean
+clean: ## Clean all builded files
+	$(RM) -r $(BIN) $(OBJ) $(TESTBIN)
+
+
+
 
 $(OBJ)/%.o: $(SRC)/%.c $(OBJ)
 	@$(MKDIR_P) $(@D)
@@ -49,15 +66,6 @@ $(OBJ)/%.o: $(SRC)/%.c $(OBJ)
 $(BIN)/$(EXE): $(OBJS) | $(BIN)
 	$(CC) $(CFLAGS) $(LDLIBS) $^ -o $@
 
-
-
-.PHONY: test
-test: ## Build and run tests
-test: LDLIBS += -lcriterion
-test: CFLAGS += --coverage
-test: $(TESTBIN) $(UNIT_TEST) 
-	$(UNIT_TEST) -j1
-	
 
 $(UNIT_TEST): $(TESTS) $(TEST)/test_utils.c 
 	$(CC) $(CFLAGS) $(LDLIBS) -Wl,-rpath,include $^ -o $@
@@ -73,10 +81,4 @@ $(OBJ):
 
 $(TESTBIN):
 	$(MKDIR_P) $@
-
-
-
-.PHONY: clean
-clean: ## Clean all builded files
-	$(RM) -r $(BIN) $(OBJ) $(TESTBIN)
 
