@@ -15,8 +15,11 @@
 		- time (maybe)
 		- fim
 		- exit (alias to fim, maybe)
+		- help
+
+- Implement handling for builtin commands (Hash table and code execution)
+		- Hash table already implemented. Still missing code execution from it
 - Implement better code for file redirection
-- Implement 
 
 ## Error handling
 

@@ -43,8 +43,11 @@ release: $(BIN)/$(EXE)
 test: ## Build and run tests
 test: LDLIBS += -lcriterion
 test: CFLAGS += --coverage
-test: $(TESTBIN) $(UNIT_TEST) 
+test: CLEAN_TESTS $(UNIT_TEST) 
 	$(UNIT_TEST) -j1
+
+CLEAN_TESTS:
+	$(RM) $(UNIT_TEST) $(TESTBIN)/*.gcno $(TESTBIN)/*.gcda
 
 .PHONY: docs
 docs: ## Generate Doxygen docs and try to open
@@ -67,7 +70,7 @@ $(BIN)/$(EXE): $(OBJS) | $(BIN)
 	$(CC) $(CFLAGS) $(LDLIBS) $^ -o $@
 
 
-$(UNIT_TEST): $(TESTS) $(TEST)/test_utils.c 
+$(UNIT_TEST): $(TESTS) $(TEST)/test_utils.c | $(TESTBIN)
 	$(CC) $(CFLAGS) $(LDLIBS) -Wl,-rpath,include $^ -o $@
 
 

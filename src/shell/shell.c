@@ -48,7 +48,7 @@ static void sigchldHandler(int sig_num) {
 }
 
 static void print_prompt() {
-	printf("Enter message: ");
+	printf("Enter command: ");
 }
 
 static char* read_input() {
@@ -92,6 +92,7 @@ void run_interactive() {
 		}
 		dup(STDIN_FILENO);
 		dup(STDOUT_FILENO);
+
 		// dup2(STDIN_FILENO, STDIN_FILENO);
 		// dup2(STDOUT_FILENO, STDOUT_FILENO);
 		// close(STDIN_FILENO);
@@ -116,6 +117,18 @@ static void CLOSE(int fd) {
 	int res = close(fd);
 	if (res == -1) {
 		perror("CLOSE: ");
+	}
+}
+
+void run_for_line(char* input) {
+
+	command* cmd = command_parse(input);
+	if (input != NULL) {
+		free(input);
+	}
+
+	if (cmd != NULL) {
+		run_command(cmd, STDIN_FILENO);
 	}
 }
 
@@ -201,10 +214,6 @@ void run_command(command* cmd, int in_fd) {
 			}
 		}
 	}
-}
-
-void run_for_line(char* input) {
-
 }
 
 
