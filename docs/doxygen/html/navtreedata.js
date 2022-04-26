@@ -26,7 +26,10 @@ var NAVTREE =
 [
   [ "shellso", "index.html", [
     [ "Table of contents", "index.html#autotoc_md1", null ],
-    [ "Author", "index.html#autotoc_md2", null ],
+    [ "Setup", "index.html#Setup", null ],
+    [ "Usage", "index.html#Usage", null ],
+    [ "it does not support", "index.html#What", null ],
+    [ "Authors", "index.html#Authors", null ],
     [ "Todo List", "todo.html", null ],
     [ "Data Structures", "annotated.html", [
       [ "Data Structures", "annotated.html", "annotated_dup" ],
@@ -41,6 +44,7 @@ var NAVTREE =
       [ "Globals", "globals.html", [
         [ "All", "globals.html", null ],
         [ "Functions", "globals_func.html", null ],
+        [ "Variables", "globals_vars.html", null ],
         [ "Typedefs", "globals_type.html", null ],
         [ "Enumerations", "globals_enum.html", null ],
         [ "Enumerator", "globals_eval.html", null ],

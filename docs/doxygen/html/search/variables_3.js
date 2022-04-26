@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['next_0',['next',['../structcommand__t.html#a9178b9432ca7618dcd45211dfba4c60d',1,'command_t']]]
+  ['length_0',['length',['../structstring__t.html#a1eafb904b04711c6482607a2ff0497ee',1,'string_t']]]
 ];

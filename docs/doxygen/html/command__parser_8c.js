@@ -12,9 +12,5 @@ var command__parser_8c =
       [ "WAITING_FIRST_REDIRECT_STDERR_FILE_CHARACTER", "command__parser_8c.html#ab0ce6a33765cfb1c3ceb2f811cc03ce9a1df1f9976912039f3b96a2d8fe3b5e2f", null ],
       [ "READING_REDIRECT_STDERR_FILE", "command__parser_8c.html#ab0ce6a33765cfb1c3ceb2f811cc03ce9ae3bd25ff17d5b9fcd99d75cdf7c08eaf", null ]
     ] ],
-    [ "command_add_argument", "command__parser_8c.html#a8d992efad244879fbf2f2244ca588a26", null ],
-    [ "command_create", "command__parser_8c.html#acb785a470b8dc73eede549319bf8cfbf", null ],
-    [ "command_free", "command__parser_8c.html#ac9256d698bd7d2af3fb3c7e05b71654d", null ],
-    [ "command_parse", "command__parser_8c.html#ad8a03bb7dbd554e3154bd71b2b0e34aa", null ],
-    [ "command_set_command", "command__parser_8c.html#abe78e017d352f9a53ad40860640414cd", null ]
+    [ "command_parse", "command__parser_8c.html#a5bc90c2ea759023d758c8d17b13238d6", null ]
 ];

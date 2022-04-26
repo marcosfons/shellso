@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['main_0',['main',['../main_8c.html#a3c04138a5bfe5d72780bb7e82a18e627',1,'main.c']]],
-  ['malloc_5for_5fexit_1',['malloc_or_exit',['../string__utils_8c.html#a65fa2a03bfaf1fd389a4958455dd5c29',1,'string_utils.c']]]
+  ['free_5fbackground_5fjobs_0',['free_background_jobs',['../background__jobs_8c.html#a7816e75150f7dca33a4d3b46ecdd9efd',1,'free_background_jobs(background_jobs *jobs):&#160;background_jobs.c'],['../background__jobs_8h.html#a7816e75150f7dca33a4d3b46ecdd9efd',1,'free_background_jobs(background_jobs *jobs):&#160;background_jobs.h']]]
 ];

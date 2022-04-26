@@ -1,97 +1,82 @@
-TARGET_EXEC ?= main.o
 
-BUILD_DIR ?= build
-BIN_DIR ?= bin
-SRC_DIRS ?= src
+MKDIR_P=mkdir -p
+
+EXE=shellso
+
+SRC=src
+BIN=bin
+OBJ=build
+TEST=tests
+TESTBIN=tests/bin
+
+SRCS=$(wildcard $(SRC)/*.c) $(wildcard $(SRC)/*/*.c)
+OBJS=$(patsubst $(SRC)/%.c, $(OBJ)/%.o, $(SRCS))
+
+TESTS=$(filter-out $(TEST)/test_utils.c, $(wildcard $(TEST)/*.c) $(wildcard $(TEST)/*/*.c))
+
+UNIT_TEST=$(TESTBIN)/unit_test.o
+
+
 
 CFLAGS=-g -Wall
 LDLIBS=
 
-SRCS := $(shell find $(SRC_DIRS) -name *.c)
-# OBJS := $(SRCS:%=$(BUILD_DIR)/%.o)
-OBJS := $(patsubst $(SRC_DIRS)/%.c, $(BUILD_DIR)/%.o, $(SRCS))
-# OBJS := $(shell find src -name *.c -exec sh -c 'echo {} | cut -d/ -f2- | xargs -I + echo "build/+"' \;)
 
-DEPS := $(OBJS:.o=.d)
-
-INC_DIRS := $(shell find $(SRC_DIRS) -type d)
-INC_FLAGS := $(addprefix -I,$(INC_DIRS))
-
-TEST := tests
-TESTBIN := tests/bin
-
-TESTS=$(shell find . -type f -path "*/tests/**/*.c")
-TESTBINS=$(patsubst $(TEST)/%.c, $(TEST)/bin/%, $(SRCS))
+.PHONY: help
+help: ## Show a help message
+help:
+	@echo -e 'Usage: make [target] ...\ntargets:'
+	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | \
+		sort | \
+		awk 'BEGIN {FS = ":.*?## "}; {printf "   \033[36m%-20s\033[0m %s\n", $$1, $$2}'
 
 
-UNIT_TEST := $(TESTBIN)/unit_test.o
+.PHONY: debug
+debug: ## Build an executable to debug 
+debug: $(BIN)/$(EXE)
 
-AA=$(BUILD_DIR/%.c.o)
+.PHONY: release
+release: ## Build a release executable
+release: CFLAGS=-Wall -O2 -DNDEBUG
+release: clean
+release: $(BIN)/$(EXE)
 
-CRITERION := LD_LIBRARY_PATH=/usr/local/lib
 
-pri:
-	echo $(OBJS)
+$(OBJ)/%.o: $(SRC)/%.c $(OBJ)
+	@$(MKDIR_P) $(@D)
+	$(CC) $(CFLAGS) $(LDLIBS) -c $< -o $@
 
-alguma: $(OBJS)
-	echo $(OBJS)
+$(BIN)/$(EXE): $(OBJS) | $(BIN)
+	$(CC) $(CFLAGS) $(LDLIBS) $^ -o $@
 
-$(OBJS): $(SRCS) | $(BUILD_DIR)
-	$(CC) $^ -o $@
+
+
+.PHONY: test
+test: ## Build and run tests
+test: LDLIBS += -lcriterion
+test: CFLAGS += --coverage
+test: $(TESTBIN) $(UNIT_TEST) 
+	$(UNIT_TEST) -j1
 	
 
-bin/main: $(OBJS)
-	$(MKDIR_P) $(dir $@)
-	echo $(OBJS)
-	$(CC) $(OBJS) -o $@ $(LDFLAGS)
-
-$(BIN_DIR)/$(TARGET_EXEC): $(OBJS)
-	$(MKDIR_P) $(dir $@)
-	echo $(OBJS)
-	$(CC) $(OBJS) -o $@ $(LDFLAGS)
-
-# c source
-$(AA): %.c
-	$(MKDIR_P) $(dir $@)
-	$(CC) $(CFLAGS) -c $< -o $@
-
-$(TEST)/bin:
-	$(MKDIR_P) $(dir $@)
-
-test: $(TESTBINS)
-	for test in $(TESTBINS) ; do ./$$test ; done
+$(UNIT_TEST): $(TESTS) $(TEST)/test_utils.c 
+	$(CC) $(CFLAGS) $(LDLIBS) -Wl,-rpath,include $^ -o $@
 
 
-tests_run: unit_test
-tests_run:
-	chmod +x $(UNIT_TEST)
-	$(CRITERION) $(UNIT_TEST) -j1
 
-tests_run_debug: unit_test
-tests_run_debug:
-	chmod +x $(UNIT_TEST)
-	$(CRITERION) $(UNIT_TEST) --crash -j1
-
-unit_test: LDLIBS += -lcriterion
-unit_test: CFLAGS += --coverage
-unit_test: $(AA)
-	$(MKDIR_P) $(dir $(UNIT_TEST))
-	$(CC) $(CFLAGS) tests/test_utils.c tests/string/string_utils.c tests/shell/command_parser.c -o $(UNIT_TEST) $(LDLIBS)
-
-
-$(BUILD_DIR):
+# Directories
+$(BIN):
 	$(MKDIR_P) $@
 
-# CGLAG=--coverage will create .gcda and .gcno
-# Create rule to delete them
+$(OBJ):
+	$(MKDIR_P) $@
+
+$(TESTBIN):
+	$(MKDIR_P) $@
+
 
 
 .PHONY: clean
-
-clean:
-	$(RM) -r $(BUILD_DIR) $(TESTBIN)
-
--include $(DEPS)
-
-MKDIR_P ?= mkdir -p
+clean: ## Clean all builded files
+	$(RM) -r $(BIN) $(OBJ) $(TESTBIN)
 

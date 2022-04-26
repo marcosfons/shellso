@@ -103,8 +103,42 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 <p >Online documentation available in <a href="https://marcosfons.github.io/shellso">here</a>.</p>
 <h1><a class="anchor" id="autotoc_md1"></a>
 Table of contents</h1>
-<h1><a class="anchor" id="autotoc_md2"></a>
-Author</h1>
+<ol type="1">
+<li><a class="el" href="index.html#Setup">Setup</a></li>
+<li><a class="el" href="index.html#Usage">Usage</a></li>
+<li>What it does not support</li>
+<li><a class="el" href="index.html#Authors">Authors</a></li>
+</ol>
+<h1><a class="anchor" id="Setup"></a>
+Setup</h1>
+<p >Clone this project in online repo. Be sure that you have installed some <code>C</code> compiler and <code>make</code>. As optional dependencies you can install:</p><ul>
+<li><a href="https://www.doxygen.nl/manual/install.html"><code>Doxygen</code></a> to generate docs</li>
+<li><a href="https://criterion.readthedocs.io/en/master/setup.html"><code>Criterion</code></a> to run the tests</li>
+</ul>
+<h1><a class="anchor" id="Usage"></a>
+Usage</h1>
+<p ><code>Makefile</code> was used to make it easier the process of building the application. Running make in the root folder of the project the message below will be displayed.</p>
+<div class="fragment"><div class="line">$ make</div>
+<div class="line">Usage: make [target] ...</div>
+<div class="line">targets:</div>
+<div class="line">   clean                Clean all builded files</div>
+<div class="line">   debug                Build an executable to debug</div>
+<div class="line">   help                 Show a help message</div>
+<div class="line">   release              Build a release executable</div>
+<div class="line">   test                 Build and run tests</div>
+</div><!-- fragment --><p >To use the application the best way to compile it is by using the release target.</p>
+<div class="fragment"><div class="line">make release</div>
+<div class="line">bin/shellso</div>
+</div><!-- fragment --><h1><a class="anchor" id="What"></a>
+it does not support</h1>
+<ul>
+<li>Environment variable substitution <div class="fragment"><div class="line">echo &quot;$ENV_VAR&quot;</div>
+</div><!-- fragment --></li>
+<li>Environment variables before commands <div class="fragment"><div class="line">ENV_VAR=123 echo &quot;$ENV_VAR&quot;</div>
+</div><!-- fragment --></li>
+</ul>
+<h1><a class="anchor" id="Authors"></a>
+Authors</h1>
 <ul>
 <li><a href="https://github.com/marcosfons">Marcos Fonseca</a> </li>
 </ul>
@@ -115,7 +149,7 @@ Author</h1>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Fri Apr 22 2022 12:38:34 for shellso by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.3 </li>
+    <li class="footer">Generated on Tue Apr 26 2022 02:20:34 for shellso by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.3 </li>
   </ul>
 </div>
 <!-- BEGIN doxygen awesome darkmode toggle -->

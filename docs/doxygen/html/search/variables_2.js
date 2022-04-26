@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['length_0',['length',['../structstring__t.html#a1eafb904b04711c6482607a2ff0497ee',1,'string_t']]]
+  ['jobs_0',['jobs',['../structshell.html#a6904d0f9a4c35874e4701cbcb5e6994f',1,'shell::jobs()'],['../shell_8c.html#a4dbb596ff63c45323ea8b298c49f6390',1,'jobs():&#160;shell.c']]]
 ];
