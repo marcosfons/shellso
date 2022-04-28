@@ -6,19 +6,21 @@
 #include <errno.h>
 #include <signal.h>
 #include <assert.h>
+#include <limits.h>
 
 
+#include "builtin_command.h"
+#include "shell.h"
 #include "background_jobs.h"
 #include "command.h"
-#include "shell.h"
 #include "command_parser.h"
 
 
 #define READ_END 0
 #define WRITE_END 1
 
+#define ARBITRARY_BUILTIN_COMMANDS_HASH_SIZE 103
 
-static background_jobs* jobs;
 
 /// Handles Ctrl-C events, it does nothing.
 /// exec already kill the child process
@@ -48,7 +50,40 @@ static void sigchldHandler(int sig_num) {
 }
 
 static void print_prompt() {
-	printf("Enter command: ");
+	size_t length = PATH_MAX;
+	char* cwd = malloc(length);
+
+	if (getcwd(cwd, length) == NULL) {
+		perror("cwd");
+		printf("%s$ ", "marcos");
+	} else {
+		printf("%s:%s$ ", "marcos", cwd);
+	}
+}
+
+shell* create_shell() {
+	shell* new_shell = malloc(sizeof(shell));
+
+	new_shell->jobs = create_background_jobs(NULL);
+	new_shell->builtin_commands = create_shell_builtin_commands(ARBITRARY_BUILTIN_COMMANDS_HASH_SIZE);
+
+	add_builtin_command(new_shell->builtin_commands, "cd", &shell_cd);
+	// add_builtin_command(new_shell->builtin_commands, "fg", &shell_fg);
+	// add_builtin_command(new_shell->builtin_commands, "help", &shell_help);
+	// add_builtin_command(new_shell->builtin_commands, "jobs", &shell_jobs);
+	// add_builtin_command(new_shell->builtin_commands, "exit", &shell_exit);
+	// add_builtin_command(new_shell->builtin_commands, "fim", &shell_fim);
+	// add_builtin_command(new_shell->builtin_commands, "time", &shell_time);
+
+	return new_shell;
+}
+
+void print_command_error(char* command, char* error) {
+	if (error == NULL) {
+		fprintf(stderr, "shellso: %s: An error has occurred\n", command);
+	} else {
+		fprintf(stderr, "shellso: %s: %s\n", command, error);
+	}
 }
 
 static char* read_input() {
@@ -70,7 +105,7 @@ static char* read_input() {
 }
 
 void run_interactive() {
-	jobs = create_background_jobs(NULL);
+	shell* interactive_shell = create_shell();
 
 	signal(SIGINT, sigintHandler);
 	signal(SIGCHLD, sigchldHandler);
@@ -85,19 +120,26 @@ void run_interactive() {
 		if (input != NULL) {
 			free(input);
 		}
+		
+		BuiltinCommandFunction func = find_builtin_command(interactive_shell->builtin_commands, cmd->command);
+		if (func != NULL) {
+			func(interactive_shell, cmd->argc, cmd->argv);
+		} else {
 
-		if (cmd != NULL) {
-			// add_command_chain(jobs, cmd);
-			run_command(cmd, STDIN_FILENO);
+			if (cmd != NULL) {
+				// add_command_chain(interactive_shell->jobs, cmd);
+				// add_command_chain(jobs, cmd);
+				run_command(cmd, STDIN_FILENO);
+			}
+			dup(STDIN_FILENO);
+			dup(STDOUT_FILENO);
+
+			// dup2(STDIN_FILENO, STDIN_FILENO);
+			// dup2(STDOUT_FILENO, STDOUT_FILENO);
+			// close(STDIN_FILENO);
+			// close(STDOUT_FILENO);
+			// fflush(stdout);
 		}
-		dup(STDIN_FILENO);
-		dup(STDOUT_FILENO);
-
-		// dup2(STDIN_FILENO, STDIN_FILENO);
-		// dup2(STDOUT_FILENO, STDOUT_FILENO);
-		// close(STDIN_FILENO);
-		// close(STDOUT_FILENO);
-		// fflush(stdout);
 		usleep(5000); // Arbitrary sleep
 	} while (!feof(stdin) && (cmd == NULL || strcmp(cmd->command, "quit") != 0));
 	
@@ -181,7 +223,7 @@ void run_command(command* cmd, int in_fd) {
 		// }
 
     execvp(cmd->command, cmd->argv);
-		fprintf(stderr, "shellso: %s: %s\n", cmd->command, strerror(errno));
+		print_command_error(cmd->command, strerror(errno));
 		
 		exit(EXIT_FAILURE); // Exits only the child process
 	} else { // Parent code

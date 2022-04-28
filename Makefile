@@ -24,10 +24,10 @@ UNIT_TEST=$(TESTBIN)/unit_test.o
 .PHONY: help
 help: ## Show a help message
 help:
-	@echo -e 'Usage: make [target] ...\ntargets:'
+	@echo -e 'Usage: make [\033[36mtarget\033[0m]\ntargets:'
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | \
 		sort | \
-		awk 'BEGIN {FS = ":.*?## "}; {printf "   \033[36m%-20s\033[0m %s\n", $$1, $$2}'
+		awk 'BEGIN {FS = ":.*?## "}; {printf "    \033[36m%-8s\033[0m %s\n", $$1, $$2}'
 
 .PHONY: debug
 debug: ## Build an executable to debug 
@@ -46,9 +46,6 @@ test: CFLAGS += --coverage
 test: CLEAN_TESTS $(UNIT_TEST) 
 	$(UNIT_TEST) -j1
 
-CLEAN_TESTS:
-	$(RM) $(UNIT_TEST) $(TESTBIN)/*.gcno $(TESTBIN)/*.gcda
-
 .PHONY: docs
 docs: ## Generate Doxygen docs and try to open
 docs:
@@ -58,6 +55,10 @@ docs:
 .PHONY: clean
 clean: ## Clean all builded files
 	$(RM) -r $(BIN) $(OBJ) $(TESTBIN)
+
+.PHONY: CLEAN_TESTS
+CLEAN_TESTS:
+	$(RM) $(UNIT_TEST) $(TESTBIN)/*.gcno $(TESTBIN)/*.gcda
 
 
 

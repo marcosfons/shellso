@@ -5,17 +5,18 @@
 #include <stdio.h>
 #include <string.h>
 
+#include "../../src/shell/shell.h"
 #include "../../src/shell/builtin_command.c"
 
 #define ARBITRARY_SIZE 103
 
 #define HELP_BUILTIN_COMMAND_RETURN_VALUE 5
 
-int builtin_command_function(int argc, char** argv) {
+int builtin_command_function(shell* shell, int argc, char** argv) {
 	return 0;
 }
 
-int help_builtin_command_function(int argc, char** argv) {
+int help_builtin_command_function(shell* shell, int argc, char** argv) {
 	return HELP_BUILTIN_COMMAND_RETURN_VALUE;
 }
 
@@ -52,7 +53,7 @@ Test(builtin_commands, create_shell_builtin_commands_add_simple_commands_and_fin
 	BuiltinCommandFunction function = find_builtin_command(builtin, "help");
 	cr_assert_not_null(function);
 	
-	int result = function(0, NULL);
+	int result = function(NULL, 0, NULL);
 
 	cr_assert_eq(result, HELP_BUILTIN_COMMAND_RETURN_VALUE);
 }

@@ -13,16 +13,17 @@
 // 	bool running;
 // 	int pid;
 // } shell_state;
-//
+
+typedef struct _shell_builtin_commands shell_builtin_commands;
 typedef struct {
 	background_jobs* jobs;
+	shell_builtin_commands* builtin_commands;
 } shell;
-//
-// typedef struct {
-//
-// } shell_builtin_command;
-//
 
+
+shell* create_shell();
+
+void print_command_error(char* command, char* error);
 
 void run_command(command* cmd, int in_fd);
 void run_interactive();

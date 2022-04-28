@@ -1,6 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <assert.h>
+#include <errno.h>
+#include <unistd.h>
+
 
 #include "builtin_command.h"
 
@@ -103,3 +107,35 @@ void free_shell_builtin_commands(shell_builtin_commands* commands) {
 	free(commands->commands);
 	free(commands);
 }
+
+
+/**
+	* BUILTIN FUNCTIONS
+	*/
+int shell_cd(shell* shell, int argc, char** argv) {
+	assert(argc > 0);
+
+	if (argc > 2) {
+		print_command_error("cd", "Too many arguments");
+		return 1;
+	}
+
+	if (chdir(argc == 2 ? argv[1] : getenv("HOME")) == -1) {
+		print_command_error("cd", strerror(errno));
+		return 1;
+	}
+
+	return 0;
+}
+
+// int shell_fg(shell* shell, int argc, char** argv);
+//
+// int shell_jobs(shell* shell, int argc, char** argv);
+//
+// int shell_time(shell* shell, int argc, char** argv);
+//
+// int shell_fim(shell* shell, int argc, char** argv);
+// int shell_exit(shell* shell, int argc, char** argv);
+//
+// int shell_help(shell* shell, int argc, char** argv);
+

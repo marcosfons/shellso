@@ -17,7 +17,7 @@ Online documentation available in [here](https://marcosfons.github.io/shellso).
 
 ### Setup
 
-Clone this project in [online repo](#https://github.com/marcosfons/shellso).
+Clone this project in [online repo](https://github.com/marcosfons/shellso).
 Be sure that you have installed some `C` compiler and `make`. As optional
 dependencies you can install:
 - [`Doxygen`](https://www.doxygen.nl/manual/install.html) to generate docs
@@ -34,7 +34,7 @@ files inside a `include` directory in the root folder. Or set the
 Running make in the root folder of the project the message below will be
 displayed.
 
-```shell
+```console
 $ make
 Usage: make [target] ...
 targets:
