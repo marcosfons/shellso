@@ -56,17 +56,17 @@ static void print_prompt() {
 	char* cwd = malloc(length);
 
 	char username[BUFSIZE];
-    char *envvar = "USRNAME";
+	char *envvar = "USERNAME";
 
-    // if env var doesn't exist, set default
-    if(!getenv(envvar)){
-	    strcpy(username,"user");
-    }
-
-    // if buffer isn't large enough, set default
-    else if(snprintf(username, BUFSIZE, "%s", getenv(envvar)) >= BUFSIZE){
+	// if env var doesn't exist, set default
+	if(!getenv(envvar)){
 		strcpy(username,"user");
-    }
+	}
+
+	// if buffer isn't large enough, set default
+	else if(snprintf(username, BUFSIZE, "%s", getenv(envvar)) >= BUFSIZE){
+		strcpy(username,"user");
+	}
 
 	if (getcwd(cwd, length) == NULL) {
 		perror("cwd");
