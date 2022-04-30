@@ -19,6 +19,8 @@
 #define READ_END 0
 #define WRITE_END 1
 
+#define BUFSIZE 80
+
 #define ARBITRARY_BUILTIN_COMMANDS_HASH_SIZE 103
 
 
@@ -53,11 +55,24 @@ static void print_prompt() {
 	size_t length = PATH_MAX;
 	char* cwd = malloc(length);
 
+	char username[BUFSIZE];
+    char *envvar = "USRNAME";
+
+    // if env var doesn't exist, set default
+    if(!getenv(envvar)){
+	    strcpy(username,"user");
+    }
+
+    // if buffer isn't large enough, set default
+    else if(snprintf(username, BUFSIZE, "%s", getenv(envvar)) >= BUFSIZE){
+		strcpy(username,"user");
+    }
+
 	if (getcwd(cwd, length) == NULL) {
 		perror("cwd");
-		printf("%s$ ", "marcos");
+		printf("%s$ ", username);
 	} else {
-		printf("%s:%s$ ", "marcos", cwd);
+		printf("%s:%s$ ", username, cwd);
 	}
 }
 
@@ -116,6 +131,10 @@ void run_interactive() {
 		char* input = read_input();
 
 		cmd = command_parse(input);
+
+		if(strcmp(cmd->command, "quit") == 0){
+			break;
+		}
 
 		if (input != NULL) {
 			free(input);
