@@ -54,11 +54,8 @@ dkms.conf
 
 .vscode
 docs/doxygen/latex
+docs/doxygen/html
 
 tests/bin
-bin/
-build/
-
-docs/doxygen/man
-docs/doxygen/html
-docs/doxygen/latex
+bin
+build
