@@ -18,3 +18,10 @@ jobs:
 
       - name: Doxygen action
         uses: mattnotmitt/doxygen-action@1.9.3
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs/doxygen/html
+          publish_branch: gh-pages
