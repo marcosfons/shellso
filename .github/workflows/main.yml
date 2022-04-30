@@ -1,0 +1,20 @@
+name: generate_doxygen_docs
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+  workflow_dispatch:
+
+jobs:
+  generate_docs:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Doxygen Action
+        uses: mattnotmitt/doxygen-action@1.9.3
+        with:
+          doxyfile-path: ./Doxyfile
+          working-directory: ./docs/doxygen/
