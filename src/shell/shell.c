@@ -53,11 +53,13 @@ static void print_prompt() {
 	size_t length = PATH_MAX;
 	char* cwd = malloc(length);
 
+	char *username = getenv("USER");
+
 	if (getcwd(cwd, length) == NULL) {
 		perror("cwd");
-		printf("%s$ ", "marcos");
+		printf("%s$ ", username != NULL ? username : "user" );
 	} else {
-		printf("%s:%s$ ", "marcos", cwd);
+		printf("%s:%s$ ", username != NULL ? username : "user", cwd);
 	}
 }
 
