@@ -76,6 +76,10 @@ void add_builtin_command(
 }
 
 BuiltinCommandFunction find_builtin_command(shell_builtin_commands* commands, char* key) {
+	if (key == NULL || key[0] == '\0') {
+		return NULL;
+	}
+
 	int index = hash_function(commands, key);
 	builtin_command* item = commands->commands[index];
 

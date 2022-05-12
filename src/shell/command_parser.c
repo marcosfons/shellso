@@ -135,12 +135,12 @@ command* command_parse(char* input) {
 			break;
 		}
 	}
+	
+	string_free(content);
 
-	if (cmd->command == NULL) {
+	if (cmd->argv[0] == NULL) {
 		return NULL;
 	}
-
-	string_free(content);
 
 	return cmd;
 }

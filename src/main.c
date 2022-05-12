@@ -4,8 +4,10 @@
 
 
 int main(int argc, char** argv) {
-	
-	run_interactive();
+	shell* shell = create_shell();
+	run_interactive(shell);
+
+	free_shell(shell);
 
 	return 0;
 }

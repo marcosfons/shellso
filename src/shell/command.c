@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <assert.h>
 
 #include "command.h"
 
@@ -11,7 +12,7 @@ command* command_create() {
 		exit(EXIT_FAILURE);
 	}
 	
-	cmd->command = NULL;
+	// cmd->command = NULL;
 	cmd->next = NULL;
 	cmd->chain_type = NONE;
 	cmd->argc = 0;
@@ -26,11 +27,16 @@ command* command_create() {
 	cmd->pid = PID_COMMAND_NOT_EXECUTED_YET;
 	cmd->status = STATUS_COMMAND_NOT_EXECUTED_YET;
 
+	cmd->stdin_file_redirection = NULL;
+	cmd->stdout_file_redirection = NULL;
+	cmd->stderr_file_redirection = NULL;
+
 	return cmd;
 }
 
 void command_set_command(command* cmd, char* input) {
-	cmd->command = input;
+	assert(cmd->argc == 0);
+	// cmd->command = input;
 
 	command_add_argument(cmd, input);
 }
@@ -62,10 +68,7 @@ void command_free(command* command) {
 		command_free(command->next);
 	}
 
-	free(command->command);
-
-	// i = 1 because the first argument is the command that already were deallocated
-	for (int i = 1; i < command->argc; i++) {
+	for (int i = 0; i < command->argc; i++) {
 		free(command->argv[i]);
 	}
 	free(command->argv);

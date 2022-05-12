@@ -7,8 +7,10 @@
 #include <signal.h>
 #include <assert.h>
 #include <limits.h>
+#include <pwd.h>
 
 
+#include "alias.h"
 #include "builtin_command.h"
 #include "shell.h"
 #include "background_jobs.h"
@@ -31,7 +33,7 @@ static void sigintHandler(int sig_num) {
 
 static void sigchldHandler(int sig_num) {
 	signal(SIGCHLD, sigchldHandler);
-	//
+
 	// command* curr = jobs->next;
 	// while (curr != NULL) {
 	// 	curr = curr->next;
@@ -45,7 +47,7 @@ static void sigchldHandler(int sig_num) {
 	// 		update_command_by_pid(jobs, curr->pid, state);
 	// 		printf("[+%d] Background updated. Status: %d\n", curr->pid, WEXITSTATUS(state));
 	// 		break;
-	// 	}	
+	// 	}
 	// }
 }
 
@@ -53,19 +55,32 @@ static void print_prompt() {
 	size_t length = PATH_MAX;
 	char* cwd = malloc(length);
 
+	struct passwd* passwd = getpwuid(getuid());
+
+	char* username = passwd != NULL ? passwd->pw_name : "user";
+
 	if (getcwd(cwd, length) == NULL) {
 		perror("cwd");
-		printf("%s$ ", "marcos");
+		printf("%s$ ", username);
 	} else {
-		printf("%s:%s$ ", "marcos", cwd);
+		printf("\033[01;32m%s:\033[01;34m%s\033[0m$ ", username, cwd);
 	}
+
+	free(cwd);
 }
 
 shell* create_shell() {
 	shell* new_shell = malloc(sizeof(shell));
 
+	// new_shell->aliasses = create_aliasses();
 	new_shell->jobs = create_background_jobs(NULL);
 	new_shell->builtin_commands = create_shell_builtin_commands(ARBITRARY_BUILTIN_COMMANDS_HASH_SIZE);
+
+	// char** ls_alias = malloc(2 * sizeof(char*));
+	// ls_alias[0] = "ls";
+	// ls_alias[1] = "ls";
+	// char* test = {"ls", "--color=auto"};
+	// add_alias(new_shell->aliasses, "ls", {"ls", "--color=auto"};
 
 	add_builtin_command(new_shell->builtin_commands, "cd", &shell_cd);
 	// add_builtin_command(new_shell->builtin_commands, "fg", &shell_fg);
@@ -104,55 +119,54 @@ static char* read_input() {
 	return input;
 }
 
-void run_interactive() {
-	shell* interactive_shell = create_shell();
-
+void run_interactive(shell* shell) {
 	signal(SIGINT, sigintHandler);
 	signal(SIGCHLD, sigchldHandler);
 
 	command* cmd = NULL;
 
 	do {
+		if (cmd != NULL) {
+			command_free(cmd);
+		}
+
 		char* input = read_input();
 
 		cmd = command_parse(input);
 
 		if (input != NULL) {
 			free(input);
+		}		
+	
+		if (cmd == NULL) {
+			if (feof(stdin)) {
+				break;
+			} else {
+				printf("É NULL\n");
+				continue;
+			}
 		}
-		
-		BuiltinCommandFunction func = find_builtin_command(interactive_shell->builtin_commands, cmd->command);
+		// printf("CMD: %d ARGV: %d\n", cmd == NULL, cmd->argv == NULL);
+
+		BuiltinCommandFunction func = find_builtin_command(shell->builtin_commands, cmd->argv[0]);
 		if (func != NULL) {
-			func(interactive_shell, cmd->argc, cmd->argv);
+			func(shell, cmd->argc, cmd->argv);
 		} else {
 
 			if (cmd != NULL) {
 				// add_command_chain(interactive_shell->jobs, cmd);
 				// add_command_chain(jobs, cmd);
 				run_command(cmd, STDIN_FILENO);
+				// dup(STDIN_FILENO);
+				// dup(STDOUT_FILENO);
 			}
-			dup(STDIN_FILENO);
-			dup(STDOUT_FILENO);
-
-			// dup2(STDIN_FILENO, STDIN_FILENO);
-			// dup2(STDOUT_FILENO, STDOUT_FILENO);
-			// close(STDIN_FILENO);
-			// close(STDOUT_FILENO);
-			// fflush(stdout);
 		}
-		usleep(5000); // Arbitrary sleep
-	} while (!feof(stdin) && (cmd == NULL || strcmp(cmd->command, "quit") != 0));
+		usleep(3000); // Arbitrary sleep
+	} while (!feof(stdin) && (cmd == NULL || strcmp(cmd->argv[0], "quit") != 0));
 	
 	if (cmd != NULL) {
 		command_free(cmd);
 	}
-}
-
-static void redirect_and_close(int oldfd, int newfd) {
-  if (oldfd != newfd) {
-    if (dup2(oldfd, newfd) != -1)
-      close(oldfd); /* successfully redirected */
-  }
 }
 
 static void CLOSE(int fd) {
@@ -162,8 +176,14 @@ static void CLOSE(int fd) {
 	}
 }
 
-void run_for_line(char* input) {
+static void redirect_and_close(int oldfd, int newfd) {
+  if (oldfd != newfd) {
+    if (dup2(oldfd, newfd) != -1)
+      CLOSE(oldfd); /* successfully redirected */
+  }
+}
 
+void run_for_line(char* input) {
 	command* cmd = command_parse(input);
 	if (input != NULL) {
 		free(input);
@@ -190,40 +210,28 @@ void run_command(command* cmd, int in_fd) {
 	} else if(child_pid == 0) { // Child code
 	
 		if (cmd->chain_type == PIPE) {
-			// printf("Piping\n");
-
 			CLOSE(fd[READ_END]);
 
-			if (cmd->stdin_file_redirection != NULL) {
-				FILE* stdin_file = fopen(cmd->stdin_file_redirection, "r");
-				redirect_and_close(in_fd, stdin_file->_fileno);
-			} else {
-				redirect_and_close(in_fd, STDIN_FILENO);
-			}
-
-			if (cmd->stdout_file_redirection != NULL) {
-				FILE* stdout_file = fopen(cmd->stdout_file_redirection, "w");
-				redirect_and_close(in_fd, stdout_file->_fileno);
-			} else {
-				redirect_and_close(fd[WRITE_END], STDOUT_FILENO);
-			}
-			// CLOSE(in_fd);
-			// CLOSE(fd[READ_END]);
-		} else {
+			// if (cmd->stdin_file_redirection != NULL) {
+			// 	FILE* stdin_file = fopen(cmd->stdin_file_redirection, "r");
+			// 	redirect_and_close(in_fd, stdin_file->_fileno);
+			// } else {
 			redirect_and_close(in_fd, STDIN_FILENO);
-			// redirect_and_close(1, STDOUT_FILENO);
-		}
-		// } else {
-		// 	// CLOSE(fd[0]);
-		// 	// CLOSE(fd[1]);
-		// 	redirect_and_close(in_fd, STDIN_FILENO);
-		// 	// CLOSE(in_fd);
-		// 	// CLOSE(fd[WRITE_END]);
-		// 	// CLOSE(fd[READ_END]);
-		// }
+			// }
 
-    execvp(cmd->command, cmd->argv);
-		print_command_error(cmd->command, strerror(errno));
+			// if (cmd->stdout_file_redirection != NULL) {
+			// 	FILE* stdout_file = fopen(cmd->stdout_file_redirection, "w");
+			// 	redirect_and_close(in_fd, stdout_file->_fileno);
+			// } else {
+			redirect_and_close(fd[WRITE_END], STDOUT_FILENO);
+			// }
+		} else {
+			// This is important because of the last command of a pipe command chain
+			redirect_and_close(in_fd, STDIN_FILENO);
+		}
+
+    execvp(cmd->argv[0], cmd->argv);
+		print_command_error(cmd->argv[0], strerror(errno));
 		
 		exit(EXIT_FAILURE); // Exits only the child process
 	} else { // Parent code
@@ -234,12 +242,9 @@ void run_command(command* cmd, int in_fd) {
 				run_command(cmd->next, in_fd);
 			}
 		} else if (cmd->chain_type == PIPE) {
-			// dup2(fd[READ_END], in_fd);
 			CLOSE(fd[WRITE_END]);
-			CLOSE(in_fd);
-			if (cmd->next != NULL) {
-				run_command(cmd->next, fd[0]);
-			}
+
+			run_command(cmd->next, fd[0]);
 		} else {
 			int state;
 			int result = waitpid(child_pid, &state, 0);
@@ -258,5 +263,16 @@ void run_command(command* cmd, int in_fd) {
 	}
 }
 
+
+void free_shell(shell *shell) {
+	if (shell == NULL) {
+		return;
+	}
+	
+	free_shell_builtin_commands(shell->builtin_commands);
+	free_background_jobs(shell->jobs);
+
+	free(shell);
+}
 
 
