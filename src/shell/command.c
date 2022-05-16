@@ -24,9 +24,6 @@ command* command_create() {
 
 	cmd->argv[0] = NULL;
 
-	cmd->pid = PID_COMMAND_NOT_EXECUTED_YET;
-	cmd->status = STATUS_COMMAND_NOT_EXECUTED_YET;
-
 	cmd->stdin_file_redirection = NULL;
 	cmd->stdout_file_redirection = NULL;
 	cmd->stderr_file_redirection = NULL;

@@ -2,8 +2,7 @@
 #define COMMAND_HEADER
 
 
-#define PID_COMMAND_NOT_EXECUTED_YET -1
-#define STATUS_COMMAND_NOT_EXECUTED_YET -1
+#include <limits.h>
 
 /** Type of a chain between two commands */
 typedef enum {
@@ -26,10 +25,6 @@ typedef struct command {
 	char* stdin_file_redirection;  /**< The file that will be the input file */
 	char* stdout_file_redirection; /**< The file that the stdout will be redirected for */
 	char* stderr_file_redirection; /**< The file that the stdout will be redirected for */
-
-	/// Execution
-	int pid;
-	int status;
 } command;
 
 

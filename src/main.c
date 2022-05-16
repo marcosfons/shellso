@@ -7,7 +7,7 @@
 
 
 typedef struct arguments {
-	enum { FROM_FILE, INTERACTIVE, COMMAND_STRING } mode;
+	enum { FROM_FILE, INTERACTIVE, FROM_STRING } mode;
 	char* input_file;
 	char* input_command;
 } arguments;
@@ -16,10 +16,10 @@ const char *argp_program_version = "shellso";
 static char doc[] = "A simple shell written in C";
 static char args_doc[] = "[FILENAME]...";
 static struct argp_option options[] = { 
-	{ "file", 'f', "input", 0, "Run commands from the given file."},
-	{ "interactive", 'i', 0, 0, "Run commands interactively. Default"},
-	{ "command", 'c', "string", 0, "Run commands from the given command string"},
-	{ 0 } 
+	{ "from-file",   'f', "input",  0, "Run commands from the given file.",          1 },
+	{ "interactive", 'i', 0,        0, "Run commands interactively. Default",        2 },
+	{ "from-string", 'c', "string", 0, "Run commands from the given command string", 2 },
+	{ 0, 0, 0, 0, 0, 0 } 
 };
 
 static int parse_opt(int key, char *arg, struct argp_state *state) {
@@ -33,7 +33,7 @@ static int parse_opt(int key, char *arg, struct argp_state *state) {
 			args->input_file = arg; 
 			break;
 		case 'c': 
-			args->mode = COMMAND_STRING;
+			args->mode = FROM_STRING;
 			args->input_command = arg;
 			break;
 		case ARGP_KEY_ARG: 
@@ -49,7 +49,8 @@ static int parse_opt(int key, char *arg, struct argp_state *state) {
 static struct argp argp = { options, parse_opt, args_doc, doc };
 
 int main(int argc, char** argv) {
-	arguments args = { 0, 0, 0 };
+	arguments args;
+	args.mode = INTERACTIVE;
 
 	argp_parse(&argp, argc, argv, 0, 0, &args);
 	
@@ -57,8 +58,8 @@ int main(int argc, char** argv) {
 
 	if (args.mode == INTERACTIVE) {
 		run_interactive(shell);
-	} else if (args.mode == COMMAND_STRING) {
-		run_from_line(shell, args.input_command);
+	} else if (args.mode == FROM_STRING) {
+		run_from_string(shell, args.input_command);
 	} else if (args.mode == FROM_FILE) {
 		// run_from_file(shell, args.input_file);
 	}

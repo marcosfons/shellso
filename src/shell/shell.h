@@ -57,11 +57,11 @@ void print_command_error(char* command, char* error);
 /// @param alias The alias that will be expanded to
 void expand_command_with_alias(command* cmd, alias alias);
 
-/// @brief Run command from a single input line
+/// @brief Run command from a single input string
 ///
 ///	@param shell The currently running shell
 ///	@param input The input line
-void run_from_line(shell* shell, char* input);
+void run_from_string(shell* shell, char* input);
 
 /// @brief Run commands from the given file
 ///

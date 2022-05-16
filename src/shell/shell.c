@@ -36,20 +36,20 @@ static void sigintHandler(int sig_num) {
 static void sigchldHandler(int sig_num) {
 	signal(SIGCHLD, sigchldHandler);
 
-	command* curr = running_shell->jobs->next;
+	background_job* curr = running_shell->jobs->next;
 	while (curr != NULL) {
-		curr = curr->next;
-
 		int state;
 		int res = waitpid(curr->pid, &state, WNOHANG);
 
 		if (res > 0 && WIFEXITED(state)) {
 			// printf("[+%d] Background process done. Status: %d\n", curr->pid, WEXITSTATUS(state));
 
-			update_command_by_pid(running_shell->jobs, curr->pid, state);
+			update_background_job_status(curr, state);
 			printf("[+%d] Background updated. Status: %d\n", curr->pid, WEXITSTATUS(state));
 			break;
 		}
+
+		curr = curr->next;
 	}
 }
 
@@ -70,7 +70,7 @@ shell* create_shell() {
 	add_builtin_command(running_shell->builtin_commands, "cd", &shell_cd);
 	// add_builtin_command(running_shell->builtin_commands, "fg", &shell_fg);
 	// add_builtin_command(running_shell->builtin_commands, "help", &shell_help);
-	// add_builtin_command(running_shell->builtin_commands, "jobs", &shell_jobs);
+	add_builtin_command(running_shell->builtin_commands, "jobs", &shell_jobs);
 	add_builtin_command(running_shell->builtin_commands, "exit", &shell_exit);
 	add_builtin_command(running_shell->builtin_commands, "fim", &shell_exit);
 	// add_builtin_command(running_shell->builtin_commands, "time", &shell_time);
@@ -139,7 +139,7 @@ void run_from_file(shell* shell, FILE* fp) {
 
 }
 
-void run_from_line(shell* shell, char* input) {
+void run_from_string(shell* shell, char* input) {
 	command* cmd = command_parse(input);
 
 	if (cmd != NULL) {
@@ -154,6 +154,7 @@ void run_from_line(shell* shell, char* input) {
 			dup(STDIN_FILENO);
 			dup(STDOUT_FILENO);
 		}
+
 		command_free(cmd);
 	}
 }
@@ -166,7 +167,7 @@ void run_interactive(shell* shell) {
 		running_shell->prompt(running_shell);
 		char* input = read_input();
 
-		run_from_line(shell, input);
+		run_from_string(shell, input);
 
 		if (input != NULL) {
 			free(input);
@@ -234,9 +235,10 @@ void run_command(shell* shell, command* cmd, int in_fd) {
 		
 		exit(EXIT_FAILURE); // Exits only the child process
 	} else { // Parent code
-		cmd->pid = child_pid;
+		add_background_job(shell->jobs, cmd, child_pid);
 
 		if (cmd->chain_type == BACKGROUND) {
+			// add_command_chain(background_jobs *jobs, command *command_chain)
 			if (cmd->next != NULL) {
 				run_command(shell, cmd->next, in_fd);
 			}
@@ -247,7 +249,7 @@ void run_command(shell* shell, command* cmd, int in_fd) {
 		} else {
 			int state;
 			int result = waitpid(child_pid, &state, 0);
-			if (result == -1) { 
+			if (result == -1 && errno != 10) { 
 				perror("waitpid");
 				exit(EXIT_FAILURE);
 			}

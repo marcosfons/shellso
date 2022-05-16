@@ -154,9 +154,38 @@ int shell_alias(shell* shell, int argc, char** argv) {
 	return EXIT_SUCCESS;
 }
 
+int shell_jobs(shell* shell, int argc, char** argv) {
+	background_job* curr = shell->jobs->next;
+	while (curr != NULL) {
+		const int BUFFER_STATE_SIZE = 37;
+		char state[BUFFER_STATE_SIZE];
+		// printf("Status: %s %d\n", curr->command, curr->status);
+		if (curr->status == STATUS_COMMAND_NOT_EXECUTED_YET) {
+			strcpy(state, "Running");
+		} else {
+			// Based on https://mesos.apache.org/api/latest/c++/status__utils_8hpp_source.html
+			if (WIFEXITED(curr->status)) {
+				snprintf(state, BUFFER_STATE_SIZE, "Exited with status %d", WEXITSTATUS(curr->status));
+			} else if (WIFSIGNALED(curr->status)) {
+				snprintf(state, BUFFER_STATE_SIZE, "Terminated with signal %s", strsignal(WTERMSIG(curr->status)));
+			} else if (WIFSTOPPED(curr->status)) {
+				snprintf(state, BUFFER_STATE_SIZE, "Stopped on signal %s", strsignal(WSTOPSIG(curr->status)));
+			} else {
+				snprintf(state, BUFFER_STATE_SIZE, "Waiting status %d", curr->status);
+			}
+
+			remove_command_by_pid(shell->jobs, curr->pid);
+		}
+
+		printf("[+%d] %-35s  %s\n", curr->pid, state, curr->command);
+
+		curr = curr->next;
+	}
+	
+	return 0;
+}
+
 // int shell_fg(shell* shell, int argc, char** argv);
-//
-// int shell_jobs(shell* shell, int argc, char** argv);
 //
 // int shell_time(shell* shell, int argc, char** argv);
 

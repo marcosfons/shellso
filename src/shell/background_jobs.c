@@ -1,62 +1,59 @@
-#include <stdlib.h>
 #include <assert.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 #include "background_jobs.h"
 #include "command.h"
 
 
-background_jobs* create_background_jobs(command* first_command) {
+background_jobs* create_background_jobs() {
 	background_jobs* jobs = malloc(sizeof(background_jobs));
-	jobs->next = first_command;
+	jobs->next = NULL;
 
 	return jobs;
 }
 
-void add_command_chain(background_jobs* jobs, command* command_chain) {
-	command* last_command = jobs->next;
+void add_background_job(background_jobs* jobs, command* cmd, int pid) {
+	background_job* job = malloc(sizeof(background_job));
 
-	while (last_command != NULL) {
+	job->command = strdup(cmd->argv[0]);
+	job->pid = pid;
+	job->status = STATUS_COMMAND_NOT_EXECUTED_YET;
+	job->next = NULL;
+
+	background_job* last_command = jobs->next;
+	if (last_command == NULL) {
+		jobs->next = job;
+		return;
+	}
+
+	while (last_command->next != NULL) {
 		last_command = last_command->next;
 	}
-
-	last_command->next = command_chain;
+	last_command->next = job;
 }
 
-int update_command_by_pid(background_jobs* jobs, int pid, int status) {
-	command* curr = jobs->next;
-	while (curr != NULL && curr->pid != pid) {
-		curr = curr->next;
-	}
-	
-	if (curr != NULL) {
-		assert(curr->pid == PID_COMMAND_NOT_EXECUTED_YET);
-		assert(curr->status == STATUS_COMMAND_NOT_EXECUTED_YET);
-
-		curr->pid = pid;
-		curr->status = status;
-
-		return status;
-	}
-
-	return -1;
+void update_background_job_status(background_job* job, int status) {
+	job->status = status;
 }
 
 int remove_command_by_pid(background_jobs* jobs, int pid) {
 	if (jobs->next != NULL && jobs->next->pid == pid) {
-		command* next = jobs->next->next;
+		background_job* next = jobs->next->next;
 		free(jobs->next);
 		jobs->next = next;
 		
 		return pid;
 	}
-	command* curr = jobs->next;
+	background_job* curr = jobs->next;
 
 	while (curr->next != NULL && curr->next->pid != pid) {
 		curr = curr->next;
 	}
 
 	if (curr->next != NULL && curr->next->pid == pid) {
-		command* next = curr->next->next;
+		background_job* next = curr->next->next;
 		free(curr->next);
 		curr->next = next;
 
@@ -66,9 +63,18 @@ int remove_command_by_pid(background_jobs* jobs, int pid) {
 	return -1;
 }
 
+void free_background_job(background_job* job) {
+	if (job->next != NULL) {
+		free_background_job(job);
+	}
+
+	free(job->command);
+	free(job);
+}
+
 void free_background_jobs(background_jobs* jobs) {
 	if (jobs->next != NULL) {
-		command_free(jobs->next);
+		free_background_job(jobs->next);
 	}
 
 	free(jobs);
