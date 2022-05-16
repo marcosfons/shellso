@@ -4,6 +4,7 @@ var annotated_dup =
     [ "alias", "structalias.html", "structalias" ],
     [ "aliasses", "structaliasses.html", "structaliasses" ],
     [ "arguments", "structarguments.html", "structarguments" ],
+    [ "background_job", "structbackground__job.html", "structbackground__job" ],
     [ "background_jobs", "structbackground__jobs.html", "structbackground__jobs" ],
     [ "builtin_command", "structbuiltin__command.html", "structbuiltin__command" ],
     [ "command", "structcommand.html", "structcommand" ],

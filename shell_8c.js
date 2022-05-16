@@ -13,7 +13,7 @@ var shell_8c =
     [ "redirect_and_close", "shell_8c.html#a11534ed616b5b837706aec72d5c3dc12", null ],
     [ "run_command", "shell_8c.html#a7bf41a557d5549e80262806150de609b", null ],
     [ "run_from_file", "shell_8c.html#a4f404a0dc5d0e0f0977739ddb5d78a67", null ],
-    [ "run_from_line", "shell_8c.html#a1e23b40aed6ccc5bb9ab0b3d49095991", null ],
+    [ "run_from_string", "shell_8c.html#adda30003bb48504d2a454839de860e8f", null ],
     [ "run_interactive", "shell_8c.html#a815cee789596e1ac246bf872b1e54d16", null ],
     [ "sigchldHandler", "shell_8c.html#a54f524d2c173fcd2915162cf3197fabb", null ],
     [ "sigintHandler", "shell_8c.html#a4afd3f9736e8a5dcbcfa94a06cd06935", null ],

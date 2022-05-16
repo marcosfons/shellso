@@ -1,8 +1,6 @@
 var command_8h =
 [
     [ "command", "structcommand.html", "structcommand" ],
-    [ "PID_COMMAND_NOT_EXECUTED_YET", "command_8h.html#a551312b111bfa6c59990af637fed291d", null ],
-    [ "STATUS_COMMAND_NOT_EXECUTED_YET", "command_8h.html#ac22cb7a3eb7f1f2cc9bf083872a95d2b", null ],
     [ "command", "command_8h.html#aab93db1936073aa132709623764402e5", null ],
     [ "command_chain_type", "command_8h.html#a4fa9f0b878abe6ebdcbddc7416bb69ad", [
       [ "NONE", "command_8h.html#a4fa9f0b878abe6ebdcbddc7416bb69adac157bdf0b85a40d2619cbc8bc1ae5fe2", null ],

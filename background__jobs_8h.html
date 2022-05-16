@@ -98,6 +98,8 @@ $(document).ready(function(){initNavTree('background__jobs_8h.html',''); initRes
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Data Structures</a> &#124;
+<a href="#define-members">Macros</a> &#124;
+<a href="#typedef-members">Typedefs</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle"><div class="title">background_jobs.h File Reference</div></div>
 </div><!--header-->
@@ -108,31 +110,75 @@ $(document).ready(function(){initNavTree('background__jobs_8h.html',''); initRes
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Data Structures</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbackground__job.html">background_job</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbackground__jobs.html">background_jobs</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:ac22cb7a3eb7f1f2cc9bf083872a95d2b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="background__jobs_8h.html#ac22cb7a3eb7f1f2cc9bf083872a95d2b">STATUS_COMMAND_NOT_EXECUTED_YET</a>&#160;&#160;&#160;INT_MIN</td></tr>
+<tr class="separator:ac22cb7a3eb7f1f2cc9bf083872a95d2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:a1f590a1aad25465009ec04b2f5ed5594"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="structbackground__job.html">background_job</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="background__jobs_8h.html#a1f590a1aad25465009ec04b2f5ed5594">background_job</a></td></tr>
+<tr class="separator:a1f590a1aad25465009ec04b2f5ed5594"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a70de420572e1167fbcffa04893c8e7f3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structbackground__jobs.html">background_jobs</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="background__jobs_8h.html#a70de420572e1167fbcffa04893c8e7f3">create_background_jobs</a> (<a class="el" href="structcommand.html">command</a> *first_command)</td></tr>
-<tr class="separator:a70de420572e1167fbcffa04893c8e7f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a22e9f3d141efa99cf57886466aa8a645"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="background__jobs_8h.html#a22e9f3d141efa99cf57886466aa8a645">add_command_chain</a> (<a class="el" href="structbackground__jobs.html">background_jobs</a> *jobs, <a class="el" href="structcommand.html">command</a> *command_chain)</td></tr>
-<tr class="separator:a22e9f3d141efa99cf57886466aa8a645"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a94745ed26ac3babab509791c9a20e809"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="background__jobs_8h.html#a94745ed26ac3babab509791c9a20e809">update_command_by_pid</a> (<a class="el" href="structbackground__jobs.html">background_jobs</a> *jobs, int pid, int status)</td></tr>
-<tr class="separator:a94745ed26ac3babab509791c9a20e809"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4597adb9fe554e7b314c966736b50758"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structbackground__jobs.html">background_jobs</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="background__jobs_8h.html#a4597adb9fe554e7b314c966736b50758">create_background_jobs</a> ()</td></tr>
+<tr class="separator:a4597adb9fe554e7b314c966736b50758"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6949e27ddbcafe827c27444388e907bb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="background__jobs_8h.html#a6949e27ddbcafe827c27444388e907bb">add_background_job</a> (<a class="el" href="structbackground__jobs.html">background_jobs</a> *jobs, <a class="el" href="structcommand.html">command</a> *cmd, int pid)</td></tr>
+<tr class="separator:a6949e27ddbcafe827c27444388e907bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae6e57676cb897218633deed50a5cf81b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="background__jobs_8h.html#ae6e57676cb897218633deed50a5cf81b">update_background_job_status</a> (<a class="el" href="structbackground__job.html">background_job</a> *job, int status)</td></tr>
+<tr class="separator:ae6e57676cb897218633deed50a5cf81b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a43584b96a56b8aa5e737f812e2972611"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="background__jobs_8h.html#a43584b96a56b8aa5e737f812e2972611">remove_command_by_pid</a> (<a class="el" href="structbackground__jobs.html">background_jobs</a> *jobs, int pid)</td></tr>
 <tr class="separator:a43584b96a56b8aa5e737f812e2972611"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a74a9ff948dff90a1a31d9acc7a098d50"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="background__jobs_8h.html#a74a9ff948dff90a1a31d9acc7a098d50">free_background_job</a> (<a class="el" href="structbackground__job.html">background_job</a> *job)</td></tr>
+<tr class="separator:a74a9ff948dff90a1a31d9acc7a098d50"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7816e75150f7dca33a4d3b46ecdd9efd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="background__jobs_8h.html#a7816e75150f7dca33a4d3b46ecdd9efd">free_background_jobs</a> (<a class="el" href="structbackground__jobs.html">background_jobs</a> *jobs)</td></tr>
 <tr class="separator:a7816e75150f7dca33a4d3b46ecdd9efd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Function Documentation</h2>
-<a id="a22e9f3d141efa99cf57886466aa8a645" name="a22e9f3d141efa99cf57886466aa8a645"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a22e9f3d141efa99cf57886466aa8a645">&#9670;&nbsp;</a></span>add_command_chain()</h2>
+<h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="ac22cb7a3eb7f1f2cc9bf083872a95d2b" name="ac22cb7a3eb7f1f2cc9bf083872a95d2b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac22cb7a3eb7f1f2cc9bf083872a95d2b">&#9670;&nbsp;</a></span>STATUS_COMMAND_NOT_EXECUTED_YET</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void add_command_chain </td>
+          <td class="memname">#define STATUS_COMMAND_NOT_EXECUTED_YET&#160;&#160;&#160;INT_MIN</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Typedef Documentation</h2>
+<a id="a1f590a1aad25465009ec04b2f5ed5594" name="a1f590a1aad25465009ec04b2f5ed5594"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1f590a1aad25465009ec04b2f5ed5594">&#9670;&nbsp;</a></span>background_job</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef struct <a class="el" href="structbackground__job.html">background_job</a> <a class="el" href="structbackground__job.html">background_job</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="a6949e27ddbcafe827c27444388e907bb" name="a6949e27ddbcafe827c27444388e907bb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6949e27ddbcafe827c27444388e907bb">&#9670;&nbsp;</a></span>add_background_job()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void add_background_job </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structbackground__jobs.html">background_jobs</a> *&#160;</td>
           <td class="paramname"><em>jobs</em>, </td>
@@ -141,7 +187,13 @@ Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="structcommand.html">command</a> *&#160;</td>
-          <td class="paramname"><em>command_chain</em>&#160;</td>
+          <td class="paramname"><em>cmd</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>pid</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -150,23 +202,38 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<div class="fragment"><div class="line"><span class="lineno">   15</span>                                                                      {</div>
-<div class="line"><span class="lineno">   16</span>    <a class="code hl_struct" href="structcommand.html">command</a>* last_command = jobs-&gt;<a class="code hl_variable" href="structbackground__jobs.html#ad7d05fdc896ea9c728bc68ad0c81be91">next</a>;</div>
-<div class="line"><span class="lineno">   17</span> </div>
-<div class="line"><span class="lineno">   18</span>    <span class="keywordflow">while</span> (last_command != NULL) {</div>
-<div class="line"><span class="lineno">   19</span>        last_command = last_command-&gt;<a class="code hl_variable" href="structcommand.html#acae402512e855ece5df315f1206455c8">next</a>;</div>
-<div class="line"><span class="lineno">   20</span>    }</div>
-<div class="line"><span class="lineno">   21</span> </div>
-<div class="line"><span class="lineno">   22</span>    last_command-&gt;<a class="code hl_variable" href="structcommand.html#acae402512e855ece5df315f1206455c8">next</a> = command_chain;</div>
-<div class="line"><span class="lineno">   23</span>}</div>
-<div class="ttc" id="astructbackground__jobs_html_ad7d05fdc896ea9c728bc68ad0c81be91"><div class="ttname"><a href="structbackground__jobs.html#ad7d05fdc896ea9c728bc68ad0c81be91">background_jobs::next</a></div><div class="ttdeci">command * next</div><div class="ttdef"><b>Definition:</b> background_jobs.h:9</div></div>
-<div class="ttc" id="astructcommand_html"><div class="ttname"><a href="structcommand.html">command</a></div><div class="ttdef"><b>Definition:</b> command.h:20</div></div>
-<div class="ttc" id="astructcommand_html_acae402512e855ece5df315f1206455c8"><div class="ttname"><a href="structcommand.html#acae402512e855ece5df315f1206455c8">command::next</a></div><div class="ttdeci">command * next</div><div class="ttdef"><b>Definition:</b> command.h:24</div></div>
+<div class="fragment"><div class="line"><span class="lineno">   17</span>                                                                      {</div>
+<div class="line"><span class="lineno">   18</span>    <a class="code hl_struct" href="structbackground__job.html">background_job</a>* job = malloc(<span class="keyword">sizeof</span>(<a class="code hl_struct" href="structbackground__job.html">background_job</a>));</div>
+<div class="line"><span class="lineno">   19</span> </div>
+<div class="line"><span class="lineno">   20</span>    job-&gt;<a class="code hl_variable" href="structbackground__job.html#a40458f93e33df523a3ef10c13823408f">command</a> = strdup(cmd-&gt;<a class="code hl_variable" href="structcommand.html#a03bac117621dd0961bafddbc41b10a9d">argv</a>[0]);</div>
+<div class="line"><span class="lineno">   21</span>    job-&gt;<a class="code hl_variable" href="structbackground__job.html#a92f573281a21ffc96121672b8d9ca500">pid</a> = pid;</div>
+<div class="line"><span class="lineno">   22</span>    job-&gt;<a class="code hl_variable" href="structbackground__job.html#a03aced3d54e3dd04a505156c162eebfd">status</a> = <a class="code hl_define" href="background__jobs_8h.html#ac22cb7a3eb7f1f2cc9bf083872a95d2b">STATUS_COMMAND_NOT_EXECUTED_YET</a>;</div>
+<div class="line"><span class="lineno">   23</span>    job-&gt;<a class="code hl_variable" href="structbackground__job.html#abbb51c5e8ea6e46655330990524499ea">next</a> = NULL;</div>
+<div class="line"><span class="lineno">   24</span> </div>
+<div class="line"><span class="lineno">   25</span>    <a class="code hl_struct" href="structbackground__job.html">background_job</a>* last_command = jobs-&gt;<a class="code hl_variable" href="structbackground__jobs.html#a32cca3c0a8ad11ee09f2d5c8e90c8ea1">next</a>;</div>
+<div class="line"><span class="lineno">   26</span>    <span class="keywordflow">if</span> (last_command == NULL) {</div>
+<div class="line"><span class="lineno">   27</span>        jobs-&gt;<a class="code hl_variable" href="structbackground__jobs.html#a32cca3c0a8ad11ee09f2d5c8e90c8ea1">next</a> = job;</div>
+<div class="line"><span class="lineno">   28</span>        <span class="keywordflow">return</span>;</div>
+<div class="line"><span class="lineno">   29</span>    }</div>
+<div class="line"><span class="lineno">   30</span> </div>
+<div class="line"><span class="lineno">   31</span>    <span class="keywordflow">while</span> (last_command-&gt;<a class="code hl_variable" href="structbackground__job.html#abbb51c5e8ea6e46655330990524499ea">next</a> != NULL) {</div>
+<div class="line"><span class="lineno">   32</span>        last_command = last_command-&gt;<a class="code hl_variable" href="structbackground__job.html#abbb51c5e8ea6e46655330990524499ea">next</a>;</div>
+<div class="line"><span class="lineno">   33</span>    }</div>
+<div class="line"><span class="lineno">   34</span>    last_command-&gt;<a class="code hl_variable" href="structbackground__job.html#abbb51c5e8ea6e46655330990524499ea">next</a> = job;</div>
+<div class="line"><span class="lineno">   35</span>}</div>
+<div class="ttc" id="abackground__jobs_8h_html_ac22cb7a3eb7f1f2cc9bf083872a95d2b"><div class="ttname"><a href="background__jobs_8h.html#ac22cb7a3eb7f1f2cc9bf083872a95d2b">STATUS_COMMAND_NOT_EXECUTED_YET</a></div><div class="ttdeci">#define STATUS_COMMAND_NOT_EXECUTED_YET</div><div class="ttdef"><b>Definition:</b> background_jobs.h:7</div></div>
+<div class="ttc" id="astructbackground__job_html"><div class="ttname"><a href="structbackground__job.html">background_job</a></div><div class="ttdef"><b>Definition:</b> background_jobs.h:11</div></div>
+<div class="ttc" id="astructbackground__job_html_a03aced3d54e3dd04a505156c162eebfd"><div class="ttname"><a href="structbackground__job.html#a03aced3d54e3dd04a505156c162eebfd">background_job::status</a></div><div class="ttdeci">int status</div><div class="ttdef"><b>Definition:</b> background_jobs.h:14</div></div>
+<div class="ttc" id="astructbackground__job_html_a40458f93e33df523a3ef10c13823408f"><div class="ttname"><a href="structbackground__job.html#a40458f93e33df523a3ef10c13823408f">background_job::command</a></div><div class="ttdeci">char * command</div><div class="ttdef"><b>Definition:</b> background_jobs.h:12</div></div>
+<div class="ttc" id="astructbackground__job_html_a92f573281a21ffc96121672b8d9ca500"><div class="ttname"><a href="structbackground__job.html#a92f573281a21ffc96121672b8d9ca500">background_job::pid</a></div><div class="ttdeci">int pid</div><div class="ttdef"><b>Definition:</b> background_jobs.h:13</div></div>
+<div class="ttc" id="astructbackground__job_html_abbb51c5e8ea6e46655330990524499ea"><div class="ttname"><a href="structbackground__job.html#abbb51c5e8ea6e46655330990524499ea">background_job::next</a></div><div class="ttdeci">background_job * next</div><div class="ttdef"><b>Definition:</b> background_jobs.h:15</div></div>
+<div class="ttc" id="astructbackground__jobs_html_a32cca3c0a8ad11ee09f2d5c8e90c8ea1"><div class="ttname"><a href="structbackground__jobs.html#a32cca3c0a8ad11ee09f2d5c8e90c8ea1">background_jobs::next</a></div><div class="ttdeci">background_job * next</div><div class="ttdef"><b>Definition:</b> background_jobs.h:19</div></div>
+<div class="ttc" id="astructcommand_html_a03bac117621dd0961bafddbc41b10a9d"><div class="ttname"><a href="structcommand.html#a03bac117621dd0961bafddbc41b10a9d">command::argv</a></div><div class="ttdeci">char ** argv</div><div class="ttdef"><b>Definition:</b> command.h:22</div></div>
 </div><!-- fragment -->
 </div>
 </div>
-<a id="a70de420572e1167fbcffa04893c8e7f3" name="a70de420572e1167fbcffa04893c8e7f3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a70de420572e1167fbcffa04893c8e7f3">&#9670;&nbsp;</a></span>create_background_jobs()</h2>
+<a id="a4597adb9fe554e7b314c966736b50758" name="a4597adb9fe554e7b314c966736b50758"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4597adb9fe554e7b314c966736b50758">&#9670;&nbsp;</a></span>create_background_jobs()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -174,19 +241,45 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="structbackground__jobs.html">background_jobs</a> * create_background_jobs </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structcommand.html">command</a> *&#160;</td>
-          <td class="paramname"><em>first_command</em></td><td>)</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
-<div class="fragment"><div class="line"><span class="lineno">    8</span>                                                                {</div>
-<div class="line"><span class="lineno">    9</span>    <a class="code hl_struct" href="structbackground__jobs.html">background_jobs</a>* jobs = malloc(<span class="keyword">sizeof</span>(<a class="code hl_struct" href="structbackground__jobs.html">background_jobs</a>));</div>
-<div class="line"><span class="lineno">   10</span>    jobs-&gt;<a class="code hl_variable" href="structbackground__jobs.html#ad7d05fdc896ea9c728bc68ad0c81be91">next</a> = first_command;</div>
-<div class="line"><span class="lineno">   11</span> </div>
-<div class="line"><span class="lineno">   12</span>    <span class="keywordflow">return</span> jobs;</div>
-<div class="line"><span class="lineno">   13</span>}</div>
-<div class="ttc" id="astructbackground__jobs_html"><div class="ttname"><a href="structbackground__jobs.html">background_jobs</a></div><div class="ttdef"><b>Definition:</b> background_jobs.h:8</div></div>
+<div class="fragment"><div class="line"><span class="lineno">   10</span>                                          {</div>
+<div class="line"><span class="lineno">   11</span>    <a class="code hl_struct" href="structbackground__jobs.html">background_jobs</a>* jobs = malloc(<span class="keyword">sizeof</span>(<a class="code hl_struct" href="structbackground__jobs.html">background_jobs</a>));</div>
+<div class="line"><span class="lineno">   12</span>    jobs-&gt;<a class="code hl_variable" href="structbackground__jobs.html#a32cca3c0a8ad11ee09f2d5c8e90c8ea1">next</a> = NULL;</div>
+<div class="line"><span class="lineno">   13</span> </div>
+<div class="line"><span class="lineno">   14</span>    <span class="keywordflow">return</span> jobs;</div>
+<div class="line"><span class="lineno">   15</span>}</div>
+<div class="ttc" id="astructbackground__jobs_html"><div class="ttname"><a href="structbackground__jobs.html">background_jobs</a></div><div class="ttdef"><b>Definition:</b> background_jobs.h:18</div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a74a9ff948dff90a1a31d9acc7a098d50" name="a74a9ff948dff90a1a31d9acc7a098d50"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a74a9ff948dff90a1a31d9acc7a098d50">&#9670;&nbsp;</a></span>free_background_job()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void free_background_job </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structbackground__job.html">background_job</a> *&#160;</td>
+          <td class="paramname"><em>job</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="fragment"><div class="line"><span class="lineno">   66</span>                                              {</div>
+<div class="line"><span class="lineno">   67</span>    <span class="keywordflow">if</span> (job-&gt;<a class="code hl_variable" href="structbackground__job.html#abbb51c5e8ea6e46655330990524499ea">next</a> != NULL) {</div>
+<div class="line"><span class="lineno">   68</span>        <a class="code hl_function" href="background__jobs_8c.html#a74a9ff948dff90a1a31d9acc7a098d50">free_background_job</a>(job);</div>
+<div class="line"><span class="lineno">   69</span>    }</div>
+<div class="line"><span class="lineno">   70</span> </div>
+<div class="line"><span class="lineno">   71</span>    free(job-&gt;<a class="code hl_variable" href="structbackground__job.html#a40458f93e33df523a3ef10c13823408f">command</a>);</div>
+<div class="line"><span class="lineno">   72</span>    free(job);</div>
+<div class="line"><span class="lineno">   73</span>}</div>
+<div class="ttc" id="abackground__jobs_8c_html_a74a9ff948dff90a1a31d9acc7a098d50"><div class="ttname"><a href="background__jobs_8c.html#a74a9ff948dff90a1a31d9acc7a098d50">free_background_job</a></div><div class="ttdeci">void free_background_job(background_job *job)</div><div class="ttdef"><b>Definition:</b> background_jobs.c:66</div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -205,14 +298,13 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<div class="fragment"><div class="line"><span class="lineno">   69</span>                                                 {</div>
-<div class="line"><span class="lineno">   70</span>    <span class="keywordflow">if</span> (jobs-&gt;<a class="code hl_variable" href="structbackground__jobs.html#ad7d05fdc896ea9c728bc68ad0c81be91">next</a> != NULL) {</div>
-<div class="line"><span class="lineno">   71</span>        <a class="code hl_function" href="command_8c.html#a95098a672188182c4eaa40748c1392e3">command_free</a>(jobs-&gt;<a class="code hl_variable" href="structbackground__jobs.html#ad7d05fdc896ea9c728bc68ad0c81be91">next</a>);</div>
-<div class="line"><span class="lineno">   72</span>    }</div>
-<div class="line"><span class="lineno">   73</span> </div>
-<div class="line"><span class="lineno">   74</span>    free(jobs);</div>
-<div class="line"><span class="lineno">   75</span>}</div>
-<div class="ttc" id="acommand_8c_html_a95098a672188182c4eaa40748c1392e3"><div class="ttname"><a href="command_8c.html#a95098a672188182c4eaa40748c1392e3">command_free</a></div><div class="ttdeci">void command_free(command *command)</div><div class="ttdoc">Frees the given command.</div><div class="ttdef"><b>Definition:</b> command.c:63</div></div>
+<div class="fragment"><div class="line"><span class="lineno">   75</span>                                                 {</div>
+<div class="line"><span class="lineno">   76</span>    <span class="keywordflow">if</span> (jobs-&gt;<a class="code hl_variable" href="structbackground__jobs.html#a32cca3c0a8ad11ee09f2d5c8e90c8ea1">next</a> != NULL) {</div>
+<div class="line"><span class="lineno">   77</span>        <a class="code hl_function" href="background__jobs_8c.html#a74a9ff948dff90a1a31d9acc7a098d50">free_background_job</a>(jobs-&gt;<a class="code hl_variable" href="structbackground__jobs.html#a32cca3c0a8ad11ee09f2d5c8e90c8ea1">next</a>);</div>
+<div class="line"><span class="lineno">   78</span>    }</div>
+<div class="line"><span class="lineno">   79</span> </div>
+<div class="line"><span class="lineno">   80</span>    free(jobs);</div>
+<div class="line"><span class="lineno">   81</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -241,51 +333,44 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<div class="fragment"><div class="line"><span class="lineno">   44</span>                                                          {</div>
-<div class="line"><span class="lineno">   45</span>    <span class="keywordflow">if</span> (jobs-&gt;<a class="code hl_variable" href="structbackground__jobs.html#ad7d05fdc896ea9c728bc68ad0c81be91">next</a> != NULL &amp;&amp; jobs-&gt;<a class="code hl_variable" href="structbackground__jobs.html#ad7d05fdc896ea9c728bc68ad0c81be91">next</a>-&gt;<a class="code hl_variable" href="structcommand.html#a3b1c7d2fbcac7ee5fea6229986312c2e">pid</a> == pid) {</div>
-<div class="line"><span class="lineno">   46</span>        <a class="code hl_struct" href="structcommand.html">command</a>* next = jobs-&gt;<a class="code hl_variable" href="structbackground__jobs.html#ad7d05fdc896ea9c728bc68ad0c81be91">next</a>-&gt;<a class="code hl_variable" href="structcommand.html#acae402512e855ece5df315f1206455c8">next</a>;</div>
-<div class="line"><span class="lineno">   47</span>        free(jobs-&gt;<a class="code hl_variable" href="structbackground__jobs.html#ad7d05fdc896ea9c728bc68ad0c81be91">next</a>);</div>
-<div class="line"><span class="lineno">   48</span>        jobs-&gt;<a class="code hl_variable" href="structbackground__jobs.html#ad7d05fdc896ea9c728bc68ad0c81be91">next</a> = next;</div>
-<div class="line"><span class="lineno">   49</span>        </div>
-<div class="line"><span class="lineno">   50</span>        <span class="keywordflow">return</span> pid;</div>
-<div class="line"><span class="lineno">   51</span>    }</div>
-<div class="line"><span class="lineno">   52</span>    <a class="code hl_struct" href="structcommand.html">command</a>* curr = jobs-&gt;<a class="code hl_variable" href="structbackground__jobs.html#ad7d05fdc896ea9c728bc68ad0c81be91">next</a>;</div>
-<div class="line"><span class="lineno">   53</span> </div>
-<div class="line"><span class="lineno">   54</span>    <span class="keywordflow">while</span> (curr-&gt;<a class="code hl_variable" href="structcommand.html#acae402512e855ece5df315f1206455c8">next</a> != NULL &amp;&amp; curr-&gt;<a class="code hl_variable" href="structcommand.html#acae402512e855ece5df315f1206455c8">next</a>-&gt;<a class="code hl_variable" href="structcommand.html#a3b1c7d2fbcac7ee5fea6229986312c2e">pid</a> != pid) {</div>
-<div class="line"><span class="lineno">   55</span>        curr = curr-&gt;<a class="code hl_variable" href="structcommand.html#acae402512e855ece5df315f1206455c8">next</a>;</div>
-<div class="line"><span class="lineno">   56</span>    }</div>
-<div class="line"><span class="lineno">   57</span> </div>
-<div class="line"><span class="lineno">   58</span>    <span class="keywordflow">if</span> (curr-&gt;<a class="code hl_variable" href="structcommand.html#acae402512e855ece5df315f1206455c8">next</a> != NULL &amp;&amp; curr-&gt;<a class="code hl_variable" href="structcommand.html#acae402512e855ece5df315f1206455c8">next</a>-&gt;<a class="code hl_variable" href="structcommand.html#a3b1c7d2fbcac7ee5fea6229986312c2e">pid</a> == pid) {</div>
-<div class="line"><span class="lineno">   59</span>        <a class="code hl_struct" href="structcommand.html">command</a>* next = curr-&gt;<a class="code hl_variable" href="structcommand.html#acae402512e855ece5df315f1206455c8">next</a>-&gt;<a class="code hl_variable" href="structcommand.html#acae402512e855ece5df315f1206455c8">next</a>;</div>
-<div class="line"><span class="lineno">   60</span>        free(curr-&gt;<a class="code hl_variable" href="structcommand.html#acae402512e855ece5df315f1206455c8">next</a>);</div>
-<div class="line"><span class="lineno">   61</span>        curr-&gt;<a class="code hl_variable" href="structcommand.html#acae402512e855ece5df315f1206455c8">next</a> = next;</div>
+<div class="fragment"><div class="line"><span class="lineno">   41</span>                                                          {</div>
+<div class="line"><span class="lineno">   42</span>    <span class="keywordflow">if</span> (jobs-&gt;<a class="code hl_variable" href="structbackground__jobs.html#a32cca3c0a8ad11ee09f2d5c8e90c8ea1">next</a> != NULL &amp;&amp; jobs-&gt;<a class="code hl_variable" href="structbackground__jobs.html#a32cca3c0a8ad11ee09f2d5c8e90c8ea1">next</a>-&gt;<a class="code hl_variable" href="structbackground__job.html#a92f573281a21ffc96121672b8d9ca500">pid</a> == pid) {</div>
+<div class="line"><span class="lineno">   43</span>        <a class="code hl_struct" href="structbackground__job.html">background_job</a>* next = jobs-&gt;<a class="code hl_variable" href="structbackground__jobs.html#a32cca3c0a8ad11ee09f2d5c8e90c8ea1">next</a>-&gt;<a class="code hl_variable" href="structbackground__job.html#abbb51c5e8ea6e46655330990524499ea">next</a>;</div>
+<div class="line"><span class="lineno">   44</span>        free(jobs-&gt;<a class="code hl_variable" href="structbackground__jobs.html#a32cca3c0a8ad11ee09f2d5c8e90c8ea1">next</a>);</div>
+<div class="line"><span class="lineno">   45</span>        jobs-&gt;<a class="code hl_variable" href="structbackground__jobs.html#a32cca3c0a8ad11ee09f2d5c8e90c8ea1">next</a> = next;</div>
+<div class="line"><span class="lineno">   46</span>        </div>
+<div class="line"><span class="lineno">   47</span>        <span class="keywordflow">return</span> pid;</div>
+<div class="line"><span class="lineno">   48</span>    }</div>
+<div class="line"><span class="lineno">   49</span>    <a class="code hl_struct" href="structbackground__job.html">background_job</a>* curr = jobs-&gt;<a class="code hl_variable" href="structbackground__jobs.html#a32cca3c0a8ad11ee09f2d5c8e90c8ea1">next</a>;</div>
+<div class="line"><span class="lineno">   50</span> </div>
+<div class="line"><span class="lineno">   51</span>    <span class="keywordflow">while</span> (curr-&gt;<a class="code hl_variable" href="structbackground__job.html#abbb51c5e8ea6e46655330990524499ea">next</a> != NULL &amp;&amp; curr-&gt;<a class="code hl_variable" href="structbackground__job.html#abbb51c5e8ea6e46655330990524499ea">next</a>-&gt;<a class="code hl_variable" href="structbackground__job.html#a92f573281a21ffc96121672b8d9ca500">pid</a> != pid) {</div>
+<div class="line"><span class="lineno">   52</span>        curr = curr-&gt;<a class="code hl_variable" href="structbackground__job.html#abbb51c5e8ea6e46655330990524499ea">next</a>;</div>
+<div class="line"><span class="lineno">   53</span>    }</div>
+<div class="line"><span class="lineno">   54</span> </div>
+<div class="line"><span class="lineno">   55</span>    <span class="keywordflow">if</span> (curr-&gt;<a class="code hl_variable" href="structbackground__job.html#abbb51c5e8ea6e46655330990524499ea">next</a> != NULL &amp;&amp; curr-&gt;<a class="code hl_variable" href="structbackground__job.html#abbb51c5e8ea6e46655330990524499ea">next</a>-&gt;<a class="code hl_variable" href="structbackground__job.html#a92f573281a21ffc96121672b8d9ca500">pid</a> == pid) {</div>
+<div class="line"><span class="lineno">   56</span>        <a class="code hl_struct" href="structbackground__job.html">background_job</a>* next = curr-&gt;<a class="code hl_variable" href="structbackground__job.html#abbb51c5e8ea6e46655330990524499ea">next</a>-&gt;<a class="code hl_variable" href="structbackground__job.html#abbb51c5e8ea6e46655330990524499ea">next</a>;</div>
+<div class="line"><span class="lineno">   57</span>        free(curr-&gt;<a class="code hl_variable" href="structbackground__job.html#abbb51c5e8ea6e46655330990524499ea">next</a>);</div>
+<div class="line"><span class="lineno">   58</span>        curr-&gt;<a class="code hl_variable" href="structbackground__job.html#abbb51c5e8ea6e46655330990524499ea">next</a> = next;</div>
+<div class="line"><span class="lineno">   59</span> </div>
+<div class="line"><span class="lineno">   60</span>        <span class="keywordflow">return</span> pid;</div>
+<div class="line"><span class="lineno">   61</span>    }</div>
 <div class="line"><span class="lineno">   62</span> </div>
-<div class="line"><span class="lineno">   63</span>        <span class="keywordflow">return</span> pid;</div>
-<div class="line"><span class="lineno">   64</span>    }</div>
-<div class="line"><span class="lineno">   65</span> </div>
-<div class="line"><span class="lineno">   66</span>    <span class="keywordflow">return</span> -1;</div>
-<div class="line"><span class="lineno">   67</span>}</div>
-<div class="ttc" id="astructcommand_html_a3b1c7d2fbcac7ee5fea6229986312c2e"><div class="ttname"><a href="structcommand.html#a3b1c7d2fbcac7ee5fea6229986312c2e">command::pid</a></div><div class="ttdeci">int pid</div><div class="ttdoc">Execution.</div><div class="ttdef"><b>Definition:</b> command.h:31</div></div>
+<div class="line"><span class="lineno">   63</span>    <span class="keywordflow">return</span> -1;</div>
+<div class="line"><span class="lineno">   64</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
-<a id="a94745ed26ac3babab509791c9a20e809" name="a94745ed26ac3babab509791c9a20e809"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a94745ed26ac3babab509791c9a20e809">&#9670;&nbsp;</a></span>update_command_by_pid()</h2>
+<a id="ae6e57676cb897218633deed50a5cf81b" name="ae6e57676cb897218633deed50a5cf81b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae6e57676cb897218633deed50a5cf81b">&#9670;&nbsp;</a></span>update_background_job_status()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int update_command_by_pid </td>
+          <td class="memname">void update_background_job_status </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structbackground__jobs.html">background_jobs</a> *&#160;</td>
-          <td class="paramname"><em>jobs</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>pid</em>, </td>
+          <td class="paramtype"><a class="el" href="structbackground__job.html">background_job</a> *&#160;</td>
+          <td class="paramname"><em>job</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -300,27 +385,9 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<div class="fragment"><div class="line"><span class="lineno">   25</span>                                                                      {</div>
-<div class="line"><span class="lineno">   26</span>    <a class="code hl_struct" href="structcommand.html">command</a>* curr = jobs-&gt;<a class="code hl_variable" href="structbackground__jobs.html#ad7d05fdc896ea9c728bc68ad0c81be91">next</a>;</div>
-<div class="line"><span class="lineno">   27</span>    <span class="keywordflow">while</span> (curr != NULL &amp;&amp; curr-&gt;<a class="code hl_variable" href="structcommand.html#a3b1c7d2fbcac7ee5fea6229986312c2e">pid</a> != pid) {</div>
-<div class="line"><span class="lineno">   28</span>        curr = curr-&gt;<a class="code hl_variable" href="structcommand.html#acae402512e855ece5df315f1206455c8">next</a>;</div>
-<div class="line"><span class="lineno">   29</span>    }</div>
-<div class="line"><span class="lineno">   30</span>    </div>
-<div class="line"><span class="lineno">   31</span>    <span class="keywordflow">if</span> (curr != NULL) {</div>
-<div class="line"><span class="lineno">   32</span>        assert(curr-&gt;<a class="code hl_variable" href="structcommand.html#a3b1c7d2fbcac7ee5fea6229986312c2e">pid</a> == <a class="code hl_define" href="command_8h.html#a551312b111bfa6c59990af637fed291d">PID_COMMAND_NOT_EXECUTED_YET</a>);</div>
-<div class="line"><span class="lineno">   33</span>        assert(curr-&gt;<a class="code hl_variable" href="structcommand.html#ae33624366b829c92cd270ad6afff2bd4">status</a> == <a class="code hl_define" href="command_8h.html#ac22cb7a3eb7f1f2cc9bf083872a95d2b">STATUS_COMMAND_NOT_EXECUTED_YET</a>);</div>
-<div class="line"><span class="lineno">   34</span> </div>
-<div class="line"><span class="lineno">   35</span>        curr-&gt;<a class="code hl_variable" href="structcommand.html#a3b1c7d2fbcac7ee5fea6229986312c2e">pid</a> = pid;</div>
-<div class="line"><span class="lineno">   36</span>        curr-&gt;<a class="code hl_variable" href="structcommand.html#ae33624366b829c92cd270ad6afff2bd4">status</a> = status;</div>
-<div class="line"><span class="lineno">   37</span> </div>
-<div class="line"><span class="lineno">   38</span>        <span class="keywordflow">return</span> status;</div>
-<div class="line"><span class="lineno">   39</span>    }</div>
-<div class="line"><span class="lineno">   40</span> </div>
-<div class="line"><span class="lineno">   41</span>    <span class="keywordflow">return</span> -1;</div>
-<div class="line"><span class="lineno">   42</span>}</div>
-<div class="ttc" id="acommand_8h_html_a551312b111bfa6c59990af637fed291d"><div class="ttname"><a href="command_8h.html#a551312b111bfa6c59990af637fed291d">PID_COMMAND_NOT_EXECUTED_YET</a></div><div class="ttdeci">#define PID_COMMAND_NOT_EXECUTED_YET</div><div class="ttdef"><b>Definition:</b> command.h:5</div></div>
-<div class="ttc" id="acommand_8h_html_ac22cb7a3eb7f1f2cc9bf083872a95d2b"><div class="ttname"><a href="command_8h.html#ac22cb7a3eb7f1f2cc9bf083872a95d2b">STATUS_COMMAND_NOT_EXECUTED_YET</a></div><div class="ttdeci">#define STATUS_COMMAND_NOT_EXECUTED_YET</div><div class="ttdef"><b>Definition:</b> command.h:6</div></div>
-<div class="ttc" id="astructcommand_html_ae33624366b829c92cd270ad6afff2bd4"><div class="ttname"><a href="structcommand.html#ae33624366b829c92cd270ad6afff2bd4">command::status</a></div><div class="ttdeci">int status</div><div class="ttdef"><b>Definition:</b> command.h:32</div></div>
+<div class="fragment"><div class="line"><span class="lineno">   37</span>                                                                   {</div>
+<div class="line"><span class="lineno">   38</span>    job-&gt;<a class="code hl_variable" href="structbackground__job.html#a03aced3d54e3dd04a505156c162eebfd">status</a> = status;</div>
+<div class="line"><span class="lineno">   39</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -331,7 +398,7 @@ Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_b2c05b11dbc691bba5c0cb93063c379f.html">shell</a></li><li class="navelem"><a class="el" href="background__jobs_8h.html">background_jobs.h</a></li>
-    <li class="footer">Generated on Mon May 16 2022 02:18:05 for shellso by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.4 </li>
+    <li class="footer">Generated on Mon May 16 2022 17:09:05 for shellso by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.4 </li>
   </ul>
 </div>
 <!-- BEGIN doxygen awesome darkmode toggle -->
