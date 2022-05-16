@@ -9,12 +9,12 @@
 /** @todo Add documentation to each function */
 
 /** @brief Type of a builtin command function that will be executed */
-typedef int (*BuiltinCommandFunction)(shell* shell, int argc, char** argv);
+typedef int (*builtin_command_function)(shell* shell, int argc, char** argv);
 
 /** @brief Struct to represent a shell builtin command */
 typedef struct {
 	char* command;
-	BuiltinCommandFunction function;
+	builtin_command_function function;
 } builtin_command;
 
 /** @brief HashTable containing every shell builtin command */
@@ -33,7 +33,16 @@ typedef struct _shell_builtin_commands {
  */
 shell_builtin_commands* create_shell_builtin_commands(int size);
 
-unsigned long hash_function(shell_builtin_commands* commands, char* str);
+/** @brief Hashes the name of the builtin command
+ *	
+ *	@param commands
+ *	@param str The name of the builtin command
+ *
+ *	@return The hash generated, limited by the commands size
+ *
+ *	Maybe it'll be better to return only the number and then limit it by the commands size
+ */
+unsigned long builtin_command_hash_function(shell_builtin_commands* commands, char* str);
 
 /** @brief Adds one builtin command using the key to hash it
  *	
@@ -45,7 +54,7 @@ unsigned long hash_function(shell_builtin_commands* commands, char* str);
 void add_builtin_command(
 	shell_builtin_commands* commands, 
 	char* key, 
-	BuiltinCommandFunction func
+	builtin_command_function func
 );
 
 /** @brief Find one builtin command by searching with one key
@@ -56,7 +65,7 @@ void add_builtin_command(
  *
  *	@return the function that must be executed for this builtin command
  */
-BuiltinCommandFunction find_builtin_command(shell_builtin_commands* commands, char* key);
+builtin_command_function find_builtin_command(shell_builtin_commands* commands, char* key);
 
 /** @brief Frees the given builtin_commands
  *	
@@ -117,16 +126,6 @@ int shell_jobs(shell* shell, int argc, char** argv);
  */
 int shell_time(shell* shell, int argc, char** argv);
 
-/** @brief Finishes the shell
- *	
- *	@param shell The shell where this command it's being executed
- *	@param argc The argument count
- *	@param argv The argument values
- *
- *	@return Return an integer according to the end status
- */
-int shell_fim(shell* shell, int argc, char** argv);
-
 /** @brief Exit from the shell
  *	
  *	@param shell The shell where this command it's being executed
@@ -146,6 +145,16 @@ int shell_exit(shell* shell, int argc, char** argv);
  *	@return Return an integer according to the end status
  */
 int shell_help(shell* shell, int argc, char** argv);
+
+/** @brief Lists all the registered aliasses
+ *	
+ *	@param shell The shell where this command it's being executed
+ *	@param argc The argument count
+ *	@param argv The argument values
+ *
+ *	@return Return an integer according to the end status
+ */
+int shell_alias(shell* shell, int argc, char** argv);
 
 
 #endif

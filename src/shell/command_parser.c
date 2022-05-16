@@ -92,6 +92,8 @@ command* command_parse(char* input) {
 				i++;
 			} else {
 				fprintf(stderr, "Syntax error: An equal sign must be followed by a >\n");
+				command_free(cmd);
+				string_free(content);
 				return NULL;
 			}
 		}
@@ -102,6 +104,8 @@ command* command_parse(char* input) {
 				i++;
 			} else {
 				fprintf(stderr, "Syntax error: An < must be followed by an equal sign\n");
+				command_free(cmd);
+				string_free(content);
 				return NULL;
 			}
 		}
@@ -130,6 +134,8 @@ command* command_parse(char* input) {
 				/** @todo Create a strategy to "expect" a new command. For now only throwing a error and returning NULL */
 				/** @todo Introduce a hint saying what character and its position */
 				fprintf(stderr, "Unexpected EOF while expecting a new command");
+				command_free(cmd);
+				string_free(content);
 				return NULL;
 			}
 			break;

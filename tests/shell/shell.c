@@ -6,6 +6,8 @@
 #include <stdio.h>
 #include <string.h>
 
+#include "../../src/shell/prompts.c"
+#include "../../src/shell/alias.c"
 #include "../../src/shell/shell.c"
 
 
