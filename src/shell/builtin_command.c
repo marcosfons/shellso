@@ -9,7 +9,7 @@
 #include "builtin_command.h"
 
 
-static builtin_command* create_builtin_command(char* command, BuiltinCommandFunction func) {
+static builtin_command* create_builtin_command(char* command, builtin_command_function func) {
 	builtin_command* item = malloc(sizeof(builtin_command));
 
 	item->command = command;
@@ -23,7 +23,9 @@ shell_builtin_commands* create_shell_builtin_commands(int size) {
 	
 	commands->size = size;
 	commands->count = 0;
-	commands->commands = calloc(commands->size, sizeof(builtin_command));
+
+	// commands->commands = calloc(commands->size, sizeof(builtin_command));
+	commands->commands = calloc(commands->size, sizeof(builtin_command*));
 
 	for (int i = 0; i < commands->size; i++) {
 		commands->commands[i] = NULL;
@@ -32,7 +34,7 @@ shell_builtin_commands* create_shell_builtin_commands(int size) {
 	return commands;
 }
 
-unsigned long hash_function(shell_builtin_commands* commands, char* str) {
+unsigned long builtin_command_hash_function(shell_builtin_commands* commands, char* str) {
 	unsigned long i = 0;
 	for (int j=0; str[j]; j++) {
 		i += str[j];
@@ -43,11 +45,11 @@ unsigned long hash_function(shell_builtin_commands* commands, char* str) {
 void add_builtin_command(
 	shell_builtin_commands* commands, 
 	char* key, 
-	BuiltinCommandFunction func
+	builtin_command_function func
 ) {
 	builtin_command* item = create_builtin_command(key, func);
 
-	unsigned long index = hash_function(commands, key);
+	unsigned long index = builtin_command_hash_function(commands, key);
 
 	builtin_command* current_item = commands->commands[index];
 	 
@@ -75,12 +77,12 @@ void add_builtin_command(
 	}
 }
 
-BuiltinCommandFunction find_builtin_command(shell_builtin_commands* commands, char* key) {
+builtin_command_function find_builtin_command(shell_builtin_commands* commands, char* key) {
 	if (key == NULL || key[0] == '\0') {
 		return NULL;
 	}
 
-	int index = hash_function(commands, key);
+	int index = builtin_command_hash_function(commands, key);
 	builtin_command* item = commands->commands[index];
 
 	// Ensure that we move to a non NULL item
@@ -117,19 +119,39 @@ void free_shell_builtin_commands(shell_builtin_commands* commands) {
 	* BUILTIN FUNCTIONS
 	*/
 int shell_cd(shell* shell, int argc, char** argv) {
-	assert(argc > 0);
-
 	if (argc > 2) {
 		print_command_error("cd", "Too many arguments");
-		return 1;
+		return EXIT_FAILURE;
 	}
 
 	if (chdir(argc == 2 ? argv[1] : getenv("HOME")) == -1) {
 		print_command_error("cd", strerror(errno));
-		return 1;
+		return EXIT_FAILURE;
 	}
 
-	return 0;
+	return EXIT_SUCCESS;
+}
+
+int shell_exit(shell* shell, int argc, char** argv) {
+	shell->running = false;
+
+	return EXIT_SUCCESS;
+}
+
+int shell_alias(shell* shell, int argc, char** argv) {
+	for (int i = 0; i < shell->aliasses->size; i++) {
+		alias* alias = shell->aliasses->aliasses[i];
+		if (alias != NULL) {
+			printf("alias %s='", alias->key);
+			for (int j = 0; j < alias->argc; j++) {
+				printf("%s ", alias->argv[j]);
+			}
+			printf("\b'\n");
+			
+		}
+	}
+
+	return EXIT_SUCCESS;
 }
 
 // int shell_fg(shell* shell, int argc, char** argv);
@@ -137,9 +159,7 @@ int shell_cd(shell* shell, int argc, char** argv) {
 // int shell_jobs(shell* shell, int argc, char** argv);
 //
 // int shell_time(shell* shell, int argc, char** argv);
-//
-// int shell_fim(shell* shell, int argc, char** argv);
-// int shell_exit(shell* shell, int argc, char** argv);
+
 //
 // int shell_help(shell* shell, int argc, char** argv);
 

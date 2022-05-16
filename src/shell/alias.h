@@ -4,26 +4,26 @@
 
 /** @brief Only one alias entry **/
 typedef struct alias {
-	char* alias;
-	int value_count;
-	char** value;
+	char* key;
+	int argc;
+	char** argv;
 } alias;
 
 /** @brief Hash table of aliasses used in the shell */
 typedef struct aliasses {
-	alias* aliasses;
+	alias** aliasses;
 	int size;
 	int count;
 } aliasses;
 
 
-aliasses* create_aliasses();
+aliasses* create_aliasses(int size);
 
-void add_alias(aliasses* aliasses, char* alias, char** value);
+void add_alias(aliasses* aliasses, char* key, int argc, char** argv);
 
-// unsigned long hash_function(aliasses* aliasses, char* str);
+unsigned long alias_hash_function(aliasses* aliasses, char* str);
 
-char** find_alias(aliasses* aliasses, char* alias);
+alias* find_alias(aliasses* aliasses, char* alias);
 
 void free_alias(alias* alias);
 

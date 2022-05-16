@@ -1,17 +1,16 @@
-#include <stdio.h>
+#include <assert.h>
+#include <signal.h>
 #include <string.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include <wait.h>
 #include <errno.h>
-#include <signal.h>
-#include <assert.h>
-#include <limits.h>
-#include <pwd.h>
+#include <stdio.h>
+#include <wait.h>
 
 
 #include "alias.h"
 #include "builtin_command.h"
+#include "prompts.h"
 #include "shell.h"
 #include "background_jobs.h"
 #include "command.h"
@@ -21,8 +20,11 @@
 #define READ_END 0
 #define WRITE_END 1
 
-#define ARBITRARY_BUILTIN_COMMANDS_HASH_SIZE 103
+#define ARBITRARY_ALIASSES_HASH_SIZE 43
+#define ARBITRARY_BUILTIN_COMMANDS_HASH_SIZE 127
 
+
+static shell* running_shell = NULL;
 
 /// Handles Ctrl-C events, it does nothing.
 /// exec already kill the child process
@@ -34,63 +36,57 @@ static void sigintHandler(int sig_num) {
 static void sigchldHandler(int sig_num) {
 	signal(SIGCHLD, sigchldHandler);
 
-	// command* curr = jobs->next;
-	// while (curr != NULL) {
-	// 	curr = curr->next;
-	//
-	// 	int state;
-	// 	int res = waitpid(curr->pid, &state, WNOHANG);
-	//
-	// 	if (res > 0 && WIFEXITED(state)) {
-	// 		// printf("[+%d] Background process done. Status: %d\n", curr->pid, WEXITSTATUS(state));
-	//
-	// 		update_command_by_pid(jobs, curr->pid, state);
-	// 		printf("[+%d] Background updated. Status: %d\n", curr->pid, WEXITSTATUS(state));
-	// 		break;
-	// 	}
-	// }
-}
+	command* curr = running_shell->jobs->next;
+	while (curr != NULL) {
+		curr = curr->next;
 
-static void print_prompt() {
-	size_t length = PATH_MAX;
-	char* cwd = malloc(length);
+		int state;
+		int res = waitpid(curr->pid, &state, WNOHANG);
 
-	struct passwd* passwd = getpwuid(getuid());
+		if (res > 0 && WIFEXITED(state)) {
+			// printf("[+%d] Background process done. Status: %d\n", curr->pid, WEXITSTATUS(state));
 
-	char* username = passwd != NULL ? passwd->pw_name : "user";
-
-	if (getcwd(cwd, length) == NULL) {
-		perror("cwd");
-		printf("%s$ ", username);
-	} else {
-		printf("\033[01;32m%s:\033[01;34m%s\033[0m$ ", username, cwd);
+			update_command_by_pid(running_shell->jobs, curr->pid, state);
+			printf("[+%d] Background updated. Status: %d\n", curr->pid, WEXITSTATUS(state));
+			break;
+		}
 	}
-
-	free(cwd);
 }
 
 shell* create_shell() {
-	shell* new_shell = malloc(sizeof(shell));
+	if (running_shell != NULL && running_shell->running) {	
+		printf("Only one shell can run at the same time. Stop the running shell\n");
+		return NULL;
+	}
 
-	// new_shell->aliasses = create_aliasses();
-	new_shell->jobs = create_background_jobs(NULL);
-	new_shell->builtin_commands = create_shell_builtin_commands(ARBITRARY_BUILTIN_COMMANDS_HASH_SIZE);
+	running_shell = malloc(sizeof(shell));
 
-	// char** ls_alias = malloc(2 * sizeof(char*));
-	// ls_alias[0] = "ls";
-	// ls_alias[1] = "ls";
-	// char* test = {"ls", "--color=auto"};
-	// add_alias(new_shell->aliasses, "ls", {"ls", "--color=auto"};
+	running_shell->running = true;
+	running_shell->prompt = &normal_shell_prompt;
+	running_shell->aliasses = create_aliasses(ARBITRARY_ALIASSES_HASH_SIZE);
+	running_shell->jobs = create_background_jobs(NULL);
+	running_shell->builtin_commands = create_shell_builtin_commands(ARBITRARY_BUILTIN_COMMANDS_HASH_SIZE);
 
-	add_builtin_command(new_shell->builtin_commands, "cd", &shell_cd);
-	// add_builtin_command(new_shell->builtin_commands, "fg", &shell_fg);
-	// add_builtin_command(new_shell->builtin_commands, "help", &shell_help);
-	// add_builtin_command(new_shell->builtin_commands, "jobs", &shell_jobs);
-	// add_builtin_command(new_shell->builtin_commands, "exit", &shell_exit);
-	// add_builtin_command(new_shell->builtin_commands, "fim", &shell_fim);
-	// add_builtin_command(new_shell->builtin_commands, "time", &shell_time);
+	add_builtin_command(running_shell->builtin_commands, "cd", &shell_cd);
+	// add_builtin_command(running_shell->builtin_commands, "fg", &shell_fg);
+	// add_builtin_command(running_shell->builtin_commands, "help", &shell_help);
+	// add_builtin_command(running_shell->builtin_commands, "jobs", &shell_jobs);
+	add_builtin_command(running_shell->builtin_commands, "exit", &shell_exit);
+	add_builtin_command(running_shell->builtin_commands, "fim", &shell_exit);
+	// add_builtin_command(running_shell->builtin_commands, "time", &shell_time);
+	add_builtin_command(running_shell->builtin_commands, "alias", &shell_alias);
+	
+	char** ls = malloc(2 * sizeof(char*));
+	ls[0] = strdup("ls");
+	ls[1] = strdup("--color=auto");
 
-	return new_shell;
+	char** grep = malloc(2 * sizeof(char*));
+	grep[0] = strdup("grep");
+	grep[1] = strdup("--color=auto");
+	add_alias(running_shell->aliasses, ls[0], 2, ls);
+	add_alias(running_shell->aliasses, grep[0], 2, grep);
+
+	return running_shell;
 }
 
 void print_command_error(char* command, char* error) {
@@ -105,7 +101,6 @@ static char* read_input() {
 	char* input = NULL;
 	size_t length = 0;
 
-	print_prompt();
 	int nread = getline(&input, &length, stdin);
 	if (nread == -1) {
 		free(input);
@@ -119,54 +114,64 @@ static char* read_input() {
 	return input;
 }
 
+
+/// @todo Check if this code must be in shell, alias or command
+/// Maybe it's better in command, because it's changing it
+void expand_command_with_alias(command* cmd, alias alias) {
+	// Minus 1 because in both there is a command cmd[0] and alias[0]
+	int new_size = cmd->argc + alias.argc;
+	cmd->argv = realloc(cmd->argv, new_size * sizeof(char*));
+
+	for (int i = 1; i < cmd->argc; i++) {
+		cmd->argv[alias.argc - 1 + i] = cmd->argv[i];
+	}
+
+	for (int i = 1; i < alias.argc; i++) {
+		cmd->argv[i] = strdup(alias.argv[i]);
+	}
+
+	cmd->argv[new_size - 1] = NULL;
+
+	cmd->argc = new_size;
+}
+
+void run_from_file(shell* shell, FILE* fp) {
+
+}
+
+void run_from_line(shell* shell, char* input) {
+	command* cmd = command_parse(input);
+
+	if (cmd != NULL) {
+		// Problem with this approach is that it'll only work if the first program is a builtin
+		builtin_command_function func = find_builtin_command(shell->builtin_commands, cmd->argv[0]);
+		if (func != NULL) {
+			int status = func(shell, cmd->argc, cmd->argv);
+		} else {
+			// add_command_chain(interactive_shell->jobs, cmd);
+			// add_command_chain(jobs, cmd);
+			run_command(shell, cmd, STDIN_FILENO);
+			dup(STDIN_FILENO);
+			dup(STDOUT_FILENO);
+		}
+		command_free(cmd);
+	}
+}
+
 void run_interactive(shell* shell) {
 	signal(SIGINT, sigintHandler);
 	signal(SIGCHLD, sigchldHandler);
 
-	command* cmd = NULL;
-
 	do {
-		if (cmd != NULL) {
-			command_free(cmd);
-		}
-
+		running_shell->prompt(running_shell);
 		char* input = read_input();
 
-		cmd = command_parse(input);
+		run_from_line(shell, input);
 
 		if (input != NULL) {
 			free(input);
 		}		
-	
-		if (cmd == NULL) {
-			if (feof(stdin)) {
-				break;
-			} else {
-				printf("É NULL\n");
-				continue;
-			}
-		}
-		// printf("CMD: %d ARGV: %d\n", cmd == NULL, cmd->argv == NULL);
-
-		BuiltinCommandFunction func = find_builtin_command(shell->builtin_commands, cmd->argv[0]);
-		if (func != NULL) {
-			func(shell, cmd->argc, cmd->argv);
-		} else {
-
-			if (cmd != NULL) {
-				// add_command_chain(interactive_shell->jobs, cmd);
-				// add_command_chain(jobs, cmd);
-				run_command(cmd, STDIN_FILENO);
-				// dup(STDIN_FILENO);
-				// dup(STDOUT_FILENO);
-			}
-		}
-		usleep(3000); // Arbitrary sleep
-	} while (!feof(stdin) && (cmd == NULL || strcmp(cmd->argv[0], "quit") != 0));
-	
-	if (cmd != NULL) {
-		command_free(cmd);
-	}
+	} while (running_shell->running && !feof(stdin));
 }
 
 static void CLOSE(int fd) {
@@ -183,19 +188,13 @@ static void redirect_and_close(int oldfd, int newfd) {
   }
 }
 
-void run_for_line(char* input) {
-	command* cmd = command_parse(input);
-	if (input != NULL) {
-		free(input);
-	}
-
-	if (cmd != NULL) {
-		run_command(cmd, STDIN_FILENO);
-	}
-}
-
-void run_command(command* cmd, int in_fd) {
+void run_command(shell* shell, command* cmd, int in_fd) {
 	int fd[2] = {-1, -1};
+
+	alias* alias = find_alias(shell->aliasses, cmd->argv[0]);
+	if (alias != NULL) {
+		expand_command_with_alias(cmd, *alias);
+	}
 
 	if (cmd->chain_type == PIPE) {
 		if (pipe(fd) == -1) {
@@ -212,25 +211,25 @@ void run_command(command* cmd, int in_fd) {
 		if (cmd->chain_type == PIPE) {
 			CLOSE(fd[READ_END]);
 
-			// if (cmd->stdin_file_redirection != NULL) {
-			// 	FILE* stdin_file = fopen(cmd->stdin_file_redirection, "r");
-			// 	redirect_and_close(in_fd, stdin_file->_fileno);
-			// } else {
-			redirect_and_close(in_fd, STDIN_FILENO);
-			// }
+			if (cmd->stdin_file_redirection != NULL) {
+				FILE* stdin_file = fopen(cmd->stdin_file_redirection, "r");
+				redirect_and_close(stdin_file->_fileno, STDIN_FILENO);
+			} else {
+				redirect_and_close(in_fd, STDIN_FILENO);
+			}
 
-			// if (cmd->stdout_file_redirection != NULL) {
-			// 	FILE* stdout_file = fopen(cmd->stdout_file_redirection, "w");
-			// 	redirect_and_close(in_fd, stdout_file->_fileno);
-			// } else {
-			redirect_and_close(fd[WRITE_END], STDOUT_FILENO);
-			// }
+			if (cmd->stdout_file_redirection != NULL) {
+				FILE* stdout_file = fopen(cmd->stdout_file_redirection, "w");
+				redirect_and_close(stdout_file->_fileno, STDOUT_FILENO);
+			} else {
+				redirect_and_close(fd[WRITE_END], STDOUT_FILENO);
+			}
 		} else {
 			// This is important because of the last command of a pipe command chain
 			redirect_and_close(in_fd, STDIN_FILENO);
 		}
 
-    execvp(cmd->argv[0], cmd->argv);
+		execvp(cmd->argv[0], cmd->argv);
 		print_command_error(cmd->argv[0], strerror(errno));
 		
 		exit(EXIT_FAILURE); // Exits only the child process
@@ -239,12 +238,12 @@ void run_command(command* cmd, int in_fd) {
 
 		if (cmd->chain_type == BACKGROUND) {
 			if (cmd->next != NULL) {
-				run_command(cmd->next, in_fd);
+				run_command(shell, cmd->next, in_fd);
 			}
 		} else if (cmd->chain_type == PIPE) {
 			CLOSE(fd[WRITE_END]);
 
-			run_command(cmd->next, fd[0]);
+			run_command(shell, cmd->next, fd[0]);
 		} else {
 			int state;
 			int result = waitpid(child_pid, &state, 0);
@@ -254,25 +253,27 @@ void run_command(command* cmd, int in_fd) {
 			}
 
 			if (cmd->next != NULL) {
-				if ((cmd->chain_type == AND && WEXITSTATUS(state) == 0) || 
+				if ((cmd->chain_type == AND && WEXITSTATUS(state) == EXIT_SUCCESS) || 
 						(cmd->chain_type == OR)) {
-					run_command(cmd->next, in_fd);
+					run_command(shell, cmd->next, in_fd);
 				}
 			}
 		}
 	}
 }
 
-
 void free_shell(shell *shell) {
 	if (shell == NULL) {
 		return;
 	}
 	
+	// Just for completeness
+	shell->running = false;
+
 	free_shell_builtin_commands(shell->builtin_commands);
 	free_background_jobs(shell->jobs);
+	free_aliasses(shell->aliasses);
 
 	free(shell);
 }
-
 

@@ -36,7 +36,6 @@ command* command_create() {
 
 void command_set_command(command* cmd, char* input) {
 	assert(cmd->argc == 0);
-	// cmd->command = input;
 
 	command_add_argument(cmd, input);
 }
@@ -72,4 +71,15 @@ void command_free(command* command) {
 		free(command->argv[i]);
 	}
 	free(command->argv);
+	
+	if (command->stdin_file_redirection != NULL)
+		free(command->stdin_file_redirection);
+
+	if (command->stdout_file_redirection != NULL)
+		free(command->stdout_file_redirection);
+
+	if (command->stderr_file_redirection != NULL)
+		free(command->stderr_file_redirection);
+
+	free(command);
 }

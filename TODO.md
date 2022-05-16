@@ -14,10 +14,10 @@
 	- [ ] fg
 	- [ ] jobs
 	- [ ] time (maybe)
-	- [ ] fim
-	- [ ] exit (alias to fim, maybe)
+	- [x] exit
+	- [x] fim (alias to exit, maybe)
 	- [ ] help
-	- [ ] alias
+	- [x] alias
 
 - [ ] Create a process group for each command chain. In this case,
 The signal handling works for each command
@@ -36,4 +36,4 @@ The signal handling works for each command
 # Others
 
 - [ ] Free all memory used and check memory leaks with `Valgrind`
-- [ ] Support aliases
+- [x] Support aliases
