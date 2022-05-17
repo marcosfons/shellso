@@ -28,13 +28,18 @@ static shell* running_shell = NULL;
 
 /// Handles Ctrl-C events, it does nothing.
 /// exec already kill the child process
-static void sigintHandler(int sig_num) {
-	signal(SIGINT, sigintHandler); // Will receive the signal on the next time
+static void signint_handler(int sig_num) {
+	signal(SIGINT, signint_handler); // Will receive the signal on the next time
 	printf("\n");
 }
 
-static void sigchldHandler(int sig_num) {
-	signal(SIGCHLD, sigchldHandler);
+static void sigstop_handler(int sig_num) {
+	signal(SIGTSTP, sigstop_handler);
+	printf("SIGSTOP PROCESS\n");
+}
+
+static void sigchld_handler(int sig_num) {
+	signal(SIGCHLD, sigchld_handler);
 
 	background_job* curr = running_shell->jobs->next;
 	while (curr != NULL) {
@@ -45,7 +50,7 @@ static void sigchldHandler(int sig_num) {
 			// printf("[+%d] Background process done. Status: %d\n", curr->pid, WEXITSTATUS(state));
 
 			update_background_job_status(curr, state);
-			printf("[+%d] Background updated. Status: %d\n", curr->pid, WEXITSTATUS(state));
+			printf("[%d] Background updated. Status: %d\n", curr->pid, WEXITSTATUS(state));
 			break;
 		}
 
@@ -62,13 +67,14 @@ shell* create_shell() {
 	running_shell = malloc(sizeof(shell));
 
 	running_shell->running = true;
+	running_shell->verbose = false;
 	running_shell->prompt = &normal_shell_prompt;
 	running_shell->aliasses = create_aliasses(ARBITRARY_ALIASSES_HASH_SIZE);
 	running_shell->jobs = create_background_jobs(NULL);
 	running_shell->builtin_commands = create_shell_builtin_commands(ARBITRARY_BUILTIN_COMMANDS_HASH_SIZE);
 
 	add_builtin_command(running_shell->builtin_commands, "cd", &shell_cd);
-	// add_builtin_command(running_shell->builtin_commands, "fg", &shell_fg);
+	add_builtin_command(running_shell->builtin_commands, "fg", &shell_fg);
 	// add_builtin_command(running_shell->builtin_commands, "help", &shell_help);
 	add_builtin_command(running_shell->builtin_commands, "jobs", &shell_jobs);
 	add_builtin_command(running_shell->builtin_commands, "exit", &shell_exit);
@@ -97,11 +103,11 @@ void print_command_error(char* command, char* error) {
 	}
 }
 
-static char* read_input() {
+static char* read_input_from_file(FILE* file) {
 	char* input = NULL;
 	size_t length = 0;
 
-	int nread = getline(&input, &length, stdin);
+	int nread = getline(&input, &length, file);
 	if (nread == -1) {
 		free(input);
 		return NULL;
@@ -135,44 +141,52 @@ void expand_command_with_alias(command* cmd, alias alias) {
 	cmd->argc = new_size;
 }
 
-void run_from_file(shell* shell, FILE* fp) {
-
-}
-
 void run_from_string(shell* shell, char* input) {
 	command* cmd = command_parse(input);
-
-	if (cmd != NULL) {
-		// Problem with this approach is that it'll only work if the first program is a builtin
-		builtin_command_function func = find_builtin_command(shell->builtin_commands, cmd->argv[0]);
-		if (func != NULL) {
-			int status = func(shell, cmd->argc, cmd->argv);
-		} else {
-			// add_command_chain(interactive_shell->jobs, cmd);
-			// add_command_chain(jobs, cmd);
-			run_command(shell, cmd, STDIN_FILENO);
-			dup(STDIN_FILENO);
-			dup(STDOUT_FILENO);
-		}
-
-		command_free(cmd);
+	if (cmd == NULL) {
+		return;
 	}
+
+	if (shell->verbose) {
+		printf("%s\n", input);
+	}
+
+	// Problem with this approach is that it'll only work if the first program is a builtin
+	builtin_command_function func = find_builtin_command(shell->builtin_commands, cmd->argv[0]);
+	if (func != NULL) {
+		int status = func(shell, cmd->argc, cmd->argv);
+	} else {
+		// add_command_chain(interactive_shell->jobs, cmd);
+		// add_command_chain(jobs, cmd);
+		run_command(shell, cmd, STDIN_FILENO);
+		dup(STDIN_FILENO);
+		dup(STDOUT_FILENO);
+	}
+
+	command_free(cmd);
 }
 
-void run_interactive(shell* shell) {
-	signal(SIGINT, sigintHandler);
-	signal(SIGCHLD, sigchldHandler);
+void run_from_file(shell* shell, FILE* file) {
+	signal(SIGINT, signint_handler);
+	signal(SIGCHLD, sigchld_handler);
+	signal(SIGTSTP, sigstop_handler);
 
 	do {
-		running_shell->prompt(running_shell);
-		char* input = read_input();
+		if (file == stdin) {
+			running_shell->prompt(running_shell);
+		}
+		char* input = read_input_from_file(file);
 
 		run_from_string(shell, input);
 
 		if (input != NULL) {
 			free(input);
 		}		
-	} while (running_shell->running && !feof(stdin));
+	} while (running_shell->running && !feof(file));
+}
+
+void run_interactive(shell* shell) {
+	run_from_file(shell, stdin);
 }
 
 static void CLOSE(int fd) {
@@ -248,7 +262,10 @@ void run_command(shell* shell, command* cmd, int in_fd) {
 			run_command(shell, cmd->next, fd[0]);
 		} else {
 			int state;
-			int result = waitpid(child_pid, &state, 0);
+			int result = waitpid(child_pid, &state, WUNTRACED);
+			
+			update_background_job_status_by_pid(shell->jobs, child_pid, state);
+
 			if (result == -1 && errno != 10) { 
 				perror("waitpid");
 				exit(EXIT_FAILURE);

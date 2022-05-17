@@ -26,6 +26,8 @@ void add_background_job(background_jobs* jobs, command* cmd, int pid);
 
 void update_background_job_status(background_job* job, int status);
 
+void update_background_job_status_by_pid(background_jobs* jobs, int pid, int status);
+
 int remove_command_by_pid(background_jobs* jobs, int pid);
 
 

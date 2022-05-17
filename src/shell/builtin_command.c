@@ -1,9 +1,11 @@
 #include <stdio.h>
+#include <signal.h>
 #include <stdlib.h>
 #include <string.h>
 #include <assert.h>
 #include <errno.h>
 #include <unistd.h>
+#include <sys/wait.h>
 
 
 #include "builtin_command.h"
@@ -167,17 +169,19 @@ int shell_jobs(shell* shell, int argc, char** argv) {
 			if (WIFEXITED(curr->status)) {
 				snprintf(state, BUFFER_STATE_SIZE, "Exited with status %d", WEXITSTATUS(curr->status));
 			} else if (WIFSIGNALED(curr->status)) {
-				snprintf(state, BUFFER_STATE_SIZE, "Terminated with signal %s", strsignal(WTERMSIG(curr->status)));
+				strncpy(state, strsignal(WTERMSIG(curr->status)), BUFFER_STATE_SIZE);
 			} else if (WIFSTOPPED(curr->status)) {
-				snprintf(state, BUFFER_STATE_SIZE, "Stopped on signal %s", strsignal(WSTOPSIG(curr->status)));
+				strncpy(state, strsignal(WSTOPSIG(curr->status)), BUFFER_STATE_SIZE);
 			} else {
 				snprintf(state, BUFFER_STATE_SIZE, "Waiting status %d", curr->status);
 			}
 
-			remove_command_by_pid(shell->jobs, curr->pid);
+			// @todo NEED TO REMOVE COMMANDS
+			// If remove inside the loop it will break
+			// remove_command_by_pid(shell->jobs, curr->pid);
 		}
 
-		printf("[+%d] %-35s  %s\n", curr->pid, state, curr->command);
+		printf("[%d] %-35s  %s\n", curr->pid, state, curr->command);
 
 		curr = curr->next;
 	}
@@ -185,7 +189,25 @@ int shell_jobs(shell* shell, int argc, char** argv) {
 	return 0;
 }
 
-// int shell_fg(shell* shell, int argc, char** argv);
+int shell_fg(shell* shell, int argc, char** argv) {
+	if (kill(shell->jobs->next->pid, SIGCONT) != 0) {
+		printf("Some kill error\n");
+		return 1;
+	}
+
+	int state;
+	int result = waitpid(shell->jobs->next->pid, &state, 0);
+	printf("CONSEGUIU SAIR KRAI  %d %d\n", state, result);
+	if (result == -1 && errno != 10) { 
+		perror("waitpid");
+		exit(EXIT_FAILURE);
+	}
+	update_background_job_status_by_pid(shell->jobs, shell->jobs->next->pid, state);
+
+
+
+	return 0;
+}
 //
 // int shell_time(shell* shell, int argc, char** argv);
 

@@ -26,6 +26,9 @@ typedef struct shell {
 	/**< Indicates if the shell is still running */
 	bool running;
 
+	/**< If it should print the readed command */
+	bool verbose;
+
 	/**< The function that will be executed to show the prompt */
 	prompt_function prompt;
 

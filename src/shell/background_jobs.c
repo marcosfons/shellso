@@ -38,6 +38,17 @@ void update_background_job_status(background_job* job, int status) {
 	job->status = status;
 }
 
+void update_background_job_status_by_pid(background_jobs* jobs, int pid, int status) {
+	background_job* job = jobs->next;
+	while (job->next != NULL && job->pid != pid) {
+		job = job->next;
+	}
+
+	if (job != NULL && job->pid == pid) {
+		job->status = status;
+	}
+}
+
 int remove_command_by_pid(background_jobs* jobs, int pid) {
 	if (jobs->next != NULL && jobs->next->pid == pid) {
 		background_job* next = jobs->next->next;
@@ -65,7 +76,7 @@ int remove_command_by_pid(background_jobs* jobs, int pid) {
 
 void free_background_job(background_job* job) {
 	if (job->next != NULL) {
-		free_background_job(job);
+		free_background_job(job->next);
 	}
 
 	free(job->command);

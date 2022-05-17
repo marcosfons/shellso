@@ -25,7 +25,8 @@ typedef enum {
 
 
 command* command_parse(char* input) {
-	if (input == NULL) {
+	// @todo Redo this conditional. It only works for # in the beginning of line
+	if (input == NULL || input[0] == '#' || input[0] == '\n' || input[0] == '\0') {
 		return NULL;
 	}
 
@@ -63,6 +64,9 @@ command* command_parse(char* input) {
 
 			input += i;
 			i = 0;
+			if (content.string != NULL) {
+				string_free(content);
+			}
 			content = create_empty_string();
 		}
 
@@ -145,6 +149,7 @@ command* command_parse(char* input) {
 	string_free(content);
 
 	if (cmd->argv[0] == NULL) {
+		command_free(cmd);
 		return NULL;
 	}
 
