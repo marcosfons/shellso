@@ -122,6 +122,8 @@ Functions</h2></td></tr>
 <tr class="separator:a43584b96a56b8aa5e737f812e2972611"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a74a9ff948dff90a1a31d9acc7a098d50"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="background__jobs_8c.html#a74a9ff948dff90a1a31d9acc7a098d50">free_background_job</a> (<a class="el" href="structbackground__job.html">background_job</a> *job)</td></tr>
 <tr class="separator:a74a9ff948dff90a1a31d9acc7a098d50"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5be1c3903a84c9a6547398acf941668b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="background__jobs_8c.html#a5be1c3903a84c9a6547398acf941668b">free_background_job_chain</a> (<a class="el" href="structbackground__job.html">background_job</a> *job)</td></tr>
+<tr class="separator:a5be1c3903a84c9a6547398acf941668b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7816e75150f7dca33a4d3b46ecdd9efd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="background__jobs_8c.html#a7816e75150f7dca33a4d3b46ecdd9efd">free_background_jobs</a> (<a class="el" href="structbackground__jobs.html">background_jobs</a> *jobs)</td></tr>
 <tr class="separator:a7816e75150f7dca33a4d3b46ecdd9efd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -227,13 +229,34 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <div class="fragment"><div class="line"><span class="lineno">   77</span>                                              {</div>
-<div class="line"><span class="lineno">   78</span>    <span class="keywordflow">if</span> (job-&gt;<a class="code hl_variable" href="structbackground__job.html#abbb51c5e8ea6e46655330990524499ea">next</a> != NULL) {</div>
-<div class="line"><span class="lineno">   79</span>        <a class="code hl_function" href="background__jobs_8c.html#a74a9ff948dff90a1a31d9acc7a098d50">free_background_job</a>(job-&gt;<a class="code hl_variable" href="structbackground__job.html#abbb51c5e8ea6e46655330990524499ea">next</a>);</div>
-<div class="line"><span class="lineno">   80</span>    }</div>
-<div class="line"><span class="lineno">   81</span> </div>
-<div class="line"><span class="lineno">   82</span>    free(job-&gt;<a class="code hl_variable" href="structbackground__job.html#a40458f93e33df523a3ef10c13823408f">command</a>);</div>
-<div class="line"><span class="lineno">   83</span>    free(job);</div>
-<div class="line"><span class="lineno">   84</span>}</div>
+<div class="line"><span class="lineno">   78</span>    free(job-&gt;<a class="code hl_variable" href="structbackground__job.html#a40458f93e33df523a3ef10c13823408f">command</a>);</div>
+<div class="line"><span class="lineno">   79</span>    free(job);</div>
+<div class="line"><span class="lineno">   80</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a5be1c3903a84c9a6547398acf941668b" name="a5be1c3903a84c9a6547398acf941668b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5be1c3903a84c9a6547398acf941668b">&#9670;&nbsp;</a></span>free_background_job_chain()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void free_background_job_chain </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structbackground__job.html">background_job</a> *&#160;</td>
+          <td class="paramname"><em>job</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="fragment"><div class="line"><span class="lineno">   82</span>                                                    {</div>
+<div class="line"><span class="lineno">   83</span>    <span class="keywordflow">if</span> (job-&gt;<a class="code hl_variable" href="structbackground__job.html#abbb51c5e8ea6e46655330990524499ea">next</a> != NULL) {</div>
+<div class="line"><span class="lineno">   84</span>        <a class="code hl_function" href="background__jobs_8c.html#a74a9ff948dff90a1a31d9acc7a098d50">free_background_job</a>(job-&gt;<a class="code hl_variable" href="structbackground__job.html#abbb51c5e8ea6e46655330990524499ea">next</a>);</div>
+<div class="line"><span class="lineno">   85</span>    }</div>
+<div class="line"><span class="lineno">   86</span> </div>
+<div class="line"><span class="lineno">   87</span>    <a class="code hl_function" href="background__jobs_8c.html#a74a9ff948dff90a1a31d9acc7a098d50">free_background_job</a>(job);</div>
+<div class="line"><span class="lineno">   88</span>}</div>
 <div class="ttc" id="abackground__jobs_8c_html_a74a9ff948dff90a1a31d9acc7a098d50"><div class="ttname"><a href="background__jobs_8c.html#a74a9ff948dff90a1a31d9acc7a098d50">free_background_job</a></div><div class="ttdeci">void free_background_job(background_job *job)</div><div class="ttdef"><b>Definition:</b> background_jobs.c:77</div></div>
 </div><!-- fragment -->
 </div>
@@ -253,13 +276,14 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<div class="fragment"><div class="line"><span class="lineno">   86</span>                                                 {</div>
-<div class="line"><span class="lineno">   87</span>    <span class="keywordflow">if</span> (jobs-&gt;<a class="code hl_variable" href="structbackground__jobs.html#a32cca3c0a8ad11ee09f2d5c8e90c8ea1">next</a> != NULL) {</div>
-<div class="line"><span class="lineno">   88</span>        <a class="code hl_function" href="background__jobs_8c.html#a74a9ff948dff90a1a31d9acc7a098d50">free_background_job</a>(jobs-&gt;<a class="code hl_variable" href="structbackground__jobs.html#a32cca3c0a8ad11ee09f2d5c8e90c8ea1">next</a>);</div>
-<div class="line"><span class="lineno">   89</span>    }</div>
-<div class="line"><span class="lineno">   90</span> </div>
-<div class="line"><span class="lineno">   91</span>    free(jobs);</div>
-<div class="line"><span class="lineno">   92</span>}</div>
+<div class="fragment"><div class="line"><span class="lineno">   90</span>                                                 {</div>
+<div class="line"><span class="lineno">   91</span>    <span class="keywordflow">if</span> (jobs-&gt;<a class="code hl_variable" href="structbackground__jobs.html#a32cca3c0a8ad11ee09f2d5c8e90c8ea1">next</a> != NULL) {</div>
+<div class="line"><span class="lineno">   92</span>        <a class="code hl_function" href="background__jobs_8c.html#a5be1c3903a84c9a6547398acf941668b">free_background_job_chain</a>(jobs-&gt;<a class="code hl_variable" href="structbackground__jobs.html#a32cca3c0a8ad11ee09f2d5c8e90c8ea1">next</a>);</div>
+<div class="line"><span class="lineno">   93</span>    }</div>
+<div class="line"><span class="lineno">   94</span> </div>
+<div class="line"><span class="lineno">   95</span>    free(jobs);</div>
+<div class="line"><span class="lineno">   96</span>}</div>
+<div class="ttc" id="abackground__jobs_8c_html_a5be1c3903a84c9a6547398acf941668b"><div class="ttname"><a href="background__jobs_8c.html#a5be1c3903a84c9a6547398acf941668b">free_background_job_chain</a></div><div class="ttdeci">void free_background_job_chain(background_job *job)</div><div class="ttdef"><b>Definition:</b> background_jobs.c:82</div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -397,7 +421,7 @@ Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_b2c05b11dbc691bba5c0cb93063c379f.html">shell</a></li><li class="navelem"><a class="el" href="background__jobs_8c.html">background_jobs.c</a></li>
-    <li class="footer">Generated on Tue May 17 2022 16:58:22 for shellso by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.4 </li>
+    <li class="footer">Generated on Tue May 17 2022 22:38:00 for shellso by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.4 </li>
   </ul>
 </div>
 <!-- BEGIN doxygen awesome darkmode toggle -->
