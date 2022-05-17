@@ -132,26 +132,28 @@ Macros</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a4afd3f9736e8a5dcbcfa94a06cd06935"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="shell_8c.html#a4afd3f9736e8a5dcbcfa94a06cd06935">sigintHandler</a> (int sig_num)</td></tr>
-<tr class="separator:a4afd3f9736e8a5dcbcfa94a06cd06935"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a54f524d2c173fcd2915162cf3197fabb"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="shell_8c.html#a54f524d2c173fcd2915162cf3197fabb">sigchldHandler</a> (int sig_num)</td></tr>
-<tr class="separator:a54f524d2c173fcd2915162cf3197fabb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abe49209a75815c91395459c8ccd971d9"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="shell_8c.html#abe49209a75815c91395459c8ccd971d9">signint_handler</a> (int sig_num)</td></tr>
+<tr class="separator:abe49209a75815c91395459c8ccd971d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa1278db3512cb8fe85e70ab6aab9062b"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="shell_8c.html#aa1278db3512cb8fe85e70ab6aab9062b">sigstop_handler</a> (int sig_num)</td></tr>
+<tr class="separator:aa1278db3512cb8fe85e70ab6aab9062b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a76199fe33026a9f049f0b7942f6f3ec8"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="shell_8c.html#a76199fe33026a9f049f0b7942f6f3ec8">sigchld_handler</a> (int sig_num)</td></tr>
+<tr class="separator:a76199fe33026a9f049f0b7942f6f3ec8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2b834ce5054e40897f3ee2009755e79a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structshell.html">shell</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="shell_8c.html#a2b834ce5054e40897f3ee2009755e79a">create_shell</a> ()</td></tr>
 <tr class="memdesc:a2b834ce5054e40897f3ee2009755e79a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a shell.  <a href="shell_8c.html#a2b834ce5054e40897f3ee2009755e79a">More...</a><br /></td></tr>
 <tr class="separator:a2b834ce5054e40897f3ee2009755e79a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7e2f62f42476df94c1451d10521a6f01"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="shell_8c.html#a7e2f62f42476df94c1451d10521a6f01">print_command_error</a> (char *<a class="el" href="structcommand.html">command</a>, char *error)</td></tr>
 <tr class="separator:a7e2f62f42476df94c1451d10521a6f01"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af7a6cb96348d64948695a697a97b941a"><td class="memItemLeft" align="right" valign="top">static char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="shell_8c.html#af7a6cb96348d64948695a697a97b941a">read_input</a> ()</td></tr>
-<tr class="separator:af7a6cb96348d64948695a697a97b941a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a174fabc79fb68c5ea07db71250668d55"><td class="memItemLeft" align="right" valign="top">static char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="shell_8c.html#a174fabc79fb68c5ea07db71250668d55">read_input_from_file</a> (FILE *file)</td></tr>
+<tr class="separator:a174fabc79fb68c5ea07db71250668d55"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1fe1d28c09c80c4d512b3a9751ec8b15"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="shell_8c.html#a1fe1d28c09c80c4d512b3a9751ec8b15">expand_command_with_alias</a> (<a class="el" href="structcommand.html">command</a> *cmd, <a class="el" href="structalias.html">alias</a> <a class="el" href="structalias.html">alias</a>)</td></tr>
 <tr class="memdesc:a1fe1d28c09c80c4d512b3a9751ec8b15"><td class="mdescLeft">&#160;</td><td class="mdescRight">Expand the command to match the given alias.  <a href="shell_8c.html#a1fe1d28c09c80c4d512b3a9751ec8b15">More...</a><br /></td></tr>
 <tr class="separator:a1fe1d28c09c80c4d512b3a9751ec8b15"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4f404a0dc5d0e0f0977739ddb5d78a67"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="shell_8c.html#a4f404a0dc5d0e0f0977739ddb5d78a67">run_from_file</a> (<a class="el" href="structshell.html">shell</a> *<a class="el" href="structshell.html">shell</a>, FILE *fp)</td></tr>
-<tr class="memdesc:a4f404a0dc5d0e0f0977739ddb5d78a67"><td class="mdescLeft">&#160;</td><td class="mdescRight">Run commands from the given file.  <a href="shell_8c.html#a4f404a0dc5d0e0f0977739ddb5d78a67">More...</a><br /></td></tr>
-<tr class="separator:a4f404a0dc5d0e0f0977739ddb5d78a67"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adda30003bb48504d2a454839de860e8f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="shell_8c.html#adda30003bb48504d2a454839de860e8f">run_from_string</a> (<a class="el" href="structshell.html">shell</a> *<a class="el" href="structshell.html">shell</a>, char *input)</td></tr>
 <tr class="memdesc:adda30003bb48504d2a454839de860e8f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Run command from a single input string.  <a href="shell_8c.html#adda30003bb48504d2a454839de860e8f">More...</a><br /></td></tr>
 <tr class="separator:adda30003bb48504d2a454839de860e8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acc0ea92c78f8c568184eb9b3fb91c17e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="shell_8c.html#acc0ea92c78f8c568184eb9b3fb91c17e">run_from_file</a> (<a class="el" href="structshell.html">shell</a> *<a class="el" href="structshell.html">shell</a>, FILE *file)</td></tr>
+<tr class="memdesc:acc0ea92c78f8c568184eb9b3fb91c17e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Run commands from the given file.  <a href="shell_8c.html#acc0ea92c78f8c568184eb9b3fb91c17e">More...</a><br /></td></tr>
+<tr class="separator:acc0ea92c78f8c568184eb9b3fb91c17e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a815cee789596e1ac246bf872b1e54d16"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="shell_8c.html#a815cee789596e1ac246bf872b1e54d16">run_interactive</a> (<a class="el" href="structshell.html">shell</a> *<a class="el" href="structshell.html">shell</a>)</td></tr>
 <tr class="memdesc:a815cee789596e1ac246bf872b1e54d16"><td class="mdescLeft">&#160;</td><td class="mdescRight">Run the shell interactively.  <a href="shell_8c.html#a815cee789596e1ac246bf872b1e54d16">More...</a><br /></td></tr>
 <tr class="separator:a815cee789596e1ac246bf872b1e54d16"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -252,12 +254,12 @@ Variables</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<div class="fragment"><div class="line"><span class="lineno">  178</span>                          {</div>
-<div class="line"><span class="lineno">  179</span>    <span class="keywordtype">int</span> res = close(fd);</div>
-<div class="line"><span class="lineno">  180</span>    <span class="keywordflow">if</span> (res == -1) {</div>
-<div class="line"><span class="lineno">  181</span>        perror(<span class="stringliteral">&quot;CLOSE: &quot;</span>);</div>
-<div class="line"><span class="lineno">  182</span>    }</div>
-<div class="line"><span class="lineno">  183</span>}</div>
+<div class="fragment"><div class="line"><span class="lineno">  192</span>                          {</div>
+<div class="line"><span class="lineno">  193</span>    <span class="keywordtype">int</span> res = close(fd);</div>
+<div class="line"><span class="lineno">  194</span>    <span class="keywordflow">if</span> (res == -1) {</div>
+<div class="line"><span class="lineno">  195</span>        perror(<span class="stringliteral">&quot;CLOSE: &quot;</span>);</div>
+<div class="line"><span class="lineno">  196</span>    }</div>
+<div class="line"><span class="lineno">  197</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -277,60 +279,63 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 <p >Only one shell can be running at the same time. It's unsafe to run more than one. Problems: Signal handling, reallocation of memory</p>
 <dl class="section return"><dt>Returns</dt><dd>Pointer to newly created shell </dd></dl>
-<div class="fragment"><div class="line"><span class="lineno">   56</span>                      {</div>
-<div class="line"><span class="lineno">   57</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="shell_8c.html#aa7b01df7bc1fb08986302c7e9fd2c460">running_shell</a> != NULL &amp;&amp; <a class="code hl_variable" href="shell_8c.html#aa7b01df7bc1fb08986302c7e9fd2c460">running_shell</a>-&gt;<a class="code hl_variable" href="structshell.html#a4c8e036de0f60e4555041dbc713ae534">running</a>) {  </div>
-<div class="line"><span class="lineno">   58</span>        printf(<span class="stringliteral">&quot;Only one shell can run at the same time. Stop the running shell\n&quot;</span>);</div>
-<div class="line"><span class="lineno">   59</span>        <span class="keywordflow">return</span> NULL;</div>
-<div class="line"><span class="lineno">   60</span>    }</div>
-<div class="line"><span class="lineno">   61</span> </div>
-<div class="line"><span class="lineno">   62</span>    <a class="code hl_variable" href="shell_8c.html#aa7b01df7bc1fb08986302c7e9fd2c460">running_shell</a> = malloc(<span class="keyword">sizeof</span>(<a class="code hl_struct" href="structshell.html">shell</a>));</div>
-<div class="line"><span class="lineno">   63</span> </div>
-<div class="line"><span class="lineno">   64</span>    <a class="code hl_variable" href="shell_8c.html#aa7b01df7bc1fb08986302c7e9fd2c460">running_shell</a>-&gt;<a class="code hl_variable" href="structshell.html#a4c8e036de0f60e4555041dbc713ae534">running</a> = <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">   65</span>    <a class="code hl_variable" href="shell_8c.html#aa7b01df7bc1fb08986302c7e9fd2c460">running_shell</a>-&gt;<a class="code hl_variable" href="structshell.html#a78aaca8ba01feff5d6c386e773cacd8f">prompt</a> = &amp;<a class="code hl_function" href="prompts_8c.html#a8ce9a95e88542227e84a78309ceb1a1f">normal_shell_prompt</a>;</div>
-<div class="line"><span class="lineno">   66</span>    <a class="code hl_variable" href="shell_8c.html#aa7b01df7bc1fb08986302c7e9fd2c460">running_shell</a>-&gt;<a class="code hl_variable" href="structshell.html#ae47c119657ffd93e4ce30d175570c2cc">aliasses</a> = <a class="code hl_function" href="alias_8c.html#add4336fa5bea1cf3cdd57c3435264a8b">create_aliasses</a>(<a class="code hl_define" href="shell_8c.html#a299b2b150aea1b3365fff9e889714581">ARBITRARY_ALIASSES_HASH_SIZE</a>);</div>
-<div class="line"><span class="lineno">   67</span>    <a class="code hl_variable" href="shell_8c.html#aa7b01df7bc1fb08986302c7e9fd2c460">running_shell</a>-&gt;<a class="code hl_variable" href="structshell.html#a6904d0f9a4c35874e4701cbcb5e6994f">jobs</a> = <a class="code hl_function" href="background__jobs_8c.html#a4597adb9fe554e7b314c966736b50758">create_background_jobs</a>(NULL);</div>
-<div class="line"><span class="lineno">   68</span>    <a class="code hl_variable" href="shell_8c.html#aa7b01df7bc1fb08986302c7e9fd2c460">running_shell</a>-&gt;<a class="code hl_variable" href="structshell.html#a12c7420c8b3f8f7e6bbeaa27b0bc343c">builtin_commands</a> = <a class="code hl_function" href="builtin__command_8c.html#a55a28d6a2b1d4cae01c418160afa5680">create_shell_builtin_commands</a>(<a class="code hl_define" href="shell_8c.html#abcd7668682a633cc83da6f847445465c">ARBITRARY_BUILTIN_COMMANDS_HASH_SIZE</a>);</div>
-<div class="line"><span class="lineno">   69</span> </div>
-<div class="line"><span class="lineno">   70</span>    <a class="code hl_function" href="builtin__command_8c.html#a7437523c5afcac7cd21375d46f0205db">add_builtin_command</a>(<a class="code hl_variable" href="shell_8c.html#aa7b01df7bc1fb08986302c7e9fd2c460">running_shell</a>-&gt;<a class="code hl_variable" href="structshell.html#a12c7420c8b3f8f7e6bbeaa27b0bc343c">builtin_commands</a>, <span class="stringliteral">&quot;cd&quot;</span>, &amp;<a class="code hl_function" href="builtin__command_8c.html#ac00b27d773a42fdd248778ac29fab8e1">shell_cd</a>);</div>
-<div class="line"><span class="lineno">   71</span>    <span class="comment">// add_builtin_command(running_shell-&gt;builtin_commands, &quot;fg&quot;, &amp;shell_fg);</span></div>
-<div class="line"><span class="lineno">   72</span>    <span class="comment">// add_builtin_command(running_shell-&gt;builtin_commands, &quot;help&quot;, &amp;shell_help);</span></div>
-<div class="line"><span class="lineno">   73</span>    <a class="code hl_function" href="builtin__command_8c.html#a7437523c5afcac7cd21375d46f0205db">add_builtin_command</a>(<a class="code hl_variable" href="shell_8c.html#aa7b01df7bc1fb08986302c7e9fd2c460">running_shell</a>-&gt;<a class="code hl_variable" href="structshell.html#a12c7420c8b3f8f7e6bbeaa27b0bc343c">builtin_commands</a>, <span class="stringliteral">&quot;jobs&quot;</span>, &amp;<a class="code hl_function" href="builtin__command_8c.html#aac0778f3d2d8dd4f54e3337f331d5572">shell_jobs</a>);</div>
-<div class="line"><span class="lineno">   74</span>    <a class="code hl_function" href="builtin__command_8c.html#a7437523c5afcac7cd21375d46f0205db">add_builtin_command</a>(<a class="code hl_variable" href="shell_8c.html#aa7b01df7bc1fb08986302c7e9fd2c460">running_shell</a>-&gt;<a class="code hl_variable" href="structshell.html#a12c7420c8b3f8f7e6bbeaa27b0bc343c">builtin_commands</a>, <span class="stringliteral">&quot;exit&quot;</span>, &amp;<a class="code hl_function" href="builtin__command_8c.html#adc4599a1416f574a9f9692ecff9cef59">shell_exit</a>);</div>
-<div class="line"><span class="lineno">   75</span>    <a class="code hl_function" href="builtin__command_8c.html#a7437523c5afcac7cd21375d46f0205db">add_builtin_command</a>(<a class="code hl_variable" href="shell_8c.html#aa7b01df7bc1fb08986302c7e9fd2c460">running_shell</a>-&gt;<a class="code hl_variable" href="structshell.html#a12c7420c8b3f8f7e6bbeaa27b0bc343c">builtin_commands</a>, <span class="stringliteral">&quot;fim&quot;</span>, &amp;<a class="code hl_function" href="builtin__command_8c.html#adc4599a1416f574a9f9692ecff9cef59">shell_exit</a>);</div>
-<div class="line"><span class="lineno">   76</span>    <span class="comment">// add_builtin_command(running_shell-&gt;builtin_commands, &quot;time&quot;, &amp;shell_time);</span></div>
-<div class="line"><span class="lineno">   77</span>    <a class="code hl_function" href="builtin__command_8c.html#a7437523c5afcac7cd21375d46f0205db">add_builtin_command</a>(<a class="code hl_variable" href="shell_8c.html#aa7b01df7bc1fb08986302c7e9fd2c460">running_shell</a>-&gt;<a class="code hl_variable" href="structshell.html#a12c7420c8b3f8f7e6bbeaa27b0bc343c">builtin_commands</a>, <span class="stringliteral">&quot;alias&quot;</span>, &amp;<a class="code hl_function" href="builtin__command_8c.html#acdb9523745e0d872ee43c3648a9899c3">shell_alias</a>);</div>
-<div class="line"><span class="lineno">   78</span>    </div>
-<div class="line"><span class="lineno">   79</span>    <span class="keywordtype">char</span>** ls = malloc(2 * <span class="keyword">sizeof</span>(<span class="keywordtype">char</span>*));</div>
-<div class="line"><span class="lineno">   80</span>    ls[0] = strdup(<span class="stringliteral">&quot;ls&quot;</span>);</div>
-<div class="line"><span class="lineno">   81</span>    ls[1] = strdup(<span class="stringliteral">&quot;--color=auto&quot;</span>);</div>
-<div class="line"><span class="lineno">   82</span> </div>
-<div class="line"><span class="lineno">   83</span>    <span class="keywordtype">char</span>** grep = malloc(2 * <span class="keyword">sizeof</span>(<span class="keywordtype">char</span>*));</div>
-<div class="line"><span class="lineno">   84</span>    grep[0] = strdup(<span class="stringliteral">&quot;grep&quot;</span>);</div>
-<div class="line"><span class="lineno">   85</span>    grep[1] = strdup(<span class="stringliteral">&quot;--color=auto&quot;</span>);</div>
-<div class="line"><span class="lineno">   86</span>    <a class="code hl_function" href="alias_8c.html#a9ae378185154ef0e6d09815fbb9ac2a7">add_alias</a>(<a class="code hl_variable" href="shell_8c.html#aa7b01df7bc1fb08986302c7e9fd2c460">running_shell</a>-&gt;<a class="code hl_variable" href="structshell.html#ae47c119657ffd93e4ce30d175570c2cc">aliasses</a>, ls[0], 2, ls);</div>
-<div class="line"><span class="lineno">   87</span>    <a class="code hl_function" href="alias_8c.html#a9ae378185154ef0e6d09815fbb9ac2a7">add_alias</a>(<a class="code hl_variable" href="shell_8c.html#aa7b01df7bc1fb08986302c7e9fd2c460">running_shell</a>-&gt;<a class="code hl_variable" href="structshell.html#ae47c119657ffd93e4ce30d175570c2cc">aliasses</a>, grep[0], 2, grep);</div>
+<div class="fragment"><div class="line"><span class="lineno">   61</span>                      {</div>
+<div class="line"><span class="lineno">   62</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="shell_8c.html#aa7b01df7bc1fb08986302c7e9fd2c460">running_shell</a> != NULL &amp;&amp; <a class="code hl_variable" href="shell_8c.html#aa7b01df7bc1fb08986302c7e9fd2c460">running_shell</a>-&gt;<a class="code hl_variable" href="structshell.html#a4c8e036de0f60e4555041dbc713ae534">running</a>) {  </div>
+<div class="line"><span class="lineno">   63</span>        printf(<span class="stringliteral">&quot;Only one shell can run at the same time. Stop the running shell\n&quot;</span>);</div>
+<div class="line"><span class="lineno">   64</span>        <span class="keywordflow">return</span> NULL;</div>
+<div class="line"><span class="lineno">   65</span>    }</div>
+<div class="line"><span class="lineno">   66</span> </div>
+<div class="line"><span class="lineno">   67</span>    <a class="code hl_variable" href="shell_8c.html#aa7b01df7bc1fb08986302c7e9fd2c460">running_shell</a> = malloc(<span class="keyword">sizeof</span>(<a class="code hl_struct" href="structshell.html">shell</a>));</div>
+<div class="line"><span class="lineno">   68</span> </div>
+<div class="line"><span class="lineno">   69</span>    <a class="code hl_variable" href="shell_8c.html#aa7b01df7bc1fb08986302c7e9fd2c460">running_shell</a>-&gt;<a class="code hl_variable" href="structshell.html#a4c8e036de0f60e4555041dbc713ae534">running</a> = <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">   70</span>    <a class="code hl_variable" href="shell_8c.html#aa7b01df7bc1fb08986302c7e9fd2c460">running_shell</a>-&gt;<a class="code hl_variable" href="structshell.html#a9b58237c688ac5d8a98b72ff970ccfd5">verbose</a> = <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">   71</span>    <a class="code hl_variable" href="shell_8c.html#aa7b01df7bc1fb08986302c7e9fd2c460">running_shell</a>-&gt;<a class="code hl_variable" href="structshell.html#a78aaca8ba01feff5d6c386e773cacd8f">prompt</a> = &amp;<a class="code hl_function" href="prompts_8c.html#a8ce9a95e88542227e84a78309ceb1a1f">normal_shell_prompt</a>;</div>
+<div class="line"><span class="lineno">   72</span>    <a class="code hl_variable" href="shell_8c.html#aa7b01df7bc1fb08986302c7e9fd2c460">running_shell</a>-&gt;<a class="code hl_variable" href="structshell.html#ae47c119657ffd93e4ce30d175570c2cc">aliasses</a> = <a class="code hl_function" href="alias_8c.html#add4336fa5bea1cf3cdd57c3435264a8b">create_aliasses</a>(<a class="code hl_define" href="shell_8c.html#a299b2b150aea1b3365fff9e889714581">ARBITRARY_ALIASSES_HASH_SIZE</a>);</div>
+<div class="line"><span class="lineno">   73</span>    <a class="code hl_variable" href="shell_8c.html#aa7b01df7bc1fb08986302c7e9fd2c460">running_shell</a>-&gt;<a class="code hl_variable" href="structshell.html#a6904d0f9a4c35874e4701cbcb5e6994f">jobs</a> = <a class="code hl_function" href="background__jobs_8c.html#a4597adb9fe554e7b314c966736b50758">create_background_jobs</a>(NULL);</div>
+<div class="line"><span class="lineno">   74</span>    <a class="code hl_variable" href="shell_8c.html#aa7b01df7bc1fb08986302c7e9fd2c460">running_shell</a>-&gt;<a class="code hl_variable" href="structshell.html#a12c7420c8b3f8f7e6bbeaa27b0bc343c">builtin_commands</a> = <a class="code hl_function" href="builtin__command_8c.html#a55a28d6a2b1d4cae01c418160afa5680">create_shell_builtin_commands</a>(<a class="code hl_define" href="shell_8c.html#abcd7668682a633cc83da6f847445465c">ARBITRARY_BUILTIN_COMMANDS_HASH_SIZE</a>);</div>
+<div class="line"><span class="lineno">   75</span> </div>
+<div class="line"><span class="lineno">   76</span>    <a class="code hl_function" href="builtin__command_8c.html#a7437523c5afcac7cd21375d46f0205db">add_builtin_command</a>(<a class="code hl_variable" href="shell_8c.html#aa7b01df7bc1fb08986302c7e9fd2c460">running_shell</a>-&gt;<a class="code hl_variable" href="structshell.html#a12c7420c8b3f8f7e6bbeaa27b0bc343c">builtin_commands</a>, <span class="stringliteral">&quot;cd&quot;</span>, &amp;<a class="code hl_function" href="builtin__command_8c.html#ac00b27d773a42fdd248778ac29fab8e1">shell_cd</a>);</div>
+<div class="line"><span class="lineno">   77</span>    <a class="code hl_function" href="builtin__command_8c.html#a7437523c5afcac7cd21375d46f0205db">add_builtin_command</a>(<a class="code hl_variable" href="shell_8c.html#aa7b01df7bc1fb08986302c7e9fd2c460">running_shell</a>-&gt;<a class="code hl_variable" href="structshell.html#a12c7420c8b3f8f7e6bbeaa27b0bc343c">builtin_commands</a>, <span class="stringliteral">&quot;fg&quot;</span>, &amp;<a class="code hl_function" href="builtin__command_8c.html#a5cd97db3fb608785229e4348e65aea77">shell_fg</a>);</div>
+<div class="line"><span class="lineno">   78</span>    <span class="comment">// add_builtin_command(running_shell-&gt;builtin_commands, &quot;help&quot;, &amp;shell_help);</span></div>
+<div class="line"><span class="lineno">   79</span>    <a class="code hl_function" href="builtin__command_8c.html#a7437523c5afcac7cd21375d46f0205db">add_builtin_command</a>(<a class="code hl_variable" href="shell_8c.html#aa7b01df7bc1fb08986302c7e9fd2c460">running_shell</a>-&gt;<a class="code hl_variable" href="structshell.html#a12c7420c8b3f8f7e6bbeaa27b0bc343c">builtin_commands</a>, <span class="stringliteral">&quot;jobs&quot;</span>, &amp;<a class="code hl_function" href="builtin__command_8c.html#aac0778f3d2d8dd4f54e3337f331d5572">shell_jobs</a>);</div>
+<div class="line"><span class="lineno">   80</span>    <a class="code hl_function" href="builtin__command_8c.html#a7437523c5afcac7cd21375d46f0205db">add_builtin_command</a>(<a class="code hl_variable" href="shell_8c.html#aa7b01df7bc1fb08986302c7e9fd2c460">running_shell</a>-&gt;<a class="code hl_variable" href="structshell.html#a12c7420c8b3f8f7e6bbeaa27b0bc343c">builtin_commands</a>, <span class="stringliteral">&quot;exit&quot;</span>, &amp;<a class="code hl_function" href="builtin__command_8c.html#adc4599a1416f574a9f9692ecff9cef59">shell_exit</a>);</div>
+<div class="line"><span class="lineno">   81</span>    <a class="code hl_function" href="builtin__command_8c.html#a7437523c5afcac7cd21375d46f0205db">add_builtin_command</a>(<a class="code hl_variable" href="shell_8c.html#aa7b01df7bc1fb08986302c7e9fd2c460">running_shell</a>-&gt;<a class="code hl_variable" href="structshell.html#a12c7420c8b3f8f7e6bbeaa27b0bc343c">builtin_commands</a>, <span class="stringliteral">&quot;fim&quot;</span>, &amp;<a class="code hl_function" href="builtin__command_8c.html#adc4599a1416f574a9f9692ecff9cef59">shell_exit</a>);</div>
+<div class="line"><span class="lineno">   82</span>    <span class="comment">// add_builtin_command(running_shell-&gt;builtin_commands, &quot;time&quot;, &amp;shell_time);</span></div>
+<div class="line"><span class="lineno">   83</span>    <a class="code hl_function" href="builtin__command_8c.html#a7437523c5afcac7cd21375d46f0205db">add_builtin_command</a>(<a class="code hl_variable" href="shell_8c.html#aa7b01df7bc1fb08986302c7e9fd2c460">running_shell</a>-&gt;<a class="code hl_variable" href="structshell.html#a12c7420c8b3f8f7e6bbeaa27b0bc343c">builtin_commands</a>, <span class="stringliteral">&quot;alias&quot;</span>, &amp;<a class="code hl_function" href="builtin__command_8c.html#acdb9523745e0d872ee43c3648a9899c3">shell_alias</a>);</div>
+<div class="line"><span class="lineno">   84</span>    </div>
+<div class="line"><span class="lineno">   85</span>    <span class="keywordtype">char</span>** ls = malloc(2 * <span class="keyword">sizeof</span>(<span class="keywordtype">char</span>*));</div>
+<div class="line"><span class="lineno">   86</span>    ls[0] = strdup(<span class="stringliteral">&quot;ls&quot;</span>);</div>
+<div class="line"><span class="lineno">   87</span>    ls[1] = strdup(<span class="stringliteral">&quot;--color=auto&quot;</span>);</div>
 <div class="line"><span class="lineno">   88</span> </div>
-<div class="line"><span class="lineno">   89</span>    <span class="keywordflow">return</span> <a class="code hl_variable" href="shell_8c.html#aa7b01df7bc1fb08986302c7e9fd2c460">running_shell</a>;</div>
-<div class="line"><span class="lineno">   90</span>}</div>
+<div class="line"><span class="lineno">   89</span>    <span class="keywordtype">char</span>** grep = malloc(2 * <span class="keyword">sizeof</span>(<span class="keywordtype">char</span>*));</div>
+<div class="line"><span class="lineno">   90</span>    grep[0] = strdup(<span class="stringliteral">&quot;grep&quot;</span>);</div>
+<div class="line"><span class="lineno">   91</span>    grep[1] = strdup(<span class="stringliteral">&quot;--color=auto&quot;</span>);</div>
+<div class="line"><span class="lineno">   92</span>    <a class="code hl_function" href="alias_8c.html#a9ae378185154ef0e6d09815fbb9ac2a7">add_alias</a>(<a class="code hl_variable" href="shell_8c.html#aa7b01df7bc1fb08986302c7e9fd2c460">running_shell</a>-&gt;<a class="code hl_variable" href="structshell.html#ae47c119657ffd93e4ce30d175570c2cc">aliasses</a>, ls[0], 2, ls);</div>
+<div class="line"><span class="lineno">   93</span>    <a class="code hl_function" href="alias_8c.html#a9ae378185154ef0e6d09815fbb9ac2a7">add_alias</a>(<a class="code hl_variable" href="shell_8c.html#aa7b01df7bc1fb08986302c7e9fd2c460">running_shell</a>-&gt;<a class="code hl_variable" href="structshell.html#ae47c119657ffd93e4ce30d175570c2cc">aliasses</a>, grep[0], 2, grep);</div>
+<div class="line"><span class="lineno">   94</span> </div>
+<div class="line"><span class="lineno">   95</span>    <span class="keywordflow">return</span> <a class="code hl_variable" href="shell_8c.html#aa7b01df7bc1fb08986302c7e9fd2c460">running_shell</a>;</div>
+<div class="line"><span class="lineno">   96</span>}</div>
 <div class="ttc" id="aalias_8c_html_a9ae378185154ef0e6d09815fbb9ac2a7"><div class="ttname"><a href="alias_8c.html#a9ae378185154ef0e6d09815fbb9ac2a7">add_alias</a></div><div class="ttdeci">void add_alias(aliasses *aliasses, char *key, int argc, char **argv)</div><div class="ttdef"><b>Definition:</b> alias.c:20</div></div>
 <div class="ttc" id="aalias_8c_html_add4336fa5bea1cf3cdd57c3435264a8b"><div class="ttname"><a href="alias_8c.html#add4336fa5bea1cf3cdd57c3435264a8b">create_aliasses</a></div><div class="ttdeci">aliasses * create_aliasses(int size)</div><div class="ttdef"><b>Definition:</b> alias.c:10</div></div>
 <div class="ttc" id="abackground__jobs_8c_html_a4597adb9fe554e7b314c966736b50758"><div class="ttname"><a href="background__jobs_8c.html#a4597adb9fe554e7b314c966736b50758">create_background_jobs</a></div><div class="ttdeci">background_jobs * create_background_jobs()</div><div class="ttdef"><b>Definition:</b> background_jobs.c:10</div></div>
-<div class="ttc" id="abuiltin__command_8c_html_a55a28d6a2b1d4cae01c418160afa5680"><div class="ttname"><a href="builtin__command_8c.html#a55a28d6a2b1d4cae01c418160afa5680">create_shell_builtin_commands</a></div><div class="ttdeci">shell_builtin_commands * create_shell_builtin_commands(int size)</div><div class="ttdoc">Create the hash map of builtin commands.</div><div class="ttdef"><b>Definition:</b> builtin_command.c:21</div></div>
-<div class="ttc" id="abuiltin__command_8c_html_a7437523c5afcac7cd21375d46f0205db"><div class="ttname"><a href="builtin__command_8c.html#a7437523c5afcac7cd21375d46f0205db">add_builtin_command</a></div><div class="ttdeci">void add_builtin_command(shell_builtin_commands *commands, char *key, builtin_command_function func)</div><div class="ttdoc">Adds one builtin command using the key to hash it.</div><div class="ttdef"><b>Definition:</b> builtin_command.c:45</div></div>
-<div class="ttc" id="abuiltin__command_8c_html_aac0778f3d2d8dd4f54e3337f331d5572"><div class="ttname"><a href="builtin__command_8c.html#aac0778f3d2d8dd4f54e3337f331d5572">shell_jobs</a></div><div class="ttdeci">int shell_jobs(shell *shell, int argc, char **argv)</div><div class="ttdoc">List all background jobs running in the shell.</div><div class="ttdef"><b>Definition:</b> builtin_command.c:157</div></div>
-<div class="ttc" id="abuiltin__command_8c_html_ac00b27d773a42fdd248778ac29fab8e1"><div class="ttname"><a href="builtin__command_8c.html#ac00b27d773a42fdd248778ac29fab8e1">shell_cd</a></div><div class="ttdeci">int shell_cd(shell *shell, int argc, char **argv)</div><div class="ttdoc">Change directory builtin function.</div><div class="ttdef"><b>Definition:</b> builtin_command.c:121</div></div>
-<div class="ttc" id="abuiltin__command_8c_html_acdb9523745e0d872ee43c3648a9899c3"><div class="ttname"><a href="builtin__command_8c.html#acdb9523745e0d872ee43c3648a9899c3">shell_alias</a></div><div class="ttdeci">int shell_alias(shell *shell, int argc, char **argv)</div><div class="ttdoc">Lists all the registered aliasses.</div><div class="ttdef"><b>Definition:</b> builtin_command.c:141</div></div>
-<div class="ttc" id="abuiltin__command_8c_html_adc4599a1416f574a9f9692ecff9cef59"><div class="ttname"><a href="builtin__command_8c.html#adc4599a1416f574a9f9692ecff9cef59">shell_exit</a></div><div class="ttdeci">int shell_exit(shell *shell, int argc, char **argv)</div><div class="ttdoc">Exit from the shell.</div><div class="ttdef"><b>Definition:</b> builtin_command.c:135</div></div>
+<div class="ttc" id="abuiltin__command_8c_html_a55a28d6a2b1d4cae01c418160afa5680"><div class="ttname"><a href="builtin__command_8c.html#a55a28d6a2b1d4cae01c418160afa5680">create_shell_builtin_commands</a></div><div class="ttdeci">shell_builtin_commands * create_shell_builtin_commands(int size)</div><div class="ttdoc">Create the hash map of builtin commands.</div><div class="ttdef"><b>Definition:</b> builtin_command.c:23</div></div>
+<div class="ttc" id="abuiltin__command_8c_html_a5cd97db3fb608785229e4348e65aea77"><div class="ttname"><a href="builtin__command_8c.html#a5cd97db3fb608785229e4348e65aea77">shell_fg</a></div><div class="ttdeci">int shell_fg(shell *shell, int argc, char **argv)</div><div class="ttdoc">Try to bring one background process to foreground.</div><div class="ttdef"><b>Definition:</b> builtin_command.c:192</div></div>
+<div class="ttc" id="abuiltin__command_8c_html_a7437523c5afcac7cd21375d46f0205db"><div class="ttname"><a href="builtin__command_8c.html#a7437523c5afcac7cd21375d46f0205db">add_builtin_command</a></div><div class="ttdeci">void add_builtin_command(shell_builtin_commands *commands, char *key, builtin_command_function func)</div><div class="ttdoc">Adds one builtin command using the key to hash it.</div><div class="ttdef"><b>Definition:</b> builtin_command.c:47</div></div>
+<div class="ttc" id="abuiltin__command_8c_html_aac0778f3d2d8dd4f54e3337f331d5572"><div class="ttname"><a href="builtin__command_8c.html#aac0778f3d2d8dd4f54e3337f331d5572">shell_jobs</a></div><div class="ttdeci">int shell_jobs(shell *shell, int argc, char **argv)</div><div class="ttdoc">List all background jobs running in the shell.</div><div class="ttdef"><b>Definition:</b> builtin_command.c:159</div></div>
+<div class="ttc" id="abuiltin__command_8c_html_ac00b27d773a42fdd248778ac29fab8e1"><div class="ttname"><a href="builtin__command_8c.html#ac00b27d773a42fdd248778ac29fab8e1">shell_cd</a></div><div class="ttdeci">int shell_cd(shell *shell, int argc, char **argv)</div><div class="ttdoc">Change directory builtin function.</div><div class="ttdef"><b>Definition:</b> builtin_command.c:123</div></div>
+<div class="ttc" id="abuiltin__command_8c_html_acdb9523745e0d872ee43c3648a9899c3"><div class="ttname"><a href="builtin__command_8c.html#acdb9523745e0d872ee43c3648a9899c3">shell_alias</a></div><div class="ttdeci">int shell_alias(shell *shell, int argc, char **argv)</div><div class="ttdoc">Lists all the registered aliasses.</div><div class="ttdef"><b>Definition:</b> builtin_command.c:143</div></div>
+<div class="ttc" id="abuiltin__command_8c_html_adc4599a1416f574a9f9692ecff9cef59"><div class="ttname"><a href="builtin__command_8c.html#adc4599a1416f574a9f9692ecff9cef59">shell_exit</a></div><div class="ttdeci">int shell_exit(shell *shell, int argc, char **argv)</div><div class="ttdoc">Exit from the shell.</div><div class="ttdef"><b>Definition:</b> builtin_command.c:137</div></div>
 <div class="ttc" id="aprompts_8c_html_a8ce9a95e88542227e84a78309ceb1a1f"><div class="ttname"><a href="prompts_8c.html#a8ce9a95e88542227e84a78309ceb1a1f">normal_shell_prompt</a></div><div class="ttdeci">void normal_shell_prompt(shell *shell)</div><div class="ttdef"><b>Definition:</b> prompts.c:9</div></div>
 <div class="ttc" id="ashell_8c_html_a299b2b150aea1b3365fff9e889714581"><div class="ttname"><a href="shell_8c.html#a299b2b150aea1b3365fff9e889714581">ARBITRARY_ALIASSES_HASH_SIZE</a></div><div class="ttdeci">#define ARBITRARY_ALIASSES_HASH_SIZE</div><div class="ttdef"><b>Definition:</b> shell.c:23</div></div>
 <div class="ttc" id="ashell_8c_html_aa7b01df7bc1fb08986302c7e9fd2c460"><div class="ttname"><a href="shell_8c.html#aa7b01df7bc1fb08986302c7e9fd2c460">running_shell</a></div><div class="ttdeci">static shell * running_shell</div><div class="ttdef"><b>Definition:</b> shell.c:27</div></div>
 <div class="ttc" id="ashell_8c_html_abcd7668682a633cc83da6f847445465c"><div class="ttname"><a href="shell_8c.html#abcd7668682a633cc83da6f847445465c">ARBITRARY_BUILTIN_COMMANDS_HASH_SIZE</a></div><div class="ttdeci">#define ARBITRARY_BUILTIN_COMMANDS_HASH_SIZE</div><div class="ttdef"><b>Definition:</b> shell.c:24</div></div>
 <div class="ttc" id="astructshell_html"><div class="ttname"><a href="structshell.html">shell</a></div><div class="ttdoc">Struct that define one shell.</div><div class="ttdef"><b>Definition:</b> shell.h:25</div></div>
-<div class="ttc" id="astructshell_html_a12c7420c8b3f8f7e6bbeaa27b0bc343c"><div class="ttname"><a href="structshell.html#a12c7420c8b3f8f7e6bbeaa27b0bc343c">shell::builtin_commands</a></div><div class="ttdeci">shell_builtin_commands * builtin_commands</div><div class="ttdef"><b>Definition:</b> shell.h:39</div></div>
+<div class="ttc" id="astructshell_html_a12c7420c8b3f8f7e6bbeaa27b0bc343c"><div class="ttname"><a href="structshell.html#a12c7420c8b3f8f7e6bbeaa27b0bc343c">shell::builtin_commands</a></div><div class="ttdeci">shell_builtin_commands * builtin_commands</div><div class="ttdef"><b>Definition:</b> shell.h:42</div></div>
 <div class="ttc" id="astructshell_html_a4c8e036de0f60e4555041dbc713ae534"><div class="ttname"><a href="structshell.html#a4c8e036de0f60e4555041dbc713ae534">shell::running</a></div><div class="ttdeci">bool running</div><div class="ttdef"><b>Definition:</b> shell.h:27</div></div>
-<div class="ttc" id="astructshell_html_a6904d0f9a4c35874e4701cbcb5e6994f"><div class="ttname"><a href="structshell.html#a6904d0f9a4c35874e4701cbcb5e6994f">shell::jobs</a></div><div class="ttdeci">background_jobs * jobs</div><div class="ttdef"><b>Definition:</b> shell.h:36</div></div>
-<div class="ttc" id="astructshell_html_a78aaca8ba01feff5d6c386e773cacd8f"><div class="ttname"><a href="structshell.html#a78aaca8ba01feff5d6c386e773cacd8f">shell::prompt</a></div><div class="ttdeci">prompt_function prompt</div><div class="ttdef"><b>Definition:</b> shell.h:30</div></div>
-<div class="ttc" id="astructshell_html_ae47c119657ffd93e4ce30d175570c2cc"><div class="ttname"><a href="structshell.html#ae47c119657ffd93e4ce30d175570c2cc">shell::aliasses</a></div><div class="ttdeci">aliasses * aliasses</div><div class="ttdef"><b>Definition:</b> shell.h:33</div></div>
+<div class="ttc" id="astructshell_html_a6904d0f9a4c35874e4701cbcb5e6994f"><div class="ttname"><a href="structshell.html#a6904d0f9a4c35874e4701cbcb5e6994f">shell::jobs</a></div><div class="ttdeci">background_jobs * jobs</div><div class="ttdef"><b>Definition:</b> shell.h:39</div></div>
+<div class="ttc" id="astructshell_html_a78aaca8ba01feff5d6c386e773cacd8f"><div class="ttname"><a href="structshell.html#a78aaca8ba01feff5d6c386e773cacd8f">shell::prompt</a></div><div class="ttdeci">prompt_function prompt</div><div class="ttdef"><b>Definition:</b> shell.h:33</div></div>
+<div class="ttc" id="astructshell_html_a9b58237c688ac5d8a98b72ff970ccfd5"><div class="ttname"><a href="structshell.html#a9b58237c688ac5d8a98b72ff970ccfd5">shell::verbose</a></div><div class="ttdeci">bool verbose</div><div class="ttdef"><b>Definition:</b> shell.h:30</div></div>
+<div class="ttc" id="astructshell_html_ae47c119657ffd93e4ce30d175570c2cc"><div class="ttname"><a href="structshell.html#ae47c119657ffd93e4ce30d175570c2cc">shell::aliasses</a></div><div class="ttdeci">aliasses * aliasses</div><div class="ttdef"><b>Definition:</b> shell.h:36</div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -360,23 +365,23 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <dl class="todo"><dt><b><a class="el" href="todo.html#_todo000007">Todo:</a></b></dt><dd>Check if this code must be in shell, alias or command Maybe it's better in command, because it's changing it </dd></dl>
-<div class="fragment"><div class="line"><span class="lineno">  120</span>                                                          {</div>
-<div class="line"><span class="lineno">  121</span>    <span class="comment">// Minus 1 because in both there is a command cmd[0] and alias[0]</span></div>
-<div class="line"><span class="lineno">  122</span>    <span class="keywordtype">int</span> new_size = cmd-&gt;<a class="code hl_variable" href="structcommand.html#a39d8af452518a3a9233dfdafd24ff9d0">argc</a> + <a class="code hl_struct" href="structalias.html">alias</a>.<a class="code hl_variable" href="structalias.html#a7f59592e9f95ba5f0caf2bcbfb9c0aeb">argc</a>;</div>
-<div class="line"><span class="lineno">  123</span>    cmd-&gt;<a class="code hl_variable" href="structcommand.html#a03bac117621dd0961bafddbc41b10a9d">argv</a> = realloc(cmd-&gt;<a class="code hl_variable" href="structcommand.html#a03bac117621dd0961bafddbc41b10a9d">argv</a>, new_size * <span class="keyword">sizeof</span>(<span class="keywordtype">char</span>*));</div>
-<div class="line"><span class="lineno">  124</span> </div>
-<div class="line"><span class="lineno">  125</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 1; i &lt; cmd-&gt;<a class="code hl_variable" href="structcommand.html#a39d8af452518a3a9233dfdafd24ff9d0">argc</a>; i++) {</div>
-<div class="line"><span class="lineno">  126</span>        cmd-&gt;<a class="code hl_variable" href="structcommand.html#a03bac117621dd0961bafddbc41b10a9d">argv</a>[<a class="code hl_struct" href="structalias.html">alias</a>.<a class="code hl_variable" href="structalias.html#a7f59592e9f95ba5f0caf2bcbfb9c0aeb">argc</a> - 1 + i] = cmd-&gt;<a class="code hl_variable" href="structcommand.html#a03bac117621dd0961bafddbc41b10a9d">argv</a>[i];</div>
-<div class="line"><span class="lineno">  127</span>    }</div>
-<div class="line"><span class="lineno">  128</span> </div>
-<div class="line"><span class="lineno">  129</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 1; i &lt; <a class="code hl_struct" href="structalias.html">alias</a>.<a class="code hl_variable" href="structalias.html#a7f59592e9f95ba5f0caf2bcbfb9c0aeb">argc</a>; i++) {</div>
-<div class="line"><span class="lineno">  130</span>        cmd-&gt;<a class="code hl_variable" href="structcommand.html#a03bac117621dd0961bafddbc41b10a9d">argv</a>[i] = strdup(<a class="code hl_struct" href="structalias.html">alias</a>.<a class="code hl_variable" href="structalias.html#a26a1a66ba57d34a91c45e52f24ccf05c">argv</a>[i]);</div>
-<div class="line"><span class="lineno">  131</span>    }</div>
-<div class="line"><span class="lineno">  132</span> </div>
-<div class="line"><span class="lineno">  133</span>    cmd-&gt;<a class="code hl_variable" href="structcommand.html#a03bac117621dd0961bafddbc41b10a9d">argv</a>[new_size - 1] = NULL;</div>
+<div class="fragment"><div class="line"><span class="lineno">  126</span>                                                          {</div>
+<div class="line"><span class="lineno">  127</span>    <span class="comment">// Minus 1 because in both there is a command cmd[0] and alias[0]</span></div>
+<div class="line"><span class="lineno">  128</span>    <span class="keywordtype">int</span> new_size = cmd-&gt;<a class="code hl_variable" href="structcommand.html#a39d8af452518a3a9233dfdafd24ff9d0">argc</a> + <a class="code hl_struct" href="structalias.html">alias</a>.<a class="code hl_variable" href="structalias.html#a7f59592e9f95ba5f0caf2bcbfb9c0aeb">argc</a>;</div>
+<div class="line"><span class="lineno">  129</span>    cmd-&gt;<a class="code hl_variable" href="structcommand.html#a03bac117621dd0961bafddbc41b10a9d">argv</a> = realloc(cmd-&gt;<a class="code hl_variable" href="structcommand.html#a03bac117621dd0961bafddbc41b10a9d">argv</a>, new_size * <span class="keyword">sizeof</span>(<span class="keywordtype">char</span>*));</div>
+<div class="line"><span class="lineno">  130</span> </div>
+<div class="line"><span class="lineno">  131</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 1; i &lt; cmd-&gt;<a class="code hl_variable" href="structcommand.html#a39d8af452518a3a9233dfdafd24ff9d0">argc</a>; i++) {</div>
+<div class="line"><span class="lineno">  132</span>        cmd-&gt;<a class="code hl_variable" href="structcommand.html#a03bac117621dd0961bafddbc41b10a9d">argv</a>[<a class="code hl_struct" href="structalias.html">alias</a>.<a class="code hl_variable" href="structalias.html#a7f59592e9f95ba5f0caf2bcbfb9c0aeb">argc</a> - 1 + i] = cmd-&gt;<a class="code hl_variable" href="structcommand.html#a03bac117621dd0961bafddbc41b10a9d">argv</a>[i];</div>
+<div class="line"><span class="lineno">  133</span>    }</div>
 <div class="line"><span class="lineno">  134</span> </div>
-<div class="line"><span class="lineno">  135</span>    cmd-&gt;<a class="code hl_variable" href="structcommand.html#a39d8af452518a3a9233dfdafd24ff9d0">argc</a> = new_size;</div>
-<div class="line"><span class="lineno">  136</span>}</div>
+<div class="line"><span class="lineno">  135</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 1; i &lt; <a class="code hl_struct" href="structalias.html">alias</a>.<a class="code hl_variable" href="structalias.html#a7f59592e9f95ba5f0caf2bcbfb9c0aeb">argc</a>; i++) {</div>
+<div class="line"><span class="lineno">  136</span>        cmd-&gt;<a class="code hl_variable" href="structcommand.html#a03bac117621dd0961bafddbc41b10a9d">argv</a>[i] = strdup(<a class="code hl_struct" href="structalias.html">alias</a>.<a class="code hl_variable" href="structalias.html#a26a1a66ba57d34a91c45e52f24ccf05c">argv</a>[i]);</div>
+<div class="line"><span class="lineno">  137</span>    }</div>
+<div class="line"><span class="lineno">  138</span> </div>
+<div class="line"><span class="lineno">  139</span>    cmd-&gt;<a class="code hl_variable" href="structcommand.html#a03bac117621dd0961bafddbc41b10a9d">argv</a>[new_size - 1] = NULL;</div>
+<div class="line"><span class="lineno">  140</span> </div>
+<div class="line"><span class="lineno">  141</span>    cmd-&gt;<a class="code hl_variable" href="structcommand.html#a39d8af452518a3a9233dfdafd24ff9d0">argc</a> = new_size;</div>
+<div class="line"><span class="lineno">  142</span>}</div>
 <div class="ttc" id="astructalias_html"><div class="ttname"><a href="structalias.html">alias</a></div><div class="ttdoc">Only one alias entry.</div><div class="ttdef"><b>Definition:</b> alias.h:6</div></div>
 <div class="ttc" id="astructalias_html_a26a1a66ba57d34a91c45e52f24ccf05c"><div class="ttname"><a href="structalias.html#a26a1a66ba57d34a91c45e52f24ccf05c">alias::argv</a></div><div class="ttdeci">char ** argv</div><div class="ttdef"><b>Definition:</b> alias.h:9</div></div>
 <div class="ttc" id="astructalias_html_a7f59592e9f95ba5f0caf2bcbfb9c0aeb"><div class="ttname"><a href="structalias.html#a7f59592e9f95ba5f0caf2bcbfb9c0aeb">alias::argc</a></div><div class="ttdeci">int argc</div><div class="ttdef"><b>Definition:</b> alias.h:8</div></div>
@@ -406,23 +411,23 @@ Variables</h2></td></tr>
   </table>
   </dd>
 </dl>
-<div class="fragment"><div class="line"><span class="lineno">  267</span>                              {</div>
-<div class="line"><span class="lineno">  268</span>    <span class="keywordflow">if</span> (<a class="code hl_struct" href="structshell.html">shell</a> == NULL) {</div>
-<div class="line"><span class="lineno">  269</span>        <span class="keywordflow">return</span>;</div>
-<div class="line"><span class="lineno">  270</span>    }</div>
-<div class="line"><span class="lineno">  271</span>    </div>
-<div class="line"><span class="lineno">  272</span>    <span class="comment">// Just for completeness</span></div>
-<div class="line"><span class="lineno">  273</span>    <a class="code hl_struct" href="structshell.html">shell</a>-&gt;<a class="code hl_variable" href="structshell.html#a4c8e036de0f60e4555041dbc713ae534">running</a> = <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">  274</span> </div>
-<div class="line"><span class="lineno">  275</span>    <a class="code hl_function" href="builtin__command_8c.html#abcf53ea7e4671bccbe0deea89ddd02f1">free_shell_builtin_commands</a>(<a class="code hl_struct" href="structshell.html">shell</a>-&gt;<a class="code hl_variable" href="structshell.html#a12c7420c8b3f8f7e6bbeaa27b0bc343c">builtin_commands</a>);</div>
-<div class="line"><span class="lineno">  276</span>    <a class="code hl_function" href="background__jobs_8c.html#a7816e75150f7dca33a4d3b46ecdd9efd">free_background_jobs</a>(<a class="code hl_struct" href="structshell.html">shell</a>-&gt;<a class="code hl_variable" href="structshell.html#a6904d0f9a4c35874e4701cbcb5e6994f">jobs</a>);</div>
-<div class="line"><span class="lineno">  277</span>    <a class="code hl_function" href="alias_8c.html#adb849a970a0fe33dd4198c44289160a8">free_aliasses</a>(<a class="code hl_struct" href="structshell.html">shell</a>-&gt;<a class="code hl_variable" href="structshell.html#ae47c119657ffd93e4ce30d175570c2cc">aliasses</a>);</div>
-<div class="line"><span class="lineno">  278</span> </div>
-<div class="line"><span class="lineno">  279</span>    free(<a class="code hl_struct" href="structshell.html">shell</a>);</div>
-<div class="line"><span class="lineno">  280</span>}</div>
+<div class="fragment"><div class="line"><span class="lineno">  284</span>                              {</div>
+<div class="line"><span class="lineno">  285</span>    <span class="keywordflow">if</span> (<a class="code hl_struct" href="structshell.html">shell</a> == NULL) {</div>
+<div class="line"><span class="lineno">  286</span>        <span class="keywordflow">return</span>;</div>
+<div class="line"><span class="lineno">  287</span>    }</div>
+<div class="line"><span class="lineno">  288</span>    </div>
+<div class="line"><span class="lineno">  289</span>    <span class="comment">// Just for completeness</span></div>
+<div class="line"><span class="lineno">  290</span>    <a class="code hl_struct" href="structshell.html">shell</a>-&gt;<a class="code hl_variable" href="structshell.html#a4c8e036de0f60e4555041dbc713ae534">running</a> = <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  291</span> </div>
+<div class="line"><span class="lineno">  292</span>    <a class="code hl_function" href="builtin__command_8c.html#abcf53ea7e4671bccbe0deea89ddd02f1">free_shell_builtin_commands</a>(<a class="code hl_struct" href="structshell.html">shell</a>-&gt;<a class="code hl_variable" href="structshell.html#a12c7420c8b3f8f7e6bbeaa27b0bc343c">builtin_commands</a>);</div>
+<div class="line"><span class="lineno">  293</span>    <a class="code hl_function" href="background__jobs_8c.html#a7816e75150f7dca33a4d3b46ecdd9efd">free_background_jobs</a>(<a class="code hl_struct" href="structshell.html">shell</a>-&gt;<a class="code hl_variable" href="structshell.html#a6904d0f9a4c35874e4701cbcb5e6994f">jobs</a>);</div>
+<div class="line"><span class="lineno">  294</span>    <a class="code hl_function" href="alias_8c.html#adb849a970a0fe33dd4198c44289160a8">free_aliasses</a>(<a class="code hl_struct" href="structshell.html">shell</a>-&gt;<a class="code hl_variable" href="structshell.html#ae47c119657ffd93e4ce30d175570c2cc">aliasses</a>);</div>
+<div class="line"><span class="lineno">  295</span> </div>
+<div class="line"><span class="lineno">  296</span>    free(<a class="code hl_struct" href="structshell.html">shell</a>);</div>
+<div class="line"><span class="lineno">  297</span>}</div>
 <div class="ttc" id="aalias_8c_html_adb849a970a0fe33dd4198c44289160a8"><div class="ttname"><a href="alias_8c.html#adb849a970a0fe33dd4198c44289160a8">free_aliasses</a></div><div class="ttdeci">void free_aliasses(aliasses *aliasses)</div><div class="ttdef"><b>Definition:</b> alias.c:67</div></div>
-<div class="ttc" id="abackground__jobs_8c_html_a7816e75150f7dca33a4d3b46ecdd9efd"><div class="ttname"><a href="background__jobs_8c.html#a7816e75150f7dca33a4d3b46ecdd9efd">free_background_jobs</a></div><div class="ttdeci">void free_background_jobs(background_jobs *jobs)</div><div class="ttdef"><b>Definition:</b> background_jobs.c:75</div></div>
-<div class="ttc" id="abuiltin__command_8c_html_abcf53ea7e4671bccbe0deea89ddd02f1"><div class="ttname"><a href="builtin__command_8c.html#abcf53ea7e4671bccbe0deea89ddd02f1">free_shell_builtin_commands</a></div><div class="ttdeci">void free_shell_builtin_commands(shell_builtin_commands *commands)</div><div class="ttdoc">Frees the given builtin_commands.</div><div class="ttdef"><b>Definition:</b> builtin_command.c:105</div></div>
+<div class="ttc" id="abackground__jobs_8c_html_a7816e75150f7dca33a4d3b46ecdd9efd"><div class="ttname"><a href="background__jobs_8c.html#a7816e75150f7dca33a4d3b46ecdd9efd">free_background_jobs</a></div><div class="ttdeci">void free_background_jobs(background_jobs *jobs)</div><div class="ttdef"><b>Definition:</b> background_jobs.c:86</div></div>
+<div class="ttc" id="abuiltin__command_8c_html_abcf53ea7e4671bccbe0deea89ddd02f1"><div class="ttname"><a href="builtin__command_8c.html#abcf53ea7e4671bccbe0deea89ddd02f1">free_shell_builtin_commands</a></div><div class="ttdeci">void free_shell_builtin_commands(shell_builtin_commands *commands)</div><div class="ttdoc">Frees the given builtin_commands.</div><div class="ttdef"><b>Definition:</b> builtin_command.c:107</div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -451,19 +456,19 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<div class="fragment"><div class="line"><span class="lineno">   92</span>                                                     {</div>
-<div class="line"><span class="lineno">   93</span>    <span class="keywordflow">if</span> (error == NULL) {</div>
-<div class="line"><span class="lineno">   94</span>        fprintf(stderr, <span class="stringliteral">&quot;shellso: %s: An error has occurred\n&quot;</span>, <a class="code hl_struct" href="structcommand.html">command</a>);</div>
-<div class="line"><span class="lineno">   95</span>    } <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno">   96</span>        fprintf(stderr, <span class="stringliteral">&quot;shellso: %s: %s\n&quot;</span>, <a class="code hl_struct" href="structcommand.html">command</a>, error);</div>
-<div class="line"><span class="lineno">   97</span>    }</div>
-<div class="line"><span class="lineno">   98</span>}</div>
+<div class="fragment"><div class="line"><span class="lineno">   98</span>                                                     {</div>
+<div class="line"><span class="lineno">   99</span>    <span class="keywordflow">if</span> (error == NULL) {</div>
+<div class="line"><span class="lineno">  100</span>        fprintf(stderr, <span class="stringliteral">&quot;shellso: %s: An error has occurred\n&quot;</span>, <a class="code hl_struct" href="structcommand.html">command</a>);</div>
+<div class="line"><span class="lineno">  101</span>    } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  102</span>        fprintf(stderr, <span class="stringliteral">&quot;shellso: %s: %s\n&quot;</span>, <a class="code hl_struct" href="structcommand.html">command</a>, error);</div>
+<div class="line"><span class="lineno">  103</span>    }</div>
+<div class="line"><span class="lineno">  104</span>}</div>
 <div class="ttc" id="astructcommand_html"><div class="ttname"><a href="structcommand.html">command</a></div><div class="ttdef"><b>Definition:</b> command.h:19</div></div>
 </div><!-- fragment -->
 </div>
 </div>
-<a id="af7a6cb96348d64948695a697a97b941a" name="af7a6cb96348d64948695a697a97b941a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af7a6cb96348d64948695a697a97b941a">&#9670;&nbsp;</a></span>read_input()</h2>
+<a id="a174fabc79fb68c5ea07db71250668d55" name="a174fabc79fb68c5ea07db71250668d55"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a174fabc79fb68c5ea07db71250668d55">&#9670;&nbsp;</a></span>read_input_from_file()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -472,9 +477,10 @@ Variables</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static char * read_input </td>
+          <td class="memname">static char * read_input_from_file </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">FILE *&#160;</td>
+          <td class="paramname"><em>file</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -484,22 +490,22 @@ Variables</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<div class="fragment"><div class="line"><span class="lineno">  100</span>                          {</div>
-<div class="line"><span class="lineno">  101</span>    <span class="keywordtype">char</span>* input = NULL;</div>
-<div class="line"><span class="lineno">  102</span>    <span class="keywordtype">size_t</span> length = 0;</div>
-<div class="line"><span class="lineno">  103</span> </div>
-<div class="line"><span class="lineno">  104</span>    <span class="keywordtype">int</span> nread = getline(&amp;input, &amp;length, stdin);</div>
-<div class="line"><span class="lineno">  105</span>    <span class="keywordflow">if</span> (nread == -1) {</div>
-<div class="line"><span class="lineno">  106</span>        free(input);</div>
-<div class="line"><span class="lineno">  107</span>        <span class="keywordflow">return</span> NULL;</div>
-<div class="line"><span class="lineno">  108</span>    }</div>
+<div class="fragment"><div class="line"><span class="lineno">  106</span>                                              {</div>
+<div class="line"><span class="lineno">  107</span>    <span class="keywordtype">char</span>* input = NULL;</div>
+<div class="line"><span class="lineno">  108</span>    <span class="keywordtype">size_t</span> length = 0;</div>
 <div class="line"><span class="lineno">  109</span> </div>
-<div class="line"><span class="lineno">  110</span>    <span class="keywordflow">if</span> (input[nread - 1] == <span class="charliteral">&#39;\n&#39;</span>) { <span class="comment">// Replace newline</span></div>
-<div class="line"><span class="lineno">  111</span>        input[nread - 1] = <span class="charliteral">&#39;\0&#39;</span>;</div>
-<div class="line"><span class="lineno">  112</span>    }</div>
-<div class="line"><span class="lineno">  113</span> </div>
-<div class="line"><span class="lineno">  114</span>    <span class="keywordflow">return</span> input;</div>
-<div class="line"><span class="lineno">  115</span>}</div>
+<div class="line"><span class="lineno">  110</span>    <span class="keywordtype">int</span> nread = getline(&amp;input, &amp;length, file);</div>
+<div class="line"><span class="lineno">  111</span>    <span class="keywordflow">if</span> (nread == -1) {</div>
+<div class="line"><span class="lineno">  112</span>        free(input);</div>
+<div class="line"><span class="lineno">  113</span>        <span class="keywordflow">return</span> NULL;</div>
+<div class="line"><span class="lineno">  114</span>    }</div>
+<div class="line"><span class="lineno">  115</span> </div>
+<div class="line"><span class="lineno">  116</span>    <span class="keywordflow">if</span> (input[nread - 1] == <span class="charliteral">&#39;\n&#39;</span>) { <span class="comment">// Replace newline</span></div>
+<div class="line"><span class="lineno">  117</span>        input[nread - 1] = <span class="charliteral">&#39;\0&#39;</span>;</div>
+<div class="line"><span class="lineno">  118</span>    }</div>
+<div class="line"><span class="lineno">  119</span> </div>
+<div class="line"><span class="lineno">  120</span>    <span class="keywordflow">return</span> input;</div>
+<div class="line"><span class="lineno">  121</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -536,13 +542,13 @@ Variables</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<div class="fragment"><div class="line"><span class="lineno">  185</span>                                                     {</div>
-<div class="line"><span class="lineno">  186</span>  <span class="keywordflow">if</span> (oldfd != newfd) {</div>
-<div class="line"><span class="lineno">  187</span>    <span class="keywordflow">if</span> (dup2(oldfd, newfd) != -1)</div>
-<div class="line"><span class="lineno">  188</span>      <a class="code hl_function" href="shell_8c.html#a0428601952a0a522c2cb358b4e76ecc9">CLOSE</a>(oldfd); <span class="comment">/* successfully redirected */</span></div>
-<div class="line"><span class="lineno">  189</span>  }</div>
-<div class="line"><span class="lineno">  190</span>}</div>
-<div class="ttc" id="ashell_8c_html_a0428601952a0a522c2cb358b4e76ecc9"><div class="ttname"><a href="shell_8c.html#a0428601952a0a522c2cb358b4e76ecc9">CLOSE</a></div><div class="ttdeci">static void CLOSE(int fd)</div><div class="ttdef"><b>Definition:</b> shell.c:178</div></div>
+<div class="fragment"><div class="line"><span class="lineno">  199</span>                                                     {</div>
+<div class="line"><span class="lineno">  200</span>  <span class="keywordflow">if</span> (oldfd != newfd) {</div>
+<div class="line"><span class="lineno">  201</span>    <span class="keywordflow">if</span> (dup2(oldfd, newfd) != -1)</div>
+<div class="line"><span class="lineno">  202</span>      <a class="code hl_function" href="shell_8c.html#a0428601952a0a522c2cb358b4e76ecc9">CLOSE</a>(oldfd); <span class="comment">/* successfully redirected */</span></div>
+<div class="line"><span class="lineno">  203</span>  }</div>
+<div class="line"><span class="lineno">  204</span>}</div>
+<div class="ttc" id="ashell_8c_html_a0428601952a0a522c2cb358b4e76ecc9"><div class="ttname"><a href="shell_8c.html#a0428601952a0a522c2cb358b4e76ecc9">CLOSE</a></div><div class="ttdeci">static void CLOSE(int fd)</div><div class="ttdef"><b>Definition:</b> shell.c:192</div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -585,92 +591,96 @@ Variables</h2></td></tr>
   </table>
   </dd>
 </dl>
-<div class="fragment"><div class="line"><span class="lineno">  192</span>                                                        {</div>
-<div class="line"><span class="lineno">  193</span>    <span class="keywordtype">int</span> fd[2] = {-1, -1};</div>
-<div class="line"><span class="lineno">  194</span> </div>
-<div class="line"><span class="lineno">  195</span>    <a class="code hl_struct" href="structalias.html">alias</a>* <a class="code hl_struct" href="structalias.html">alias</a> = <a class="code hl_function" href="alias_8c.html#a4699c9397b81000698cb5c07837fbd63">find_alias</a>(<a class="code hl_struct" href="structshell.html">shell</a>-&gt;<a class="code hl_variable" href="structshell.html#ae47c119657ffd93e4ce30d175570c2cc">aliasses</a>, cmd-&gt;<a class="code hl_variable" href="structcommand.html#a03bac117621dd0961bafddbc41b10a9d">argv</a>[0]);</div>
-<div class="line"><span class="lineno">  196</span>    <span class="keywordflow">if</span> (<a class="code hl_struct" href="structalias.html">alias</a> != NULL) {</div>
-<div class="line"><span class="lineno">  197</span>        <a class="code hl_function" href="shell_8c.html#a1fe1d28c09c80c4d512b3a9751ec8b15">expand_command_with_alias</a>(cmd, *<a class="code hl_struct" href="structalias.html">alias</a>);</div>
-<div class="line"><span class="lineno">  198</span>    }</div>
-<div class="line"><span class="lineno">  199</span> </div>
-<div class="line"><span class="lineno">  200</span>    <span class="keywordflow">if</span> (cmd-&gt;<a class="code hl_variable" href="structcommand.html#aef8935bdf704e1ff07054800281d24c4">chain_type</a> == <a class="code hl_enumvalue" href="command_8h.html#a4fa9f0b878abe6ebdcbddc7416bb69ada9bc832fa28809fb974f6ce5bb0cc7117">PIPE</a>) {</div>
-<div class="line"><span class="lineno">  201</span>        <span class="keywordflow">if</span> (pipe(fd) == -1) {</div>
-<div class="line"><span class="lineno">  202</span>            perror(<span class="stringliteral">&quot;pipe:&quot;</span>);</div>
-<div class="line"><span class="lineno">  203</span>        }</div>
-<div class="line"><span class="lineno">  204</span>    }</div>
-<div class="line"><span class="lineno">  205</span> </div>
-<div class="line"><span class="lineno">  206</span>    pid_t child_pid = fork();   </div>
-<div class="line"><span class="lineno">  207</span> </div>
-<div class="line"><span class="lineno">  208</span>    <span class="keywordflow">if</span> (child_pid == -1) {</div>
-<div class="line"><span class="lineno">  209</span>        perror(<span class="stringliteral">&quot;Fork&quot;</span>);</div>
-<div class="line"><span class="lineno">  210</span>    } <span class="keywordflow">else</span> <span class="keywordflow">if</span>(child_pid == 0) { <span class="comment">// Child code</span></div>
-<div class="line"><span class="lineno">  211</span>    </div>
-<div class="line"><span class="lineno">  212</span>        <span class="keywordflow">if</span> (cmd-&gt;<a class="code hl_variable" href="structcommand.html#aef8935bdf704e1ff07054800281d24c4">chain_type</a> == <a class="code hl_enumvalue" href="command_8h.html#a4fa9f0b878abe6ebdcbddc7416bb69ada9bc832fa28809fb974f6ce5bb0cc7117">PIPE</a>) {</div>
-<div class="line"><span class="lineno">  213</span>            <a class="code hl_function" href="shell_8c.html#a0428601952a0a522c2cb358b4e76ecc9">CLOSE</a>(fd[<a class="code hl_define" href="shell_8c.html#a2469c53816dc077f9deefb187ffcabf3">READ_END</a>]);</div>
-<div class="line"><span class="lineno">  214</span> </div>
-<div class="line"><span class="lineno">  215</span>            <span class="keywordflow">if</span> (cmd-&gt;<a class="code hl_variable" href="structcommand.html#a2f753045109abb875e61b99fd45268ab">stdin_file_redirection</a> != NULL) {</div>
-<div class="line"><span class="lineno">  216</span>                FILE* stdin_file = fopen(cmd-&gt;<a class="code hl_variable" href="structcommand.html#a2f753045109abb875e61b99fd45268ab">stdin_file_redirection</a>, <span class="stringliteral">&quot;r&quot;</span>);</div>
-<div class="line"><span class="lineno">  217</span>                <a class="code hl_function" href="shell_8c.html#a11534ed616b5b837706aec72d5c3dc12">redirect_and_close</a>(stdin_file-&gt;_fileno, STDIN_FILENO);</div>
-<div class="line"><span class="lineno">  218</span>            } <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno">  219</span>                <a class="code hl_function" href="shell_8c.html#a11534ed616b5b837706aec72d5c3dc12">redirect_and_close</a>(in_fd, STDIN_FILENO);</div>
-<div class="line"><span class="lineno">  220</span>            }</div>
+<div class="fragment"><div class="line"><span class="lineno">  206</span>                                                        {</div>
+<div class="line"><span class="lineno">  207</span>    <span class="keywordtype">int</span> fd[2] = {-1, -1};</div>
+<div class="line"><span class="lineno">  208</span> </div>
+<div class="line"><span class="lineno">  209</span>    <a class="code hl_struct" href="structalias.html">alias</a>* <a class="code hl_struct" href="structalias.html">alias</a> = <a class="code hl_function" href="alias_8c.html#a4699c9397b81000698cb5c07837fbd63">find_alias</a>(<a class="code hl_struct" href="structshell.html">shell</a>-&gt;<a class="code hl_variable" href="structshell.html#ae47c119657ffd93e4ce30d175570c2cc">aliasses</a>, cmd-&gt;<a class="code hl_variable" href="structcommand.html#a03bac117621dd0961bafddbc41b10a9d">argv</a>[0]);</div>
+<div class="line"><span class="lineno">  210</span>    <span class="keywordflow">if</span> (<a class="code hl_struct" href="structalias.html">alias</a> != NULL) {</div>
+<div class="line"><span class="lineno">  211</span>        <a class="code hl_function" href="shell_8c.html#a1fe1d28c09c80c4d512b3a9751ec8b15">expand_command_with_alias</a>(cmd, *<a class="code hl_struct" href="structalias.html">alias</a>);</div>
+<div class="line"><span class="lineno">  212</span>    }</div>
+<div class="line"><span class="lineno">  213</span> </div>
+<div class="line"><span class="lineno">  214</span>    <span class="keywordflow">if</span> (cmd-&gt;<a class="code hl_variable" href="structcommand.html#aef8935bdf704e1ff07054800281d24c4">chain_type</a> == <a class="code hl_enumvalue" href="command_8h.html#a4fa9f0b878abe6ebdcbddc7416bb69ada9bc832fa28809fb974f6ce5bb0cc7117">PIPE</a>) {</div>
+<div class="line"><span class="lineno">  215</span>        <span class="keywordflow">if</span> (pipe(fd) == -1) {</div>
+<div class="line"><span class="lineno">  216</span>            perror(<span class="stringliteral">&quot;pipe:&quot;</span>);</div>
+<div class="line"><span class="lineno">  217</span>        }</div>
+<div class="line"><span class="lineno">  218</span>    }</div>
+<div class="line"><span class="lineno">  219</span> </div>
+<div class="line"><span class="lineno">  220</span>    pid_t child_pid = fork();   </div>
 <div class="line"><span class="lineno">  221</span> </div>
-<div class="line"><span class="lineno">  222</span>            <span class="keywordflow">if</span> (cmd-&gt;<a class="code hl_variable" href="structcommand.html#abdb2eeb4f5aaeaeba39e8343b0792088">stdout_file_redirection</a> != NULL) {</div>
-<div class="line"><span class="lineno">  223</span>                FILE* stdout_file = fopen(cmd-&gt;<a class="code hl_variable" href="structcommand.html#abdb2eeb4f5aaeaeba39e8343b0792088">stdout_file_redirection</a>, <span class="stringliteral">&quot;w&quot;</span>);</div>
-<div class="line"><span class="lineno">  224</span>                <a class="code hl_function" href="shell_8c.html#a11534ed616b5b837706aec72d5c3dc12">redirect_and_close</a>(stdout_file-&gt;_fileno, STDOUT_FILENO);</div>
-<div class="line"><span class="lineno">  225</span>            } <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno">  226</span>                <a class="code hl_function" href="shell_8c.html#a11534ed616b5b837706aec72d5c3dc12">redirect_and_close</a>(fd[<a class="code hl_define" href="shell_8c.html#a2efd706d915e621e5e18b3f0803c4ed2">WRITE_END</a>], STDOUT_FILENO);</div>
-<div class="line"><span class="lineno">  227</span>            }</div>
-<div class="line"><span class="lineno">  228</span>        } <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno">  229</span>            <span class="comment">// This is important because of the last command of a pipe command chain</span></div>
-<div class="line"><span class="lineno">  230</span>            <a class="code hl_function" href="shell_8c.html#a11534ed616b5b837706aec72d5c3dc12">redirect_and_close</a>(in_fd, STDIN_FILENO);</div>
-<div class="line"><span class="lineno">  231</span>        }</div>
-<div class="line"><span class="lineno">  232</span> </div>
-<div class="line"><span class="lineno">  233</span>        execvp(cmd-&gt;<a class="code hl_variable" href="structcommand.html#a03bac117621dd0961bafddbc41b10a9d">argv</a>[0], cmd-&gt;<a class="code hl_variable" href="structcommand.html#a03bac117621dd0961bafddbc41b10a9d">argv</a>);</div>
-<div class="line"><span class="lineno">  234</span>        <a class="code hl_function" href="shell_8c.html#a7e2f62f42476df94c1451d10521a6f01">print_command_error</a>(cmd-&gt;<a class="code hl_variable" href="structcommand.html#a03bac117621dd0961bafddbc41b10a9d">argv</a>[0], strerror(errno));</div>
-<div class="line"><span class="lineno">  235</span>        </div>
-<div class="line"><span class="lineno">  236</span>        exit(EXIT_FAILURE); <span class="comment">// Exits only the child process</span></div>
-<div class="line"><span class="lineno">  237</span>    } <span class="keywordflow">else</span> { <span class="comment">// Parent code</span></div>
-<div class="line"><span class="lineno">  238</span>        <a class="code hl_function" href="background__jobs_8c.html#a6949e27ddbcafe827c27444388e907bb">add_background_job</a>(<a class="code hl_struct" href="structshell.html">shell</a>-&gt;<a class="code hl_variable" href="structshell.html#a6904d0f9a4c35874e4701cbcb5e6994f">jobs</a>, cmd, child_pid);</div>
-<div class="line"><span class="lineno">  239</span> </div>
-<div class="line"><span class="lineno">  240</span>        <span class="keywordflow">if</span> (cmd-&gt;<a class="code hl_variable" href="structcommand.html#aef8935bdf704e1ff07054800281d24c4">chain_type</a> == <a class="code hl_enumvalue" href="command_8h.html#a4fa9f0b878abe6ebdcbddc7416bb69adaa44b734476c2f3d073ee7aca08660a0e">BACKGROUND</a>) {</div>
-<div class="line"><span class="lineno">  241</span>            <span class="comment">// add_command_chain(background_jobs *jobs, command *command_chain)</span></div>
-<div class="line"><span class="lineno">  242</span>            <span class="keywordflow">if</span> (cmd-&gt;<a class="code hl_variable" href="structcommand.html#acae402512e855ece5df315f1206455c8">next</a> != NULL) {</div>
-<div class="line"><span class="lineno">  243</span>                <a class="code hl_function" href="shell_8c.html#a7bf41a557d5549e80262806150de609b">run_command</a>(<a class="code hl_struct" href="structshell.html">shell</a>, cmd-&gt;<a class="code hl_variable" href="structcommand.html#acae402512e855ece5df315f1206455c8">next</a>, in_fd);</div>
-<div class="line"><span class="lineno">  244</span>            }</div>
-<div class="line"><span class="lineno">  245</span>        } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (cmd-&gt;<a class="code hl_variable" href="structcommand.html#aef8935bdf704e1ff07054800281d24c4">chain_type</a> == <a class="code hl_enumvalue" href="command_8h.html#a4fa9f0b878abe6ebdcbddc7416bb69ada9bc832fa28809fb974f6ce5bb0cc7117">PIPE</a>) {</div>
-<div class="line"><span class="lineno">  246</span>            <a class="code hl_function" href="shell_8c.html#a0428601952a0a522c2cb358b4e76ecc9">CLOSE</a>(fd[<a class="code hl_define" href="shell_8c.html#a2efd706d915e621e5e18b3f0803c4ed2">WRITE_END</a>]);</div>
-<div class="line"><span class="lineno">  247</span> </div>
-<div class="line"><span class="lineno">  248</span>            <a class="code hl_function" href="shell_8c.html#a7bf41a557d5549e80262806150de609b">run_command</a>(<a class="code hl_struct" href="structshell.html">shell</a>, cmd-&gt;<a class="code hl_variable" href="structcommand.html#acae402512e855ece5df315f1206455c8">next</a>, fd[0]);</div>
-<div class="line"><span class="lineno">  249</span>        } <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno">  250</span>            <span class="keywordtype">int</span> state;</div>
-<div class="line"><span class="lineno">  251</span>            <span class="keywordtype">int</span> result = waitpid(child_pid, &amp;state, 0);</div>
-<div class="line"><span class="lineno">  252</span>            <span class="keywordflow">if</span> (result == -1 &amp;&amp; errno != 10) { </div>
-<div class="line"><span class="lineno">  253</span>                perror(<span class="stringliteral">&quot;waitpid&quot;</span>);</div>
-<div class="line"><span class="lineno">  254</span>                exit(EXIT_FAILURE);</div>
-<div class="line"><span class="lineno">  255</span>            }</div>
-<div class="line"><span class="lineno">  256</span> </div>
-<div class="line"><span class="lineno">  257</span>            <span class="keywordflow">if</span> (cmd-&gt;<a class="code hl_variable" href="structcommand.html#acae402512e855ece5df315f1206455c8">next</a> != NULL) {</div>
-<div class="line"><span class="lineno">  258</span>                <span class="keywordflow">if</span> ((cmd-&gt;<a class="code hl_variable" href="structcommand.html#aef8935bdf704e1ff07054800281d24c4">chain_type</a> == <a class="code hl_enumvalue" href="command_8h.html#a4fa9f0b878abe6ebdcbddc7416bb69ada865555c9f2e0458a7078486aa1b3254f">AND</a> &amp;&amp; WEXITSTATUS(state) == EXIT_SUCCESS) || </div>
-<div class="line"><span class="lineno">  259</span>                        (cmd-&gt;<a class="code hl_variable" href="structcommand.html#aef8935bdf704e1ff07054800281d24c4">chain_type</a> == <a class="code hl_enumvalue" href="command_8h.html#a4fa9f0b878abe6ebdcbddc7416bb69ada96727447c0ad447987df1c6415aef074">OR</a>)) {</div>
-<div class="line"><span class="lineno">  260</span>                    <a class="code hl_function" href="shell_8c.html#a7bf41a557d5549e80262806150de609b">run_command</a>(<a class="code hl_struct" href="structshell.html">shell</a>, cmd-&gt;<a class="code hl_variable" href="structcommand.html#acae402512e855ece5df315f1206455c8">next</a>, in_fd);</div>
-<div class="line"><span class="lineno">  261</span>                }</div>
-<div class="line"><span class="lineno">  262</span>            }</div>
-<div class="line"><span class="lineno">  263</span>        }</div>
-<div class="line"><span class="lineno">  264</span>    }</div>
-<div class="line"><span class="lineno">  265</span>}</div>
+<div class="line"><span class="lineno">  222</span>    <span class="keywordflow">if</span> (child_pid == -1) {</div>
+<div class="line"><span class="lineno">  223</span>        perror(<span class="stringliteral">&quot;Fork&quot;</span>);</div>
+<div class="line"><span class="lineno">  224</span>    } <span class="keywordflow">else</span> <span class="keywordflow">if</span>(child_pid == 0) { <span class="comment">// Child code</span></div>
+<div class="line"><span class="lineno">  225</span>    </div>
+<div class="line"><span class="lineno">  226</span>        <span class="keywordflow">if</span> (cmd-&gt;<a class="code hl_variable" href="structcommand.html#aef8935bdf704e1ff07054800281d24c4">chain_type</a> == <a class="code hl_enumvalue" href="command_8h.html#a4fa9f0b878abe6ebdcbddc7416bb69ada9bc832fa28809fb974f6ce5bb0cc7117">PIPE</a>) {</div>
+<div class="line"><span class="lineno">  227</span>            <a class="code hl_function" href="shell_8c.html#a0428601952a0a522c2cb358b4e76ecc9">CLOSE</a>(fd[<a class="code hl_define" href="shell_8c.html#a2469c53816dc077f9deefb187ffcabf3">READ_END</a>]);</div>
+<div class="line"><span class="lineno">  228</span> </div>
+<div class="line"><span class="lineno">  229</span>            <span class="keywordflow">if</span> (cmd-&gt;<a class="code hl_variable" href="structcommand.html#a2f753045109abb875e61b99fd45268ab">stdin_file_redirection</a> != NULL) {</div>
+<div class="line"><span class="lineno">  230</span>                FILE* stdin_file = fopen(cmd-&gt;<a class="code hl_variable" href="structcommand.html#a2f753045109abb875e61b99fd45268ab">stdin_file_redirection</a>, <span class="stringliteral">&quot;r&quot;</span>);</div>
+<div class="line"><span class="lineno">  231</span>                <a class="code hl_function" href="shell_8c.html#a11534ed616b5b837706aec72d5c3dc12">redirect_and_close</a>(stdin_file-&gt;_fileno, STDIN_FILENO);</div>
+<div class="line"><span class="lineno">  232</span>            } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  233</span>                <a class="code hl_function" href="shell_8c.html#a11534ed616b5b837706aec72d5c3dc12">redirect_and_close</a>(in_fd, STDIN_FILENO);</div>
+<div class="line"><span class="lineno">  234</span>            }</div>
+<div class="line"><span class="lineno">  235</span> </div>
+<div class="line"><span class="lineno">  236</span>            <span class="keywordflow">if</span> (cmd-&gt;<a class="code hl_variable" href="structcommand.html#abdb2eeb4f5aaeaeba39e8343b0792088">stdout_file_redirection</a> != NULL) {</div>
+<div class="line"><span class="lineno">  237</span>                FILE* stdout_file = fopen(cmd-&gt;<a class="code hl_variable" href="structcommand.html#abdb2eeb4f5aaeaeba39e8343b0792088">stdout_file_redirection</a>, <span class="stringliteral">&quot;w&quot;</span>);</div>
+<div class="line"><span class="lineno">  238</span>                <a class="code hl_function" href="shell_8c.html#a11534ed616b5b837706aec72d5c3dc12">redirect_and_close</a>(stdout_file-&gt;_fileno, STDOUT_FILENO);</div>
+<div class="line"><span class="lineno">  239</span>            } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  240</span>                <a class="code hl_function" href="shell_8c.html#a11534ed616b5b837706aec72d5c3dc12">redirect_and_close</a>(fd[<a class="code hl_define" href="shell_8c.html#a2efd706d915e621e5e18b3f0803c4ed2">WRITE_END</a>], STDOUT_FILENO);</div>
+<div class="line"><span class="lineno">  241</span>            }</div>
+<div class="line"><span class="lineno">  242</span>        } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  243</span>            <span class="comment">// This is important because of the last command of a pipe command chain</span></div>
+<div class="line"><span class="lineno">  244</span>            <a class="code hl_function" href="shell_8c.html#a11534ed616b5b837706aec72d5c3dc12">redirect_and_close</a>(in_fd, STDIN_FILENO);</div>
+<div class="line"><span class="lineno">  245</span>        }</div>
+<div class="line"><span class="lineno">  246</span> </div>
+<div class="line"><span class="lineno">  247</span>        execvp(cmd-&gt;<a class="code hl_variable" href="structcommand.html#a03bac117621dd0961bafddbc41b10a9d">argv</a>[0], cmd-&gt;<a class="code hl_variable" href="structcommand.html#a03bac117621dd0961bafddbc41b10a9d">argv</a>);</div>
+<div class="line"><span class="lineno">  248</span>        <a class="code hl_function" href="shell_8c.html#a7e2f62f42476df94c1451d10521a6f01">print_command_error</a>(cmd-&gt;<a class="code hl_variable" href="structcommand.html#a03bac117621dd0961bafddbc41b10a9d">argv</a>[0], strerror(errno));</div>
+<div class="line"><span class="lineno">  249</span>        </div>
+<div class="line"><span class="lineno">  250</span>        exit(EXIT_FAILURE); <span class="comment">// Exits only the child process</span></div>
+<div class="line"><span class="lineno">  251</span>    } <span class="keywordflow">else</span> { <span class="comment">// Parent code</span></div>
+<div class="line"><span class="lineno">  252</span>        <a class="code hl_function" href="background__jobs_8c.html#a6949e27ddbcafe827c27444388e907bb">add_background_job</a>(<a class="code hl_struct" href="structshell.html">shell</a>-&gt;<a class="code hl_variable" href="structshell.html#a6904d0f9a4c35874e4701cbcb5e6994f">jobs</a>, cmd, child_pid);</div>
+<div class="line"><span class="lineno">  253</span> </div>
+<div class="line"><span class="lineno">  254</span>        <span class="keywordflow">if</span> (cmd-&gt;<a class="code hl_variable" href="structcommand.html#aef8935bdf704e1ff07054800281d24c4">chain_type</a> == <a class="code hl_enumvalue" href="command_8h.html#a4fa9f0b878abe6ebdcbddc7416bb69adaa44b734476c2f3d073ee7aca08660a0e">BACKGROUND</a>) {</div>
+<div class="line"><span class="lineno">  255</span>            <span class="comment">// add_command_chain(background_jobs *jobs, command *command_chain)</span></div>
+<div class="line"><span class="lineno">  256</span>            <span class="keywordflow">if</span> (cmd-&gt;<a class="code hl_variable" href="structcommand.html#acae402512e855ece5df315f1206455c8">next</a> != NULL) {</div>
+<div class="line"><span class="lineno">  257</span>                <a class="code hl_function" href="shell_8c.html#a7bf41a557d5549e80262806150de609b">run_command</a>(<a class="code hl_struct" href="structshell.html">shell</a>, cmd-&gt;<a class="code hl_variable" href="structcommand.html#acae402512e855ece5df315f1206455c8">next</a>, in_fd);</div>
+<div class="line"><span class="lineno">  258</span>            }</div>
+<div class="line"><span class="lineno">  259</span>        } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (cmd-&gt;<a class="code hl_variable" href="structcommand.html#aef8935bdf704e1ff07054800281d24c4">chain_type</a> == <a class="code hl_enumvalue" href="command_8h.html#a4fa9f0b878abe6ebdcbddc7416bb69ada9bc832fa28809fb974f6ce5bb0cc7117">PIPE</a>) {</div>
+<div class="line"><span class="lineno">  260</span>            <a class="code hl_function" href="shell_8c.html#a0428601952a0a522c2cb358b4e76ecc9">CLOSE</a>(fd[<a class="code hl_define" href="shell_8c.html#a2efd706d915e621e5e18b3f0803c4ed2">WRITE_END</a>]);</div>
+<div class="line"><span class="lineno">  261</span> </div>
+<div class="line"><span class="lineno">  262</span>            <a class="code hl_function" href="shell_8c.html#a7bf41a557d5549e80262806150de609b">run_command</a>(<a class="code hl_struct" href="structshell.html">shell</a>, cmd-&gt;<a class="code hl_variable" href="structcommand.html#acae402512e855ece5df315f1206455c8">next</a>, fd[0]);</div>
+<div class="line"><span class="lineno">  263</span>        } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  264</span>            <span class="keywordtype">int</span> state;</div>
+<div class="line"><span class="lineno">  265</span>            <span class="keywordtype">int</span> result = waitpid(child_pid, &amp;state, WUNTRACED);</div>
+<div class="line"><span class="lineno">  266</span>            </div>
+<div class="line"><span class="lineno">  267</span>            <a class="code hl_function" href="background__jobs_8c.html#a195c31e22dd0b6edfa3a03f5638f05d8">update_background_job_status_by_pid</a>(<a class="code hl_struct" href="structshell.html">shell</a>-&gt;<a class="code hl_variable" href="structshell.html#a6904d0f9a4c35874e4701cbcb5e6994f">jobs</a>, child_pid, state);</div>
+<div class="line"><span class="lineno">  268</span> </div>
+<div class="line"><span class="lineno">  269</span>            <span class="keywordflow">if</span> (result == -1 &amp;&amp; errno != 10) { </div>
+<div class="line"><span class="lineno">  270</span>                perror(<span class="stringliteral">&quot;waitpid&quot;</span>);</div>
+<div class="line"><span class="lineno">  271</span>                exit(EXIT_FAILURE);</div>
+<div class="line"><span class="lineno">  272</span>            }</div>
+<div class="line"><span class="lineno">  273</span> </div>
+<div class="line"><span class="lineno">  274</span>            <span class="keywordflow">if</span> (cmd-&gt;<a class="code hl_variable" href="structcommand.html#acae402512e855ece5df315f1206455c8">next</a> != NULL) {</div>
+<div class="line"><span class="lineno">  275</span>                <span class="keywordflow">if</span> ((cmd-&gt;<a class="code hl_variable" href="structcommand.html#aef8935bdf704e1ff07054800281d24c4">chain_type</a> == <a class="code hl_enumvalue" href="command_8h.html#a4fa9f0b878abe6ebdcbddc7416bb69ada865555c9f2e0458a7078486aa1b3254f">AND</a> &amp;&amp; WEXITSTATUS(state) == EXIT_SUCCESS) || </div>
+<div class="line"><span class="lineno">  276</span>                        (cmd-&gt;<a class="code hl_variable" href="structcommand.html#aef8935bdf704e1ff07054800281d24c4">chain_type</a> == <a class="code hl_enumvalue" href="command_8h.html#a4fa9f0b878abe6ebdcbddc7416bb69ada96727447c0ad447987df1c6415aef074">OR</a>)) {</div>
+<div class="line"><span class="lineno">  277</span>                    <a class="code hl_function" href="shell_8c.html#a7bf41a557d5549e80262806150de609b">run_command</a>(<a class="code hl_struct" href="structshell.html">shell</a>, cmd-&gt;<a class="code hl_variable" href="structcommand.html#acae402512e855ece5df315f1206455c8">next</a>, in_fd);</div>
+<div class="line"><span class="lineno">  278</span>                }</div>
+<div class="line"><span class="lineno">  279</span>            }</div>
+<div class="line"><span class="lineno">  280</span>        }</div>
+<div class="line"><span class="lineno">  281</span>    }</div>
+<div class="line"><span class="lineno">  282</span>}</div>
 <div class="ttc" id="aalias_8c_html_a4699c9397b81000698cb5c07837fbd63"><div class="ttname"><a href="alias_8c.html#a4699c9397b81000698cb5c07837fbd63">find_alias</a></div><div class="ttdeci">alias * find_alias(aliasses *aliasses, char *key)</div><div class="ttdef"><b>Definition:</b> alias.c:46</div></div>
+<div class="ttc" id="abackground__jobs_8c_html_a195c31e22dd0b6edfa3a03f5638f05d8"><div class="ttname"><a href="background__jobs_8c.html#a195c31e22dd0b6edfa3a03f5638f05d8">update_background_job_status_by_pid</a></div><div class="ttdeci">void update_background_job_status_by_pid(background_jobs *jobs, int pid, int status)</div><div class="ttdef"><b>Definition:</b> background_jobs.c:41</div></div>
 <div class="ttc" id="abackground__jobs_8c_html_a6949e27ddbcafe827c27444388e907bb"><div class="ttname"><a href="background__jobs_8c.html#a6949e27ddbcafe827c27444388e907bb">add_background_job</a></div><div class="ttdeci">void add_background_job(background_jobs *jobs, command *cmd, int pid)</div><div class="ttdef"><b>Definition:</b> background_jobs.c:17</div></div>
 <div class="ttc" id="acommand_8h_html_a4fa9f0b878abe6ebdcbddc7416bb69ada865555c9f2e0458a7078486aa1b3254f"><div class="ttname"><a href="command_8h.html#a4fa9f0b878abe6ebdcbddc7416bb69ada865555c9f2e0458a7078486aa1b3254f">AND</a></div><div class="ttdeci">@ AND</div><div class="ttdef"><b>Definition:</b> command.h:13</div></div>
 <div class="ttc" id="acommand_8h_html_a4fa9f0b878abe6ebdcbddc7416bb69ada96727447c0ad447987df1c6415aef074"><div class="ttname"><a href="command_8h.html#a4fa9f0b878abe6ebdcbddc7416bb69ada96727447c0ad447987df1c6415aef074">OR</a></div><div class="ttdeci">@ OR</div><div class="ttdef"><b>Definition:</b> command.h:11</div></div>
 <div class="ttc" id="acommand_8h_html_a4fa9f0b878abe6ebdcbddc7416bb69ada9bc832fa28809fb974f6ce5bb0cc7117"><div class="ttname"><a href="command_8h.html#a4fa9f0b878abe6ebdcbddc7416bb69ada9bc832fa28809fb974f6ce5bb0cc7117">PIPE</a></div><div class="ttdeci">@ PIPE</div><div class="ttdef"><b>Definition:</b> command.h:10</div></div>
 <div class="ttc" id="acommand_8h_html_a4fa9f0b878abe6ebdcbddc7416bb69adaa44b734476c2f3d073ee7aca08660a0e"><div class="ttname"><a href="command_8h.html#a4fa9f0b878abe6ebdcbddc7416bb69adaa44b734476c2f3d073ee7aca08660a0e">BACKGROUND</a></div><div class="ttdeci">@ BACKGROUND</div><div class="ttdef"><b>Definition:</b> command.h:12</div></div>
-<div class="ttc" id="ashell_8c_html_a11534ed616b5b837706aec72d5c3dc12"><div class="ttname"><a href="shell_8c.html#a11534ed616b5b837706aec72d5c3dc12">redirect_and_close</a></div><div class="ttdeci">static void redirect_and_close(int oldfd, int newfd)</div><div class="ttdef"><b>Definition:</b> shell.c:185</div></div>
-<div class="ttc" id="ashell_8c_html_a1fe1d28c09c80c4d512b3a9751ec8b15"><div class="ttname"><a href="shell_8c.html#a1fe1d28c09c80c4d512b3a9751ec8b15">expand_command_with_alias</a></div><div class="ttdeci">void expand_command_with_alias(command *cmd, alias alias)</div><div class="ttdoc">Expand the command to match the given alias.</div><div class="ttdef"><b>Definition:</b> shell.c:120</div></div>
+<div class="ttc" id="ashell_8c_html_a11534ed616b5b837706aec72d5c3dc12"><div class="ttname"><a href="shell_8c.html#a11534ed616b5b837706aec72d5c3dc12">redirect_and_close</a></div><div class="ttdeci">static void redirect_and_close(int oldfd, int newfd)</div><div class="ttdef"><b>Definition:</b> shell.c:199</div></div>
+<div class="ttc" id="ashell_8c_html_a1fe1d28c09c80c4d512b3a9751ec8b15"><div class="ttname"><a href="shell_8c.html#a1fe1d28c09c80c4d512b3a9751ec8b15">expand_command_with_alias</a></div><div class="ttdeci">void expand_command_with_alias(command *cmd, alias alias)</div><div class="ttdoc">Expand the command to match the given alias.</div><div class="ttdef"><b>Definition:</b> shell.c:126</div></div>
 <div class="ttc" id="ashell_8c_html_a2469c53816dc077f9deefb187ffcabf3"><div class="ttname"><a href="shell_8c.html#a2469c53816dc077f9deefb187ffcabf3">READ_END</a></div><div class="ttdeci">#define READ_END</div><div class="ttdef"><b>Definition:</b> shell.c:20</div></div>
 <div class="ttc" id="ashell_8c_html_a2efd706d915e621e5e18b3f0803c4ed2"><div class="ttname"><a href="shell_8c.html#a2efd706d915e621e5e18b3f0803c4ed2">WRITE_END</a></div><div class="ttdeci">#define WRITE_END</div><div class="ttdef"><b>Definition:</b> shell.c:21</div></div>
-<div class="ttc" id="ashell_8c_html_a7bf41a557d5549e80262806150de609b"><div class="ttname"><a href="shell_8c.html#a7bf41a557d5549e80262806150de609b">run_command</a></div><div class="ttdeci">void run_command(shell *shell, command *cmd, int in_fd)</div><div class="ttdoc">Run a single command chain.</div><div class="ttdef"><b>Definition:</b> shell.c:192</div></div>
-<div class="ttc" id="ashell_8c_html_a7e2f62f42476df94c1451d10521a6f01"><div class="ttname"><a href="shell_8c.html#a7e2f62f42476df94c1451d10521a6f01">print_command_error</a></div><div class="ttdeci">void print_command_error(char *command, char *error)</div><div class="ttdef"><b>Definition:</b> shell.c:92</div></div>
+<div class="ttc" id="ashell_8c_html_a7bf41a557d5549e80262806150de609b"><div class="ttname"><a href="shell_8c.html#a7bf41a557d5549e80262806150de609b">run_command</a></div><div class="ttdeci">void run_command(shell *shell, command *cmd, int in_fd)</div><div class="ttdoc">Run a single command chain.</div><div class="ttdef"><b>Definition:</b> shell.c:206</div></div>
+<div class="ttc" id="ashell_8c_html_a7e2f62f42476df94c1451d10521a6f01"><div class="ttname"><a href="shell_8c.html#a7e2f62f42476df94c1451d10521a6f01">print_command_error</a></div><div class="ttdeci">void print_command_error(char *command, char *error)</div><div class="ttdef"><b>Definition:</b> shell.c:98</div></div>
 <div class="ttc" id="astructcommand_html_a2f753045109abb875e61b99fd45268ab"><div class="ttname"><a href="structcommand.html#a2f753045109abb875e61b99fd45268ab">command::stdin_file_redirection</a></div><div class="ttdeci">char * stdin_file_redirection</div><div class="ttdef"><b>Definition:</b> command.h:25</div></div>
 <div class="ttc" id="astructcommand_html_abdb2eeb4f5aaeaeba39e8343b0792088"><div class="ttname"><a href="structcommand.html#abdb2eeb4f5aaeaeba39e8343b0792088">command::stdout_file_redirection</a></div><div class="ttdeci">char * stdout_file_redirection</div><div class="ttdef"><b>Definition:</b> command.h:26</div></div>
 <div class="ttc" id="astructcommand_html_acae402512e855ece5df315f1206455c8"><div class="ttname"><a href="structcommand.html#acae402512e855ece5df315f1206455c8">command::next</a></div><div class="ttdeci">command * next</div><div class="ttdef"><b>Definition:</b> command.h:23</div></div>
@@ -678,8 +688,8 @@ Variables</h2></td></tr>
 </div><!-- fragment -->
 </div>
 </div>
-<a id="a4f404a0dc5d0e0f0977739ddb5d78a67" name="a4f404a0dc5d0e0f0977739ddb5d78a67"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4f404a0dc5d0e0f0977739ddb5d78a67">&#9670;&nbsp;</a></span>run_from_file()</h2>
+<a id="acc0ea92c78f8c568184eb9b3fb91c17e" name="acc0ea92c78f8c568184eb9b3fb91c17e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acc0ea92c78f8c568184eb9b3fb91c17e">&#9670;&nbsp;</a></span>run_from_file()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -710,9 +720,29 @@ Variables</h2></td></tr>
   </table>
   </dd>
 </dl>
-<div class="fragment"><div class="line"><span class="lineno">  138</span>                                           {</div>
-<div class="line"><span class="lineno">  139</span> </div>
-<div class="line"><span class="lineno">  140</span>}</div>
+<div class="fragment"><div class="line"><span class="lineno">  169</span>                                             {</div>
+<div class="line"><span class="lineno">  170</span>    signal(SIGINT, <a class="code hl_function" href="shell_8c.html#abe49209a75815c91395459c8ccd971d9">signint_handler</a>);</div>
+<div class="line"><span class="lineno">  171</span>    signal(SIGCHLD, <a class="code hl_function" href="shell_8c.html#a76199fe33026a9f049f0b7942f6f3ec8">sigchld_handler</a>);</div>
+<div class="line"><span class="lineno">  172</span>    signal(SIGTSTP, <a class="code hl_function" href="shell_8c.html#aa1278db3512cb8fe85e70ab6aab9062b">sigstop_handler</a>);</div>
+<div class="line"><span class="lineno">  173</span> </div>
+<div class="line"><span class="lineno">  174</span>    <span class="keywordflow">do</span> {</div>
+<div class="line"><span class="lineno">  175</span>        <span class="keywordflow">if</span> (file == stdin) {</div>
+<div class="line"><span class="lineno">  176</span>            <a class="code hl_variable" href="shell_8c.html#aa7b01df7bc1fb08986302c7e9fd2c460">running_shell</a>-&gt;<a class="code hl_variable" href="structshell.html#a78aaca8ba01feff5d6c386e773cacd8f">prompt</a>(<a class="code hl_variable" href="shell_8c.html#aa7b01df7bc1fb08986302c7e9fd2c460">running_shell</a>);</div>
+<div class="line"><span class="lineno">  177</span>        }</div>
+<div class="line"><span class="lineno">  178</span>        <span class="keywordtype">char</span>* input = <a class="code hl_function" href="shell_8c.html#a174fabc79fb68c5ea07db71250668d55">read_input_from_file</a>(file);</div>
+<div class="line"><span class="lineno">  179</span> </div>
+<div class="line"><span class="lineno">  180</span>        <a class="code hl_function" href="shell_8c.html#adda30003bb48504d2a454839de860e8f">run_from_string</a>(<a class="code hl_struct" href="structshell.html">shell</a>, input);</div>
+<div class="line"><span class="lineno">  181</span> </div>
+<div class="line"><span class="lineno">  182</span>        <span class="keywordflow">if</span> (input != NULL) {</div>
+<div class="line"><span class="lineno">  183</span>            free(input);</div>
+<div class="line"><span class="lineno">  184</span>        }       </div>
+<div class="line"><span class="lineno">  185</span>    } <span class="keywordflow">while</span> (<a class="code hl_variable" href="shell_8c.html#aa7b01df7bc1fb08986302c7e9fd2c460">running_shell</a>-&gt;<a class="code hl_variable" href="structshell.html#a4c8e036de0f60e4555041dbc713ae534">running</a> &amp;&amp; !feof(file));</div>
+<div class="line"><span class="lineno">  186</span>}</div>
+<div class="ttc" id="ashell_8c_html_a174fabc79fb68c5ea07db71250668d55"><div class="ttname"><a href="shell_8c.html#a174fabc79fb68c5ea07db71250668d55">read_input_from_file</a></div><div class="ttdeci">static char * read_input_from_file(FILE *file)</div><div class="ttdef"><b>Definition:</b> shell.c:106</div></div>
+<div class="ttc" id="ashell_8c_html_a76199fe33026a9f049f0b7942f6f3ec8"><div class="ttname"><a href="shell_8c.html#a76199fe33026a9f049f0b7942f6f3ec8">sigchld_handler</a></div><div class="ttdeci">static void sigchld_handler(int sig_num)</div><div class="ttdef"><b>Definition:</b> shell.c:41</div></div>
+<div class="ttc" id="ashell_8c_html_aa1278db3512cb8fe85e70ab6aab9062b"><div class="ttname"><a href="shell_8c.html#aa1278db3512cb8fe85e70ab6aab9062b">sigstop_handler</a></div><div class="ttdeci">static void sigstop_handler(int sig_num)</div><div class="ttdef"><b>Definition:</b> shell.c:36</div></div>
+<div class="ttc" id="ashell_8c_html_abe49209a75815c91395459c8ccd971d9"><div class="ttname"><a href="shell_8c.html#abe49209a75815c91395459c8ccd971d9">signint_handler</a></div><div class="ttdeci">static void signint_handler(int sig_num)</div><div class="ttdef"><b>Definition:</b> shell.c:31</div></div>
+<div class="ttc" id="ashell_8c_html_adda30003bb48504d2a454839de860e8f"><div class="ttname"><a href="shell_8c.html#adda30003bb48504d2a454839de860e8f">run_from_string</a></div><div class="ttdeci">void run_from_string(shell *shell, char *input)</div><div class="ttdoc">Run command from a single input string.</div><div class="ttdef"><b>Definition:</b> shell.c:144</div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -748,26 +778,31 @@ Variables</h2></td></tr>
   </table>
   </dd>
 </dl>
-<div class="fragment"><div class="line"><span class="lineno">  142</span>                                                {</div>
-<div class="line"><span class="lineno">  143</span>    <a class="code hl_struct" href="structcommand.html">command</a>* cmd = <a class="code hl_function" href="command__parser_8c.html#a5bc90c2ea759023d758c8d17b13238d6">command_parse</a>(input);</div>
-<div class="line"><span class="lineno">  144</span> </div>
-<div class="line"><span class="lineno">  145</span>    <span class="keywordflow">if</span> (cmd != NULL) {</div>
-<div class="line"><span class="lineno">  146</span>        <span class="comment">// Problem with this approach is that it&#39;ll only work if the first program is a builtin</span></div>
-<div class="line"><span class="lineno">  147</span>        <a class="code hl_typedef" href="builtin__command_8h.html#a78c340fad82b2494617941a00ee97146">builtin_command_function</a> func = <a class="code hl_function" href="builtin__command_8c.html#a8090997432344498a55c465d6c927452">find_builtin_command</a>(<a class="code hl_struct" href="structshell.html">shell</a>-&gt;<a class="code hl_variable" href="structshell.html#a12c7420c8b3f8f7e6bbeaa27b0bc343c">builtin_commands</a>, cmd-&gt;<a class="code hl_variable" href="structcommand.html#a03bac117621dd0961bafddbc41b10a9d">argv</a>[0]);</div>
-<div class="line"><span class="lineno">  148</span>        <span class="keywordflow">if</span> (func != NULL) {</div>
-<div class="line"><span class="lineno">  149</span>            <span class="keywordtype">int</span> status = func(<a class="code hl_struct" href="structshell.html">shell</a>, cmd-&gt;<a class="code hl_variable" href="structcommand.html#a39d8af452518a3a9233dfdafd24ff9d0">argc</a>, cmd-&gt;<a class="code hl_variable" href="structcommand.html#a03bac117621dd0961bafddbc41b10a9d">argv</a>);</div>
-<div class="line"><span class="lineno">  150</span>        } <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno">  151</span>            <span class="comment">// add_command_chain(interactive_shell-&gt;jobs, cmd);</span></div>
-<div class="line"><span class="lineno">  152</span>            <span class="comment">// add_command_chain(jobs, cmd);</span></div>
-<div class="line"><span class="lineno">  153</span>            <a class="code hl_function" href="shell_8c.html#a7bf41a557d5549e80262806150de609b">run_command</a>(<a class="code hl_struct" href="structshell.html">shell</a>, cmd, STDIN_FILENO);</div>
-<div class="line"><span class="lineno">  154</span>            dup(STDIN_FILENO);</div>
-<div class="line"><span class="lineno">  155</span>            dup(STDOUT_FILENO);</div>
-<div class="line"><span class="lineno">  156</span>        }</div>
-<div class="line"><span class="lineno">  157</span> </div>
-<div class="line"><span class="lineno">  158</span>        <a class="code hl_function" href="command_8c.html#a95098a672188182c4eaa40748c1392e3">command_free</a>(cmd);</div>
-<div class="line"><span class="lineno">  159</span>    }</div>
-<div class="line"><span class="lineno">  160</span>}</div>
-<div class="ttc" id="abuiltin__command_8c_html_a8090997432344498a55c465d6c927452"><div class="ttname"><a href="builtin__command_8c.html#a8090997432344498a55c465d6c927452">find_builtin_command</a></div><div class="ttdeci">builtin_command_function find_builtin_command(shell_builtin_commands *commands, char *key)</div><div class="ttdoc">Find one builtin command by searching with one key.</div><div class="ttdef"><b>Definition:</b> builtin_command.c:80</div></div>
+<div class="fragment"><div class="line"><span class="lineno">  144</span>                                                {</div>
+<div class="line"><span class="lineno">  145</span>    <a class="code hl_struct" href="structcommand.html">command</a>* cmd = <a class="code hl_function" href="command__parser_8c.html#a5bc90c2ea759023d758c8d17b13238d6">command_parse</a>(input);</div>
+<div class="line"><span class="lineno">  146</span>    <span class="keywordflow">if</span> (cmd == NULL) {</div>
+<div class="line"><span class="lineno">  147</span>        <span class="keywordflow">return</span>;</div>
+<div class="line"><span class="lineno">  148</span>    }</div>
+<div class="line"><span class="lineno">  149</span> </div>
+<div class="line"><span class="lineno">  150</span>    <span class="keywordflow">if</span> (<a class="code hl_struct" href="structshell.html">shell</a>-&gt;<a class="code hl_variable" href="structshell.html#a9b58237c688ac5d8a98b72ff970ccfd5">verbose</a>) {</div>
+<div class="line"><span class="lineno">  151</span>        printf(<span class="stringliteral">&quot;%s\n&quot;</span>, input);</div>
+<div class="line"><span class="lineno">  152</span>    }</div>
+<div class="line"><span class="lineno">  153</span> </div>
+<div class="line"><span class="lineno">  154</span>    <span class="comment">// Problem with this approach is that it&#39;ll only work if the first program is a builtin</span></div>
+<div class="line"><span class="lineno">  155</span>    <a class="code hl_typedef" href="builtin__command_8h.html#a78c340fad82b2494617941a00ee97146">builtin_command_function</a> func = <a class="code hl_function" href="builtin__command_8c.html#a8090997432344498a55c465d6c927452">find_builtin_command</a>(<a class="code hl_struct" href="structshell.html">shell</a>-&gt;<a class="code hl_variable" href="structshell.html#a12c7420c8b3f8f7e6bbeaa27b0bc343c">builtin_commands</a>, cmd-&gt;<a class="code hl_variable" href="structcommand.html#a03bac117621dd0961bafddbc41b10a9d">argv</a>[0]);</div>
+<div class="line"><span class="lineno">  156</span>    <span class="keywordflow">if</span> (func != NULL) {</div>
+<div class="line"><span class="lineno">  157</span>        <span class="keywordtype">int</span> status = func(<a class="code hl_struct" href="structshell.html">shell</a>, cmd-&gt;<a class="code hl_variable" href="structcommand.html#a39d8af452518a3a9233dfdafd24ff9d0">argc</a>, cmd-&gt;<a class="code hl_variable" href="structcommand.html#a03bac117621dd0961bafddbc41b10a9d">argv</a>);</div>
+<div class="line"><span class="lineno">  158</span>    } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  159</span>        <span class="comment">// add_command_chain(interactive_shell-&gt;jobs, cmd);</span></div>
+<div class="line"><span class="lineno">  160</span>        <span class="comment">// add_command_chain(jobs, cmd);</span></div>
+<div class="line"><span class="lineno">  161</span>        <a class="code hl_function" href="shell_8c.html#a7bf41a557d5549e80262806150de609b">run_command</a>(<a class="code hl_struct" href="structshell.html">shell</a>, cmd, STDIN_FILENO);</div>
+<div class="line"><span class="lineno">  162</span>        dup(STDIN_FILENO);</div>
+<div class="line"><span class="lineno">  163</span>        dup(STDOUT_FILENO);</div>
+<div class="line"><span class="lineno">  164</span>    }</div>
+<div class="line"><span class="lineno">  165</span> </div>
+<div class="line"><span class="lineno">  166</span>    <a class="code hl_function" href="command_8c.html#a95098a672188182c4eaa40748c1392e3">command_free</a>(cmd);</div>
+<div class="line"><span class="lineno">  167</span>}</div>
+<div class="ttc" id="abuiltin__command_8c_html_a8090997432344498a55c465d6c927452"><div class="ttname"><a href="builtin__command_8c.html#a8090997432344498a55c465d6c927452">find_builtin_command</a></div><div class="ttdeci">builtin_command_function find_builtin_command(shell_builtin_commands *commands, char *key)</div><div class="ttdoc">Find one builtin command by searching with one key.</div><div class="ttdef"><b>Definition:</b> builtin_command.c:82</div></div>
 <div class="ttc" id="abuiltin__command_8h_html_a78c340fad82b2494617941a00ee97146"><div class="ttname"><a href="builtin__command_8h.html#a78c340fad82b2494617941a00ee97146">builtin_command_function</a></div><div class="ttdeci">int(* builtin_command_function)(shell *shell, int argc, char **argv)</div><div class="ttdoc">Type of a builtin command function that will be executed.</div><div class="ttdef"><b>Definition:</b> builtin_command.h:12</div></div>
 <div class="ttc" id="acommand_8c_html_a95098a672188182c4eaa40748c1392e3"><div class="ttname"><a href="command_8c.html#a95098a672188182c4eaa40748c1392e3">command_free</a></div><div class="ttdeci">void command_free(command *command)</div><div class="ttdoc">Frees the given command.</div><div class="ttdef"><b>Definition:</b> command.c:60</div></div>
 <div class="ttc" id="acommand__parser_8c_html_a5bc90c2ea759023d758c8d17b13238d6"><div class="ttname"><a href="command__parser_8c.html#a5bc90c2ea759023d758c8d17b13238d6">command_parse</a></div><div class="ttdeci">command * command_parse(char *input)</div><div class="ttdoc">Create a new command.</div><div class="ttdef"><b>Definition:</b> command_parser.c:27</div></div>
@@ -795,30 +830,15 @@ Variables</h2></td></tr>
   </table>
   </dd>
 </dl>
-<div class="fragment"><div class="line"><span class="lineno">  162</span>                                   {</div>
-<div class="line"><span class="lineno">  163</span>    signal(SIGINT, <a class="code hl_function" href="shell_8c.html#a4afd3f9736e8a5dcbcfa94a06cd06935">sigintHandler</a>);</div>
-<div class="line"><span class="lineno">  164</span>    signal(SIGCHLD, <a class="code hl_function" href="shell_8c.html#a54f524d2c173fcd2915162cf3197fabb">sigchldHandler</a>);</div>
-<div class="line"><span class="lineno">  165</span> </div>
-<div class="line"><span class="lineno">  166</span>    <span class="keywordflow">do</span> {</div>
-<div class="line"><span class="lineno">  167</span>        <a class="code hl_variable" href="shell_8c.html#aa7b01df7bc1fb08986302c7e9fd2c460">running_shell</a>-&gt;<a class="code hl_variable" href="structshell.html#a78aaca8ba01feff5d6c386e773cacd8f">prompt</a>(<a class="code hl_variable" href="shell_8c.html#aa7b01df7bc1fb08986302c7e9fd2c460">running_shell</a>);</div>
-<div class="line"><span class="lineno">  168</span>        <span class="keywordtype">char</span>* input = <a class="code hl_function" href="shell_8c.html#af7a6cb96348d64948695a697a97b941a">read_input</a>();</div>
-<div class="line"><span class="lineno">  169</span> </div>
-<div class="line"><span class="lineno">  170</span>        <a class="code hl_function" href="shell_8c.html#adda30003bb48504d2a454839de860e8f">run_from_string</a>(<a class="code hl_struct" href="structshell.html">shell</a>, input);</div>
-<div class="line"><span class="lineno">  171</span> </div>
-<div class="line"><span class="lineno">  172</span>        <span class="keywordflow">if</span> (input != NULL) {</div>
-<div class="line"><span class="lineno">  173</span>            free(input);</div>
-<div class="line"><span class="lineno">  174</span>        }       </div>
-<div class="line"><span class="lineno">  175</span>    } <span class="keywordflow">while</span> (<a class="code hl_variable" href="shell_8c.html#aa7b01df7bc1fb08986302c7e9fd2c460">running_shell</a>-&gt;<a class="code hl_variable" href="structshell.html#a4c8e036de0f60e4555041dbc713ae534">running</a> &amp;&amp; !feof(stdin));</div>
-<div class="line"><span class="lineno">  176</span>}</div>
-<div class="ttc" id="ashell_8c_html_a4afd3f9736e8a5dcbcfa94a06cd06935"><div class="ttname"><a href="shell_8c.html#a4afd3f9736e8a5dcbcfa94a06cd06935">sigintHandler</a></div><div class="ttdeci">static void sigintHandler(int sig_num)</div><div class="ttdef"><b>Definition:</b> shell.c:31</div></div>
-<div class="ttc" id="ashell_8c_html_a54f524d2c173fcd2915162cf3197fabb"><div class="ttname"><a href="shell_8c.html#a54f524d2c173fcd2915162cf3197fabb">sigchldHandler</a></div><div class="ttdeci">static void sigchldHandler(int sig_num)</div><div class="ttdef"><b>Definition:</b> shell.c:36</div></div>
-<div class="ttc" id="ashell_8c_html_adda30003bb48504d2a454839de860e8f"><div class="ttname"><a href="shell_8c.html#adda30003bb48504d2a454839de860e8f">run_from_string</a></div><div class="ttdeci">void run_from_string(shell *shell, char *input)</div><div class="ttdoc">Run command from a single input string.</div><div class="ttdef"><b>Definition:</b> shell.c:142</div></div>
-<div class="ttc" id="ashell_8c_html_af7a6cb96348d64948695a697a97b941a"><div class="ttname"><a href="shell_8c.html#af7a6cb96348d64948695a697a97b941a">read_input</a></div><div class="ttdeci">static char * read_input()</div><div class="ttdef"><b>Definition:</b> shell.c:100</div></div>
+<div class="fragment"><div class="line"><span class="lineno">  188</span>                                   {</div>
+<div class="line"><span class="lineno">  189</span>    <a class="code hl_function" href="shell_8c.html#acc0ea92c78f8c568184eb9b3fb91c17e">run_from_file</a>(<a class="code hl_struct" href="structshell.html">shell</a>, stdin);</div>
+<div class="line"><span class="lineno">  190</span>}</div>
+<div class="ttc" id="ashell_8c_html_acc0ea92c78f8c568184eb9b3fb91c17e"><div class="ttname"><a href="shell_8c.html#acc0ea92c78f8c568184eb9b3fb91c17e">run_from_file</a></div><div class="ttdeci">void run_from_file(shell *shell, FILE *file)</div><div class="ttdoc">Run commands from the given file.</div><div class="ttdef"><b>Definition:</b> shell.c:169</div></div>
 </div><!-- fragment -->
 </div>
 </div>
-<a id="a54f524d2c173fcd2915162cf3197fabb" name="a54f524d2c173fcd2915162cf3197fabb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a54f524d2c173fcd2915162cf3197fabb">&#9670;&nbsp;</a></span>sigchldHandler()</h2>
+<a id="a76199fe33026a9f049f0b7942f6f3ec8" name="a76199fe33026a9f049f0b7942f6f3ec8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a76199fe33026a9f049f0b7942f6f3ec8">&#9670;&nbsp;</a></span>sigchld_handler()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -827,7 +847,7 @@ Variables</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static void sigchldHandler </td>
+          <td class="memname">static void sigchld_handler </td>
           <td>(</td>
           <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>sig_num</em></td><td>)</td>
@@ -840,25 +860,25 @@ Variables</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<div class="fragment"><div class="line"><span class="lineno">   36</span>                                        {</div>
-<div class="line"><span class="lineno">   37</span>    signal(SIGCHLD, <a class="code hl_function" href="shell_8c.html#a54f524d2c173fcd2915162cf3197fabb">sigchldHandler</a>);</div>
-<div class="line"><span class="lineno">   38</span> </div>
-<div class="line"><span class="lineno">   39</span>    <a class="code hl_struct" href="structbackground__job.html">background_job</a>* curr = <a class="code hl_variable" href="shell_8c.html#aa7b01df7bc1fb08986302c7e9fd2c460">running_shell</a>-&gt;<a class="code hl_variable" href="structshell.html#a6904d0f9a4c35874e4701cbcb5e6994f">jobs</a>-&gt;<a class="code hl_variable" href="structbackground__jobs.html#a32cca3c0a8ad11ee09f2d5c8e90c8ea1">next</a>;</div>
-<div class="line"><span class="lineno">   40</span>    <span class="keywordflow">while</span> (curr != NULL) {</div>
-<div class="line"><span class="lineno">   41</span>        <span class="keywordtype">int</span> state;</div>
-<div class="line"><span class="lineno">   42</span>        <span class="keywordtype">int</span> res = waitpid(curr-&gt;<a class="code hl_variable" href="structbackground__job.html#a92f573281a21ffc96121672b8d9ca500">pid</a>, &amp;state, WNOHANG);</div>
+<div class="fragment"><div class="line"><span class="lineno">   41</span>                                         {</div>
+<div class="line"><span class="lineno">   42</span>    signal(SIGCHLD, <a class="code hl_function" href="shell_8c.html#a76199fe33026a9f049f0b7942f6f3ec8">sigchld_handler</a>);</div>
 <div class="line"><span class="lineno">   43</span> </div>
-<div class="line"><span class="lineno">   44</span>        <span class="keywordflow">if</span> (res &gt; 0 &amp;&amp; WIFEXITED(state)) {</div>
-<div class="line"><span class="lineno">   45</span>            <span class="comment">// printf(&quot;[+%d] Background process done. Status: %d\n&quot;, curr-&gt;pid, WEXITSTATUS(state));</span></div>
-<div class="line"><span class="lineno">   46</span> </div>
-<div class="line"><span class="lineno">   47</span>            <a class="code hl_function" href="background__jobs_8c.html#ae6e57676cb897218633deed50a5cf81b">update_background_job_status</a>(curr, state);</div>
-<div class="line"><span class="lineno">   48</span>            printf(<span class="stringliteral">&quot;[+%d] Background updated. Status: %d\n&quot;</span>, curr-&gt;<a class="code hl_variable" href="structbackground__job.html#a92f573281a21ffc96121672b8d9ca500">pid</a>, WEXITSTATUS(state));</div>
-<div class="line"><span class="lineno">   49</span>            <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">   50</span>        }</div>
+<div class="line"><span class="lineno">   44</span>    <a class="code hl_struct" href="structbackground__job.html">background_job</a>* curr = <a class="code hl_variable" href="shell_8c.html#aa7b01df7bc1fb08986302c7e9fd2c460">running_shell</a>-&gt;<a class="code hl_variable" href="structshell.html#a6904d0f9a4c35874e4701cbcb5e6994f">jobs</a>-&gt;<a class="code hl_variable" href="structbackground__jobs.html#a32cca3c0a8ad11ee09f2d5c8e90c8ea1">next</a>;</div>
+<div class="line"><span class="lineno">   45</span>    <span class="keywordflow">while</span> (curr != NULL) {</div>
+<div class="line"><span class="lineno">   46</span>        <span class="keywordtype">int</span> state;</div>
+<div class="line"><span class="lineno">   47</span>        <span class="keywordtype">int</span> res = waitpid(curr-&gt;<a class="code hl_variable" href="structbackground__job.html#a92f573281a21ffc96121672b8d9ca500">pid</a>, &amp;state, WNOHANG);</div>
+<div class="line"><span class="lineno">   48</span> </div>
+<div class="line"><span class="lineno">   49</span>        <span class="keywordflow">if</span> (res &gt; 0 &amp;&amp; WIFEXITED(state)) {</div>
+<div class="line"><span class="lineno">   50</span>            <span class="comment">// printf(&quot;[+%d] Background process done. Status: %d\n&quot;, curr-&gt;pid, WEXITSTATUS(state));</span></div>
 <div class="line"><span class="lineno">   51</span> </div>
-<div class="line"><span class="lineno">   52</span>        curr = curr-&gt;<a class="code hl_variable" href="structbackground__job.html#abbb51c5e8ea6e46655330990524499ea">next</a>;</div>
-<div class="line"><span class="lineno">   53</span>    }</div>
-<div class="line"><span class="lineno">   54</span>}</div>
+<div class="line"><span class="lineno">   52</span>            <a class="code hl_function" href="background__jobs_8c.html#ae6e57676cb897218633deed50a5cf81b">update_background_job_status</a>(curr, state);</div>
+<div class="line"><span class="lineno">   53</span>            printf(<span class="stringliteral">&quot;[%d] Background updated. Status: %d\n&quot;</span>, curr-&gt;<a class="code hl_variable" href="structbackground__job.html#a92f573281a21ffc96121672b8d9ca500">pid</a>, WEXITSTATUS(state));</div>
+<div class="line"><span class="lineno">   54</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">   55</span>        }</div>
+<div class="line"><span class="lineno">   56</span> </div>
+<div class="line"><span class="lineno">   57</span>        curr = curr-&gt;<a class="code hl_variable" href="structbackground__job.html#abbb51c5e8ea6e46655330990524499ea">next</a>;</div>
+<div class="line"><span class="lineno">   58</span>    }</div>
+<div class="line"><span class="lineno">   59</span>}</div>
 <div class="ttc" id="abackground__jobs_8c_html_ae6e57676cb897218633deed50a5cf81b"><div class="ttname"><a href="background__jobs_8c.html#ae6e57676cb897218633deed50a5cf81b">update_background_job_status</a></div><div class="ttdeci">void update_background_job_status(background_job *job, int status)</div><div class="ttdef"><b>Definition:</b> background_jobs.c:37</div></div>
 <div class="ttc" id="astructbackground__job_html"><div class="ttname"><a href="structbackground__job.html">background_job</a></div><div class="ttdef"><b>Definition:</b> background_jobs.h:11</div></div>
 <div class="ttc" id="astructbackground__job_html_a92f573281a21ffc96121672b8d9ca500"><div class="ttname"><a href="structbackground__job.html#a92f573281a21ffc96121672b8d9ca500">background_job::pid</a></div><div class="ttdeci">int pid</div><div class="ttdef"><b>Definition:</b> background_jobs.h:13</div></div>
@@ -867,8 +887,8 @@ Variables</h2></td></tr>
 </div><!-- fragment -->
 </div>
 </div>
-<a id="a4afd3f9736e8a5dcbcfa94a06cd06935" name="a4afd3f9736e8a5dcbcfa94a06cd06935"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4afd3f9736e8a5dcbcfa94a06cd06935">&#9670;&nbsp;</a></span>sigintHandler()</h2>
+<a id="abe49209a75815c91395459c8ccd971d9" name="abe49209a75815c91395459c8ccd971d9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abe49209a75815c91395459c8ccd971d9">&#9670;&nbsp;</a></span>signint_handler()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -877,7 +897,7 @@ Variables</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static void sigintHandler </td>
+          <td class="memname">static void signint_handler </td>
           <td>(</td>
           <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>sig_num</em></td><td>)</td>
@@ -891,10 +911,40 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 <p >Handles Ctrl-C events, it does nothing. exec already kill the child process </p>
-<div class="fragment"><div class="line"><span class="lineno">   31</span>                                       {</div>
-<div class="line"><span class="lineno">   32</span>    signal(SIGINT, <a class="code hl_function" href="shell_8c.html#a4afd3f9736e8a5dcbcfa94a06cd06935">sigintHandler</a>); <span class="comment">// Will receive the signal on the next time</span></div>
+<div class="fragment"><div class="line"><span class="lineno">   31</span>                                         {</div>
+<div class="line"><span class="lineno">   32</span>    signal(SIGINT, <a class="code hl_function" href="shell_8c.html#abe49209a75815c91395459c8ccd971d9">signint_handler</a>); <span class="comment">// Will receive the signal on the next time</span></div>
 <div class="line"><span class="lineno">   33</span>    printf(<span class="stringliteral">&quot;\n&quot;</span>);</div>
 <div class="line"><span class="lineno">   34</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="aa1278db3512cb8fe85e70ab6aab9062b" name="aa1278db3512cb8fe85e70ab6aab9062b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa1278db3512cb8fe85e70ab6aab9062b">&#9670;&nbsp;</a></span>sigstop_handler()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void sigstop_handler </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>sig_num</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<div class="fragment"><div class="line"><span class="lineno">   36</span>                                         {</div>
+<div class="line"><span class="lineno">   37</span>    signal(SIGTSTP, <a class="code hl_function" href="shell_8c.html#aa1278db3512cb8fe85e70ab6aab9062b">sigstop_handler</a>);</div>
+<div class="line"><span class="lineno">   38</span>    printf(<span class="stringliteral">&quot;SIGSTOP PROCESS\n&quot;</span>);</div>
+<div class="line"><span class="lineno">   39</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -928,7 +978,7 @@ Variables</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_b2c05b11dbc691bba5c0cb93063c379f.html">shell</a></li><li class="navelem"><a class="el" href="shell_8c.html">shell.c</a></li>
-    <li class="footer">Generated on Mon May 16 2022 17:09:05 for shellso by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.4 </li>
+    <li class="footer">Generated on Tue May 17 2022 16:58:22 for shellso by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.4 </li>
   </ul>
 </div>
 <!-- BEGIN doxygen awesome darkmode toggle -->

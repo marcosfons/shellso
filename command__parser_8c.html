@@ -211,129 +211,134 @@ Functions</h2></td></tr>
 <dl class="todo"><dt><b><a class="el" href="todo.html#_todo000005">Todo:</a></b></dt><dd>Create a strategy to "expect" a new command. For now only throwing a error and returning NULL </dd></dl>
 <dl class="todo"><dt><b><a class="el" href="todo.html#_todo000006">Todo:</a></b></dt><dd>Introduce a hint saying what character and its position </dd></dl>
 <div class="fragment"><div class="line"><span class="lineno">   27</span>                                    {</div>
-<div class="line"><span class="lineno">   28</span>    <span class="keywordflow">if</span> (input == NULL) {</div>
-<div class="line"><span class="lineno">   29</span>        <span class="keywordflow">return</span> NULL;</div>
-<div class="line"><span class="lineno">   30</span>    }</div>
-<div class="line"><span class="lineno">   31</span> </div>
-<div class="line"><span class="lineno">   32</span>    <a class="code hl_struct" href="structcommand.html">command</a>* cmd = <a class="code hl_function" href="command_8c.html#a92d84bb0db13ef0d0ee878eac2e8fb3d">command_create</a>();</div>
-<div class="line"><span class="lineno">   33</span> </div>
-<div class="line"><span class="lineno">   34</span>    <span class="comment">// Using =&gt; to redirect stdout &#39;&gt;&#39; isn&#39;t a restricted char</span></div>
-<div class="line"><span class="lineno">   35</span>    <span class="keyword">const</span> <span class="keywordtype">char</span>* restricted_chars = <span class="stringliteral">&quot;&amp;| =&lt;\0&quot;</span>;</div>
-<div class="line"><span class="lineno">   36</span> </div>
-<div class="line"><span class="lineno">   37</span>    <a class="code hl_struct" href="structstring__t.html">string_t</a> content = <a class="code hl_function" href="string__utils_8c.html#a80c7c1081ae8fd0a73bab19c8d39568a">create_empty_string</a>();</div>
-<div class="line"><span class="lineno">   38</span>    <a class="code hl_enumeration" href="command__parser_8c.html#ab0ce6a33765cfb1c3ceb2f811cc03ce9">parser_state</a> state = <a class="code hl_enumvalue" href="command__parser_8c.html#ab0ce6a33765cfb1c3ceb2f811cc03ce9a4ce9c78ca194de0491c36adb14e85f87">WAITING_FIRST_COMMAND_CHARACTER</a>;</div>
-<div class="line"><span class="lineno">   39</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i == 0 || input[i - 1] != <span class="charliteral">&#39;\0&#39;</span>; i++) {</div>
-<div class="line"><span class="lineno">   40</span> </div>
-<div class="line"><span class="lineno">   41</span>        <span class="keywordflow">if</span> (strchr(restricted_chars, input[i]) != <a class="code hl_enumvalue" href="command_8h.html#a4fa9f0b878abe6ebdcbddc7416bb69adac157bdf0b85a40d2619cbc8bc1ae5fe2">NONE</a>) {</div>
-<div class="line"><span class="lineno">   42</span>            <span class="keywordflow">if</span> (state % 2 != 0) { <span class="comment">// State READING</span></div>
-<div class="line"><span class="lineno">   43</span>                <a class="code hl_function" href="string__utils_8c.html#a2426b37bf8aa4caf96e7935b7e8fd57a">append_string</a>(&amp;content, input, i);</div>
-<div class="line"><span class="lineno">   44</span> </div>
-<div class="line"><span class="lineno">   45</span>                <span class="keywordflow">if</span> (state == <a class="code hl_enumvalue" href="command__parser_8c.html#ab0ce6a33765cfb1c3ceb2f811cc03ce9afb079704dccc5d73fd5aae4cf944d11f">READING_COMMAND</a>) {</div>
-<div class="line"><span class="lineno">   46</span>                    <a class="code hl_function" href="command_8c.html#a177927482cca70d563c009417f6c1c25">command_set_command</a>(cmd, content.<a class="code hl_variable" href="structstring__t.html#a37ef53a3554a52fc80f220a1e5cf699c">string</a>);</div>
-<div class="line"><span class="lineno">   47</span>                } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (state == <a class="code hl_enumvalue" href="command__parser_8c.html#ab0ce6a33765cfb1c3ceb2f811cc03ce9a012581533eccd1efdcca0c83e6bd8146">READING_ARGUMENTS</a>) {</div>
-<div class="line"><span class="lineno">   48</span>                    <a class="code hl_function" href="command_8c.html#aba418022cc3cc6265b2bbf54047888c8">command_add_argument</a>(cmd, content.<a class="code hl_variable" href="structstring__t.html#a37ef53a3554a52fc80f220a1e5cf699c">string</a>);</div>
-<div class="line"><span class="lineno">   49</span>                } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (state == <a class="code hl_enumvalue" href="command__parser_8c.html#ab0ce6a33765cfb1c3ceb2f811cc03ce9a8fc8eaf3309f7cb734d1ab6781a76b67">READING_REDIRECT_STDIN_FILE</a>) {</div>
-<div class="line"><span class="lineno">   50</span>                    cmd-&gt;<a class="code hl_variable" href="structcommand.html#a2f753045109abb875e61b99fd45268ab">stdin_file_redirection</a> = content.<a class="code hl_variable" href="structstring__t.html#a37ef53a3554a52fc80f220a1e5cf699c">string</a>;</div>
-<div class="line"><span class="lineno">   51</span>                } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (state == <a class="code hl_enumvalue" href="command__parser_8c.html#ab0ce6a33765cfb1c3ceb2f811cc03ce9ab1275636c5e593d37a3fab5710733d38">READING_REDIRECT_STDOUT_FILE</a>) {</div>
-<div class="line"><span class="lineno">   52</span>                    cmd-&gt;<a class="code hl_variable" href="structcommand.html#abdb2eeb4f5aaeaeba39e8343b0792088">stdout_file_redirection</a> = content.<a class="code hl_variable" href="structstring__t.html#a37ef53a3554a52fc80f220a1e5cf699c">string</a>;</div>
-<div class="line"><span class="lineno">   53</span>                }</div>
-<div class="line"><span class="lineno">   54</span> </div>
-<div class="line"><span class="lineno">   55</span>                state = <a class="code hl_enumvalue" href="command__parser_8c.html#ab0ce6a33765cfb1c3ceb2f811cc03ce9af5659f583d980e84aabe562adc31e938">WAITING_FIRST_ARGUMENT_CHARACTER</a>;</div>
-<div class="line"><span class="lineno">   56</span>                input += i;</div>
-<div class="line"><span class="lineno">   57</span>                i = 0;</div>
-<div class="line"><span class="lineno">   58</span>                content = <a class="code hl_function" href="string__utils_8c.html#a80c7c1081ae8fd0a73bab19c8d39568a">create_empty_string</a>();</div>
-<div class="line"><span class="lineno">   59</span>            }</div>
-<div class="line"><span class="lineno">   60</span>        } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (state % 2 == 0) { <span class="comment">// State WAITING_FIRST_CHARACTER</span></div>
-<div class="line"><span class="lineno">   61</span>            <span class="comment">// Here it transforms WAITING to READING</span></div>
-<div class="line"><span class="lineno">   62</span>            state += 1;</div>
-<div class="line"><span class="lineno">   63</span> </div>
-<div class="line"><span class="lineno">   64</span>            input += i;</div>
-<div class="line"><span class="lineno">   65</span>            i = 0;</div>
-<div class="line"><span class="lineno">   66</span>            content = <a class="code hl_function" href="string__utils_8c.html#a80c7c1081ae8fd0a73bab19c8d39568a">create_empty_string</a>();</div>
-<div class="line"><span class="lineno">   67</span>        }</div>
-<div class="line"><span class="lineno">   68</span> </div>
-<div class="line"><span class="lineno">   69</span>        <span class="keywordflow">if</span> (input[i] == <span class="charliteral">&#39;&quot;&#39;</span> || input[i] == <span class="charliteral">&#39;\&#39;&#39;</span>) {</div>
-<div class="line"><span class="lineno">   70</span>            <a class="code hl_function" href="string__utils_8c.html#a2426b37bf8aa4caf96e7935b7e8fd57a">append_string</a>(&amp;content, input, i);</div>
-<div class="line"><span class="lineno">   71</span> </div>
-<div class="line"><span class="lineno">   72</span>            input += i;</div>
-<div class="line"><span class="lineno">   73</span>            i = <a class="code hl_function" href="string__utils_8c.html#a98f51d2e644d08c8c2bcb43b5f9a5514">extract_to_string_between_quotes_content</a>(&amp;content, input);</div>
-<div class="line"><span class="lineno">   74</span>            <span class="keywordflow">if</span> (i == -1) {</div>
-<div class="line"><span class="lineno">   75</span>                <a class="code hl_function" href="command_8c.html#a95098a672188182c4eaa40748c1392e3">command_free</a>(cmd);</div>
-<div class="line"><span class="lineno">   76</span>                <a class="code hl_function" href="string__utils_8c.html#a1aa4d35dfaa88afa95815ca47427c15e">string_free</a>(content);</div>
-<div class="line"><span class="lineno">   77</span>                <span class="keywordflow">return</span> NULL;</div>
-<div class="line"><span class="lineno">   78</span>            }</div>
-<div class="line"><span class="lineno">   79</span>            input += i + 1; <span class="comment">// Jumps the last quote</span></div>
-<div class="line"><span class="lineno">   80</span>            i = -1;</div>
-<div class="line"><span class="lineno">   81</span>        }</div>
-<div class="line"><span class="lineno">   82</span> </div>
-<div class="line"><span class="lineno">   83</span>        <span class="keywordflow">if</span> (input[i] == <span class="charliteral">&#39;\\&#39;</span>) {</div>
-<div class="line"><span class="lineno">   84</span>            <a class="code hl_function" href="string__utils_8c.html#ad96984f86d7638639012e0b711a99460">append_string_escaping_final_char</a>(&amp;content, input, i);</div>
-<div class="line"><span class="lineno">   85</span>            input += i + 2; <span class="comment">// Jumps \ and the escaped char</span></div>
-<div class="line"><span class="lineno">   86</span>            i = -1;</div>
-<div class="line"><span class="lineno">   87</span>        }</div>
-<div class="line"><span class="lineno">   88</span> </div>
-<div class="line"><span class="lineno">   89</span>        <span class="keywordflow">if</span> (input[i] == <span class="charliteral">&#39;=&#39;</span>) {</div>
-<div class="line"><span class="lineno">   90</span>            <span class="keywordflow">if</span> (input[i + 1] == <span class="charliteral">&#39;&gt;&#39;</span>) {</div>
-<div class="line"><span class="lineno">   91</span>                state = <a class="code hl_enumvalue" href="command__parser_8c.html#ab0ce6a33765cfb1c3ceb2f811cc03ce9a033dc12915c0cbb43eb69e1e50617149">WAITING_FIRST_REDIRECT_STDOUT_FILE_CHARACTER</a>;</div>
-<div class="line"><span class="lineno">   92</span>                i++;</div>
-<div class="line"><span class="lineno">   93</span>            } <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno">   94</span>                fprintf(stderr, <span class="stringliteral">&quot;Syntax error: An equal sign must be followed by a &gt;\n&quot;</span>);</div>
-<div class="line"><span class="lineno">   95</span>                <a class="code hl_function" href="command_8c.html#a95098a672188182c4eaa40748c1392e3">command_free</a>(cmd);</div>
-<div class="line"><span class="lineno">   96</span>                <a class="code hl_function" href="string__utils_8c.html#a1aa4d35dfaa88afa95815ca47427c15e">string_free</a>(content);</div>
-<div class="line"><span class="lineno">   97</span>                <span class="keywordflow">return</span> NULL;</div>
-<div class="line"><span class="lineno">   98</span>            }</div>
-<div class="line"><span class="lineno">   99</span>        }</div>
-<div class="line"><span class="lineno">  100</span> </div>
-<div class="line"><span class="lineno">  101</span>        <span class="keywordflow">if</span> (input[i] == <span class="charliteral">&#39;&lt;&#39;</span>) {</div>
-<div class="line"><span class="lineno">  102</span>            <span class="keywordflow">if</span> (input[i + 1] == <span class="charliteral">&#39;=&#39;</span>) {</div>
-<div class="line"><span class="lineno">  103</span>                state = <a class="code hl_enumvalue" href="command__parser_8c.html#ab0ce6a33765cfb1c3ceb2f811cc03ce9a569b6991d1ab2e3f6877ecd6bc99090d">WAITING_FIRST_REDIRECT_STDIN_FILE_CHARACTER</a>;</div>
-<div class="line"><span class="lineno">  104</span>                i++;</div>
-<div class="line"><span class="lineno">  105</span>            } <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno">  106</span>                fprintf(stderr, <span class="stringliteral">&quot;Syntax error: An &lt; must be followed by an equal sign\n&quot;</span>);</div>
-<div class="line"><span class="lineno">  107</span>                <a class="code hl_function" href="command_8c.html#a95098a672188182c4eaa40748c1392e3">command_free</a>(cmd);</div>
-<div class="line"><span class="lineno">  108</span>                <a class="code hl_function" href="string__utils_8c.html#a1aa4d35dfaa88afa95815ca47427c15e">string_free</a>(content);</div>
-<div class="line"><span class="lineno">  109</span>                <span class="keywordflow">return</span> NULL;</div>
-<div class="line"><span class="lineno">  110</span>            }</div>
-<div class="line"><span class="lineno">  111</span>        }</div>
-<div class="line"><span class="lineno">  112</span> </div>
-<div class="line"><span class="lineno">  113</span>        <span class="keywordflow">if</span> (input[i] == <span class="charliteral">&#39;&amp;&#39;</span> || input[i] == <span class="charliteral">&#39;|&#39;</span>) {</div>
-<div class="line"><span class="lineno">  114</span> </div>
-<div class="line"><span class="lineno">  115</span>            <span class="keywordflow">if</span> (input[i] == <span class="charliteral">&#39;&amp;&#39;</span>) {</div>
-<div class="line"><span class="lineno">  116</span>                <span class="keywordflow">if</span> (input[i + 1] == <span class="charliteral">&#39;&amp;&#39;</span>) {</div>
-<div class="line"><span class="lineno">  117</span>                    cmd-&gt;<a class="code hl_variable" href="structcommand.html#aef8935bdf704e1ff07054800281d24c4">chain_type</a> = <a class="code hl_enumvalue" href="command_8h.html#a4fa9f0b878abe6ebdcbddc7416bb69ada865555c9f2e0458a7078486aa1b3254f">AND</a>;</div>
-<div class="line"><span class="lineno">  118</span>                    i++;</div>
-<div class="line"><span class="lineno">  119</span>                } <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno">  120</span>                    cmd-&gt;<a class="code hl_variable" href="structcommand.html#aef8935bdf704e1ff07054800281d24c4">chain_type</a> = <a class="code hl_enumvalue" href="command_8h.html#a4fa9f0b878abe6ebdcbddc7416bb69adaa44b734476c2f3d073ee7aca08660a0e">BACKGROUND</a>;</div>
-<div class="line"><span class="lineno">  121</span>                }</div>
-<div class="line"><span class="lineno">  122</span>            }</div>
-<div class="line"><span class="lineno">  123</span>            <span class="keywordflow">if</span> (input[i] == <span class="charliteral">&#39;|&#39;</span>) {</div>
-<div class="line"><span class="lineno">  124</span>                <span class="keywordflow">if</span> (input[i + 1] == <span class="charliteral">&#39;|&#39;</span>) {</div>
-<div class="line"><span class="lineno">  125</span>                    cmd-&gt;<a class="code hl_variable" href="structcommand.html#aef8935bdf704e1ff07054800281d24c4">chain_type</a> = <a class="code hl_enumvalue" href="command_8h.html#a4fa9f0b878abe6ebdcbddc7416bb69ada96727447c0ad447987df1c6415aef074">OR</a>;</div>
-<div class="line"><span class="lineno">  126</span>                    i++;</div>
-<div class="line"><span class="lineno">  127</span>                } <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno">  128</span>                    cmd-&gt;<a class="code hl_variable" href="structcommand.html#aef8935bdf704e1ff07054800281d24c4">chain_type</a> = <a class="code hl_enumvalue" href="command_8h.html#a4fa9f0b878abe6ebdcbddc7416bb69ada9bc832fa28809fb974f6ce5bb0cc7117">PIPE</a>;</div>
-<div class="line"><span class="lineno">  129</span>                }</div>
-<div class="line"><span class="lineno">  130</span>            }</div>
-<div class="line"><span class="lineno">  131</span> </div>
-<div class="line"><span class="lineno">  132</span>            cmd-&gt;<a class="code hl_variable" href="structcommand.html#acae402512e855ece5df315f1206455c8">next</a> = <a class="code hl_function" href="command__parser_8c.html#a5bc90c2ea759023d758c8d17b13238d6">command_parse</a>(input + i + 1);</div>
-<div class="line"><span class="lineno">  133</span>            <span class="keywordflow">if</span> (cmd-&gt;<a class="code hl_variable" href="structcommand.html#acae402512e855ece5df315f1206455c8">next</a> == NULL &amp;&amp; cmd-&gt;<a class="code hl_variable" href="structcommand.html#aef8935bdf704e1ff07054800281d24c4">chain_type</a> != <a class="code hl_enumvalue" href="command_8h.html#a4fa9f0b878abe6ebdcbddc7416bb69adaa44b734476c2f3d073ee7aca08660a0e">BACKGROUND</a>) {</div>
-<div class="line"><span class="lineno">  136</span>                fprintf(stderr, <span class="stringliteral">&quot;Unexpected EOF while expecting a new command&quot;</span>);</div>
-<div class="line"><span class="lineno">  137</span>                <a class="code hl_function" href="command_8c.html#a95098a672188182c4eaa40748c1392e3">command_free</a>(cmd);</div>
-<div class="line"><span class="lineno">  138</span>                <a class="code hl_function" href="string__utils_8c.html#a1aa4d35dfaa88afa95815ca47427c15e">string_free</a>(content);</div>
-<div class="line"><span class="lineno">  139</span>                <span class="keywordflow">return</span> NULL;</div>
-<div class="line"><span class="lineno">  140</span>            }</div>
-<div class="line"><span class="lineno">  141</span>            <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  142</span>        }</div>
-<div class="line"><span class="lineno">  143</span>    }</div>
-<div class="line"><span class="lineno">  144</span>    </div>
-<div class="line"><span class="lineno">  145</span>    <a class="code hl_function" href="string__utils_8c.html#a1aa4d35dfaa88afa95815ca47427c15e">string_free</a>(content);</div>
-<div class="line"><span class="lineno">  146</span> </div>
-<div class="line"><span class="lineno">  147</span>    <span class="keywordflow">if</span> (cmd-&gt;<a class="code hl_variable" href="structcommand.html#a03bac117621dd0961bafddbc41b10a9d">argv</a>[0] == NULL) {</div>
-<div class="line"><span class="lineno">  148</span>        <span class="keywordflow">return</span> NULL;</div>
-<div class="line"><span class="lineno">  149</span>    }</div>
+<div class="line"><span class="lineno">   28</span>    <span class="comment">// @todo Redo this conditional. It only works for # in the beginning of line</span></div>
+<div class="line"><span class="lineno">   29</span>    <span class="keywordflow">if</span> (input == NULL || input[0] == <span class="charliteral">&#39;#&#39;</span> || input[0] == <span class="charliteral">&#39;\n&#39;</span> || input[0] == <span class="charliteral">&#39;\0&#39;</span>) {</div>
+<div class="line"><span class="lineno">   30</span>        <span class="keywordflow">return</span> NULL;</div>
+<div class="line"><span class="lineno">   31</span>    }</div>
+<div class="line"><span class="lineno">   32</span> </div>
+<div class="line"><span class="lineno">   33</span>    <a class="code hl_struct" href="structcommand.html">command</a>* cmd = <a class="code hl_function" href="command_8c.html#a92d84bb0db13ef0d0ee878eac2e8fb3d">command_create</a>();</div>
+<div class="line"><span class="lineno">   34</span> </div>
+<div class="line"><span class="lineno">   35</span>    <span class="comment">// Using =&gt; to redirect stdout &#39;&gt;&#39; isn&#39;t a restricted char</span></div>
+<div class="line"><span class="lineno">   36</span>    <span class="keyword">const</span> <span class="keywordtype">char</span>* restricted_chars = <span class="stringliteral">&quot;&amp;| =&lt;\0&quot;</span>;</div>
+<div class="line"><span class="lineno">   37</span> </div>
+<div class="line"><span class="lineno">   38</span>    <a class="code hl_struct" href="structstring__t.html">string_t</a> content = <a class="code hl_function" href="string__utils_8c.html#a80c7c1081ae8fd0a73bab19c8d39568a">create_empty_string</a>();</div>
+<div class="line"><span class="lineno">   39</span>    <a class="code hl_enumeration" href="command__parser_8c.html#ab0ce6a33765cfb1c3ceb2f811cc03ce9">parser_state</a> state = <a class="code hl_enumvalue" href="command__parser_8c.html#ab0ce6a33765cfb1c3ceb2f811cc03ce9a4ce9c78ca194de0491c36adb14e85f87">WAITING_FIRST_COMMAND_CHARACTER</a>;</div>
+<div class="line"><span class="lineno">   40</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i == 0 || input[i - 1] != <span class="charliteral">&#39;\0&#39;</span>; i++) {</div>
+<div class="line"><span class="lineno">   41</span> </div>
+<div class="line"><span class="lineno">   42</span>        <span class="keywordflow">if</span> (strchr(restricted_chars, input[i]) != <a class="code hl_enumvalue" href="command_8h.html#a4fa9f0b878abe6ebdcbddc7416bb69adac157bdf0b85a40d2619cbc8bc1ae5fe2">NONE</a>) {</div>
+<div class="line"><span class="lineno">   43</span>            <span class="keywordflow">if</span> (state % 2 != 0) { <span class="comment">// State READING</span></div>
+<div class="line"><span class="lineno">   44</span>                <a class="code hl_function" href="string__utils_8c.html#a2426b37bf8aa4caf96e7935b7e8fd57a">append_string</a>(&amp;content, input, i);</div>
+<div class="line"><span class="lineno">   45</span> </div>
+<div class="line"><span class="lineno">   46</span>                <span class="keywordflow">if</span> (state == <a class="code hl_enumvalue" href="command__parser_8c.html#ab0ce6a33765cfb1c3ceb2f811cc03ce9afb079704dccc5d73fd5aae4cf944d11f">READING_COMMAND</a>) {</div>
+<div class="line"><span class="lineno">   47</span>                    <a class="code hl_function" href="command_8c.html#a177927482cca70d563c009417f6c1c25">command_set_command</a>(cmd, content.<a class="code hl_variable" href="structstring__t.html#a37ef53a3554a52fc80f220a1e5cf699c">string</a>);</div>
+<div class="line"><span class="lineno">   48</span>                } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (state == <a class="code hl_enumvalue" href="command__parser_8c.html#ab0ce6a33765cfb1c3ceb2f811cc03ce9a012581533eccd1efdcca0c83e6bd8146">READING_ARGUMENTS</a>) {</div>
+<div class="line"><span class="lineno">   49</span>                    <a class="code hl_function" href="command_8c.html#aba418022cc3cc6265b2bbf54047888c8">command_add_argument</a>(cmd, content.<a class="code hl_variable" href="structstring__t.html#a37ef53a3554a52fc80f220a1e5cf699c">string</a>);</div>
+<div class="line"><span class="lineno">   50</span>                } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (state == <a class="code hl_enumvalue" href="command__parser_8c.html#ab0ce6a33765cfb1c3ceb2f811cc03ce9a8fc8eaf3309f7cb734d1ab6781a76b67">READING_REDIRECT_STDIN_FILE</a>) {</div>
+<div class="line"><span class="lineno">   51</span>                    cmd-&gt;<a class="code hl_variable" href="structcommand.html#a2f753045109abb875e61b99fd45268ab">stdin_file_redirection</a> = content.<a class="code hl_variable" href="structstring__t.html#a37ef53a3554a52fc80f220a1e5cf699c">string</a>;</div>
+<div class="line"><span class="lineno">   52</span>                } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (state == <a class="code hl_enumvalue" href="command__parser_8c.html#ab0ce6a33765cfb1c3ceb2f811cc03ce9ab1275636c5e593d37a3fab5710733d38">READING_REDIRECT_STDOUT_FILE</a>) {</div>
+<div class="line"><span class="lineno">   53</span>                    cmd-&gt;<a class="code hl_variable" href="structcommand.html#abdb2eeb4f5aaeaeba39e8343b0792088">stdout_file_redirection</a> = content.<a class="code hl_variable" href="structstring__t.html#a37ef53a3554a52fc80f220a1e5cf699c">string</a>;</div>
+<div class="line"><span class="lineno">   54</span>                }</div>
+<div class="line"><span class="lineno">   55</span> </div>
+<div class="line"><span class="lineno">   56</span>                state = <a class="code hl_enumvalue" href="command__parser_8c.html#ab0ce6a33765cfb1c3ceb2f811cc03ce9af5659f583d980e84aabe562adc31e938">WAITING_FIRST_ARGUMENT_CHARACTER</a>;</div>
+<div class="line"><span class="lineno">   57</span>                input += i;</div>
+<div class="line"><span class="lineno">   58</span>                i = 0;</div>
+<div class="line"><span class="lineno">   59</span>                content = <a class="code hl_function" href="string__utils_8c.html#a80c7c1081ae8fd0a73bab19c8d39568a">create_empty_string</a>();</div>
+<div class="line"><span class="lineno">   60</span>            }</div>
+<div class="line"><span class="lineno">   61</span>        } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (state % 2 == 0) { <span class="comment">// State WAITING_FIRST_CHARACTER</span></div>
+<div class="line"><span class="lineno">   62</span>            <span class="comment">// Here it transforms WAITING to READING</span></div>
+<div class="line"><span class="lineno">   63</span>            state += 1;</div>
+<div class="line"><span class="lineno">   64</span> </div>
+<div class="line"><span class="lineno">   65</span>            input += i;</div>
+<div class="line"><span class="lineno">   66</span>            i = 0;</div>
+<div class="line"><span class="lineno">   67</span>            <span class="keywordflow">if</span> (content.<a class="code hl_variable" href="structstring__t.html#a37ef53a3554a52fc80f220a1e5cf699c">string</a> != NULL) {</div>
+<div class="line"><span class="lineno">   68</span>                <a class="code hl_function" href="string__utils_8c.html#a1aa4d35dfaa88afa95815ca47427c15e">string_free</a>(content);</div>
+<div class="line"><span class="lineno">   69</span>            }</div>
+<div class="line"><span class="lineno">   70</span>            content = <a class="code hl_function" href="string__utils_8c.html#a80c7c1081ae8fd0a73bab19c8d39568a">create_empty_string</a>();</div>
+<div class="line"><span class="lineno">   71</span>        }</div>
+<div class="line"><span class="lineno">   72</span> </div>
+<div class="line"><span class="lineno">   73</span>        <span class="keywordflow">if</span> (input[i] == <span class="charliteral">&#39;&quot;&#39;</span> || input[i] == <span class="charliteral">&#39;\&#39;&#39;</span>) {</div>
+<div class="line"><span class="lineno">   74</span>            <a class="code hl_function" href="string__utils_8c.html#a2426b37bf8aa4caf96e7935b7e8fd57a">append_string</a>(&amp;content, input, i);</div>
+<div class="line"><span class="lineno">   75</span> </div>
+<div class="line"><span class="lineno">   76</span>            input += i;</div>
+<div class="line"><span class="lineno">   77</span>            i = <a class="code hl_function" href="string__utils_8c.html#a98f51d2e644d08c8c2bcb43b5f9a5514">extract_to_string_between_quotes_content</a>(&amp;content, input);</div>
+<div class="line"><span class="lineno">   78</span>            <span class="keywordflow">if</span> (i == -1) {</div>
+<div class="line"><span class="lineno">   79</span>                <a class="code hl_function" href="command_8c.html#a95098a672188182c4eaa40748c1392e3">command_free</a>(cmd);</div>
+<div class="line"><span class="lineno">   80</span>                <a class="code hl_function" href="string__utils_8c.html#a1aa4d35dfaa88afa95815ca47427c15e">string_free</a>(content);</div>
+<div class="line"><span class="lineno">   81</span>                <span class="keywordflow">return</span> NULL;</div>
+<div class="line"><span class="lineno">   82</span>            }</div>
+<div class="line"><span class="lineno">   83</span>            input += i + 1; <span class="comment">// Jumps the last quote</span></div>
+<div class="line"><span class="lineno">   84</span>            i = -1;</div>
+<div class="line"><span class="lineno">   85</span>        }</div>
+<div class="line"><span class="lineno">   86</span> </div>
+<div class="line"><span class="lineno">   87</span>        <span class="keywordflow">if</span> (input[i] == <span class="charliteral">&#39;\\&#39;</span>) {</div>
+<div class="line"><span class="lineno">   88</span>            <a class="code hl_function" href="string__utils_8c.html#ad96984f86d7638639012e0b711a99460">append_string_escaping_final_char</a>(&amp;content, input, i);</div>
+<div class="line"><span class="lineno">   89</span>            input += i + 2; <span class="comment">// Jumps \ and the escaped char</span></div>
+<div class="line"><span class="lineno">   90</span>            i = -1;</div>
+<div class="line"><span class="lineno">   91</span>        }</div>
+<div class="line"><span class="lineno">   92</span> </div>
+<div class="line"><span class="lineno">   93</span>        <span class="keywordflow">if</span> (input[i] == <span class="charliteral">&#39;=&#39;</span>) {</div>
+<div class="line"><span class="lineno">   94</span>            <span class="keywordflow">if</span> (input[i + 1] == <span class="charliteral">&#39;&gt;&#39;</span>) {</div>
+<div class="line"><span class="lineno">   95</span>                state = <a class="code hl_enumvalue" href="command__parser_8c.html#ab0ce6a33765cfb1c3ceb2f811cc03ce9a033dc12915c0cbb43eb69e1e50617149">WAITING_FIRST_REDIRECT_STDOUT_FILE_CHARACTER</a>;</div>
+<div class="line"><span class="lineno">   96</span>                i++;</div>
+<div class="line"><span class="lineno">   97</span>            } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">   98</span>                fprintf(stderr, <span class="stringliteral">&quot;Syntax error: An equal sign must be followed by a &gt;\n&quot;</span>);</div>
+<div class="line"><span class="lineno">   99</span>                <a class="code hl_function" href="command_8c.html#a95098a672188182c4eaa40748c1392e3">command_free</a>(cmd);</div>
+<div class="line"><span class="lineno">  100</span>                <a class="code hl_function" href="string__utils_8c.html#a1aa4d35dfaa88afa95815ca47427c15e">string_free</a>(content);</div>
+<div class="line"><span class="lineno">  101</span>                <span class="keywordflow">return</span> NULL;</div>
+<div class="line"><span class="lineno">  102</span>            }</div>
+<div class="line"><span class="lineno">  103</span>        }</div>
+<div class="line"><span class="lineno">  104</span> </div>
+<div class="line"><span class="lineno">  105</span>        <span class="keywordflow">if</span> (input[i] == <span class="charliteral">&#39;&lt;&#39;</span>) {</div>
+<div class="line"><span class="lineno">  106</span>            <span class="keywordflow">if</span> (input[i + 1] == <span class="charliteral">&#39;=&#39;</span>) {</div>
+<div class="line"><span class="lineno">  107</span>                state = <a class="code hl_enumvalue" href="command__parser_8c.html#ab0ce6a33765cfb1c3ceb2f811cc03ce9a569b6991d1ab2e3f6877ecd6bc99090d">WAITING_FIRST_REDIRECT_STDIN_FILE_CHARACTER</a>;</div>
+<div class="line"><span class="lineno">  108</span>                i++;</div>
+<div class="line"><span class="lineno">  109</span>            } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  110</span>                fprintf(stderr, <span class="stringliteral">&quot;Syntax error: An &lt; must be followed by an equal sign\n&quot;</span>);</div>
+<div class="line"><span class="lineno">  111</span>                <a class="code hl_function" href="command_8c.html#a95098a672188182c4eaa40748c1392e3">command_free</a>(cmd);</div>
+<div class="line"><span class="lineno">  112</span>                <a class="code hl_function" href="string__utils_8c.html#a1aa4d35dfaa88afa95815ca47427c15e">string_free</a>(content);</div>
+<div class="line"><span class="lineno">  113</span>                <span class="keywordflow">return</span> NULL;</div>
+<div class="line"><span class="lineno">  114</span>            }</div>
+<div class="line"><span class="lineno">  115</span>        }</div>
+<div class="line"><span class="lineno">  116</span> </div>
+<div class="line"><span class="lineno">  117</span>        <span class="keywordflow">if</span> (input[i] == <span class="charliteral">&#39;&amp;&#39;</span> || input[i] == <span class="charliteral">&#39;|&#39;</span>) {</div>
+<div class="line"><span class="lineno">  118</span> </div>
+<div class="line"><span class="lineno">  119</span>            <span class="keywordflow">if</span> (input[i] == <span class="charliteral">&#39;&amp;&#39;</span>) {</div>
+<div class="line"><span class="lineno">  120</span>                <span class="keywordflow">if</span> (input[i + 1] == <span class="charliteral">&#39;&amp;&#39;</span>) {</div>
+<div class="line"><span class="lineno">  121</span>                    cmd-&gt;<a class="code hl_variable" href="structcommand.html#aef8935bdf704e1ff07054800281d24c4">chain_type</a> = <a class="code hl_enumvalue" href="command_8h.html#a4fa9f0b878abe6ebdcbddc7416bb69ada865555c9f2e0458a7078486aa1b3254f">AND</a>;</div>
+<div class="line"><span class="lineno">  122</span>                    i++;</div>
+<div class="line"><span class="lineno">  123</span>                } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  124</span>                    cmd-&gt;<a class="code hl_variable" href="structcommand.html#aef8935bdf704e1ff07054800281d24c4">chain_type</a> = <a class="code hl_enumvalue" href="command_8h.html#a4fa9f0b878abe6ebdcbddc7416bb69adaa44b734476c2f3d073ee7aca08660a0e">BACKGROUND</a>;</div>
+<div class="line"><span class="lineno">  125</span>                }</div>
+<div class="line"><span class="lineno">  126</span>            }</div>
+<div class="line"><span class="lineno">  127</span>            <span class="keywordflow">if</span> (input[i] == <span class="charliteral">&#39;|&#39;</span>) {</div>
+<div class="line"><span class="lineno">  128</span>                <span class="keywordflow">if</span> (input[i + 1] == <span class="charliteral">&#39;|&#39;</span>) {</div>
+<div class="line"><span class="lineno">  129</span>                    cmd-&gt;<a class="code hl_variable" href="structcommand.html#aef8935bdf704e1ff07054800281d24c4">chain_type</a> = <a class="code hl_enumvalue" href="command_8h.html#a4fa9f0b878abe6ebdcbddc7416bb69ada96727447c0ad447987df1c6415aef074">OR</a>;</div>
+<div class="line"><span class="lineno">  130</span>                    i++;</div>
+<div class="line"><span class="lineno">  131</span>                } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  132</span>                    cmd-&gt;<a class="code hl_variable" href="structcommand.html#aef8935bdf704e1ff07054800281d24c4">chain_type</a> = <a class="code hl_enumvalue" href="command_8h.html#a4fa9f0b878abe6ebdcbddc7416bb69ada9bc832fa28809fb974f6ce5bb0cc7117">PIPE</a>;</div>
+<div class="line"><span class="lineno">  133</span>                }</div>
+<div class="line"><span class="lineno">  134</span>            }</div>
+<div class="line"><span class="lineno">  135</span> </div>
+<div class="line"><span class="lineno">  136</span>            cmd-&gt;<a class="code hl_variable" href="structcommand.html#acae402512e855ece5df315f1206455c8">next</a> = <a class="code hl_function" href="command__parser_8c.html#a5bc90c2ea759023d758c8d17b13238d6">command_parse</a>(input + i + 1);</div>
+<div class="line"><span class="lineno">  137</span>            <span class="keywordflow">if</span> (cmd-&gt;<a class="code hl_variable" href="structcommand.html#acae402512e855ece5df315f1206455c8">next</a> == NULL &amp;&amp; cmd-&gt;<a class="code hl_variable" href="structcommand.html#aef8935bdf704e1ff07054800281d24c4">chain_type</a> != <a class="code hl_enumvalue" href="command_8h.html#a4fa9f0b878abe6ebdcbddc7416bb69adaa44b734476c2f3d073ee7aca08660a0e">BACKGROUND</a>) {</div>
+<div class="line"><span class="lineno">  140</span>                fprintf(stderr, <span class="stringliteral">&quot;Unexpected EOF while expecting a new command&quot;</span>);</div>
+<div class="line"><span class="lineno">  141</span>                <a class="code hl_function" href="command_8c.html#a95098a672188182c4eaa40748c1392e3">command_free</a>(cmd);</div>
+<div class="line"><span class="lineno">  142</span>                <a class="code hl_function" href="string__utils_8c.html#a1aa4d35dfaa88afa95815ca47427c15e">string_free</a>(content);</div>
+<div class="line"><span class="lineno">  143</span>                <span class="keywordflow">return</span> NULL;</div>
+<div class="line"><span class="lineno">  144</span>            }</div>
+<div class="line"><span class="lineno">  145</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  146</span>        }</div>
+<div class="line"><span class="lineno">  147</span>    }</div>
+<div class="line"><span class="lineno">  148</span>    </div>
+<div class="line"><span class="lineno">  149</span>    <a class="code hl_function" href="string__utils_8c.html#a1aa4d35dfaa88afa95815ca47427c15e">string_free</a>(content);</div>
 <div class="line"><span class="lineno">  150</span> </div>
-<div class="line"><span class="lineno">  151</span>    <span class="keywordflow">return</span> cmd;</div>
-<div class="line"><span class="lineno">  152</span>}</div>
+<div class="line"><span class="lineno">  151</span>    <span class="keywordflow">if</span> (cmd-&gt;<a class="code hl_variable" href="structcommand.html#a03bac117621dd0961bafddbc41b10a9d">argv</a>[0] == NULL) {</div>
+<div class="line"><span class="lineno">  152</span>        <a class="code hl_function" href="command_8c.html#a95098a672188182c4eaa40748c1392e3">command_free</a>(cmd);</div>
+<div class="line"><span class="lineno">  153</span>        <span class="keywordflow">return</span> NULL;</div>
+<div class="line"><span class="lineno">  154</span>    }</div>
+<div class="line"><span class="lineno">  155</span> </div>
+<div class="line"><span class="lineno">  156</span>    <span class="keywordflow">return</span> cmd;</div>
+<div class="line"><span class="lineno">  157</span>}</div>
 <div class="ttc" id="acommand_8c_html_a177927482cca70d563c009417f6c1c25"><div class="ttname"><a href="command_8c.html#a177927482cca70d563c009417f6c1c25">command_set_command</a></div><div class="ttdeci">void command_set_command(command *cmd, char *input)</div><div class="ttdoc">Set the command itself.</div><div class="ttdef"><b>Definition:</b> command.c:34</div></div>
 <div class="ttc" id="acommand_8c_html_a92d84bb0db13ef0d0ee878eac2e8fb3d"><div class="ttname"><a href="command_8c.html#a92d84bb0db13ef0d0ee878eac2e8fb3d">command_create</a></div><div class="ttdeci">command * command_create()</div><div class="ttdoc">Creates one command setting default values.</div><div class="ttdef"><b>Definition:</b> command.c:8</div></div>
 <div class="ttc" id="acommand_8c_html_a95098a672188182c4eaa40748c1392e3"><div class="ttname"><a href="command_8c.html#a95098a672188182c4eaa40748c1392e3">command_free</a></div><div class="ttdeci">void command_free(command *command)</div><div class="ttdoc">Frees the given command.</div><div class="ttdef"><b>Definition:</b> command.c:60</div></div>
@@ -367,7 +372,7 @@ Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_b2c05b11dbc691bba5c0cb93063c379f.html">shell</a></li><li class="navelem"><a class="el" href="command__parser_8c.html">command_parser.c</a></li>
-    <li class="footer">Generated on Mon May 16 2022 17:09:05 for shellso by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.4 </li>
+    <li class="footer">Generated on Tue May 17 2022 16:58:22 for shellso by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.4 </li>
   </ul>
 </div>
 <!-- BEGIN doxygen awesome darkmode toggle -->

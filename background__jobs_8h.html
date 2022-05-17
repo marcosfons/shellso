@@ -133,6 +133,8 @@ Functions</h2></td></tr>
 <tr class="separator:a6949e27ddbcafe827c27444388e907bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae6e57676cb897218633deed50a5cf81b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="background__jobs_8h.html#ae6e57676cb897218633deed50a5cf81b">update_background_job_status</a> (<a class="el" href="structbackground__job.html">background_job</a> *job, int status)</td></tr>
 <tr class="separator:ae6e57676cb897218633deed50a5cf81b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a195c31e22dd0b6edfa3a03f5638f05d8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="background__jobs_8h.html#a195c31e22dd0b6edfa3a03f5638f05d8">update_background_job_status_by_pid</a> (<a class="el" href="structbackground__jobs.html">background_jobs</a> *jobs, int pid, int status)</td></tr>
+<tr class="separator:a195c31e22dd0b6edfa3a03f5638f05d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a43584b96a56b8aa5e737f812e2972611"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="background__jobs_8h.html#a43584b96a56b8aa5e737f812e2972611">remove_command_by_pid</a> (<a class="el" href="structbackground__jobs.html">background_jobs</a> *jobs, int pid)</td></tr>
 <tr class="separator:a43584b96a56b8aa5e737f812e2972611"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a74a9ff948dff90a1a31d9acc7a098d50"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="background__jobs_8h.html#a74a9ff948dff90a1a31d9acc7a098d50">free_background_job</a> (<a class="el" href="structbackground__job.html">background_job</a> *job)</td></tr>
@@ -271,15 +273,15 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<div class="fragment"><div class="line"><span class="lineno">   66</span>                                              {</div>
-<div class="line"><span class="lineno">   67</span>    <span class="keywordflow">if</span> (job-&gt;<a class="code hl_variable" href="structbackground__job.html#abbb51c5e8ea6e46655330990524499ea">next</a> != NULL) {</div>
-<div class="line"><span class="lineno">   68</span>        <a class="code hl_function" href="background__jobs_8c.html#a74a9ff948dff90a1a31d9acc7a098d50">free_background_job</a>(job);</div>
-<div class="line"><span class="lineno">   69</span>    }</div>
-<div class="line"><span class="lineno">   70</span> </div>
-<div class="line"><span class="lineno">   71</span>    free(job-&gt;<a class="code hl_variable" href="structbackground__job.html#a40458f93e33df523a3ef10c13823408f">command</a>);</div>
-<div class="line"><span class="lineno">   72</span>    free(job);</div>
-<div class="line"><span class="lineno">   73</span>}</div>
-<div class="ttc" id="abackground__jobs_8c_html_a74a9ff948dff90a1a31d9acc7a098d50"><div class="ttname"><a href="background__jobs_8c.html#a74a9ff948dff90a1a31d9acc7a098d50">free_background_job</a></div><div class="ttdeci">void free_background_job(background_job *job)</div><div class="ttdef"><b>Definition:</b> background_jobs.c:66</div></div>
+<div class="fragment"><div class="line"><span class="lineno">   77</span>                                              {</div>
+<div class="line"><span class="lineno">   78</span>    <span class="keywordflow">if</span> (job-&gt;<a class="code hl_variable" href="structbackground__job.html#abbb51c5e8ea6e46655330990524499ea">next</a> != NULL) {</div>
+<div class="line"><span class="lineno">   79</span>        <a class="code hl_function" href="background__jobs_8c.html#a74a9ff948dff90a1a31d9acc7a098d50">free_background_job</a>(job-&gt;<a class="code hl_variable" href="structbackground__job.html#abbb51c5e8ea6e46655330990524499ea">next</a>);</div>
+<div class="line"><span class="lineno">   80</span>    }</div>
+<div class="line"><span class="lineno">   81</span> </div>
+<div class="line"><span class="lineno">   82</span>    free(job-&gt;<a class="code hl_variable" href="structbackground__job.html#a40458f93e33df523a3ef10c13823408f">command</a>);</div>
+<div class="line"><span class="lineno">   83</span>    free(job);</div>
+<div class="line"><span class="lineno">   84</span>}</div>
+<div class="ttc" id="abackground__jobs_8c_html_a74a9ff948dff90a1a31d9acc7a098d50"><div class="ttname"><a href="background__jobs_8c.html#a74a9ff948dff90a1a31d9acc7a098d50">free_background_job</a></div><div class="ttdeci">void free_background_job(background_job *job)</div><div class="ttdef"><b>Definition:</b> background_jobs.c:77</div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -298,13 +300,13 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<div class="fragment"><div class="line"><span class="lineno">   75</span>                                                 {</div>
-<div class="line"><span class="lineno">   76</span>    <span class="keywordflow">if</span> (jobs-&gt;<a class="code hl_variable" href="structbackground__jobs.html#a32cca3c0a8ad11ee09f2d5c8e90c8ea1">next</a> != NULL) {</div>
-<div class="line"><span class="lineno">   77</span>        <a class="code hl_function" href="background__jobs_8c.html#a74a9ff948dff90a1a31d9acc7a098d50">free_background_job</a>(jobs-&gt;<a class="code hl_variable" href="structbackground__jobs.html#a32cca3c0a8ad11ee09f2d5c8e90c8ea1">next</a>);</div>
-<div class="line"><span class="lineno">   78</span>    }</div>
-<div class="line"><span class="lineno">   79</span> </div>
-<div class="line"><span class="lineno">   80</span>    free(jobs);</div>
-<div class="line"><span class="lineno">   81</span>}</div>
+<div class="fragment"><div class="line"><span class="lineno">   86</span>                                                 {</div>
+<div class="line"><span class="lineno">   87</span>    <span class="keywordflow">if</span> (jobs-&gt;<a class="code hl_variable" href="structbackground__jobs.html#a32cca3c0a8ad11ee09f2d5c8e90c8ea1">next</a> != NULL) {</div>
+<div class="line"><span class="lineno">   88</span>        <a class="code hl_function" href="background__jobs_8c.html#a74a9ff948dff90a1a31d9acc7a098d50">free_background_job</a>(jobs-&gt;<a class="code hl_variable" href="structbackground__jobs.html#a32cca3c0a8ad11ee09f2d5c8e90c8ea1">next</a>);</div>
+<div class="line"><span class="lineno">   89</span>    }</div>
+<div class="line"><span class="lineno">   90</span> </div>
+<div class="line"><span class="lineno">   91</span>    free(jobs);</div>
+<div class="line"><span class="lineno">   92</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -333,30 +335,30 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<div class="fragment"><div class="line"><span class="lineno">   41</span>                                                          {</div>
-<div class="line"><span class="lineno">   42</span>    <span class="keywordflow">if</span> (jobs-&gt;<a class="code hl_variable" href="structbackground__jobs.html#a32cca3c0a8ad11ee09f2d5c8e90c8ea1">next</a> != NULL &amp;&amp; jobs-&gt;<a class="code hl_variable" href="structbackground__jobs.html#a32cca3c0a8ad11ee09f2d5c8e90c8ea1">next</a>-&gt;<a class="code hl_variable" href="structbackground__job.html#a92f573281a21ffc96121672b8d9ca500">pid</a> == pid) {</div>
-<div class="line"><span class="lineno">   43</span>        <a class="code hl_struct" href="structbackground__job.html">background_job</a>* next = jobs-&gt;<a class="code hl_variable" href="structbackground__jobs.html#a32cca3c0a8ad11ee09f2d5c8e90c8ea1">next</a>-&gt;<a class="code hl_variable" href="structbackground__job.html#abbb51c5e8ea6e46655330990524499ea">next</a>;</div>
-<div class="line"><span class="lineno">   44</span>        free(jobs-&gt;<a class="code hl_variable" href="structbackground__jobs.html#a32cca3c0a8ad11ee09f2d5c8e90c8ea1">next</a>);</div>
-<div class="line"><span class="lineno">   45</span>        jobs-&gt;<a class="code hl_variable" href="structbackground__jobs.html#a32cca3c0a8ad11ee09f2d5c8e90c8ea1">next</a> = next;</div>
-<div class="line"><span class="lineno">   46</span>        </div>
-<div class="line"><span class="lineno">   47</span>        <span class="keywordflow">return</span> pid;</div>
-<div class="line"><span class="lineno">   48</span>    }</div>
-<div class="line"><span class="lineno">   49</span>    <a class="code hl_struct" href="structbackground__job.html">background_job</a>* curr = jobs-&gt;<a class="code hl_variable" href="structbackground__jobs.html#a32cca3c0a8ad11ee09f2d5c8e90c8ea1">next</a>;</div>
-<div class="line"><span class="lineno">   50</span> </div>
-<div class="line"><span class="lineno">   51</span>    <span class="keywordflow">while</span> (curr-&gt;<a class="code hl_variable" href="structbackground__job.html#abbb51c5e8ea6e46655330990524499ea">next</a> != NULL &amp;&amp; curr-&gt;<a class="code hl_variable" href="structbackground__job.html#abbb51c5e8ea6e46655330990524499ea">next</a>-&gt;<a class="code hl_variable" href="structbackground__job.html#a92f573281a21ffc96121672b8d9ca500">pid</a> != pid) {</div>
-<div class="line"><span class="lineno">   52</span>        curr = curr-&gt;<a class="code hl_variable" href="structbackground__job.html#abbb51c5e8ea6e46655330990524499ea">next</a>;</div>
-<div class="line"><span class="lineno">   53</span>    }</div>
-<div class="line"><span class="lineno">   54</span> </div>
-<div class="line"><span class="lineno">   55</span>    <span class="keywordflow">if</span> (curr-&gt;<a class="code hl_variable" href="structbackground__job.html#abbb51c5e8ea6e46655330990524499ea">next</a> != NULL &amp;&amp; curr-&gt;<a class="code hl_variable" href="structbackground__job.html#abbb51c5e8ea6e46655330990524499ea">next</a>-&gt;<a class="code hl_variable" href="structbackground__job.html#a92f573281a21ffc96121672b8d9ca500">pid</a> == pid) {</div>
-<div class="line"><span class="lineno">   56</span>        <a class="code hl_struct" href="structbackground__job.html">background_job</a>* next = curr-&gt;<a class="code hl_variable" href="structbackground__job.html#abbb51c5e8ea6e46655330990524499ea">next</a>-&gt;<a class="code hl_variable" href="structbackground__job.html#abbb51c5e8ea6e46655330990524499ea">next</a>;</div>
-<div class="line"><span class="lineno">   57</span>        free(curr-&gt;<a class="code hl_variable" href="structbackground__job.html#abbb51c5e8ea6e46655330990524499ea">next</a>);</div>
-<div class="line"><span class="lineno">   58</span>        curr-&gt;<a class="code hl_variable" href="structbackground__job.html#abbb51c5e8ea6e46655330990524499ea">next</a> = next;</div>
-<div class="line"><span class="lineno">   59</span> </div>
-<div class="line"><span class="lineno">   60</span>        <span class="keywordflow">return</span> pid;</div>
-<div class="line"><span class="lineno">   61</span>    }</div>
-<div class="line"><span class="lineno">   62</span> </div>
-<div class="line"><span class="lineno">   63</span>    <span class="keywordflow">return</span> -1;</div>
-<div class="line"><span class="lineno">   64</span>}</div>
+<div class="fragment"><div class="line"><span class="lineno">   52</span>                                                          {</div>
+<div class="line"><span class="lineno">   53</span>    <span class="keywordflow">if</span> (jobs-&gt;<a class="code hl_variable" href="structbackground__jobs.html#a32cca3c0a8ad11ee09f2d5c8e90c8ea1">next</a> != NULL &amp;&amp; jobs-&gt;<a class="code hl_variable" href="structbackground__jobs.html#a32cca3c0a8ad11ee09f2d5c8e90c8ea1">next</a>-&gt;<a class="code hl_variable" href="structbackground__job.html#a92f573281a21ffc96121672b8d9ca500">pid</a> == pid) {</div>
+<div class="line"><span class="lineno">   54</span>        <a class="code hl_struct" href="structbackground__job.html">background_job</a>* next = jobs-&gt;<a class="code hl_variable" href="structbackground__jobs.html#a32cca3c0a8ad11ee09f2d5c8e90c8ea1">next</a>-&gt;<a class="code hl_variable" href="structbackground__job.html#abbb51c5e8ea6e46655330990524499ea">next</a>;</div>
+<div class="line"><span class="lineno">   55</span>        free(jobs-&gt;<a class="code hl_variable" href="structbackground__jobs.html#a32cca3c0a8ad11ee09f2d5c8e90c8ea1">next</a>);</div>
+<div class="line"><span class="lineno">   56</span>        jobs-&gt;<a class="code hl_variable" href="structbackground__jobs.html#a32cca3c0a8ad11ee09f2d5c8e90c8ea1">next</a> = next;</div>
+<div class="line"><span class="lineno">   57</span>        </div>
+<div class="line"><span class="lineno">   58</span>        <span class="keywordflow">return</span> pid;</div>
+<div class="line"><span class="lineno">   59</span>    }</div>
+<div class="line"><span class="lineno">   60</span>    <a class="code hl_struct" href="structbackground__job.html">background_job</a>* curr = jobs-&gt;<a class="code hl_variable" href="structbackground__jobs.html#a32cca3c0a8ad11ee09f2d5c8e90c8ea1">next</a>;</div>
+<div class="line"><span class="lineno">   61</span> </div>
+<div class="line"><span class="lineno">   62</span>    <span class="keywordflow">while</span> (curr-&gt;<a class="code hl_variable" href="structbackground__job.html#abbb51c5e8ea6e46655330990524499ea">next</a> != NULL &amp;&amp; curr-&gt;<a class="code hl_variable" href="structbackground__job.html#abbb51c5e8ea6e46655330990524499ea">next</a>-&gt;<a class="code hl_variable" href="structbackground__job.html#a92f573281a21ffc96121672b8d9ca500">pid</a> != pid) {</div>
+<div class="line"><span class="lineno">   63</span>        curr = curr-&gt;<a class="code hl_variable" href="structbackground__job.html#abbb51c5e8ea6e46655330990524499ea">next</a>;</div>
+<div class="line"><span class="lineno">   64</span>    }</div>
+<div class="line"><span class="lineno">   65</span> </div>
+<div class="line"><span class="lineno">   66</span>    <span class="keywordflow">if</span> (curr-&gt;<a class="code hl_variable" href="structbackground__job.html#abbb51c5e8ea6e46655330990524499ea">next</a> != NULL &amp;&amp; curr-&gt;<a class="code hl_variable" href="structbackground__job.html#abbb51c5e8ea6e46655330990524499ea">next</a>-&gt;<a class="code hl_variable" href="structbackground__job.html#a92f573281a21ffc96121672b8d9ca500">pid</a> == pid) {</div>
+<div class="line"><span class="lineno">   67</span>        <a class="code hl_struct" href="structbackground__job.html">background_job</a>* next = curr-&gt;<a class="code hl_variable" href="structbackground__job.html#abbb51c5e8ea6e46655330990524499ea">next</a>-&gt;<a class="code hl_variable" href="structbackground__job.html#abbb51c5e8ea6e46655330990524499ea">next</a>;</div>
+<div class="line"><span class="lineno">   68</span>        free(curr-&gt;<a class="code hl_variable" href="structbackground__job.html#abbb51c5e8ea6e46655330990524499ea">next</a>);</div>
+<div class="line"><span class="lineno">   69</span>        curr-&gt;<a class="code hl_variable" href="structbackground__job.html#abbb51c5e8ea6e46655330990524499ea">next</a> = next;</div>
+<div class="line"><span class="lineno">   70</span> </div>
+<div class="line"><span class="lineno">   71</span>        <span class="keywordflow">return</span> pid;</div>
+<div class="line"><span class="lineno">   72</span>    }</div>
+<div class="line"><span class="lineno">   73</span> </div>
+<div class="line"><span class="lineno">   74</span>    <span class="keywordflow">return</span> -1;</div>
+<div class="line"><span class="lineno">   75</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -391,6 +393,50 @@ Functions</h2></td></tr>
 </div><!-- fragment -->
 </div>
 </div>
+<a id="a195c31e22dd0b6edfa3a03f5638f05d8" name="a195c31e22dd0b6edfa3a03f5638f05d8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a195c31e22dd0b6edfa3a03f5638f05d8">&#9670;&nbsp;</a></span>update_background_job_status_by_pid()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void update_background_job_status_by_pid </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structbackground__jobs.html">background_jobs</a> *&#160;</td>
+          <td class="paramname"><em>jobs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>pid</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>status</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="fragment"><div class="line"><span class="lineno">   41</span>                                                                                     {</div>
+<div class="line"><span class="lineno">   42</span>    <a class="code hl_struct" href="structbackground__job.html">background_job</a>* job = jobs-&gt;<a class="code hl_variable" href="structbackground__jobs.html#a32cca3c0a8ad11ee09f2d5c8e90c8ea1">next</a>;</div>
+<div class="line"><span class="lineno">   43</span>    <span class="keywordflow">while</span> (job-&gt;<a class="code hl_variable" href="structbackground__job.html#abbb51c5e8ea6e46655330990524499ea">next</a> != NULL &amp;&amp; job-&gt;<a class="code hl_variable" href="structbackground__job.html#a92f573281a21ffc96121672b8d9ca500">pid</a> != pid) {</div>
+<div class="line"><span class="lineno">   44</span>        job = job-&gt;<a class="code hl_variable" href="structbackground__job.html#abbb51c5e8ea6e46655330990524499ea">next</a>;</div>
+<div class="line"><span class="lineno">   45</span>    }</div>
+<div class="line"><span class="lineno">   46</span> </div>
+<div class="line"><span class="lineno">   47</span>    <span class="keywordflow">if</span> (job != NULL &amp;&amp; job-&gt;<a class="code hl_variable" href="structbackground__job.html#a92f573281a21ffc96121672b8d9ca500">pid</a> == pid) {</div>
+<div class="line"><span class="lineno">   48</span>        job-&gt;<a class="code hl_variable" href="structbackground__job.html#a03aced3d54e3dd04a505156c162eebfd">status</a> = status;</div>
+<div class="line"><span class="lineno">   49</span>    }</div>
+<div class="line"><span class="lineno">   50</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.9.3-->
@@ -398,7 +444,7 @@ Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_b2c05b11dbc691bba5c0cb93063c379f.html">shell</a></li><li class="navelem"><a class="el" href="background__jobs_8h.html">background_jobs.h</a></li>
-    <li class="footer">Generated on Mon May 16 2022 17:09:05 for shellso by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.4 </li>
+    <li class="footer">Generated on Tue May 17 2022 16:58:22 for shellso by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.4 </li>
   </ul>
 </div>
 <!-- BEGIN doxygen awesome darkmode toggle -->
