@@ -31,7 +31,11 @@ void update_background_job_status_by_pid(background_jobs* jobs, int pid, int sta
 int remove_command_by_pid(background_jobs* jobs, int pid);
 
 
+// Free only one background_job 
 void free_background_job(background_job* job);
+
+// Free the whole linked list of background jobs
+void free_background_job_chain(background_job* job);
 
 void free_background_jobs(background_jobs* jobs);
 

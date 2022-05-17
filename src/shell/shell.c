@@ -30,7 +30,7 @@ static shell* running_shell = NULL;
 /// exec already kill the child process
 static void signint_handler(int sig_num) {
 	signal(SIGINT, signint_handler); // Will receive the signal on the next time
-	printf("\n");
+	// printf("\n");
 }
 
 static void sigstop_handler(int sig_num) {
@@ -167,7 +167,7 @@ void run_from_string(shell* shell, char* input) {
 }
 
 void run_from_file(shell* shell, FILE* file) {
-	signal(SIGINT, signint_handler);
+	// signal(SIGINT, sigint_handler);
 	signal(SIGCHLD, sigchld_handler);
 	signal(SIGTSTP, sigstop_handler);
 

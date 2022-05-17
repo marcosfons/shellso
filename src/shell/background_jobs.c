@@ -75,17 +75,21 @@ int remove_command_by_pid(background_jobs* jobs, int pid) {
 }
 
 void free_background_job(background_job* job) {
-	if (job->next != NULL) {
-		free_background_job(job->next);
-	}
-
 	free(job->command);
 	free(job);
 }
 
+void free_background_job_chain(background_job* job) {
+	if (job->next != NULL) {
+		free_background_job(job->next);
+	}
+
+	free_background_job(job);
+}
+
 void free_background_jobs(background_jobs* jobs) {
 	if (jobs->next != NULL) {
-		free_background_job(jobs->next);
+		free_background_job_chain(jobs->next);
 	}
 
 	free(jobs);

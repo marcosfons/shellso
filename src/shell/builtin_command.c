@@ -8,7 +8,9 @@
 #include <sys/wait.h>
 
 
+#include "background_jobs.h"
 #include "builtin_command.h"
+#include "shell.h"
 
 
 static builtin_command* create_builtin_command(char* command, builtin_command_function func) {
@@ -157,6 +159,7 @@ int shell_alias(shell* shell, int argc, char** argv) {
 }
 
 int shell_jobs(shell* shell, int argc, char** argv) {
+	background_job* last = NULL;
 	background_job* curr = shell->jobs->next;
 	while (curr != NULL) {
 		const int BUFFER_STATE_SIZE = 37;
@@ -175,39 +178,57 @@ int shell_jobs(shell* shell, int argc, char** argv) {
 			} else {
 				snprintf(state, BUFFER_STATE_SIZE, "Waiting status %d", curr->status);
 			}
-
-			// @todo NEED TO REMOVE COMMANDS
-			// If remove inside the loop it will break
-			// remove_command_by_pid(shell->jobs, curr->pid);
 		}
 
 		printf("[%d] %-35s  %s\n", curr->pid, state, curr->command);
 
-		curr = curr->next;
+		background_job* next = curr->next;
+
+		if (WIFEXITED(curr->status) || WIFSIGNALED(curr->status)) {
+			if (last == NULL) {
+				shell->jobs->next = curr->next;
+			} else {
+				last->next = curr->next;
+			}
+			free_background_job(curr);
+		} else {
+			last = curr;
+		}
+		
+		curr = next;
 	}
 	
 	return 0;
 }
 
 int shell_fg(shell* shell, int argc, char** argv) {
-	if (kill(shell->jobs->next->pid, SIGCONT) != 0) {
-		printf("Some kill error\n");
+	background_job* curr = shell->jobs->next;
+	while (curr != NULL && !WIFSTOPPED(curr->status)) {
+		curr = curr->next;
+	}
+
+	if (curr == NULL) {
+		return 0;
+	}
+
+	if (kill(curr->pid, SIGCONT) != 0) {
+		perror("kill SIGCONT");
 		return 1;
 	}
 
 	int state;
-	int result = waitpid(shell->jobs->next->pid, &state, 0);
-	printf("CONSEGUIU SAIR KRAI  %d %d\n", state, result);
-	if (result == -1 && errno != 10) { 
+	int result = waitpid(curr->pid, &state, WNOHANG);
+
+	if (result == -1 && errno != 10) {
 		perror("waitpid");
 		exit(EXIT_FAILURE);
 	}
-	update_background_job_status_by_pid(shell->jobs, shell->jobs->next->pid, state);
 
-
+	update_background_job_status_by_pid(shell->jobs, curr->pid, state);
 
 	return 0;
 }
+
 //
 // int shell_time(shell* shell, int argc, char** argv);
 
