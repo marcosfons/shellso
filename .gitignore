@@ -61,3 +61,8 @@ bin
 build
 
 .vgcore.*
+
+# pdflatex
+*.aux
+*.log
+*.toc
