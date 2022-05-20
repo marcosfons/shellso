@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['main_0',['main',['../main_8c.html#a3c04138a5bfe5d72780bb7e82a18e627',1,'main.c']]],
-  ['malloc_5for_5fexit_1',['malloc_or_exit',['../string__utils_8c.html#a65fa2a03bfaf1fd389a4958455dd5c29',1,'string_utils.c']]]
+  ['job_5fexited_0',['job_exited',['../builtin__command_8c.html#ad793cb5317707d060b0773143deee369',1,'builtin_command.c']]],
+  ['job_5frunning_1',['job_running',['../builtin__command_8c.html#a46fb74ff681ee16428bd537e73c4d75f',1,'builtin_command.c']]]
 ];

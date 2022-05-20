@@ -1,14 +1,11 @@
 var searchData=
 [
-  ['shell_5falias_0',['shell_alias',['../builtin__command_8h.html#acdb9523745e0d872ee43c3648a9899c3',1,'shell_alias(shell *shell, int argc, char **argv):&#160;builtin_command.c'],['../builtin__command_8c.html#acdb9523745e0d872ee43c3648a9899c3',1,'shell_alias(shell *shell, int argc, char **argv):&#160;builtin_command.c']]],
-  ['shell_5fcd_1',['shell_cd',['../builtin__command_8c.html#ac00b27d773a42fdd248778ac29fab8e1',1,'shell_cd(shell *shell, int argc, char **argv):&#160;builtin_command.c'],['../builtin__command_8h.html#ac00b27d773a42fdd248778ac29fab8e1',1,'shell_cd(shell *shell, int argc, char **argv):&#160;builtin_command.c']]],
-  ['shell_5fexit_2',['shell_exit',['../builtin__command_8c.html#adc4599a1416f574a9f9692ecff9cef59',1,'shell_exit(shell *shell, int argc, char **argv):&#160;builtin_command.c'],['../builtin__command_8h.html#adc4599a1416f574a9f9692ecff9cef59',1,'shell_exit(shell *shell, int argc, char **argv):&#160;builtin_command.c']]],
-  ['shell_5ffg_3',['shell_fg',['../builtin__command_8c.html#a5cd97db3fb608785229e4348e65aea77',1,'shell_fg(shell *shell, int argc, char **argv):&#160;builtin_command.c'],['../builtin__command_8h.html#a5cd97db3fb608785229e4348e65aea77',1,'shell_fg(shell *shell, int argc, char **argv):&#160;builtin_command.c']]],
-  ['shell_5fhelp_4',['shell_help',['../builtin__command_8h.html#a9379a9b706916f1c86452a13de26b984',1,'builtin_command.h']]],
-  ['shell_5fjobs_5',['shell_jobs',['../builtin__command_8c.html#aac0778f3d2d8dd4f54e3337f331d5572',1,'shell_jobs(shell *shell, int argc, char **argv):&#160;builtin_command.c'],['../builtin__command_8h.html#aac0778f3d2d8dd4f54e3337f331d5572',1,'shell_jobs(shell *shell, int argc, char **argv):&#160;builtin_command.c']]],
-  ['shell_5ftime_6',['shell_time',['../builtin__command_8h.html#ae626282b8e4946b6f9ccc04885b66fa2',1,'builtin_command.h']]],
-  ['sigchld_5fhandler_7',['sigchld_handler',['../shell_8c.html#a76199fe33026a9f049f0b7942f6f3ec8',1,'shell.c']]],
-  ['signint_5fhandler_8',['signint_handler',['../shell_8c.html#abe49209a75815c91395459c8ccd971d9',1,'shell.c']]],
-  ['sigstop_5fhandler_9',['sigstop_handler',['../shell_8c.html#aa1278db3512cb8fe85e70ab6aab9062b',1,'shell.c']]],
-  ['string_5ffree_10',['string_free',['../string__utils_8c.html#a1aa4d35dfaa88afa95815ca47427c15e',1,'string_free(string_t string):&#160;string_utils.c'],['../string__utils_8h.html#a1aa4d35dfaa88afa95815ca47427c15e',1,'string_free(string_t string):&#160;string_utils.c']]]
+  ['read_5finput_5ffrom_5ffile_0',['read_input_from_file',['../shell_8c.html#a174fabc79fb68c5ea07db71250668d55',1,'shell.c']]],
+  ['realloc_5for_5fexit_1',['realloc_or_exit',['../string__utils_8c.html#ae79b81039ece51b48899286163a3ba6b',1,'string_utils.c']]],
+  ['redirect_5fand_5fclose_2',['redirect_and_close',['../shell_8c.html#a11534ed616b5b837706aec72d5c3dc12',1,'shell.c']]],
+  ['remove_5fcommand_5fby_5fpid_3',['remove_command_by_pid',['../background__jobs_8c.html#a43584b96a56b8aa5e737f812e2972611',1,'remove_command_by_pid(background_jobs *jobs, int pid):&#160;background_jobs.c'],['../background__jobs_8h.html#a43584b96a56b8aa5e737f812e2972611',1,'remove_command_by_pid(background_jobs *jobs, int pid):&#160;background_jobs.c']]],
+  ['run_5fcommand_4',['run_command',['../shell_8c.html#a7bf41a557d5549e80262806150de609b',1,'run_command(shell *shell, command *cmd, int in_fd):&#160;shell.c'],['../shell_8h.html#a7bf41a557d5549e80262806150de609b',1,'run_command(shell *shell, command *cmd, int in_fd):&#160;shell.c']]],
+  ['run_5ffrom_5ffile_5',['run_from_file',['../shell_8c.html#acc0ea92c78f8c568184eb9b3fb91c17e',1,'run_from_file(shell *shell, FILE *file):&#160;shell.c'],['../shell_8h.html#a4f404a0dc5d0e0f0977739ddb5d78a67',1,'run_from_file(shell *shell, FILE *fp):&#160;shell.c']]],
+  ['run_5ffrom_5fstring_6',['run_from_string',['../shell_8c.html#adda30003bb48504d2a454839de860e8f',1,'run_from_string(shell *shell, char *input):&#160;shell.c'],['../shell_8h.html#adda30003bb48504d2a454839de860e8f',1,'run_from_string(shell *shell, char *input):&#160;shell.c']]],
+  ['run_5finteractive_7',['run_interactive',['../shell_8c.html#a815cee789596e1ac246bf872b1e54d16',1,'run_interactive(shell *shell):&#160;shell.c'],['../shell_8h.html#a815cee789596e1ac246bf872b1e54d16',1,'run_interactive(shell *shell):&#160;shell.c']]]
 ];

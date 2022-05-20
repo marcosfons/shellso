@@ -144,6 +144,10 @@ Functions</h2></td></tr>
 <tr class="memitem:acdb9523745e0d872ee43c3648a9899c3"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="builtin__command_8c.html#acdb9523745e0d872ee43c3648a9899c3">shell_alias</a> (<a class="el" href="structshell.html">shell</a> *<a class="el" href="structshell.html">shell</a>, int argc, char **argv)</td></tr>
 <tr class="memdesc:acdb9523745e0d872ee43c3648a9899c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lists all the registered aliasses.  <a href="builtin__command_8c.html#acdb9523745e0d872ee43c3648a9899c3">More...</a><br /></td></tr>
 <tr class="separator:acdb9523745e0d872ee43c3648a9899c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad793cb5317707d060b0773143deee369"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="builtin__command_8c.html#ad793cb5317707d060b0773143deee369">job_exited</a> (int status)</td></tr>
+<tr class="separator:ad793cb5317707d060b0773143deee369"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a46fb74ff681ee16428bd537e73c4d75f"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="builtin__command_8c.html#a46fb74ff681ee16428bd537e73c4d75f">job_running</a> (int status)</td></tr>
+<tr class="separator:a46fb74ff681ee16428bd537e73c4d75f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aac0778f3d2d8dd4f54e3337f331d5572"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="builtin__command_8c.html#aac0778f3d2d8dd4f54e3337f331d5572">shell_jobs</a> (<a class="el" href="structshell.html">shell</a> *<a class="el" href="structshell.html">shell</a>, int argc, char **argv)</td></tr>
 <tr class="memdesc:aac0778f3d2d8dd4f54e3337f331d5572"><td class="mdescLeft">&#160;</td><td class="mdescRight">List all background jobs running in the shell.  <a href="builtin__command_8c.html#aac0778f3d2d8dd4f54e3337f331d5572">More...</a><br /></td></tr>
 <tr class="separator:aac0778f3d2d8dd4f54e3337f331d5572"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -484,6 +488,66 @@ Functions</h2></td></tr>
 </div><!-- fragment -->
 </div>
 </div>
+<a id="ad793cb5317707d060b0773143deee369" name="ad793cb5317707d060b0773143deee369"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad793cb5317707d060b0773143deee369">&#9670;&nbsp;</a></span>job_exited()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static bool job_exited </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>status</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<div class="fragment"><div class="line"><span class="lineno">  162</span>                                   {</div>
+<div class="line"><span class="lineno">  163</span>    <span class="keywordflow">return</span> status != INT_MIN &amp;&amp;</div>
+<div class="line"><span class="lineno">  164</span>          (WIFEXITED(status) || WIFSIGNALED(status));</div>
+<div class="line"><span class="lineno">  165</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a46fb74ff681ee16428bd537e73c4d75f" name="a46fb74ff681ee16428bd537e73c4d75f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a46fb74ff681ee16428bd537e73c4d75f">&#9670;&nbsp;</a></span>job_running()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static bool job_running </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>status</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<div class="fragment"><div class="line"><span class="lineno">  167</span>                                    {</div>
+<div class="line"><span class="lineno">  168</span>    <span class="keywordflow">return</span> status == INT_MIN ||</div>
+<div class="line"><span class="lineno">  169</span>          (!WIFEXITED(status) &amp;&amp; !WIFSIGNALED(status));</div>
+<div class="line"><span class="lineno">  170</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
 <a id="acdb9523745e0d872ee43c3648a9899c3" name="acdb9523745e0d872ee43c3648a9899c3"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#acdb9523745e0d872ee43c3648a9899c3">&#9670;&nbsp;</a></span>shell_alias()</h2>
 
@@ -688,34 +752,40 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Return an integer according to the end status </dd></dl>
-<div class="fragment"><div class="line"><span class="lineno">  204</span>                                                  {</div>
-<div class="line"><span class="lineno">  205</span>    <a class="code hl_struct" href="structbackground__job.html">background_job</a>* curr = <a class="code hl_struct" href="structshell.html">shell</a>-&gt;<a class="code hl_variable" href="structshell.html#a6904d0f9a4c35874e4701cbcb5e6994f">jobs</a>-&gt;<a class="code hl_variable" href="structbackground__jobs.html#a32cca3c0a8ad11ee09f2d5c8e90c8ea1">next</a>;</div>
-<div class="line"><span class="lineno">  206</span>    <span class="keywordflow">while</span> (curr != NULL &amp;&amp; !WIFSTOPPED(curr-&gt;<a class="code hl_variable" href="structbackground__job.html#a03aced3d54e3dd04a505156c162eebfd">status</a>)) {</div>
-<div class="line"><span class="lineno">  207</span>        curr = curr-&gt;<a class="code hl_variable" href="structbackground__job.html#abbb51c5e8ea6e46655330990524499ea">next</a>;</div>
-<div class="line"><span class="lineno">  208</span>    }</div>
-<div class="line"><span class="lineno">  209</span> </div>
-<div class="line"><span class="lineno">  210</span>    <span class="keywordflow">if</span> (curr == NULL) {</div>
-<div class="line"><span class="lineno">  211</span>        <span class="keywordflow">return</span> 0;</div>
-<div class="line"><span class="lineno">  212</span>    }</div>
-<div class="line"><span class="lineno">  213</span> </div>
-<div class="line"><span class="lineno">  214</span>    <span class="keywordflow">if</span> (kill(curr-&gt;<a class="code hl_variable" href="structbackground__job.html#a92f573281a21ffc96121672b8d9ca500">pid</a>, SIGCONT) != 0) {</div>
-<div class="line"><span class="lineno">  215</span>        perror(<span class="stringliteral">&quot;kill SIGCONT&quot;</span>);</div>
-<div class="line"><span class="lineno">  216</span>        <span class="keywordflow">return</span> 1;</div>
-<div class="line"><span class="lineno">  217</span>    }</div>
-<div class="line"><span class="lineno">  218</span> </div>
-<div class="line"><span class="lineno">  219</span>    <span class="keywordtype">int</span> state;</div>
-<div class="line"><span class="lineno">  220</span>    <span class="keywordtype">int</span> result = waitpid(curr-&gt;<a class="code hl_variable" href="structbackground__job.html#a92f573281a21ffc96121672b8d9ca500">pid</a>, &amp;state, WNOHANG);</div>
-<div class="line"><span class="lineno">  221</span> </div>
-<div class="line"><span class="lineno">  222</span>    <span class="keywordflow">if</span> (result == -1 &amp;&amp; errno != 10) {</div>
-<div class="line"><span class="lineno">  223</span>        perror(<span class="stringliteral">&quot;waitpid&quot;</span>);</div>
-<div class="line"><span class="lineno">  224</span>        exit(EXIT_FAILURE);</div>
+<div class="fragment"><div class="line"><span class="lineno">  216</span>                                                  {</div>
+<div class="line"><span class="lineno">  217</span>    <a class="code hl_struct" href="structbackground__job.html">background_job</a>* curr = <a class="code hl_struct" href="structshell.html">shell</a>-&gt;<a class="code hl_variable" href="structshell.html#a6904d0f9a4c35874e4701cbcb5e6994f">jobs</a>-&gt;<a class="code hl_variable" href="structbackground__jobs.html#a32cca3c0a8ad11ee09f2d5c8e90c8ea1">next</a>;</div>
+<div class="line"><span class="lineno">  218</span>    <span class="comment">// Get the non terminated job running</span></div>
+<div class="line"><span class="lineno">  219</span>    <span class="keywordflow">while</span> (curr != NULL &amp;&amp; !<a class="code hl_function" href="builtin__command_8c.html#a46fb74ff681ee16428bd537e73c4d75f">job_running</a>(curr-&gt;<a class="code hl_variable" href="structbackground__job.html#a03aced3d54e3dd04a505156c162eebfd">status</a>)) {</div>
+<div class="line"><span class="lineno">  220</span>        curr = curr-&gt;<a class="code hl_variable" href="structbackground__job.html#abbb51c5e8ea6e46655330990524499ea">next</a>;</div>
+<div class="line"><span class="lineno">  221</span>    }</div>
+<div class="line"><span class="lineno">  222</span> </div>
+<div class="line"><span class="lineno">  223</span>    <span class="keywordflow">if</span> (curr == NULL) {</div>
+<div class="line"><span class="lineno">  224</span>        <span class="keywordflow">return</span> 0;</div>
 <div class="line"><span class="lineno">  225</span>    }</div>
 <div class="line"><span class="lineno">  226</span> </div>
-<div class="line"><span class="lineno">  227</span>    <a class="code hl_function" href="background__jobs_8c.html#a195c31e22dd0b6edfa3a03f5638f05d8">update_background_job_status_by_pid</a>(<a class="code hl_struct" href="structshell.html">shell</a>-&gt;<a class="code hl_variable" href="structshell.html#a6904d0f9a4c35874e4701cbcb5e6994f">jobs</a>, curr-&gt;<a class="code hl_variable" href="structbackground__job.html#a92f573281a21ffc96121672b8d9ca500">pid</a>, state);</div>
-<div class="line"><span class="lineno">  228</span> </div>
-<div class="line"><span class="lineno">  229</span>    <span class="keywordflow">return</span> 0;</div>
-<div class="line"><span class="lineno">  230</span>}</div>
+<div class="line"><span class="lineno">  227</span>    <span class="comment">// If it is stopped send a signal to resume it</span></div>
+<div class="line"><span class="lineno">  228</span>    <span class="keywordflow">if</span> (WIFSTOPPED(curr-&gt;<a class="code hl_variable" href="structbackground__job.html#a03aced3d54e3dd04a505156c162eebfd">status</a>)) {</div>
+<div class="line"><span class="lineno">  229</span>        printf(<span class="stringliteral">&quot;Ta stopped uai\n&quot;</span>);</div>
+<div class="line"><span class="lineno">  230</span>        <span class="keywordflow">if</span> (kill(curr-&gt;<a class="code hl_variable" href="structbackground__job.html#a92f573281a21ffc96121672b8d9ca500">pid</a>, SIGCONT) != 0) {</div>
+<div class="line"><span class="lineno">  231</span>            perror(<span class="stringliteral">&quot;kill SIGCONT&quot;</span>);</div>
+<div class="line"><span class="lineno">  232</span>            <span class="keywordflow">return</span> 1;</div>
+<div class="line"><span class="lineno">  233</span>        }</div>
+<div class="line"><span class="lineno">  234</span>    }</div>
+<div class="line"><span class="lineno">  235</span> </div>
+<div class="line"><span class="lineno">  236</span>    <span class="keywordtype">int</span> state;</div>
+<div class="line"><span class="lineno">  237</span>    <span class="keywordtype">int</span> result = waitpid(curr-&gt;<a class="code hl_variable" href="structbackground__job.html#a92f573281a21ffc96121672b8d9ca500">pid</a>, &amp;state, WUNTRACED);</div>
+<div class="line"><span class="lineno">  238</span> </div>
+<div class="line"><span class="lineno">  239</span>    <span class="keywordflow">if</span> (result == -1 &amp;&amp; errno != 10) {</div>
+<div class="line"><span class="lineno">  240</span>        perror(<span class="stringliteral">&quot;waitpid&quot;</span>);</div>
+<div class="line"><span class="lineno">  241</span>        exit(EXIT_FAILURE);</div>
+<div class="line"><span class="lineno">  242</span>    }</div>
+<div class="line"><span class="lineno">  243</span> </div>
+<div class="line"><span class="lineno">  244</span>    <a class="code hl_function" href="background__jobs_8c.html#a195c31e22dd0b6edfa3a03f5638f05d8">update_background_job_status_by_pid</a>(<a class="code hl_struct" href="structshell.html">shell</a>-&gt;<a class="code hl_variable" href="structshell.html#a6904d0f9a4c35874e4701cbcb5e6994f">jobs</a>, curr-&gt;<a class="code hl_variable" href="structbackground__job.html#a92f573281a21ffc96121672b8d9ca500">pid</a>, state);</div>
+<div class="line"><span class="lineno">  245</span> </div>
+<div class="line"><span class="lineno">  246</span>    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><span class="lineno">  247</span>}</div>
 <div class="ttc" id="abackground__jobs_8c_html_a195c31e22dd0b6edfa3a03f5638f05d8"><div class="ttname"><a href="background__jobs_8c.html#a195c31e22dd0b6edfa3a03f5638f05d8">update_background_job_status_by_pid</a></div><div class="ttdeci">void update_background_job_status_by_pid(background_jobs *jobs, int pid, int status)</div><div class="ttdef"><b>Definition:</b> background_jobs.c:41</div></div>
+<div class="ttc" id="abuiltin__command_8c_html_a46fb74ff681ee16428bd537e73c4d75f"><div class="ttname"><a href="builtin__command_8c.html#a46fb74ff681ee16428bd537e73c4d75f">job_running</a></div><div class="ttdeci">static bool job_running(int status)</div><div class="ttdef"><b>Definition:</b> builtin_command.c:167</div></div>
 <div class="ttc" id="astructbackground__job_html"><div class="ttname"><a href="structbackground__job.html">background_job</a></div><div class="ttdef"><b>Definition:</b> background_jobs.h:11</div></div>
 <div class="ttc" id="astructbackground__job_html_a03aced3d54e3dd04a505156c162eebfd"><div class="ttname"><a href="structbackground__job.html#a03aced3d54e3dd04a505156c162eebfd">background_job::status</a></div><div class="ttdeci">int status</div><div class="ttdef"><b>Definition:</b> background_jobs.h:14</div></div>
 <div class="ttc" id="astructbackground__job_html_a92f573281a21ffc96121672b8d9ca500"><div class="ttname"><a href="structbackground__job.html#a92f573281a21ffc96121672b8d9ca500">background_job::pid</a></div><div class="ttdeci">int pid</div><div class="ttdef"><b>Definition:</b> background_jobs.h:13</div></div>
@@ -765,48 +835,49 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Return an integer according to the end status </dd></dl>
-<div class="fragment"><div class="line"><span class="lineno">  161</span>                                                    {</div>
-<div class="line"><span class="lineno">  162</span>    <a class="code hl_struct" href="structbackground__job.html">background_job</a>* last = NULL;</div>
-<div class="line"><span class="lineno">  163</span>    <a class="code hl_struct" href="structbackground__job.html">background_job</a>* curr = <a class="code hl_struct" href="structshell.html">shell</a>-&gt;<a class="code hl_variable" href="structshell.html#a6904d0f9a4c35874e4701cbcb5e6994f">jobs</a>-&gt;<a class="code hl_variable" href="structbackground__jobs.html#a32cca3c0a8ad11ee09f2d5c8e90c8ea1">next</a>;</div>
-<div class="line"><span class="lineno">  164</span>    <span class="keywordflow">while</span> (curr != NULL) {</div>
-<div class="line"><span class="lineno">  165</span>        <span class="keyword">const</span> <span class="keywordtype">int</span> BUFFER_STATE_SIZE = 37;</div>
-<div class="line"><span class="lineno">  166</span>        <span class="keywordtype">char</span> state[BUFFER_STATE_SIZE];</div>
-<div class="line"><span class="lineno">  167</span>        <span class="comment">// printf(&quot;Status: %s %d\n&quot;, curr-&gt;command, curr-&gt;status);</span></div>
-<div class="line"><span class="lineno">  168</span>        <span class="keywordflow">if</span> (curr-&gt;<a class="code hl_variable" href="structbackground__job.html#a03aced3d54e3dd04a505156c162eebfd">status</a> == <a class="code hl_define" href="background__jobs_8h.html#ac22cb7a3eb7f1f2cc9bf083872a95d2b">STATUS_COMMAND_NOT_EXECUTED_YET</a>) {</div>
-<div class="line"><span class="lineno">  169</span>            strcpy(state, <span class="stringliteral">&quot;Running&quot;</span>);</div>
-<div class="line"><span class="lineno">  170</span>        } <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno">  171</span>            <span class="comment">// Based on https://mesos.apache.org/api/latest/c++/status__utils_8hpp_source.html</span></div>
-<div class="line"><span class="lineno">  172</span>            <span class="keywordflow">if</span> (WIFEXITED(curr-&gt;<a class="code hl_variable" href="structbackground__job.html#a03aced3d54e3dd04a505156c162eebfd">status</a>)) {</div>
-<div class="line"><span class="lineno">  173</span>                snprintf(state, BUFFER_STATE_SIZE, <span class="stringliteral">&quot;Exited with status %d&quot;</span>, WEXITSTATUS(curr-&gt;<a class="code hl_variable" href="structbackground__job.html#a03aced3d54e3dd04a505156c162eebfd">status</a>));</div>
-<div class="line"><span class="lineno">  174</span>            } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (WIFSIGNALED(curr-&gt;<a class="code hl_variable" href="structbackground__job.html#a03aced3d54e3dd04a505156c162eebfd">status</a>)) {</div>
-<div class="line"><span class="lineno">  175</span>                strncpy(state, strsignal(WTERMSIG(curr-&gt;<a class="code hl_variable" href="structbackground__job.html#a03aced3d54e3dd04a505156c162eebfd">status</a>)), BUFFER_STATE_SIZE);</div>
-<div class="line"><span class="lineno">  176</span>            } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (WIFSTOPPED(curr-&gt;<a class="code hl_variable" href="structbackground__job.html#a03aced3d54e3dd04a505156c162eebfd">status</a>)) {</div>
-<div class="line"><span class="lineno">  177</span>                strncpy(state, strsignal(WSTOPSIG(curr-&gt;<a class="code hl_variable" href="structbackground__job.html#a03aced3d54e3dd04a505156c162eebfd">status</a>)), BUFFER_STATE_SIZE);</div>
-<div class="line"><span class="lineno">  178</span>            } <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno">  179</span>                snprintf(state, BUFFER_STATE_SIZE, <span class="stringliteral">&quot;Waiting status %d&quot;</span>, curr-&gt;<a class="code hl_variable" href="structbackground__job.html#a03aced3d54e3dd04a505156c162eebfd">status</a>);</div>
-<div class="line"><span class="lineno">  180</span>            }</div>
-<div class="line"><span class="lineno">  181</span>        }</div>
-<div class="line"><span class="lineno">  182</span> </div>
-<div class="line"><span class="lineno">  183</span>        printf(<span class="stringliteral">&quot;[%d] %-35s  %s\n&quot;</span>, curr-&gt;<a class="code hl_variable" href="structbackground__job.html#a92f573281a21ffc96121672b8d9ca500">pid</a>, state, curr-&gt;<a class="code hl_variable" href="structbackground__job.html#a40458f93e33df523a3ef10c13823408f">command</a>);</div>
-<div class="line"><span class="lineno">  184</span> </div>
-<div class="line"><span class="lineno">  185</span>        <a class="code hl_struct" href="structbackground__job.html">background_job</a>* next = curr-&gt;<a class="code hl_variable" href="structbackground__job.html#abbb51c5e8ea6e46655330990524499ea">next</a>;</div>
-<div class="line"><span class="lineno">  186</span> </div>
-<div class="line"><span class="lineno">  187</span>        <span class="keywordflow">if</span> (WIFEXITED(curr-&gt;<a class="code hl_variable" href="structbackground__job.html#a03aced3d54e3dd04a505156c162eebfd">status</a>) || WIFSIGNALED(curr-&gt;<a class="code hl_variable" href="structbackground__job.html#a03aced3d54e3dd04a505156c162eebfd">status</a>)) {</div>
-<div class="line"><span class="lineno">  188</span>            <span class="keywordflow">if</span> (last == NULL) {</div>
-<div class="line"><span class="lineno">  189</span>                <a class="code hl_struct" href="structshell.html">shell</a>-&gt;<a class="code hl_variable" href="structshell.html#a6904d0f9a4c35874e4701cbcb5e6994f">jobs</a>-&gt;<a class="code hl_variable" href="structbackground__jobs.html#a32cca3c0a8ad11ee09f2d5c8e90c8ea1">next</a> = curr-&gt;<a class="code hl_variable" href="structbackground__job.html#abbb51c5e8ea6e46655330990524499ea">next</a>;</div>
+<div class="fragment"><div class="line"><span class="lineno">  172</span>                                                    {</div>
+<div class="line"><span class="lineno">  173</span>    <a class="code hl_struct" href="structbackground__job.html">background_job</a>* last = NULL;</div>
+<div class="line"><span class="lineno">  174</span>    <a class="code hl_struct" href="structbackground__job.html">background_job</a>* curr = <a class="code hl_struct" href="structshell.html">shell</a>-&gt;<a class="code hl_variable" href="structshell.html#a6904d0f9a4c35874e4701cbcb5e6994f">jobs</a>-&gt;<a class="code hl_variable" href="structbackground__jobs.html#a32cca3c0a8ad11ee09f2d5c8e90c8ea1">next</a>;</div>
+<div class="line"><span class="lineno">  175</span> </div>
+<div class="line"><span class="lineno">  176</span>    <span class="keywordflow">while</span> (curr != NULL) {</div>
+<div class="line"><span class="lineno">  177</span>        <span class="keyword">const</span> <span class="keywordtype">int</span> BUFFER_STATE_SIZE = 37;</div>
+<div class="line"><span class="lineno">  178</span>        <span class="keywordtype">char</span> state[BUFFER_STATE_SIZE];</div>
+<div class="line"><span class="lineno">  179</span> </div>
+<div class="line"><span class="lineno">  180</span>        <span class="keywordflow">if</span> (curr-&gt;<a class="code hl_variable" href="structbackground__job.html#a03aced3d54e3dd04a505156c162eebfd">status</a> == <a class="code hl_define" href="background__jobs_8h.html#ac22cb7a3eb7f1f2cc9bf083872a95d2b">STATUS_COMMAND_NOT_EXECUTED_YET</a>) {</div>
+<div class="line"><span class="lineno">  181</span>            strcpy(state, <span class="stringliteral">&quot;Running&quot;</span>);</div>
+<div class="line"><span class="lineno">  182</span>        } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  183</span>            <span class="comment">// Based on https://mesos.apache.org/api/latest/c++/status__utils_8hpp_source.html</span></div>
+<div class="line"><span class="lineno">  184</span>            <span class="keywordflow">if</span> (WIFEXITED(curr-&gt;<a class="code hl_variable" href="structbackground__job.html#a03aced3d54e3dd04a505156c162eebfd">status</a>)) {</div>
+<div class="line"><span class="lineno">  185</span>                snprintf(state, BUFFER_STATE_SIZE, <span class="stringliteral">&quot;Exited with status %d&quot;</span>, WEXITSTATUS(curr-&gt;<a class="code hl_variable" href="structbackground__job.html#a03aced3d54e3dd04a505156c162eebfd">status</a>));</div>
+<div class="line"><span class="lineno">  186</span>            } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (WIFSIGNALED(curr-&gt;<a class="code hl_variable" href="structbackground__job.html#a03aced3d54e3dd04a505156c162eebfd">status</a>)) {</div>
+<div class="line"><span class="lineno">  187</span>                strncpy(state, strsignal(WTERMSIG(curr-&gt;<a class="code hl_variable" href="structbackground__job.html#a03aced3d54e3dd04a505156c162eebfd">status</a>)), BUFFER_STATE_SIZE);</div>
+<div class="line"><span class="lineno">  188</span>            } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (WIFSTOPPED(curr-&gt;<a class="code hl_variable" href="structbackground__job.html#a03aced3d54e3dd04a505156c162eebfd">status</a>)) {</div>
+<div class="line"><span class="lineno">  189</span>                strncpy(state, strsignal(WSTOPSIG(curr-&gt;<a class="code hl_variable" href="structbackground__job.html#a03aced3d54e3dd04a505156c162eebfd">status</a>)), BUFFER_STATE_SIZE);</div>
 <div class="line"><span class="lineno">  190</span>            } <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno">  191</span>                last-&gt;<a class="code hl_variable" href="structbackground__job.html#abbb51c5e8ea6e46655330990524499ea">next</a> = curr-&gt;<a class="code hl_variable" href="structbackground__job.html#abbb51c5e8ea6e46655330990524499ea">next</a>;</div>
+<div class="line"><span class="lineno">  191</span>                snprintf(state, BUFFER_STATE_SIZE, <span class="stringliteral">&quot;Waiting status %d&quot;</span>, curr-&gt;<a class="code hl_variable" href="structbackground__job.html#a03aced3d54e3dd04a505156c162eebfd">status</a>);</div>
 <div class="line"><span class="lineno">  192</span>            }</div>
-<div class="line"><span class="lineno">  193</span>            <a class="code hl_function" href="background__jobs_8c.html#a74a9ff948dff90a1a31d9acc7a098d50">free_background_job</a>(curr);</div>
-<div class="line"><span class="lineno">  194</span>        } <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno">  195</span>            last = curr;</div>
-<div class="line"><span class="lineno">  196</span>        }</div>
-<div class="line"><span class="lineno">  197</span>        </div>
-<div class="line"><span class="lineno">  198</span>        curr = next;</div>
-<div class="line"><span class="lineno">  199</span>    }</div>
-<div class="line"><span class="lineno">  200</span>    </div>
-<div class="line"><span class="lineno">  201</span>    <span class="keywordflow">return</span> 0;</div>
-<div class="line"><span class="lineno">  202</span>}</div>
+<div class="line"><span class="lineno">  193</span>        }</div>
+<div class="line"><span class="lineno">  194</span> </div>
+<div class="line"><span class="lineno">  195</span>        printf(<span class="stringliteral">&quot;[%d] %-35s  %s\n&quot;</span>, curr-&gt;<a class="code hl_variable" href="structbackground__job.html#a92f573281a21ffc96121672b8d9ca500">pid</a>, state, curr-&gt;<a class="code hl_variable" href="structbackground__job.html#a40458f93e33df523a3ef10c13823408f">command</a>);</div>
+<div class="line"><span class="lineno">  196</span> </div>
+<div class="line"><span class="lineno">  197</span>        <a class="code hl_struct" href="structbackground__job.html">background_job</a>* next = curr-&gt;<a class="code hl_variable" href="structbackground__job.html#abbb51c5e8ea6e46655330990524499ea">next</a>;</div>
+<div class="line"><span class="lineno">  198</span> </div>
+<div class="line"><span class="lineno">  199</span>        <span class="keywordflow">if</span> (!<a class="code hl_function" href="builtin__command_8c.html#a46fb74ff681ee16428bd537e73c4d75f">job_running</a>(curr-&gt;<a class="code hl_variable" href="structbackground__job.html#a03aced3d54e3dd04a505156c162eebfd">status</a>)) {</div>
+<div class="line"><span class="lineno">  200</span>            <span class="keywordflow">if</span> (last == NULL) {</div>
+<div class="line"><span class="lineno">  201</span>                <a class="code hl_struct" href="structshell.html">shell</a>-&gt;<a class="code hl_variable" href="structshell.html#a6904d0f9a4c35874e4701cbcb5e6994f">jobs</a>-&gt;<a class="code hl_variable" href="structbackground__jobs.html#a32cca3c0a8ad11ee09f2d5c8e90c8ea1">next</a> = curr-&gt;<a class="code hl_variable" href="structbackground__job.html#abbb51c5e8ea6e46655330990524499ea">next</a>;</div>
+<div class="line"><span class="lineno">  202</span>            } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  203</span>                last-&gt;<a class="code hl_variable" href="structbackground__job.html#abbb51c5e8ea6e46655330990524499ea">next</a> = curr-&gt;<a class="code hl_variable" href="structbackground__job.html#abbb51c5e8ea6e46655330990524499ea">next</a>;</div>
+<div class="line"><span class="lineno">  204</span>            }</div>
+<div class="line"><span class="lineno">  205</span>            <a class="code hl_function" href="background__jobs_8c.html#a74a9ff948dff90a1a31d9acc7a098d50">free_background_job</a>(curr);</div>
+<div class="line"><span class="lineno">  206</span>        } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  207</span>            last = curr;</div>
+<div class="line"><span class="lineno">  208</span>        }</div>
+<div class="line"><span class="lineno">  209</span>        </div>
+<div class="line"><span class="lineno">  210</span>        curr = next;</div>
+<div class="line"><span class="lineno">  211</span>    }</div>
+<div class="line"><span class="lineno">  212</span>    </div>
+<div class="line"><span class="lineno">  213</span>    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><span class="lineno">  214</span>}</div>
 <div class="ttc" id="abackground__jobs_8c_html_a74a9ff948dff90a1a31d9acc7a098d50"><div class="ttname"><a href="background__jobs_8c.html#a74a9ff948dff90a1a31d9acc7a098d50">free_background_job</a></div><div class="ttdeci">void free_background_job(background_job *job)</div><div class="ttdef"><b>Definition:</b> background_jobs.c:77</div></div>
 <div class="ttc" id="abackground__jobs_8h_html_ac22cb7a3eb7f1f2cc9bf083872a95d2b"><div class="ttname"><a href="background__jobs_8h.html#ac22cb7a3eb7f1f2cc9bf083872a95d2b">STATUS_COMMAND_NOT_EXECUTED_YET</a></div><div class="ttdeci">#define STATUS_COMMAND_NOT_EXECUTED_YET</div><div class="ttdef"><b>Definition:</b> background_jobs.h:7</div></div>
 <div class="ttc" id="astructbackground__job_html_a40458f93e33df523a3ef10c13823408f"><div class="ttname"><a href="structbackground__job.html#a40458f93e33df523a3ef10c13823408f">background_job::command</a></div><div class="ttdeci">char * command</div><div class="ttdef"><b>Definition:</b> background_jobs.h:12</div></div>
@@ -820,7 +891,7 @@ Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_b2c05b11dbc691bba5c0cb93063c379f.html">shell</a></li><li class="navelem"><a class="el" href="builtin__command_8c.html">builtin_command.c</a></li>
-    <li class="footer">Generated on Tue May 17 2022 22:38:00 for shellso by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.4 </li>
+    <li class="footer">Generated on Fri May 20 2022 23:49:05 for shellso by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.4 </li>
   </ul>
 </div>
 <!-- BEGIN doxygen awesome darkmode toggle -->
