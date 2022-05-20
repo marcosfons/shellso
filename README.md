@@ -73,4 +73,5 @@ ENV_VAR=123 echo "$ENV_VAR"
 
 - [Filipe Mateus](https://github.com/fm4teus)
 - [Marcos Fonseca](https://github.com/marcosfons)
+- [Gustavo Detomi](https://github.com/Gudetomi)
 
