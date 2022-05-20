@@ -11,8 +11,8 @@
 - [ ] Implement tests for `shell.c` and `background_jobs.c`
 - [ ] Implement shell builtin commands:
 	- [x] cd
-	- [ ] fg
-	- [ ] jobs
+	- [x] fg
+	- [x] jobs
 	- [ ] time (maybe)
 	- [x] exit
 	- [x] fim (alias to exit, maybe)

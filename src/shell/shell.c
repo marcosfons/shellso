@@ -28,9 +28,9 @@ static shell* running_shell = NULL;
 
 /// Handles Ctrl-C events, it does nothing.
 /// exec already kill the child process
-static void signint_handler(int sig_num) {
-	signal(SIGINT, signint_handler); // Will receive the signal on the next time
-	// printf("\n");
+static void sigint_handler(int sig_num) {
+	signal(SIGINT, sigint_handler); // Will receive the signal on the next time
+	printf("\n");
 }
 
 static void sigstop_handler(int sig_num) {
@@ -167,7 +167,7 @@ void run_from_string(shell* shell, char* input) {
 }
 
 void run_from_file(shell* shell, FILE* file) {
-	// signal(SIGINT, sigint_handler);
+	signal(SIGINT, sigint_handler);
 	signal(SIGCHLD, sigchld_handler);
 	signal(SIGTSTP, sigstop_handler);
 
@@ -273,7 +273,7 @@ void run_command(shell* shell, command* cmd, int in_fd) {
 
 			if (cmd->next != NULL) {
 				if ((cmd->chain_type == AND && WEXITSTATUS(state) == EXIT_SUCCESS) || 
-						(cmd->chain_type == OR)) {
+						(cmd->chain_type == OR  && WEXITSTATUS(state) != EXIT_SUCCESS)) {
 					run_command(shell, cmd->next, in_fd);
 				}
 			}

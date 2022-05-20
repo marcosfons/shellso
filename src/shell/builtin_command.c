@@ -158,13 +158,25 @@ int shell_alias(shell* shell, int argc, char** argv) {
 	return EXIT_SUCCESS;
 }
 
+
+static bool job_exited(int status) {
+	return status != INT_MIN &&
+	      (WIFEXITED(status) || WIFSIGNALED(status));
+}
+
+static bool job_running(int status) {
+	return status == INT_MIN ||
+	      (!WIFEXITED(status) && !WIFSIGNALED(status));
+}
+
 int shell_jobs(shell* shell, int argc, char** argv) {
 	background_job* last = NULL;
 	background_job* curr = shell->jobs->next;
+
 	while (curr != NULL) {
 		const int BUFFER_STATE_SIZE = 37;
 		char state[BUFFER_STATE_SIZE];
-		// printf("Status: %s %d\n", curr->command, curr->status);
+
 		if (curr->status == STATUS_COMMAND_NOT_EXECUTED_YET) {
 			strcpy(state, "Running");
 		} else {
@@ -184,7 +196,7 @@ int shell_jobs(shell* shell, int argc, char** argv) {
 
 		background_job* next = curr->next;
 
-		if (WIFEXITED(curr->status) || WIFSIGNALED(curr->status)) {
+		if (!job_running(curr->status)) {
 			if (last == NULL) {
 				shell->jobs->next = curr->next;
 			} else {
@@ -203,7 +215,8 @@ int shell_jobs(shell* shell, int argc, char** argv) {
 
 int shell_fg(shell* shell, int argc, char** argv) {
 	background_job* curr = shell->jobs->next;
-	while (curr != NULL && !WIFSTOPPED(curr->status)) {
+	// Get the non terminated job running
+	while (curr != NULL && !job_running(curr->status)) {
 		curr = curr->next;
 	}
 
@@ -211,13 +224,17 @@ int shell_fg(shell* shell, int argc, char** argv) {
 		return 0;
 	}
 
-	if (kill(curr->pid, SIGCONT) != 0) {
-		perror("kill SIGCONT");
-		return 1;
+	// If it is stopped send a signal to resume it
+	if (WIFSTOPPED(curr->status)) {
+		printf("Ta stopped uai\n");
+		if (kill(curr->pid, SIGCONT) != 0) {
+			perror("kill SIGCONT");
+			return 1;
+		}
 	}
 
 	int state;
-	int result = waitpid(curr->pid, &state, WNOHANG);
+	int result = waitpid(curr->pid, &state, WUNTRACED);
 
 	if (result == -1 && errno != 10) {
 		perror("waitpid");

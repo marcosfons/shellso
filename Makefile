@@ -10,12 +10,17 @@ SRC=src
 BIN=bin
 OBJ=build
 TEST=tests
+TESTSCRIPT=$(TEST)/test_scripts
 TESTBIN=tests/bin
 
 SRCS=$(wildcard $(SRC)/*.c) $(wildcard $(SRC)/*/*.c)
 OBJS=$(patsubst $(SRC)/%.c, $(OBJ)/%.o, $(SRCS))
 
 TESTS=$(filter-out $(TEST)/test_utils.c, $(wildcard $(TEST)/*.c) $(wildcard $(TEST)/*/*.c))
+
+
+TESTSCRIPTS=$(wildcard $(TESTSCRIPT)/*.sh)
+TESTSCRIPTSOUT=$(patsubst $(TESTSCRIPT)/%.sh, $(TESTSCRIPT)/%_output.txt, $(TESTSCRIPTS))
 
 UNIT_TEST=$(TESTBIN)/unit_test.o
 
@@ -29,10 +34,10 @@ help:
 		sort | \
 		sed \
 			-e :a \
-			-e 's/^\([^:]\{1,8\}\):/\1 :/;ta' \
+			-e 's/^\([^:]\{1,9\}\):/\1 :/;ta' \
 			-e 's/^\([^:]*\): \+##/    \x1b[36m\1\x1b[0m/'
 # sed -e :a \                                      Create a label "a"
-# 	-e 's/^\([^:]\{1,8\}\):/\1 :/;ta' \            Loop through the string adding white space padding
+# 	-e 's/^\([^:]\{1,9\}\):/\1 :/;ta' \            Loop through the string adding white space padding
 # 	-e 's/^\([^:]*\): \+##/    \x1b[36m\1\x1b[0m/' Replace target with colored output
 
 .PHONY: debug
@@ -52,6 +57,11 @@ test: CFLAGS += --coverage
 test: CLEAN_TESTS $(UNIT_TEST) 
 	$(UNIT_TEST) -j1
 
+.PHONY: test_files
+test_files: ## Run test scripts comparing lines to the sh output
+test_files: debug
+test_files: $(TESTSCRIPTSOUT)
+
 .PHONY: docs
 docs: ## Generate Doxygen docs and try to open
 docs:
@@ -60,7 +70,7 @@ docs:
 
 .PHONY: clean
 clean: ## Clean all builded files
-	$(RM) -r $(BIN) $(OBJ) $(TESTBIN)
+	$(RM) -r $(BIN) $(OBJ) $(TESTBIN) $(TESTSCRIPTSOUT)
 
 .PHONY: CLEAN_TESTS
 CLEAN_TESTS:
@@ -80,6 +90,9 @@ $(BIN)/$(EXE): $(OBJS) | $(BIN)
 $(UNIT_TEST): $(TESTS) $(TEST)/test_utils.c | $(TESTBIN)
 	$(CC) $(CFLAGS) $(LDLIBS) -Wl,-rpath,include $^ -o $@
 
+
+$(TESTSCRIPT)/%_output.txt: $(TESTSCRIPT)/%.sh
+	diff <(sh $<) <($(BIN)/$(EXE) -f $<)
 
 
 # Directories
