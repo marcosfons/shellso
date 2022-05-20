@@ -13,10 +13,10 @@
 \begin{titlepage}
 	\begin{center}
 	
-	%\begin{figure}[!ht]
-	%\centering
-	%\includegraphics[width=2cm]{c:/ufba.jpg}
-	%\end{figure}
+	\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=2cm]{relatorio/ufsj.png}
+	\end{figure}
 
 		\LARGE{Universidade Federal de São João del Rei}\\
 		\large{Departamento de Ciência da Computação}\\ 
@@ -59,33 +59,89 @@
 		 2022
 			\end{center}
 \end{titlepage}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-% % % % % % % % %FOLHA DE ROSTO % % % % % % % % % %
 
 \newpage
-% % % % % % % % % % % % % % % % % % % % % % % % % %
-\newpage
+
 \tableofcontents
 \thispagestyle{empty}
 
 \newpage
 \pagenumbering{arabic}
-% % % % % % % % % % % % % % % % % % % % % % % % % % %
+
 \section{Introdução}
+Para este Trabalho Prático foi implementado um interpretador de comandos que foi 
+chamado \textbf{\textit{shellso}}, e conta com diversas 
+funcionalidades comuns aos interpretadores de comandos: disparar processos, 
+encadear a comunicação entre eles usando pipes, executar processos em segundo 
+plano, listar processos disparados pelo interpretador, retornar processos do 
+segundo plano de volta para o interpretador, entre outras.
+
+
+
 \newpage
+
 \section{Resumo do projeto}
+Algumas estruturas importantes:
+
+\begin{verbatim}
+struct shell {
+    bool running;
+    bool verbose;
+    prompt_function prompt;
+    aliasses* aliasses;
+    background_jobs* jobs;
+    shell_builtin_commands* builtin_commands;
+}
+\end{verbatim}
+
+
+\begin{verbatim}
+struct command {
+    int argc;                      
+    char** argv;                    
+    command* next;                  
+    command_chain_type chain_type;  
+    char* stdin_file_redirection;    
+    char* stdout_file_redirection;   
+    char* stderr_file_redirection;   
+}
+\end{verbatim}
+
+\begin{verbatim}
+struct builtin_command {
+    char* command;
+    builtin_command_function function;
+}
+\end{verbatim}
+
+\begin{verbatim}
+struct _shell_builtin_commands {
+    builtin_command** commands;
+    int size;
+    int count;
+} shell_builtin_commands;
+\end{verbatim}
+
+\begin{verbatim}
+struct background_job {
+    char* command;
+    int pid;
+    int status;
+    background_job* next;
+}
+\end{verbatim}
+
 \newpage
 
 \section{Decisões de projeto}
-
 \newpage
+
 \section{Bugs conhecidos ou problemas}
 \newpage
 
-
 \addcontentsline{toc}{section}{Anexo}
 \section*{Anexo}
-https://github.com/marcosfons/shellso
+Repositório: https://github.com/marcosfons/shellso
+Documentação online: https://marcosfons.github.io/shellso/
 \end{document}
 
