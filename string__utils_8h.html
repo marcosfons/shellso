@@ -113,16 +113,22 @@ Data Structures</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a80c7c1081ae8fd0a73bab19c8d39568a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structstring__t.html">string_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="string__utils_8h.html#a80c7c1081ae8fd0a73bab19c8d39568a">create_empty_string</a> ()</td></tr>
+<tr class="memdesc:a80c7c1081ae8fd0a73bab19c8d39568a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates an empty string.  <a href="string__utils_8h.html#a80c7c1081ae8fd0a73bab19c8d39568a">More...</a><br /></td></tr>
 <tr class="separator:a80c7c1081ae8fd0a73bab19c8d39568a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a15233c640b8ea93a8c8bcab1e916c847"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structstring__t.html">string_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="string__utils_8h.html#a15233c640b8ea93a8c8bcab1e916c847">create_string_from_input</a> (char *input, int length)</td></tr>
+<tr class="memdesc:a15233c640b8ea93a8c8bcab1e916c847"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a string from the given input.  <a href="string__utils_8h.html#a15233c640b8ea93a8c8bcab1e916c847">More...</a><br /></td></tr>
 <tr class="separator:a15233c640b8ea93a8c8bcab1e916c847"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2426b37bf8aa4caf96e7935b7e8fd57a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structstring__t.html">string_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="string__utils_8h.html#a2426b37bf8aa4caf96e7935b7e8fd57a">append_string</a> (<a class="el" href="structstring__t.html">string_t</a> *string, char *input, int length)</td></tr>
+<tr class="memdesc:a2426b37bf8aa4caf96e7935b7e8fd57a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Append string from the given input.  <a href="string__utils_8h.html#a2426b37bf8aa4caf96e7935b7e8fd57a">More...</a><br /></td></tr>
 <tr class="separator:a2426b37bf8aa4caf96e7935b7e8fd57a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1aa4d35dfaa88afa95815ca47427c15e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="string__utils_8h.html#a1aa4d35dfaa88afa95815ca47427c15e">string_free</a> (<a class="el" href="structstring__t.html">string_t</a> string)</td></tr>
+<tr class="memdesc:a1aa4d35dfaa88afa95815ca47427c15e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Frees the given string.  <a href="string__utils_8h.html#a1aa4d35dfaa88afa95815ca47427c15e">More...</a><br /></td></tr>
 <tr class="separator:a1aa4d35dfaa88afa95815ca47427c15e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad96984f86d7638639012e0b711a99460"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structstring__t.html">string_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="string__utils_8h.html#ad96984f86d7638639012e0b711a99460">append_string_escaping_final_char</a> (<a class="el" href="structstring__t.html">string_t</a> *dest, char *input, int escaping_char_position)</td></tr>
+<tr class="memdesc:ad96984f86d7638639012e0b711a99460"><td class="mdescLeft">&#160;</td><td class="mdescRight">Append string from the given input escaping the final char from it. This is useful for strings that contain backslashes.  <a href="string__utils_8h.html#ad96984f86d7638639012e0b711a99460">More...</a><br /></td></tr>
 <tr class="separator:ad96984f86d7638639012e0b711a99460"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a98f51d2e644d08c8c2bcb43b5f9a5514"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="string__utils_8h.html#a98f51d2e644d08c8c2bcb43b5f9a5514">extract_to_string_between_quotes_content</a> (<a class="el" href="structstring__t.html">string_t</a> *dest, char *input)</td></tr>
+<tr class="memdesc:a98f51d2e644d08c8c2bcb43b5f9a5514"><td class="mdescLeft">&#160;</td><td class="mdescRight">Append string from the given input, extracting only the content between quotes.  <a href="string__utils_8h.html#a98f51d2e644d08c8c2bcb43b5f9a5514">More...</a><br /></td></tr>
 <tr class="separator:a98f51d2e644d08c8c2bcb43b5f9a5514"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
@@ -157,6 +163,15 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">string</td><td>Pointer to the string that will grow </td></tr>
+    <tr><td class="paramname">input</td><td>The string that will be appended </td></tr>
+    <tr><td class="paramname">length</td><td>The length of the input string</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns the reallocated string pointer </dd></dl>
 <div class="fragment"><div class="line"><span class="lineno">   54</span>                                                                   {</div>
 <div class="line"><span class="lineno">   55</span>    <span class="keywordflow">if</span> (length == 0) {</div>
 <div class="line"><span class="lineno">   56</span>        <span class="keywordflow">return</span> string;</div>
@@ -174,8 +189,8 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">   68</span>    <span class="keywordflow">return</span> string;</div>
 <div class="line"><span class="lineno">   69</span>}</div>
 <div class="ttc" id="astring__utils_8c_html_ae79b81039ece51b48899286163a3ba6b"><div class="ttname"><a href="string__utils_8c.html#ae79b81039ece51b48899286163a3ba6b">realloc_or_exit</a></div><div class="ttdeci">static void * realloc_or_exit(void *pointer, size_t size, char *reason)</div><div class="ttdef"><b>Definition:</b> string_utils.c:21</div></div>
-<div class="ttc" id="astructstring__t_html_a1eafb904b04711c6482607a2ff0497ee"><div class="ttname"><a href="structstring__t.html#a1eafb904b04711c6482607a2ff0497ee">string_t::length</a></div><div class="ttdeci">int length</div><div class="ttdef"><b>Definition:</b> string_utils.h:7</div></div>
-<div class="ttc" id="astructstring__t_html_a37ef53a3554a52fc80f220a1e5cf699c"><div class="ttname"><a href="structstring__t.html#a37ef53a3554a52fc80f220a1e5cf699c">string_t::string</a></div><div class="ttdeci">char * string</div><div class="ttdef"><b>Definition:</b> string_utils.h:8</div></div>
+<div class="ttc" id="astructstring__t_html_a1eafb904b04711c6482607a2ff0497ee"><div class="ttname"><a href="structstring__t.html#a1eafb904b04711c6482607a2ff0497ee">string_t::length</a></div><div class="ttdeci">int length</div><div class="ttdef"><b>Definition:</b> string_utils.h:8</div></div>
+<div class="ttc" id="astructstring__t_html_a37ef53a3554a52fc80f220a1e5cf699c"><div class="ttname"><a href="structstring__t.html#a37ef53a3554a52fc80f220a1e5cf699c">string_t::string</a></div><div class="ttdeci">char * string</div><div class="ttdef"><b>Definition:</b> string_utils.h:9</div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -210,13 +225,23 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<div class="fragment"><div class="line"><span class="lineno">   79</span>                                                                                                     {</div>
-<div class="line"><span class="lineno">   80</span>    dest = <a class="code hl_function" href="string__utils_8c.html#a2426b37bf8aa4caf96e7935b7e8fd57a">append_string</a>(dest, input, escaping_char_position + 1);</div>
-<div class="line"><span class="lineno">   81</span>    dest-&gt;<a class="code hl_variable" href="structstring__t.html#a37ef53a3554a52fc80f220a1e5cf699c">string</a>[dest-&gt;<a class="code hl_variable" href="structstring__t.html#a1eafb904b04711c6482607a2ff0497ee">length</a> - 2] = input[escaping_char_position + 1];</div>
-<div class="line"><span class="lineno">   82</span>    </div>
-<div class="line"><span class="lineno">   83</span>    <span class="keywordflow">return</span> dest;</div>
-<div class="line"><span class="lineno">   84</span>}</div>
-<div class="ttc" id="astring__utils_8c_html_a2426b37bf8aa4caf96e7935b7e8fd57a"><div class="ttname"><a href="string__utils_8c.html#a2426b37bf8aa4caf96e7935b7e8fd57a">append_string</a></div><div class="ttdeci">string_t * append_string(string_t *string, char *input, int length)</div><div class="ttdef"><b>Definition:</b> string_utils.c:54</div></div>
+<p >The input string must be of size escaping_char_position + 2</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">dest</td><td>The string that will be changed </td></tr>
+    <tr><td class="paramname">input</td><td>The string that will be appended </td></tr>
+    <tr><td class="paramname">escaping_char_position</td><td>The position of the escaping char "\\"</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns the reallocated string pointer </dd></dl>
+<div class="fragment"><div class="line"><span class="lineno">   71</span>                                                                                                     {</div>
+<div class="line"><span class="lineno">   72</span>    dest = <a class="code hl_function" href="string__utils_8c.html#a2426b37bf8aa4caf96e7935b7e8fd57a">append_string</a>(dest, input, escaping_char_position + 1);</div>
+<div class="line"><span class="lineno">   73</span>    dest-&gt;<a class="code hl_variable" href="structstring__t.html#a37ef53a3554a52fc80f220a1e5cf699c">string</a>[dest-&gt;<a class="code hl_variable" href="structstring__t.html#a1eafb904b04711c6482607a2ff0497ee">length</a> - 2] = input[escaping_char_position + 1];</div>
+<div class="line"><span class="lineno">   74</span>    </div>
+<div class="line"><span class="lineno">   75</span>    <span class="keywordflow">return</span> dest;</div>
+<div class="line"><span class="lineno">   76</span>}</div>
+<div class="ttc" id="astring__utils_8c_html_a2426b37bf8aa4caf96e7935b7e8fd57a"><div class="ttname"><a href="string__utils_8c.html#a2426b37bf8aa4caf96e7935b7e8fd57a">append_string</a></div><div class="ttdeci">string_t * append_string(string_t *string, char *input, int length)</div><div class="ttdoc">Append string from the given input.</div><div class="ttdef"><b>Definition:</b> string_utils.c:54</div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -234,6 +259,7 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>Return the newly created string </dd></dl>
 <div class="fragment"><div class="line"><span class="lineno">   31</span>                               {</div>
 <div class="line"><span class="lineno">   32</span>    <a class="code hl_struct" href="structstring__t.html">string_t</a> string;</div>
 <div class="line"><span class="lineno">   33</span> </div>
@@ -244,7 +270,7 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">   38</span>    <span class="keywordflow">return</span> string;</div>
 <div class="line"><span class="lineno">   39</span>}</div>
 <div class="ttc" id="astring__utils_8c_html_a65fa2a03bfaf1fd389a4958455dd5c29"><div class="ttname"><a href="string__utils_8c.html#a65fa2a03bfaf1fd389a4958455dd5c29">malloc_or_exit</a></div><div class="ttdeci">static void * malloc_or_exit(size_t size, char *reason)</div><div class="ttdef"><b>Definition:</b> string_utils.c:10</div></div>
-<div class="ttc" id="astructstring__t_html"><div class="ttname"><a href="structstring__t.html">string_t</a></div><div class="ttdef"><b>Definition:</b> string_utils.h:6</div></div>
+<div class="ttc" id="astructstring__t_html"><div class="ttname"><a href="structstring__t.html">string_t</a></div><div class="ttdef"><b>Definition:</b> string_utils.h:7</div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -273,6 +299,14 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">input</td><td>The input string </td></tr>
+    <tr><td class="paramname">length</td><td>The length of the input string</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns the newly created string </dd></dl>
 <div class="fragment"><div class="line"><span class="lineno">   41</span>                                                           {</div>
 <div class="line"><span class="lineno">   42</span>    <a class="code hl_struct" href="structstring__t.html">string_t</a> string;</div>
 <div class="line"><span class="lineno">   43</span> </div>
@@ -313,40 +347,49 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<div class="fragment"><div class="line"><span class="lineno">   97</span>                                                                          {</div>
-<div class="line"><span class="lineno">   98</span>    <span class="keywordtype">char</span> quote_type = input[0]; <span class="comment">// will be &quot; or &#39;</span></div>
-<div class="line"><span class="lineno">   99</span>    assert(quote_type == <span class="charliteral">&#39;&quot;&#39;</span> || quote_type == <span class="charliteral">&#39;\&#39;&#39;</span>);</div>
-<div class="line"><span class="lineno">  100</span>    input += 1; <span class="comment">// shift the quote char</span></div>
-<div class="line"><span class="lineno">  101</span>    <span class="keywordtype">int</span> i = 0;</div>
-<div class="line"><span class="lineno">  102</span> </div>
-<div class="line"><span class="lineno">  103</span>    <span class="keywordflow">if</span> (quote_type == <span class="charliteral">&#39;\&#39;&#39;</span>) {</div>
-<div class="line"><span class="lineno">  104</span>        <span class="keywordflow">for</span> (; input[i] != quote_type &amp;&amp; input[i] != <span class="charliteral">&#39;\0&#39;</span>; i++) {}</div>
-<div class="line"><span class="lineno">  105</span>        <span class="keywordflow">if</span> (i != 0) {</div>
-<div class="line"><span class="lineno">  106</span>            <a class="code hl_function" href="string__utils_8c.html#a2426b37bf8aa4caf96e7935b7e8fd57a">append_string</a>(dest, input, i);</div>
-<div class="line"><span class="lineno">  107</span>        }</div>
-<div class="line"><span class="lineno">  108</span>    } <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno">  109</span>        <span class="keywordtype">int</span> j = 0;</div>
-<div class="line"><span class="lineno">  110</span>        <span class="keywordflow">for</span> (; input[j] != quote_type &amp;&amp; input[j] != <span class="charliteral">&#39;\0&#39;</span>; j++) {</div>
-<div class="line"><span class="lineno">  111</span>            <span class="keywordflow">if</span> (input[j] == <span class="charliteral">&#39;\\&#39;</span>) {</div>
-<div class="line"><span class="lineno">  112</span>                <a class="code hl_function" href="string__utils_8c.html#ad96984f86d7638639012e0b711a99460">append_string_escaping_final_char</a>(dest, input, j);</div>
-<div class="line"><span class="lineno">  113</span>                input += j + 2;</div>
-<div class="line"><span class="lineno">  114</span>                i += j + 2;</div>
-<div class="line"><span class="lineno">  115</span>                j = -1;</div>
-<div class="line"><span class="lineno">  116</span>            }</div>
-<div class="line"><span class="lineno">  117</span>        }</div>
-<div class="line"><span class="lineno">  118</span>        i += j;</div>
-<div class="line"><span class="lineno">  119</span>        <a class="code hl_function" href="string__utils_8c.html#a2426b37bf8aa4caf96e7935b7e8fd57a">append_string</a>(dest, input, j);</div>
-<div class="line"><span class="lineno">  120</span>    }</div>
-<div class="line"><span class="lineno">  121</span>    </div>
-<div class="line"><span class="lineno">  122</span>    <span class="comment">// Reached the end of the string without finding the end quote</span></div>
-<div class="line"><span class="lineno">  123</span>    <span class="keywordflow">if</span> (input[i] == <span class="charliteral">&#39;\0&#39;</span>) {</div>
-<div class="line"><span class="lineno">  124</span>        fprintf(stderr, <span class="stringliteral">&quot;Unexpected EOF while looking for matching %c\n&quot;</span>, quote_type);</div>
-<div class="line"><span class="lineno">  125</span>        <span class="keywordflow">return</span> -1;</div>
-<div class="line"><span class="lineno">  126</span>    }</div>
-<div class="line"><span class="lineno">  127</span> </div>
-<div class="line"><span class="lineno">  128</span>    <span class="keywordflow">return</span> i + 1;</div>
-<div class="line"><span class="lineno">  129</span>}</div>
-<div class="ttc" id="astring__utils_8c_html_ad96984f86d7638639012e0b711a99460"><div class="ttname"><a href="string__utils_8c.html#ad96984f86d7638639012e0b711a99460">append_string_escaping_final_char</a></div><div class="ttdeci">string_t * append_string_escaping_final_char(string_t *dest, char *input, int escaping_char_position)</div><div class="ttdef"><b>Definition:</b> string_utils.c:79</div></div>
+<p >The first character of the input must be a quote. " or '</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">dest</td><td>The string that will be changed </td></tr>
+    <tr><td class="paramname">input</td><td>The string that will be appended</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns the position of the last quote or -1 if the last quote was not found </dd></dl>
+<div class="fragment"><div class="line"><span class="lineno">   78</span>                                                                          {</div>
+<div class="line"><span class="lineno">   79</span>    <span class="keywordtype">char</span> quote_type = input[0]; <span class="comment">// will be &quot; or &#39;</span></div>
+<div class="line"><span class="lineno">   80</span>    assert(quote_type == <span class="charliteral">&#39;&quot;&#39;</span> || quote_type == <span class="charliteral">&#39;\&#39;&#39;</span>);</div>
+<div class="line"><span class="lineno">   81</span>    input += 1; <span class="comment">// shift the quote char</span></div>
+<div class="line"><span class="lineno">   82</span>    <span class="keywordtype">int</span> i = 0;</div>
+<div class="line"><span class="lineno">   83</span> </div>
+<div class="line"><span class="lineno">   84</span>    <span class="keywordflow">if</span> (quote_type == <span class="charliteral">&#39;\&#39;&#39;</span>) {</div>
+<div class="line"><span class="lineno">   85</span>        <span class="keywordflow">for</span> (; input[i] != quote_type &amp;&amp; input[i] != <span class="charliteral">&#39;\0&#39;</span>; i++) {}</div>
+<div class="line"><span class="lineno">   86</span>        <span class="keywordflow">if</span> (i != 0) {</div>
+<div class="line"><span class="lineno">   87</span>            <a class="code hl_function" href="string__utils_8c.html#a2426b37bf8aa4caf96e7935b7e8fd57a">append_string</a>(dest, input, i);</div>
+<div class="line"><span class="lineno">   88</span>        }</div>
+<div class="line"><span class="lineno">   89</span>    } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">   90</span>        <span class="keywordtype">int</span> j = 0;</div>
+<div class="line"><span class="lineno">   91</span>        <span class="keywordflow">for</span> (; input[j] != quote_type &amp;&amp; input[j] != <span class="charliteral">&#39;\0&#39;</span>; j++) {</div>
+<div class="line"><span class="lineno">   92</span>            <span class="keywordflow">if</span> (input[j] == <span class="charliteral">&#39;\\&#39;</span>) {</div>
+<div class="line"><span class="lineno">   93</span>                <a class="code hl_function" href="string__utils_8c.html#ad96984f86d7638639012e0b711a99460">append_string_escaping_final_char</a>(dest, input, j);</div>
+<div class="line"><span class="lineno">   94</span>                input += j + 2;</div>
+<div class="line"><span class="lineno">   95</span>                i += j + 2;</div>
+<div class="line"><span class="lineno">   96</span>                j = -1;</div>
+<div class="line"><span class="lineno">   97</span>            }</div>
+<div class="line"><span class="lineno">   98</span>        }</div>
+<div class="line"><span class="lineno">   99</span>        i += j;</div>
+<div class="line"><span class="lineno">  100</span>        <a class="code hl_function" href="string__utils_8c.html#a2426b37bf8aa4caf96e7935b7e8fd57a">append_string</a>(dest, input, j);</div>
+<div class="line"><span class="lineno">  101</span>    }</div>
+<div class="line"><span class="lineno">  102</span>    </div>
+<div class="line"><span class="lineno">  103</span>    <span class="comment">// Reached the end of the string without finding the end quote</span></div>
+<div class="line"><span class="lineno">  104</span>    <span class="keywordflow">if</span> (input[i] == <span class="charliteral">&#39;\0&#39;</span>) {</div>
+<div class="line"><span class="lineno">  105</span>        fprintf(stderr, <span class="stringliteral">&quot;Unexpected EOF while looking for matching %c\n&quot;</span>, quote_type);</div>
+<div class="line"><span class="lineno">  106</span>        <span class="keywordflow">return</span> -1;</div>
+<div class="line"><span class="lineno">  107</span>    }</div>
+<div class="line"><span class="lineno">  108</span> </div>
+<div class="line"><span class="lineno">  109</span>    <span class="keywordflow">return</span> i + 1;</div>
+<div class="line"><span class="lineno">  110</span>}</div>
+<div class="ttc" id="astring__utils_8c_html_ad96984f86d7638639012e0b711a99460"><div class="ttname"><a href="string__utils_8c.html#ad96984f86d7638639012e0b711a99460">append_string_escaping_final_char</a></div><div class="ttdeci">string_t * append_string_escaping_final_char(string_t *dest, char *input, int escaping_char_position)</div><div class="ttdoc">Append string from the given input escaping the final char from it. This is useful for strings that c...</div><div class="ttdef"><b>Definition:</b> string_utils.c:71</div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -365,10 +408,16 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<div class="fragment"><div class="line"><span class="lineno">  132</span>                                  {</div>
-<div class="line"><span class="lineno">  133</span>    free(<span class="keywordtype">string</span>.<span class="keywordtype">string</span>);</div>
-<div class="line"><span class="lineno">  134</span>    <span class="keywordtype">string</span>.length = 0;</div>
-<div class="line"><span class="lineno">  135</span>}</div>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">string</td><td>The string that will be freed </td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="fragment"><div class="line"><span class="lineno">  112</span>                                  {</div>
+<div class="line"><span class="lineno">  113</span>    free(<span class="keywordtype">string</span>.<span class="keywordtype">string</span>);</div>
+<div class="line"><span class="lineno">  114</span>    <span class="keywordtype">string</span>.length = 0;</div>
+<div class="line"><span class="lineno">  115</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -379,7 +428,7 @@ Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_6cc8961f7f77054fb84f95c9f23f5ca0.html">string</a></li><li class="navelem"><a class="el" href="string__utils_8h.html">string_utils.h</a></li>
-    <li class="footer">Generated on Fri May 20 2022 23:50:27 for shellso by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.4 </li>
+    <li class="footer">Generated on Sat May 21 2022 23:07:44 for shellso by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.4 </li>
   </ul>
 </div>
 <!-- BEGIN doxygen awesome darkmode toggle -->

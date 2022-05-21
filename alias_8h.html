@@ -127,16 +127,22 @@ Typedefs</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:add4336fa5bea1cf3cdd57c3435264a8b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaliasses.html">aliasses</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="alias_8h.html#add4336fa5bea1cf3cdd57c3435264a8b">create_aliasses</a> (int size)</td></tr>
+<tr class="memdesc:add4336fa5bea1cf3cdd57c3435264a8b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create the hash map of aliasses.  <a href="alias_8h.html#add4336fa5bea1cf3cdd57c3435264a8b">More...</a><br /></td></tr>
 <tr class="separator:add4336fa5bea1cf3cdd57c3435264a8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9ae378185154ef0e6d09815fbb9ac2a7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="alias_8h.html#a9ae378185154ef0e6d09815fbb9ac2a7">add_alias</a> (<a class="el" href="structaliasses.html">aliasses</a> *<a class="el" href="structaliasses.html">aliasses</a>, char *key, int argc, char **argv)</td></tr>
+<tr class="memdesc:a9ae378185154ef0e6d09815fbb9ac2a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add an alias to the hash map.  <a href="alias_8h.html#a9ae378185154ef0e6d09815fbb9ac2a7">More...</a><br /></td></tr>
 <tr class="separator:a9ae378185154ef0e6d09815fbb9ac2a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aac65c41717f250e7edea7bcc26f5ef60"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="alias_8h.html#aac65c41717f250e7edea7bcc26f5ef60">alias_hash_function</a> (<a class="el" href="structaliasses.html">aliasses</a> *<a class="el" href="structaliasses.html">aliasses</a>, char *str)</td></tr>
+<tr class="memdesc:aac65c41717f250e7edea7bcc26f5ef60"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the hash value of the input string.  <a href="alias_8h.html#aac65c41717f250e7edea7bcc26f5ef60">More...</a><br /></td></tr>
 <tr class="separator:aac65c41717f250e7edea7bcc26f5ef60"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1e2b02a30b04ebfb421d390fd44225f5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structalias.html">alias</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="alias_8h.html#a1e2b02a30b04ebfb421d390fd44225f5">find_alias</a> (<a class="el" href="structaliasses.html">aliasses</a> *<a class="el" href="structaliasses.html">aliasses</a>, char *<a class="el" href="structalias.html">alias</a>)</td></tr>
+<tr class="memdesc:a1e2b02a30b04ebfb421d390fd44225f5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find an alias in the hash map by a string.  <a href="alias_8h.html#a1e2b02a30b04ebfb421d390fd44225f5">More...</a><br /></td></tr>
 <tr class="separator:a1e2b02a30b04ebfb421d390fd44225f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abd741741f99485644bff1a47db4fb075"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="alias_8h.html#abd741741f99485644bff1a47db4fb075">free_alias</a> (<a class="el" href="structalias.html">alias</a> *<a class="el" href="structalias.html">alias</a>)</td></tr>
+<tr class="memdesc:abd741741f99485644bff1a47db4fb075"><td class="mdescLeft">&#160;</td><td class="mdescRight">Frees a single alias.  <a href="alias_8h.html#abd741741f99485644bff1a47db4fb075">More...</a><br /></td></tr>
 <tr class="separator:abd741741f99485644bff1a47db4fb075"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adb849a970a0fe33dd4198c44289160a8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="alias_8h.html#adb849a970a0fe33dd4198c44289160a8">free_aliasses</a> (<a class="el" href="structaliasses.html">aliasses</a> *<a class="el" href="structaliasses.html">aliasses</a>)</td></tr>
+<tr class="memdesc:adb849a970a0fe33dd4198c44289160a8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Frees the aliasses hash map.  <a href="alias_8h.html#adb849a970a0fe33dd4198c44289160a8">More...</a><br /></td></tr>
 <tr class="separator:adb849a970a0fe33dd4198c44289160a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Typedef Documentation</h2>
@@ -206,6 +212,15 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">aliasses</td><td>A pointer to the aliasses hash map </td></tr>
+    <tr><td class="paramname">key</td><td>The key that identifies the alias </td></tr>
+    <tr><td class="paramname">argc</td><td>The argument count of the alias </td></tr>
+    <tr><td class="paramname">argv</td><td>The list of arguments starting with the command </td></tr>
+  </table>
+  </dd>
+</dl>
 <div class="fragment"><div class="line"><span class="lineno">   20</span>                                                                     {</div>
 <div class="line"><span class="lineno">   21</span>    assert(argc &gt; 0 &amp;&amp; argv[0] != NULL);</div>
 <div class="line"><span class="lineno">   22</span>    </div>
@@ -223,7 +238,7 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">   34</span>    <a class="code hl_struct" href="structaliasses.html">aliasses</a>-&gt;<a class="code hl_variable" href="structaliasses.html#a51fcda425a99d152d1ca24e282da700a">aliasses</a>[hash] = new_alias;</div>
 <div class="line"><span class="lineno">   35</span>    <a class="code hl_struct" href="structaliasses.html">aliasses</a>-&gt;<a class="code hl_variable" href="structaliasses.html#ab237da21d94189608aa9533a1404695f">count</a> += 1;</div>
 <div class="line"><span class="lineno">   36</span>}</div>
-<div class="ttc" id="aalias_8c_html_aac65c41717f250e7edea7bcc26f5ef60"><div class="ttname"><a href="alias_8c.html#aac65c41717f250e7edea7bcc26f5ef60">alias_hash_function</a></div><div class="ttdeci">unsigned long alias_hash_function(aliasses *aliasses, char *str)</div><div class="ttdef"><b>Definition:</b> alias.c:38</div></div>
+<div class="ttc" id="aalias_8c_html_aac65c41717f250e7edea7bcc26f5ef60"><div class="ttname"><a href="alias_8c.html#aac65c41717f250e7edea7bcc26f5ef60">alias_hash_function</a></div><div class="ttdeci">unsigned long alias_hash_function(aliasses *aliasses, char *str)</div><div class="ttdoc">Calculate the hash value of the input string.</div><div class="ttdef"><b>Definition:</b> alias.c:38</div></div>
 <div class="ttc" id="astructalias_html"><div class="ttname"><a href="structalias.html">alias</a></div><div class="ttdoc">Only one alias entry.</div><div class="ttdef"><b>Definition:</b> alias.h:6</div></div>
 <div class="ttc" id="astructalias_html_a26a1a66ba57d34a91c45e52f24ccf05c"><div class="ttname"><a href="structalias.html#a26a1a66ba57d34a91c45e52f24ccf05c">alias::argv</a></div><div class="ttdeci">char ** argv</div><div class="ttdef"><b>Definition:</b> alias.h:9</div></div>
 <div class="ttc" id="astructalias_html_a7f59592e9f95ba5f0caf2bcbfb9c0aeb"><div class="ttname"><a href="structalias.html#a7f59592e9f95ba5f0caf2bcbfb9c0aeb">alias::argc</a></div><div class="ttdeci">int argc</div><div class="ttdef"><b>Definition:</b> alias.h:8</div></div>
@@ -259,6 +274,14 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">aliasses</td><td>The aliasses hash map </td></tr>
+    <tr><td class="paramname">str</td><td>The alias input string</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The hash generated, limited by the aliasses size </dd></dl>
 <div class="fragment"><div class="line"><span class="lineno">   38</span>                                                                 {</div>
 <div class="line"><span class="lineno">   39</span>    <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> i = 0;</div>
 <div class="line"><span class="lineno">   40</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j=0; str[j]; j++) {</div>
@@ -285,6 +308,13 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">size</td><td>The initial size of the hash map</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns a pointer to the newly created aliasses hash map </dd></dl>
 <div class="fragment"><div class="line"><span class="lineno">   10</span>                                    {</div>
 <div class="line"><span class="lineno">   11</span>    <a class="code hl_struct" href="structaliasses.html">aliasses</a>* new_aliasses = malloc(<span class="keyword">sizeof</span>(<a class="code hl_struct" href="structaliasses.html">aliasses</a>));</div>
 <div class="line"><span class="lineno">   12</span> </div>
@@ -322,6 +352,14 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">aliasses</td><td>The aliasses hash map </td></tr>
+    <tr><td class="paramname">alias</td><td>The alias string</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns an alias pointer or NULL if it was not find </dd></dl>
 <div class="fragment"><div class="line"><span class="lineno">   46</span>                                                 {</div>
 <div class="line"><span class="lineno">   47</span>    <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> hash = <a class="code hl_function" href="alias_8c.html#aac65c41717f250e7edea7bcc26f5ef60">alias_hash_function</a>(<a class="code hl_struct" href="structaliasses.html">aliasses</a>, key);</div>
 <div class="line"><span class="lineno">   48</span>    </div>
@@ -351,6 +389,12 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">alias</td><td>The alias that will be freed </td></tr>
+  </table>
+  </dd>
+</dl>
 <div class="fragment"><div class="line"><span class="lineno">   58</span>                              {</div>
 <div class="line"><span class="lineno">   59</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; <a class="code hl_struct" href="structalias.html">alias</a>-&gt;<a class="code hl_variable" href="structalias.html#a7f59592e9f95ba5f0caf2bcbfb9c0aeb">argc</a>; i++) {</div>
 <div class="line"><span class="lineno">   60</span>        free(<a class="code hl_struct" href="structalias.html">alias</a>-&gt;<a class="code hl_variable" href="structalias.html#a26a1a66ba57d34a91c45e52f24ccf05c">argv</a>[i]);</div>
@@ -377,6 +421,12 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">aliasses</td><td>The aliasses hash map </td></tr>
+  </table>
+  </dd>
+</dl>
 <div class="fragment"><div class="line"><span class="lineno">   67</span>                                       {</div>
 <div class="line"><span class="lineno">   68</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; <a class="code hl_struct" href="structaliasses.html">aliasses</a>-&gt;<a class="code hl_variable" href="structaliasses.html#a4f38ecd4ee3616995601c47c40ffb3a7">size</a>; i++) {</div>
 <div class="line"><span class="lineno">   69</span>        <span class="keywordflow">if</span> (<a class="code hl_struct" href="structaliasses.html">aliasses</a>-&gt;<a class="code hl_variable" href="structaliasses.html#a51fcda425a99d152d1ca24e282da700a">aliasses</a>[i] != NULL) {</div>
@@ -387,7 +437,7 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">   74</span>    free(<a class="code hl_struct" href="structaliasses.html">aliasses</a>-&gt;<a class="code hl_variable" href="structaliasses.html#a51fcda425a99d152d1ca24e282da700a">aliasses</a>);</div>
 <div class="line"><span class="lineno">   75</span>    free(<a class="code hl_struct" href="structaliasses.html">aliasses</a>);</div>
 <div class="line"><span class="lineno">   76</span>}</div>
-<div class="ttc" id="aalias_8c_html_abd741741f99485644bff1a47db4fb075"><div class="ttname"><a href="alias_8c.html#abd741741f99485644bff1a47db4fb075">free_alias</a></div><div class="ttdeci">void free_alias(alias *alias)</div><div class="ttdef"><b>Definition:</b> alias.c:58</div></div>
+<div class="ttc" id="aalias_8c_html_abd741741f99485644bff1a47db4fb075"><div class="ttname"><a href="alias_8c.html#abd741741f99485644bff1a47db4fb075">free_alias</a></div><div class="ttdeci">void free_alias(alias *alias)</div><div class="ttdoc">Frees a single alias.</div><div class="ttdef"><b>Definition:</b> alias.c:58</div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -398,7 +448,7 @@ Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_b2c05b11dbc691bba5c0cb93063c379f.html">shell</a></li><li class="navelem"><a class="el" href="alias_8h.html">alias.h</a></li>
-    <li class="footer">Generated on Fri May 20 2022 23:50:27 for shellso by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.4 </li>
+    <li class="footer">Generated on Sat May 21 2022 23:07:44 for shellso by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.4 </li>
   </ul>
 </div>
 <!-- BEGIN doxygen awesome darkmode toggle -->

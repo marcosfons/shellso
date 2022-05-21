@@ -1,7 +1,7 @@
 var searchData=
 [
   ['chain_5ftype_0',['chain_type',['../structcommand.html#aef8935bdf704e1ff07054800281d24c4',1,'command']]],
-  ['close_1',['CLOSE',['../shell_8c.html#a0428601952a0a522c2cb358b4e76ecc9',1,'shell.c']]],
+  ['close_5ffd_1',['close_fd',['../shell_8c.html#a651bf5ab247e4a9eae3b950e5c046483',1,'shell.c']]],
   ['command_2',['command',['../structcommand.html',1,'command'],['../structbackground__job.html#a40458f93e33df523a3ef10c13823408f',1,'background_job::command()'],['../structbuiltin__command.html#addbfd32f23200e9d14084fa62838fa78',1,'builtin_command::command()'],['../command_8h.html#aab93db1936073aa132709623764402e5',1,'command():&#160;command.h']]],
   ['command_2ec_3',['command.c',['../command_8c.html',1,'']]],
   ['command_2eh_4',['command.h',['../command_8h.html',1,'']]],

@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['close_0',['CLOSE',['../shell_8c.html#a0428601952a0a522c2cb358b4e76ecc9',1,'shell.c']]],
+  ['close_5ffd_0',['close_fd',['../shell_8c.html#a651bf5ab247e4a9eae3b950e5c046483',1,'shell.c']]],
   ['command_5fadd_5fargument_1',['command_add_argument',['../command_8c.html#aba418022cc3cc6265b2bbf54047888c8',1,'command_add_argument(command *cmd, char *argument):&#160;command.c'],['../command_8h.html#aba418022cc3cc6265b2bbf54047888c8',1,'command_add_argument(command *cmd, char *argument):&#160;command.c']]],
   ['command_5fcreate_2',['command_create',['../command_8c.html#a92d84bb0db13ef0d0ee878eac2e8fb3d',1,'command_create():&#160;command.c'],['../command_8h.html#a92d84bb0db13ef0d0ee878eac2e8fb3d',1,'command_create():&#160;command.c']]],
   ['command_5ffree_3',['command_free',['../command_8c.html#a95098a672188182c4eaa40748c1392e3',1,'command_free(command *command):&#160;command.c'],['../command_8h.html#a95098a672188182c4eaa40748c1392e3',1,'command_free(command *command):&#160;command.c']]],

@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['job_5fexited_0',['job_exited',['../builtin__command_8c.html#ad793cb5317707d060b0773143deee369',1,'builtin_command.c']]],
-  ['job_5frunning_1',['job_running',['../builtin__command_8c.html#a46fb74ff681ee16428bd537e73c4d75f',1,'builtin_command.c']]],
-  ['jobs_2',['jobs',['../structshell.html#a6904d0f9a4c35874e4701cbcb5e6994f',1,'shell']]]
+  ['job_5frunning_0',['job_running',['../background__jobs_8c.html#acd533c62dfca81f0d67284fc30d78750',1,'job_running(background_job *job):&#160;background_jobs.c'],['../background__jobs_8h.html#acd533c62dfca81f0d67284fc30d78750',1,'job_running(background_job *job):&#160;background_jobs.c']]],
+  ['jobs_1',['jobs',['../structshell.html#a6904d0f9a4c35874e4701cbcb5e6994f',1,'shell']]]
 ];

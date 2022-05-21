@@ -7,8 +7,6 @@ var builtin__command_8c =
     [ "find_builtin_command", "builtin__command_8c.html#a8090997432344498a55c465d6c927452", null ],
     [ "free_builtin_command", "builtin__command_8c.html#ab513a242017ccfb7e25fa46cf23ea249", null ],
     [ "free_shell_builtin_commands", "builtin__command_8c.html#abcf53ea7e4671bccbe0deea89ddd02f1", null ],
-    [ "job_exited", "builtin__command_8c.html#ad793cb5317707d060b0773143deee369", null ],
-    [ "job_running", "builtin__command_8c.html#a46fb74ff681ee16428bd537e73c4d75f", null ],
     [ "shell_alias", "builtin__command_8c.html#acdb9523745e0d872ee43c3648a9899c3", null ],
     [ "shell_cd", "builtin__command_8c.html#ac00b27d773a42fdd248778ac29fab8e1", null ],
     [ "shell_exit", "builtin__command_8c.html#adc4599a1416f574a9f9692ecff9cef59", null ],

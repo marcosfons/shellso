@@ -110,6 +110,7 @@ $(document).ready(function(){initNavTree('prompts_8c.html',''); initResizable();
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a8ce9a95e88542227e84a78309ceb1a1f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="prompts_8c.html#a8ce9a95e88542227e84a78309ceb1a1f">normal_shell_prompt</a> (<a class="el" href="structshell.html">shell</a> *<a class="el" href="structshell.html">shell</a>)</td></tr>
+<tr class="memdesc:a8ce9a95e88542227e84a78309ceb1a1f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Simple shell prompt that prints the name of the user and the cwd.  <a href="prompts_8c.html#a8ce9a95e88542227e84a78309ceb1a1f">More...</a><br /></td></tr>
 <tr class="separator:a8ce9a95e88542227e84a78309ceb1a1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa61462310978639dba88c824d9f93e9a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="prompts_8c.html#aa61462310978639dba88c824d9f93e9a">tp_shell_prompt</a> (<a class="el" href="structshell.html">shell</a> *<a class="el" href="structshell.html">shell</a>)</td></tr>
 <tr class="separator:aa61462310978639dba88c824d9f93e9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -130,6 +131,12 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">shell</td><td>The running shell </td></tr>
+  </table>
+  </dd>
+</dl>
 <div class="fragment"><div class="line"><span class="lineno">    9</span>                                       {</div>
 <div class="line"><span class="lineno">   10</span>    <span class="keywordtype">size_t</span> length = PATH_MAX;</div>
 <div class="line"><span class="lineno">   11</span>    <span class="keywordtype">char</span>* cwd = malloc(length);</div>
@@ -142,7 +149,7 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">   18</span>        perror(<span class="stringliteral">&quot;cwd&quot;</span>);</div>
 <div class="line"><span class="lineno">   19</span>        printf(<span class="stringliteral">&quot;%s$ &quot;</span>, username);</div>
 <div class="line"><span class="lineno">   20</span>    } <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno">   21</span>        printf(<span class="stringliteral">&quot;\033[03;32m%s:\033[03;34m%s\033[0m$ &quot;</span>, username, cwd);</div>
+<div class="line"><span class="lineno">   21</span>        printf(<span class="stringliteral">&quot;\033[01;32m%s:\033[01;34m%s\033[0m$ &quot;</span>, username, cwd);</div>
 <div class="line"><span class="lineno">   22</span>    }</div>
 <div class="line"><span class="lineno">   23</span> </div>
 <div class="line"><span class="lineno">   24</span>    free(cwd);</div>
@@ -178,7 +185,7 @@ Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_b2c05b11dbc691bba5c0cb93063c379f.html">shell</a></li><li class="navelem"><a class="el" href="prompts_8c.html">prompts.c</a></li>
-    <li class="footer">Generated on Fri May 20 2022 23:50:27 for shellso by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.4 </li>
+    <li class="footer">Generated on Sat May 21 2022 23:07:44 for shellso by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.4 </li>
   </ul>
 </div>
 <!-- BEGIN doxygen awesome darkmode toggle -->

@@ -125,7 +125,7 @@ $(document).ready(function(){initNavTree('globals.html',''); initResizable(); })
 
 
 <h3><a id="index_c" name="index_c"></a>- c -</h3><ul>
-<li>CLOSE()&#160;:&#160;<a class="el" href="shell_8c.html#a0428601952a0a522c2cb358b4e76ecc9">shell.c</a></li>
+<li>close_fd()&#160;:&#160;<a class="el" href="shell_8c.html#a651bf5ab247e4a9eae3b950e5c046483">shell.c</a></li>
 <li>command&#160;:&#160;<a class="el" href="command_8h.html#aab93db1936073aa132709623764402e5">command.h</a></li>
 <li>command_add_argument()&#160;:&#160;<a class="el" href="command_8c.html#aba418022cc3cc6265b2bbf54047888c8">command.c</a>, <a class="el" href="command_8h.html#aba418022cc3cc6265b2bbf54047888c8">command.h</a></li>
 <li>command_chain_type&#160;:&#160;<a class="el" href="command_8h.html#a4fa9f0b878abe6ebdcbddc7416bb69ad">command.h</a></li>
@@ -151,6 +151,7 @@ $(document).ready(function(){initNavTree('globals.html',''); initResizable(); })
 
 
 <h3><a id="index_e" name="index_e"></a>- e -</h3><ul>
+<li>execute_command()&#160;:&#160;<a class="el" href="shell_8c.html#a769a2e287c74ad4a12fac70fba90f680">shell.c</a></li>
 <li>expand_command_with_alias()&#160;:&#160;<a class="el" href="shell_8c.html#a1fe1d28c09c80c4d512b3a9751ec8b15">shell.c</a>, <a class="el" href="shell_8h.html#a1fe1d28c09c80c4d512b3a9751ec8b15">shell.h</a></li>
 <li>extract_to_string_between_quotes_content()&#160;:&#160;<a class="el" href="string__utils_8c.html#a98f51d2e644d08c8c2bcb43b5f9a5514">string_utils.c</a>, <a class="el" href="string__utils_8h.html#a98f51d2e644d08c8c2bcb43b5f9a5514">string_utils.h</a></li>
 </ul>
@@ -171,8 +172,7 @@ $(document).ready(function(){initNavTree('globals.html',''); initResizable(); })
 
 
 <h3><a id="index_j" name="index_j"></a>- j -</h3><ul>
-<li>job_exited()&#160;:&#160;<a class="el" href="builtin__command_8c.html#ad793cb5317707d060b0773143deee369">builtin_command.c</a></li>
-<li>job_running()&#160;:&#160;<a class="el" href="builtin__command_8c.html#a46fb74ff681ee16428bd537e73c4d75f">builtin_command.c</a></li>
+<li>job_running()&#160;:&#160;<a class="el" href="background__jobs_8c.html#acd533c62dfca81f0d67284fc30d78750">background_jobs.c</a>, <a class="el" href="background__jobs_8h.html#acd533c62dfca81f0d67284fc30d78750">background_jobs.h</a></li>
 </ul>
 
 
@@ -213,7 +213,8 @@ $(document).ready(function(){initNavTree('globals.html',''); initResizable(); })
 <li>READING_REDIRECT_STDOUT_FILE&#160;:&#160;<a class="el" href="command__parser_8c.html#ab0ce6a33765cfb1c3ceb2f811cc03ce9ab1275636c5e593d37a3fab5710733d38">command_parser.c</a></li>
 <li>realloc_or_exit()&#160;:&#160;<a class="el" href="string__utils_8c.html#ae79b81039ece51b48899286163a3ba6b">string_utils.c</a></li>
 <li>redirect_and_close()&#160;:&#160;<a class="el" href="shell_8c.html#a11534ed616b5b837706aec72d5c3dc12">shell.c</a></li>
-<li>remove_command_by_pid()&#160;:&#160;<a class="el" href="background__jobs_8h.html#a43584b96a56b8aa5e737f812e2972611">background_jobs.h</a>, <a class="el" href="background__jobs_8c.html#a43584b96a56b8aa5e737f812e2972611">background_jobs.c</a></li>
+<li>redirect_to_file()&#160;:&#160;<a class="el" href="shell_8c.html#af08c5685b9150e019d0d1467280d4f4b">shell.c</a></li>
+<li>remove_command_by_pid()&#160;:&#160;<a class="el" href="background__jobs_8c.html#a43584b96a56b8aa5e737f812e2972611">background_jobs.c</a>, <a class="el" href="background__jobs_8h.html#a43584b96a56b8aa5e737f812e2972611">background_jobs.h</a></li>
 <li>run_command()&#160;:&#160;<a class="el" href="shell_8c.html#a7bf41a557d5549e80262806150de609b">shell.c</a>, <a class="el" href="shell_8h.html#a7bf41a557d5549e80262806150de609b">shell.h</a></li>
 <li>run_from_file()&#160;:&#160;<a class="el" href="shell_8c.html#acc0ea92c78f8c568184eb9b3fb91c17e">shell.c</a>, <a class="el" href="shell_8h.html#a4f404a0dc5d0e0f0977739ddb5d78a67">shell.h</a></li>
 <li>run_from_string()&#160;:&#160;<a class="el" href="shell_8c.html#adda30003bb48504d2a454839de860e8f">shell.c</a>, <a class="el" href="shell_8h.html#adda30003bb48504d2a454839de860e8f">shell.h</a></li>
@@ -265,7 +266,7 @@ $(document).ready(function(){initNavTree('globals.html',''); initResizable(); })
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Fri May 20 2022 23:50:28 for shellso by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.4 </li>
+    <li class="footer">Generated on Sat May 21 2022 23:07:44 for shellso by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.4 </li>
   </ul>
 </div>
 <!-- BEGIN doxygen awesome darkmode toggle -->
