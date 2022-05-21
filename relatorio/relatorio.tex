@@ -94,6 +94,8 @@ struct shell {
 }
 \end{verbatim}
 
+A estrutura \textit{shell} representa a base do nosso interpretador de comandos, e deve manter
+registro dos jobs, dos comandos próprios e dos \textit{aliasses}.
 
 \begin{verbatim}
 struct command {
@@ -107,12 +109,19 @@ struct command {
 }
 \end{verbatim}
 
+A estrutura \textit{shell} representa os comandos em si, possui os campos necessários para
+armazenar informações do comando, do encadeamento de comandos e redirecionamento 
+de entrada e saída. 
+
 \begin{verbatim}
 struct builtin_command {
     char* command;
     builtin_command_function function;
 }
 \end{verbatim}
+
+A estrutura \textit{builtin\_command} é usada para representar os comandos implementados
+internamente no \textbf{\textit{shellso}}.
 
 \begin{verbatim}
 struct _shell_builtin_commands {
@@ -121,6 +130,9 @@ struct _shell_builtin_commands {
     int count;
 } shell_builtin_commands;
 \end{verbatim}
+
+É uma tabela \textit{Hash} contendo todos os comandos que foram implementados diretamente
+no \textit{shell}.
 
 \begin{verbatim}
 struct background_job {
@@ -131,9 +143,30 @@ struct background_job {
 }
 \end{verbatim}
 
+Essa estrutura representa os comandos que estão sendo executados em segundo plano pelo \textbf{\textit{shellso}}.
+
 \newpage
 
 \section{Decisões de projeto}
+
+O \textbf{\textit{shellso}} foi projetado de forma a ser dividido em módulos bem separados
+com o objetivo de tornar seu desenvolvimento e eventual manutenção mais fácil. Cada elemento
+do interpretador foi implementado em arquivos separados dentro da pasta \textit{shell}, algumas
+funções utilitárias para trabalhar com cadeias de caracteres foram implementadas na pasta \textit{string}.
+
+Essa decisão de dividir o programa em módulos primeiramente divide bem as responsabilidades, 
+o que garante que a pessoa desenvolvedora possa trabalhar em um pedaço pequeno do problema simplificando
+o projeto e a implementação, além disso auxilia a evitar efeitos colaterais, já que se ao
+longo de todo o problema as estruturas apresentadas na seção anterior fossem visíveis e 
+alteráveis seria bastante provável que ao longo do desenvolvimento e eventuais manutenções
+fossem provocados efeitos colaterais ou seja, alterações introduzidas sem cuidado
+causando modificações incompletas nas estruturas de dados, provocando erros difíceis de reproduzir e detectar.
+ 
+
+
+
+
+
 \newpage
 
 \section{Bugs conhecidos ou problemas}
