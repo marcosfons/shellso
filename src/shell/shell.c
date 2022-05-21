@@ -151,15 +151,10 @@ void run_from_string(shell* shell, char* input) {
 		printf("%s\n", input);
 	}
 
-	// Problem with this approach is that it'll only work if the first program is a builtin
-	builtin_command_function func = find_builtin_command(shell->builtin_commands, cmd->argv[0]);
-	if (func != NULL) {
-		int status = func(shell, cmd->argc, cmd->argv);
-	} else {
-		run_command(shell, cmd, STDIN_FILENO);
-		dup(STDIN_FILENO);
-		dup(STDOUT_FILENO);
-	}
+	run_command(shell, cmd, STDIN_FILENO);
+	// Unnecessary
+	// dup(STDIN_FILENO);
+	// dup(STDOUT_FILENO);
 
 	command_free(cmd);
 }
@@ -243,13 +238,31 @@ static void execute_command(command* cmd, int fd[2], int in_fd) {
 
 
 void run_command(shell* shell, command* cmd, int in_fd) {
-	int fd[2];
+	// Try to run a builtin command first
+	builtin_command_function func = find_builtin_command(shell->builtin_commands, cmd->argv[0]);
+	if (func != NULL) {
+		int status = func(shell, cmd->argc, cmd->argv);
+
+		if (cmd->next != NULL) {
+			if (cmd->chain_type == AND && status == EXIT_SUCCESS) {
+				run_command(shell, cmd->next, in_fd);
+			} else if (cmd->chain_type == OR && status != EXIT_SUCCESS) {
+				printf("OR\n");
+				run_command(shell, cmd->next, in_fd);
+			} else if (cmd->chain_type != AND && cmd->chain_type != OR) {
+				run_command(shell, cmd->next, in_fd);
+			}
+		}
+
+		return;
+	}
 
 	alias* alias = find_alias(shell->aliasses, cmd->argv[0]);
 	if (alias != NULL) {
 		expand_command_with_alias(cmd, *alias);
 	}
 
+	int fd[2];
 	if (cmd->chain_type == PIPE) {
 		if (pipe(fd) == -1) {
 			perror("pipe:");
