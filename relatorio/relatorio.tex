@@ -78,7 +78,7 @@ segundo plano de volta para o interpretador, entre outras.
 
 
 
-\newpage
+
 
 \section{Resumo do projeto}
 Algumas estruturas importantes:
@@ -134,6 +134,27 @@ struct _shell_builtin_commands {
 É uma tabela \textit{Hash} contendo todos os comandos que foram implementados diretamente
 no \textit{shell}.
 
+Alguns exemplos de \textit{builtin\_commands} são \textit{jobs} e \textit{fg}. Esses comandos
+são necessários para controlar a execução de processos filhos do interpretador. O comando 
+\textit{jobs} percorre os \textit{backgroud\_jobs} do shell mostrando informações relevantes sobre eles,
+se estão executando, se foram terminados com sucesso além do \textit{pid} de cada um. Enquanto isso
+o \textit{buitin\_command} \textit{fg} traz de volta para o shell aqueles processos que estavam em segundo
+plano. Abaixo temos um exemplo do uso deles:
+
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=12cm]{relatorio/jobs.jpeg}
+\end{figure}
+
+Nesse exemplo foi usado o \textit{shellso} para executar o vim,
+em seguida sua execução foi pausada e isso pode ser verificado com
+o \textit{jobs}, após executar um \textit{ls} o \textit{jobs} mostra
+o processo do \textit{vim} pausado e o processo do \textit{ls} terminado com sucesso.
+Após isso foi executado outro \textit{builtin\_command} \textit{fg}
+para trazer o \textit{vim} para o primeiro plano e terminar sua execução.
+Após isso o \textit{jobs} pode ser utilizado uma última vez para verificar que o processo foi de fato terminado.
+
+
 \begin{verbatim}
 struct background_job {
     char* command;
@@ -144,8 +165,15 @@ struct background_job {
 \end{verbatim}
 
 Essa estrutura representa os comandos que estão sendo executados em segundo plano pelo \textbf{\textit{shellso}}.
+Um caso de uso interessante dessa estrutura foi no \textit{handler} do sinal \textit{SIGCHLD}.
+Nessa função foi preciso identificar quais processos de segundo plano foram finalizados, e
+quais continuam em execução, para isso é percorrida a \textit{lista encadeada} de 
+textit{background\_job}'s do \textit{shell}, para cada um usamos a chamada de sistema 
+\textit{waitpid()} passando a flag WNOHANG, essa flag faz com que a chamada
+retorne imediatamente o estado de um determinado processo filho sem
+esperar até que ele seja terminado.
 
-\newpage
+
 
 \section{Decisões de projeto}
 
@@ -168,14 +196,31 @@ foi possível escrever testes de unidades que facilitam o desenvolvimento tornan
 visualizar quando um código novo resolve o problema a que se propõe sem causar efeitos colaterais
 em outras partes do código.
 
-\newpage
+
 
 \section{Bugs conhecidos ou problemas}
-\newpage
+
+Um erro conhecido desse trabalho é relacionado aos redirecionamentos
+de entrada e saída. A cada \textit{pipe} utilizado um \textit{file descriptor} é deixado aberto,
+não foi possível identificar onde seria necessário fechar esse descritor de arquivo. Abaixo temos um exemplo desse bug:
+
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=12cm]{relatorio/fd.jpeg}
+\end{figure}
+
+Um recurso interessante que não foi implementado foi a captura de alguns atalhos
+que poderiam facilitar o uso do interpretador, como o \textit{ctrl+L} para limpar
+o terminal e das teclas direcionais para buscar comandos recém executados ou para
+movimentar o cursor do prompt para corrigir um comando sem reescrevê-lo do início.
+
+
+
 
 \addcontentsline{toc}{section}{Anexo}
 \section*{Anexo}
 Repositório: https://github.com/marcosfons/shellso
+
 Documentação online: https://marcosfons.github.io/shellso/
 \end{document}
 
