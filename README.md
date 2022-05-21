@@ -23,6 +23,7 @@ dependencies you can install:
 - [`Doxygen`](https://www.doxygen.nl/manual/install.html) to generate docs
 - [`Criterion`](https://criterion.readthedocs.io/en/master/setup.html) to run
 	the tests
+- `pdflatex` to compile the report `sudo apt install texlive-latex-base texlive-lang-portuguese`
 
 If you choosed to run the tests with `Criterion`, install it and place the `.so`
 files inside a `include` directory in the root folder. Or set the
