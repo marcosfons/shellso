@@ -3,11 +3,11 @@
 
 #include "command.h"
 
-/**
- * @brief Create a new command
- * @param input The input string
- * @return The newly created command
- */
+/// @brief Create a new command
+///
+/// @param input The input string
+///
+/// @return The newly created command
 command* command_parse(char* input);
 
 #endif

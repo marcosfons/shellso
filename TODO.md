@@ -22,18 +22,18 @@
 - [ ] Create a process group for each command chain. In this case,
 The signal handling works for each command
 
-- [ ] Implement handling for builtin commands (Hash table and code execution)
-		- [ ] Hash table already implemented. Still missing code execution from it
-- [ ] Implement better code for file redirection
+- [x] Implement handling for builtin commands (Hash table and code execution)
+		- [x] Hash table already implemented. Still missing code execution from it
+- [x] Implement better code for file redirection
 
 
 ## Error handling
 
-- [ ] Check error handling in `command_parser.c`
-- [ ] Implement error handling in `shell.c`
+- [x] Check error handling in `command_parser.c`
+- [x] Implement error handling in `shell.c`
 
 
 # Others
 
-- [ ] Free all memory used and check memory leaks with `Valgrind`
+- [x] Free all memory used and check memory leaks with `Valgrind`
 - [x] Support aliases

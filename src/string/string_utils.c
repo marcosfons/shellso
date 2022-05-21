@@ -68,14 +68,6 @@ string_t* append_string(string_t* string, char* input, int length) {
 	return string;
 }
 
-
-/*
- *
- * Arguments:
- * 	string_t* dest
- * 	char* input
- * 	int escaping_char_position  dest[escaping_char_position] == '\\'
- */
 string_t* append_string_escaping_final_char(string_t* dest, char* input, int escaping_char_position) {
 	dest = append_string(dest, input, escaping_char_position + 1);
 	dest->string[dest->length - 2] = input[escaping_char_position + 1];
@@ -83,17 +75,6 @@ string_t* append_string_escaping_final_char(string_t* dest, char* input, int esc
 	return dest;
 }
 
-/* Extract the content between single quotes inside input into dest string
- *
- * Arguments:
- * 	char* dest
- * 	int size 		the size of the dest string before concatenating. dest[size - 1] == '\0'
- *	char* input the input string, the initial character must be " or '
- *
- * returns a int indicating the position of the last quote, if the 
- * last quote was not found it returns -1
- *
- */
 int extract_to_string_between_quotes_content(string_t* dest, char* input) {
 	char quote_type = input[0]; // will be " or '
 	assert(quote_type == '"' || quote_type == '\'');
@@ -127,7 +108,6 @@ int extract_to_string_between_quotes_content(string_t* dest, char* input) {
 
 	return i + 1;
 }
-
 
 void string_free(string_t string) {
 	free(string.string);

@@ -31,6 +31,9 @@ static shell* running_shell = NULL;
 static void sigint_handler(int sig_num) {
 	signal(SIGINT, sigint_handler); // Will receive the signal on the next time
 	printf("\n");
+	running_shell->prompt(running_shell);
+	// Flush because the prompt usually does not have a newline in the end
+	fflush(stdout);
 }
 
 static void sigstop_handler(int sig_num) {
@@ -47,10 +50,7 @@ static void sigchld_handler(int sig_num) {
 		int res = waitpid(curr->pid, &state, WNOHANG);
 
 		if (res > 0 && WIFEXITED(state)) {
-			// printf("[+%d] Background process done. Status: %d\n", curr->pid, WEXITSTATUS(state));
-
 			update_background_job_status(curr, state);
-			printf("[%d] Background updated. Status: %d\n", curr->pid, WEXITSTATUS(state));
 			break;
 		}
 
@@ -156,8 +156,6 @@ void run_from_string(shell* shell, char* input) {
 	if (func != NULL) {
 		int status = func(shell, cmd->argc, cmd->argv);
 	} else {
-		// add_command_chain(interactive_shell->jobs, cmd);
-		// add_command_chain(jobs, cmd);
 		run_command(shell, cmd, STDIN_FILENO);
 		dup(STDIN_FILENO);
 		dup(STDOUT_FILENO);
@@ -189,22 +187,63 @@ void run_interactive(shell* shell) {
 	run_from_file(shell, stdin);
 }
 
-static void CLOSE(int fd) {
+static void close_fd(int fd) {
 	int res = close(fd);
 	if (res == -1) {
-		perror("CLOSE: ");
+		perror("close");
 	}
 }
 
 static void redirect_and_close(int oldfd, int newfd) {
   if (oldfd != newfd) {
-    if (dup2(oldfd, newfd) != -1)
-      CLOSE(oldfd); /* successfully redirected */
+    if (dup2(oldfd, newfd) != -1) {
+      close_fd(oldfd); /* successfully redirected */
+		}
   }
 }
 
+static void redirect_to_file(char* filepath, char* mode, int redirect_fd) {
+	FILE* file = fopen(filepath, mode);
+	if (file == NULL) {
+		perror("fopen");
+		exit(EXIT_FAILURE); // Exits only the child process
+	}
+
+	redirect_and_close(file->_fileno, redirect_fd);
+}
+
+// This function is only executed by the child process
+static void execute_command(command* cmd, int fd[2], int in_fd) {
+	if (cmd->stdin_file_redirection != NULL) {
+		redirect_to_file(cmd->stdin_file_redirection, "r", in_fd);
+	}	
+	if (cmd->stdout_file_redirection != NULL) {
+		redirect_to_file(cmd->stdout_file_redirection, "w+", STDOUT_FILENO);
+	}
+
+	if (cmd->chain_type == PIPE) {
+		close_fd(fd[READ_END]);
+
+		if (cmd->stdin_file_redirection == NULL) {
+			redirect_and_close(in_fd, STDIN_FILENO);
+		}
+		if (cmd->stdout_file_redirection == NULL) {
+			redirect_and_close(fd[WRITE_END], STDOUT_FILENO);
+		}
+	} else {
+		// This is important because of the last command of a pipe command chain
+		redirect_and_close(in_fd, STDIN_FILENO);
+	}
+
+	execvp(cmd->argv[0], cmd->argv);
+	print_command_error(cmd->argv[0], strerror(errno));
+	
+	exit(EXIT_FAILURE); // Exits only the child process
+}
+
+
 void run_command(shell* shell, command* cmd, int in_fd) {
-	int fd[2] = {-1, -1};
+	int fd[2];
 
 	alias* alias = find_alias(shell->aliasses, cmd->argv[0]);
 	if (alias != NULL) {
@@ -222,54 +261,26 @@ void run_command(shell* shell, command* cmd, int in_fd) {
 	if (child_pid == -1) {
 		perror("Fork");
 	} else if(child_pid == 0) { // Child code
-	
-		if (cmd->chain_type == PIPE) {
-			CLOSE(fd[READ_END]);
-
-			if (cmd->stdin_file_redirection != NULL) {
-				FILE* stdin_file = fopen(cmd->stdin_file_redirection, "r");
-				redirect_and_close(stdin_file->_fileno, STDIN_FILENO);
-			} else {
-				redirect_and_close(in_fd, STDIN_FILENO);
-			}
-
-			if (cmd->stdout_file_redirection != NULL) {
-				FILE* stdout_file = fopen(cmd->stdout_file_redirection, "w");
-				redirect_and_close(stdout_file->_fileno, STDOUT_FILENO);
-			} else {
-				redirect_and_close(fd[WRITE_END], STDOUT_FILENO);
-			}
-		} else {
-			// This is important because of the last command of a pipe command chain
-			redirect_and_close(in_fd, STDIN_FILENO);
-		}
-
-		execvp(cmd->argv[0], cmd->argv);
-		print_command_error(cmd->argv[0], strerror(errno));
-		
-		exit(EXIT_FAILURE); // Exits only the child process
+		execute_command(cmd, fd, in_fd);
 	} else { // Parent code
 		add_background_job(shell->jobs, cmd, child_pid);
 
 		if (cmd->chain_type == BACKGROUND) {
-			// add_command_chain(background_jobs *jobs, command *command_chain)
 			if (cmd->next != NULL) {
 				run_command(shell, cmd->next, in_fd);
 			}
 		} else if (cmd->chain_type == PIPE) {
-			CLOSE(fd[WRITE_END]);
+			close_fd(fd[WRITE_END]);
 
 			run_command(shell, cmd->next, fd[0]);
 		} else {
 			int state;
 			int result = waitpid(child_pid, &state, WUNTRACED);
-			
-			update_background_job_status_by_pid(shell->jobs, child_pid, state);
-
 			if (result == -1 && errno != 10) { 
 				perror("waitpid");
-				exit(EXIT_FAILURE);
 			}
+			
+			update_background_job_status_by_pid(shell->jobs, child_pid, state);
 
 			if (cmd->next != NULL) {
 				if ((cmd->chain_type == AND && WEXITSTATUS(state) == EXIT_SUCCESS) || 

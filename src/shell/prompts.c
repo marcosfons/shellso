@@ -18,7 +18,7 @@ void normal_shell_prompt(shell* shell) {
 		perror("cwd");
 		printf("%s$ ", username);
 	} else {
-		printf("\033[03;32m%s:\033[03;34m%s\033[0m$ ", username, cwd);
+		printf("\033[01;32m%s:\033[01;34m%s\033[0m$ ", username, cwd);
 	}
 
 	free(cwd);

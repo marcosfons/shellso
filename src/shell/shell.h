@@ -52,6 +52,10 @@ typedef struct shell {
 /// @return Pointer to newly created shell
 shell* create_shell();
 
+/// @brief Format and print an error
+///
+/// @param command The command that failed
+/// @param error The error that occurred
 void print_command_error(char* command, char* error);
 
 /// @brief Expand the command to match the given alias
@@ -81,7 +85,7 @@ void run_command(shell* shell, command* cmd, int in_fd);
 
 /// @brief Run the shell interactively
 ///
-/// @param The shell that will be executed
+/// @param shell The shell that will be executed
 void run_interactive(shell* shell);
 
 /// @brief Frees the given shell

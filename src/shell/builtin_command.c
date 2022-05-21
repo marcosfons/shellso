@@ -28,7 +28,6 @@ shell_builtin_commands* create_shell_builtin_commands(int size) {
 	commands->size = size;
 	commands->count = 0;
 
-	// commands->commands = calloc(commands->size, sizeof(builtin_command));
 	commands->commands = calloc(commands->size, sizeof(builtin_command*));
 
 	for (int i = 0; i < commands->size; i++) {
@@ -137,9 +136,21 @@ int shell_cd(shell* shell, int argc, char** argv) {
 }
 
 int shell_exit(shell* shell, int argc, char** argv) {
-	shell->running = false;
+	background_job* curr = shell->jobs->next;
+	while (curr != NULL && !job_running(curr)) {
+		curr = curr->next;
+	}
 
-	return EXIT_SUCCESS;
+	if (curr != NULL) {
+		printf("Finish all jobs running then exit\n");
+		printf("Use the jobs builtin command to list running commands\n");
+
+		return EXIT_FAILURE;
+	} else {
+		shell->running = false;
+
+		return EXIT_SUCCESS;
+	}
 }
 
 int shell_alias(shell* shell, int argc, char** argv) {
@@ -158,24 +169,13 @@ int shell_alias(shell* shell, int argc, char** argv) {
 	return EXIT_SUCCESS;
 }
 
-
-static bool job_exited(int status) {
-	return status != INT_MIN &&
-	      (WIFEXITED(status) || WIFSIGNALED(status));
-}
-
-static bool job_running(int status) {
-	return status == INT_MIN ||
-	      (!WIFEXITED(status) && !WIFSIGNALED(status));
-}
-
 int shell_jobs(shell* shell, int argc, char** argv) {
 	background_job* last = NULL;
 	background_job* curr = shell->jobs->next;
 
 	while (curr != NULL) {
 		const int BUFFER_STATE_SIZE = 37;
-		char state[BUFFER_STATE_SIZE];
+		char state[BUFFER_STATE_SIZE + 1];
 
 		if (curr->status == STATUS_COMMAND_NOT_EXECUTED_YET) {
 			strcpy(state, "Running");
@@ -196,7 +196,7 @@ int shell_jobs(shell* shell, int argc, char** argv) {
 
 		background_job* next = curr->next;
 
-		if (!job_running(curr->status)) {
+		if (!job_running(curr)) {
 			if (last == NULL) {
 				shell->jobs->next = curr->next;
 			} else {
@@ -216,7 +216,7 @@ int shell_jobs(shell* shell, int argc, char** argv) {
 int shell_fg(shell* shell, int argc, char** argv) {
 	background_job* curr = shell->jobs->next;
 	// Get the non terminated job running
-	while (curr != NULL && !job_running(curr->status)) {
+	while (curr != NULL && !job_running(curr)) {
 		curr = curr->next;
 	}
 
@@ -226,7 +226,6 @@ int shell_fg(shell* shell, int argc, char** argv) {
 
 	// If it is stopped send a signal to resume it
 	if (WIFSTOPPED(curr->status)) {
-		printf("Ta stopped uai\n");
 		if (kill(curr->pid, SIGCONT) != 0) {
 			perror("kill SIGCONT");
 			return 1;
@@ -246,9 +245,8 @@ int shell_fg(shell* shell, int argc, char** argv) {
 	return 0;
 }
 
-//
+
 // int shell_time(shell* shell, int argc, char** argv);
 
-//
 // int shell_help(shell* shell, int argc, char** argv);
 

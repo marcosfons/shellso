@@ -17,7 +17,6 @@ typedef enum {
 /** @brief A structure to represent a command chain that will be executed */
 typedef struct command command;
 typedef struct command {
-	/// Infos
 	int argc;                      /**< The number of arguments */
 	char** argv;                   /**< The arguments. The first argument is the program */
 	command* next;                 /**< The next command in the chain */
@@ -29,6 +28,7 @@ typedef struct command {
 
 
 /// @brief Creates one command setting default values
+///
 /// @return Returns a pointer to the newly created command
 command* command_create();
 

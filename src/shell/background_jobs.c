@@ -74,6 +74,11 @@ int remove_command_by_pid(background_jobs* jobs, int pid) {
 	return -1;
 }
 
+bool job_running(background_job* job) {
+	return job->status == INT_MIN ||
+	      (!WIFEXITED(job->status) && !WIFSIGNALED(job->status));
+}
+
 void free_background_job(background_job* job) {
 	free(job->command);
 	free(job);
