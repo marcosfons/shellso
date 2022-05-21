@@ -92,7 +92,12 @@ $(UNIT_TEST): $(TESTS) $(TEST)/test_utils.c | $(TESTBIN)
 
 
 $(TESTSCRIPT)/%_output.txt: $(TESTSCRIPT)/%.sh
-	diff <(sh $<) <($(BIN)/$(EXE) -f $<)
+	@echo $<
+	@sed -e 's/>/=>/g' -e 's/</<=/g' $< > $<.shellso && \
+		sh $< > $<.sh_output && \
+		$(BIN)/$(EXE) -f $<.shellso > $<.shellso_output && \
+		diff $<.sh_output $<.shellso_output
+	@rm $<.shellso $<.shellso_output $<.sh_output
 
 
 # Directories
