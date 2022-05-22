@@ -101,12 +101,16 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 <div class="contents">
 <div class="textblock"><p ><a class="anchor" id="md_README"></a> A shell written in C for the Operational Systems subject at UFSJ taught by <a href="https://github.com/rsachetto/">Rafael Sachetto</a>.</p>
 <p >Online documentation available in <a href="https://marcosfons.github.io/shellso">here</a>.</p>
-<h1><a class="anchor" id="autotoc_md1"></a>
+<div class="image">
+<img src="example_usage.gif" alt=""/>
+<div class="caption">
+Example of usage</div></div>
+    <h1><a class="anchor" id="autotoc_md1"></a>
 Table of contents</h1>
 <ol type="1">
 <li><a class="el" href="index.html#Setup">Setup</a></li>
 <li><a class="el" href="index.html#Usage">Usage</a></li>
-<li>What it does not support</li>
+<li><a class="el" href="index.html#Unsupported">Unsupported</a></li>
 <li><a class="el" href="index.html#Authors">Authors</a></li>
 </ol>
 <h1><a class="anchor" id="Setup"></a>
@@ -120,22 +124,24 @@ Setup</h1>
 <h1><a class="anchor" id="Usage"></a>
 Usage</h1>
 <p ><code>Makefile</code> was used to make it easier the process of building the application. Running make in the root folder of the project the message below will be displayed.</p>
-<div class="fragment"><div class="line">$ make</div>
-<div class="line">Usage: make [target] ...</div>
+<div class="fragment"><div class="line">Usage: make [target]</div>
 <div class="line">targets:</div>
-<div class="line">   clean                Clean all builded files</div>
-<div class="line">   debug                Build an executable to debug</div>
-<div class="line">   docs                 Generate and try to open docs</div>
-<div class="line">   help                 Show a help message</div>
-<div class="line">   release              Build a release executable</div>
-<div class="line">   test                 Build and run tests</div>
+<div class="line">    clean      Clean all builded files</div>
+<div class="line">    debug      Build an executable to debug</div>
+<div class="line">    docs       Generate Doxygen docs and try to open</div>
+<div class="line">    help       Show a help message</div>
+<div class="line">    relatorio  Generate a report based on docs/relatorio.tex</div>
+<div class="line">    release    Build a release executable</div>
+<div class="line">    test       Build and run tests</div>
+<div class="line">    test_files Run test scripts comparing lines to the sh output</div>
 </div><!-- fragment --><p >To use the application the best way to compile it is by using the release target.</p>
 <div class="fragment"><div class="line">make release</div>
 <div class="line">bin/shellso</div>
-</div><!-- fragment --><h1><a class="anchor" id="What"></a>
-it does not support</h1>
+</div><!-- fragment --><h1><a class="anchor" id="Unsupported"></a>
+Unsupported</h1>
 <ul>
-<li>Environment variable substitution <div class="fragment"><div class="line">echo &quot;$ENV_VAR&quot;</div>
+<li>Expand variables, commands, wildcards, ... The following does not work like a normal shell <div class="fragment"><div class="line">echo &quot;$ENV_VAR&quot;</div>
+<div class="line">ls *</div>
 </div><!-- fragment --></li>
 <li>Environment variables before commands <div class="fragment"><div class="line">ENV_VAR=123 echo &quot;$ENV_VAR&quot;</div>
 </div><!-- fragment --></li>
@@ -154,7 +160,7 @@ Authors</h1>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Sun May 22 2022 00:14:01 for shellso by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.4 </li>
+    <li class="footer">Generated on Sun May 22 2022 00:56:30 for shellso by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.4 </li>
   </ul>
 </div>
 <!-- BEGIN doxygen awesome darkmode toggle -->

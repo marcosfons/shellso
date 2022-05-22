@@ -28,7 +28,7 @@ var NAVTREE =
     [ "Table of contents", "index.html#autotoc_md1", null ],
     [ "Setup", "index.html#Setup", null ],
     [ "Usage", "index.html#Usage", null ],
-    [ "it does not support", "index.html#What", null ],
+    [ "Unsupported", "index.html#Unsupported", null ],
     [ "Authors", "index.html#Authors", null ],
     [ "Todo List", "todo.html", null ],
     [ "Data Structures", "annotated.html", [
