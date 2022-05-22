@@ -1,0 +1,226 @@
+\documentclass[a4paper, 12pt]{article}
+
+\usepackage[portuges]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{indentfirst}
+\usepackage{graphicx}
+\usepackage{multicol}
+
+\begin{document}
+%\maketitle
+
+\begin{titlepage}
+	\begin{center}
+	
+	\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=2cm]{docs/images/ufsj.png}
+	\end{figure}
+
+		\LARGE{Universidade Federal de São João del Rei}\\
+		\large{Departamento de Ciência da Computação}\\ 
+		\large{Sistemas Operacionais}\\
+		\large{\textbf{Professor:} Rafael Sachetto} \\
+		\vspace{15pt}
+        \vspace{95pt}
+        \textbf{\LARGE{Relatório Trabalho Prático 1}}\\
+		%\title{{\large{Título}}}
+		\vspace{3,5cm}
+	\end{center}
+	
+	\begin{flushright}
+   \begin{list}{}{
+      \setlength{\leftmargin}{4.5cm}
+      \setlength{\rightmargin}{0cm}
+      \setlength{\labelwidth}{0pt}
+      \setlength{\labelsep}{\leftmargin}}
+
+      \item Relatório do primeiro Trabalho Prático para a disciplina de Sistemas Operacionais do Bacharelado em Ciência da Computação da Universidade Federal de São João del Rei.
+
+      \begin{list}{}{
+      \setlength{\leftmargin}{0cm}
+      \setlength{\rightmargin}{0cm}
+      \setlength{\labelwidth}{0pt}
+      \setlength{\labelsep}{\leftmargin}}
+
+			\item \hfill Filipe Mateus \
+            \item \hfill Gustavo Detomi \
+      		\item \hfill Marcos Martins \
+
+      \end{list}
+   \end{list}
+ \end{flushright}
+	\vspace{1cm}
+	
+	\begin{center}
+		\vspace{\fill}
+			 Maio\\
+		 2022
+			\end{center}
+\end{titlepage}
+
+\newpage
+
+% \tableofcontents
+% \thispagestyle{empty}
+
+% \newpage
+\pagenumbering{arabic}
+
+\section{Introdução}
+Para este Trabalho Prático foi implementado um interpretador de comandos que foi 
+chamado \textbf{\textit{shellso}}, e conta com diversas 
+funcionalidades comuns aos interpretadores de comandos: disparar processos, 
+encadear a comunicação entre eles usando pipes, executar processos em segundo 
+plano, listar processos disparados pelo interpretador, retornar processos do 
+segundo plano de volta para o interpretador, entre outras.
+
+
+
+
+
+\section{Resumo do projeto}
+Algumas estruturas importantes:
+
+\begin{verbatim}
+struct shell {
+    bool running;
+    bool verbose;
+    prompt_function prompt;
+    aliasses* aliasses;
+    background_jobs* jobs;
+    shell_builtin_commands* builtin_commands;
+}
+\end{verbatim}
+
+A estrutura \textit{shell} representa a base do nosso interpretador de comandos, e deve manter
+registro dos jobs, dos comandos próprios e dos \textit{aliasses}.
+
+\begin{verbatim}
+struct command {
+    int argc;                      
+    char** argv;                    
+    command* next;                  
+    command_chain_type chain_type;  
+    char* stdin_file_redirection;    
+    char* stdout_file_redirection;   
+    char* stderr_file_redirection;   
+}
+\end{verbatim}
+
+A estrutura \textit{shell} representa os comandos em si, possui os campos necessários para
+armazenar informações do comando, do encadeamento de comandos e redirecionamento 
+de entrada e saída. 
+
+\begin{verbatim}
+struct builtin_command {
+    char* command;
+    builtin_command_function function;
+}
+\end{verbatim}
+
+A estrutura \textit{builtin\_command} é usada para representar os comandos implementados
+internamente no \textbf{\textit{shellso}}.
+
+\begin{verbatim}
+struct _shell_builtin_commands {
+    builtin_command** commands;
+    int size;
+    int count;
+} shell_builtin_commands;
+\end{verbatim}
+
+É uma tabela \textit{Hash} contendo todos os comandos que foram implementados diretamente
+no \textit{shell}.
+
+Alguns exemplos de \textit{builtin\_commands} são \textit{jobs} e \textit{fg}. Esses comandos
+são necessários para controlar a execução de processos filhos do interpretador. O comando 
+\textit{jobs} percorre os \textit{backgroud\_jobs} do shell mostrando informações relevantes sobre eles,
+se estão executando, se foram terminados com sucesso além do \textit{pid} de cada um. Enquanto isso
+o \textit{buitin\_command} \textit{fg} traz de volta para o shell aqueles processos que estavam em segundo
+plano. Abaixo temos um exemplo do uso deles:
+
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=12cm]{docs/images/jobs.jpeg}
+\end{figure}
+
+Nesse exemplo foi usado o \textit{shellso} para executar o vim,
+em seguida sua execução foi pausada e isso pode ser verificado com
+o \textit{jobs}, após executar um \textit{ls} o \textit{jobs} mostra
+o processo do \textit{vim} pausado e o processo do \textit{ls} terminado com sucesso.
+Após isso foi executado outro \textit{builtin\_command} \textit{fg}
+para trazer o \textit{vim} para o primeiro plano e terminar sua execução.
+Após isso o \textit{jobs} pode ser utilizado uma última vez para verificar que o processo foi de fato terminado.
+
+
+\begin{verbatim}
+struct background_job {
+    char* command;
+    int pid;
+    int status;
+    background_job* next;
+}
+\end{verbatim}
+
+Essa estrutura representa os comandos que estão sendo executados em segundo plano pelo \textbf{\textit{shellso}}.
+Um caso de uso interessante dessa estrutura foi no \textit{handler} do sinal \textit{SIGCHLD}.
+Nessa função foi preciso identificar quais processos de segundo plano foram finalizados, e
+quais continuam em execução, para isso é percorrida a \textit{lista encadeada} de 
+textit{background\_job}'s do \textit{shell}, para cada um usamos a chamada de sistema 
+\textit{waitpid()} passando a flag WNOHANG, essa flag faz com que a chamada
+retorne imediatamente o estado de um determinado processo filho sem
+esperar até que ele seja terminado.
+
+
+
+\section{Decisões de projeto}
+
+O \textbf{\textit{shellso}} foi projetado de forma a ser dividido em módulos bem separados
+com o objetivo de tornar seu desenvolvimento e eventual manutenção mais fácil. Cada elemento
+do interpretador foi implementado em arquivos separados dentro da pasta \textit{shell}, algumas
+funções utilitárias para trabalhar com cadeias de caracteres foram implementadas na pasta \textit{string}.
+
+Essa decisão de dividir o programa em módulos primeiramente divide bem as responsabilidades, 
+o que garante que a pessoa desenvolvedora possa trabalhar em um pedaço pequeno do problema simplificando
+o projeto e a implementação, além disso auxilia a evitar efeitos colaterais, já que se ao
+longo de todo o problema as estruturas apresentadas na seção anterior fossem visíveis e 
+alteráveis seria bastante provável que ao longo do desenvolvimento e eventuais manutenções
+fossem provocados efeitos colaterais ou seja, alterações introduzidas sem cuidado
+causando modificações incompletas nas estruturas de dados, provocando erros difíceis de reproduzir e detectar.
+
+Outra decisão que tomamos foi de implementar testes, para isso usamos a blibioteca Criterion, disponível em 
+\textit{https://criterion.readthedocs.io/en/master/intro.html}. Com essa simples biblioteca de testes 
+foi possível escrever testes de unidades que facilitam o desenvolvimento tornando mais fácil
+visualizar quando um código novo resolve o problema a que se propõe sem causar efeitos colaterais
+em outras partes do código.
+
+
+
+\section{Bugs conhecidos ou problemas}
+
+Um erro conhecido desse trabalho é relacionado aos redirecionamentos
+de entrada e saída. A cada \textit{pipe} utilizado um \textit{file descriptor} é deixado aberto,
+não foi possível identificar onde seria necessário fechar esse descritor de arquivo. Abaixo temos um exemplo desse bug:
+
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=12cm]{docs/images/fd.jpeg}
+\end{figure}
+
+Um recurso interessante que não foi implementado foi a captura de alguns atalhos
+que poderiam facilitar o uso do interpretador, como o \textit{ctrl+L} para limpar
+o terminal e das teclas direcionais para buscar comandos recém executados ou para
+movimentar o cursor do prompt para corrigir um comando sem reescrevê-lo do início.
+
+
+
+
+\addcontentsline{toc}{section}{Anexo}
+\section*{Anexo}
+Repositório: https://github.com/marcosfons/shellso
+
+Documentação online: https://marcosfons.github.io/shellso/
+\end{document}
+

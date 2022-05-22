@@ -68,6 +68,11 @@ docs:
 	doxygen
 	xdg-open docs/doxygen/html/index.html
 
+.PHONY: relatorio
+relatorio: ## Generate a report based on docs/relatorio.tex
+relatorio:
+	pdflatex -output-directory=. docs/relatorio.tex
+
 .PHONY: clean
 clean: ## Clean all builded files
 	$(RM) -r $(BIN) $(OBJ) $(TESTBIN) $(TESTSCRIPTSOUT)
