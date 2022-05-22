@@ -5,14 +5,14 @@ A shell written in C for the Operational Systems subject at UFSJ taught by
 
 Online documentation available in [here](https://marcosfons.github.io/shellso).
 
+![Example of usage](./docs/images/example_usage.gif)
 
 ## Table of contents
 
 1. [Setup](#Setup)
 2. [Usage](#Usage)
-3. What it does not support
+3. [Unsupported](#Unsupported)
 5. [Authors](#Authors)
-
 
 
 ### Setup
@@ -36,31 +36,34 @@ Running make in the root folder of the project the message below will be
 displayed.
 
 ```console
-$ make
-Usage: make [target] ...
+Usage: make [target]
 targets:
-   clean                Clean all builded files
-   debug                Build an executable to debug
-   docs                 Generate and try to open docs
-   help                 Show a help message
-   release              Build a release executable
-   test                 Build and run tests
+    clean      Clean all builded files
+    debug      Build an executable to debug
+    docs       Generate Doxygen docs and try to open
+    help       Show a help message
+    relatorio  Generate a report based on docs/relatorio.tex
+    release    Build a release executable
+    test       Build and run tests
+    test_files Run test scripts comparing lines to the sh output
 ```
 
 To use the application the best way to compile it is by using the release
 target.
 
-```shell
+```console
 make release
 bin/shellso
 ```
 
 
-### What it does not support
+### Unsupported
 
-- Environment variable substitution
+- Expand variables, commands, wildcards, ...
+The following does not work like a normal shell
 ```shell
 echo "$ENV_VAR"
+ls *
 ```
 
 - Environment variables before commands 

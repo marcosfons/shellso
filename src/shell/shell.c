@@ -126,19 +126,24 @@ static char* read_input_from_file(FILE* file) {
 void expand_command_with_alias(command* cmd, alias alias) {
 	// Minus 1 because in both there is a command cmd[0] and alias[0]
 	int new_size = cmd->argc + alias.argc;
-	cmd->argv = realloc(cmd->argv, new_size * sizeof(char*));
+
+	char** new_argv = malloc(new_size * sizeof(char*));
 
 	for (int i = 1; i < cmd->argc; i++) {
-		cmd->argv[alias.argc - 1 + i] = cmd->argv[i];
+		new_argv[alias.argc - 1 + i] = cmd->argv[i];
 	}
 
-	for (int i = 1; i < alias.argc; i++) {
-		cmd->argv[i] = strdup(alias.argv[i]);
+	for (int i = 0; i < alias.argc; i++) {
+		new_argv[i] = strdup(alias.argv[i]);
 	}
 
-	cmd->argv[new_size - 1] = NULL;
+	new_argv[new_size - 1] = NULL;
 
+	free(cmd->argv[0]);
+	free(cmd->argv);
 	cmd->argc = new_size;
+
+	cmd->argv = new_argv;
 }
 
 void run_from_string(shell* shell, char* input) {
